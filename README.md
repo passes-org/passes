@@ -9,7 +9,7 @@ Passes is designed to invert the relationship between user identity and the serv
 - Old: User is downstream of their identity, which is held by upstream servers
 - New: Services are downstream of users and their identities
 
-[https://docs.passes.dev](Visit the documentation) to learn more about building with passes.
+[Visit the documentation](https://docs.passes.dev) to learn more about building with passes.
 
 ## How it works
 - The Passes protocol allows any web application to make identity and authn related requests directly to the user on the client
@@ -54,11 +54,11 @@ declare global {
 
 Here's an overview of the structure of this repo:
 
-- `docs/` – The site at [https://docs.passes.dev](docs.passes.dev)
+- `docs/` – The site at [docs.passes.dev](https://docs.passes.dev)
 - `extension/` – The Passes web extension
 - `packages/` – Packages published by the `@passes` org on npm
   - `polyfill/` – A polyfill that provides the `document.passes` ABI
   - `reqs/` – A friendly and typesafe API for making common pass requests, and creating your own request types
   - `types/` – Type declarations related to the Passes Protocol APIs
-- `passes.dev/` – The web application at [https://passes.dev], which consists of a splash screen, and routes used by the `@passes/polyfill` package
+- `passes.dev/` – The web application at [passes.dev](https://passes.dev), which consists of a splash screen, and routes used by the `@passes/polyfill` package
 
