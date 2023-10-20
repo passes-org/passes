@@ -12,6 +12,7 @@ Passes is designed to invert the relationship between user identity and the serv
 [Visit the documentation](https://docs.passes.dev) to learn more about building with passes.
 
 ## How it works
+
 - The Passes protocol allows any web application to make identity and authn related requests directly to the user on the client
 - Users create their passes on a web application called a "Pass Engine", which anyone can create. You can even self-host your own pass engine
 - Web apps that make pass requests don't know which pass engine you use. To them, it makes no difference
