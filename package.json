@@ -1,5 +1,6 @@
 {
-  "name": "passes-workspace",
+  "name": "@passes/workspace",
+  "private": true,
   "workspaces": [
     "docs",
     "extension",
