@@ -1,0 +1,15 @@
+{
+  "name": "passes-workspace",
+  "workspaces": [
+    "docs",
+    "extension",
+    "passes.dev",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
