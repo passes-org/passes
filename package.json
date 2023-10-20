@@ -2,7 +2,9 @@
   "name": "@passes/workspace",
   "private": true,
   "workspaces": [
-    "extension"
+    "extension",
+    "passes.dev",
+    "packages/*"
   ],
   "devDependencies": {
     "bun-types": "latest",
