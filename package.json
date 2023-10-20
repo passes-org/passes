@@ -2,15 +2,20 @@
   "name": "@passes/workspace",
   "private": true,
   "workspaces": [
-    "docs",
     "extension",
     "passes.dev",
     "packages/*"
   ],
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "vitepress": "^1.0.0-rc.22"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   }
 }
