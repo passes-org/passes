@@ -1,0 +1,7 @@
+import type { PassesAPI } from 'passes-protocol';
+
+declare global {
+  interface Document {
+    passes?: PassesAPI;
+  }
+}
