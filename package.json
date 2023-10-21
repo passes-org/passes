@@ -3,7 +3,7 @@
   "private": true,
   "workspaces": [
     "extension",
-    "passes.dev",
+    "passes.org",
     "packages/*"
   ],
   "devDependencies": {

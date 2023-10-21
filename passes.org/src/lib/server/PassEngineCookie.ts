@@ -1,6 +1,6 @@
 import type { RequestEvent } from "@sveltejs/kit";
 
-const PASS_ENGINE_COOKIE_NAME = 'passes.dev/v1/PassEngine';
+const PASS_ENGINE_COOKIE_NAME = 'passes.org/v1/PassEngine';
 
 export function getPassEngine({ cookies }: Pick<RequestEvent, 'cookies'>): string | undefined {
   return cookies.get(PASS_ENGINE_COOKIE_NAME);

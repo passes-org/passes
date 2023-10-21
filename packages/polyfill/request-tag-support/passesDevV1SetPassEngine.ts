@@ -2,7 +2,7 @@ import { RequestResult } from "passes-protocol";
 import { PASSES_BASE_URL } from "../constants";
 import { getRequestBody } from "../utils";
 
-export const REQUEST_TAG = 'https://passes.dev/v1/set-pass-engine';
+export const REQUEST_TAG = 'https://passes.org/v1/set-pass-engine';
 
 export function support(request: Uint8Array) {
   const { uri } = JSON.parse(decoder.decode(getRequestBody(request)));
@@ -10,7 +10,7 @@ export function support(request: Uint8Array) {
   const confirmURL = `${PASSES_BASE_URL}/v1/set-pass-engine?${new URLSearchParams({ url: uri })}`;
 
   // FIXME: Use a POST request instead
-  // Open the passes.dev UI to confirm the user's choice to set their pass engine
+  // Open the passes.org UI to confirm the user's choice to set their pass engine
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const confirmWindow = window.open(confirmURL)!;
 
@@ -21,7 +21,7 @@ export function support(request: Uint8Array) {
   function handleMessage(event: MessageEvent<RequestResult>) {
     const message = event.data;
 
-    // Ignore messages that aren't from the passes.dev window opened in this call
+    // Ignore messages that aren't from the passes.org window opened in this call
     if (event.source !== confirmWindow) return;
 
     // Ignore messages that aren't request results

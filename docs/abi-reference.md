@@ -12,7 +12,7 @@ export interface PassesAPI {
 
 declare global {
   interface Document {
-		/** document.passes will be defined if it's supported (i.e. if the extension is installed or passes.dev JS script has run) */
+		/** document.passes will be defined if it's supported (i.e. if the extension is installed or passes.org JS script has run) */
     passes?: PassesAPI;
   }
 }

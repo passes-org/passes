@@ -8,7 +8,7 @@ export type SetPassEngineRequestBody = {
 	userkey?: string;
 };
 
-const requestTag = 'https://passes.dev/v1/set-pass-engine';
+const requestTag = 'https://passes.org/v1/set-pass-engine';
 
 const requestCodec: Codec<SetPassEngineRequestBody> = {
   encode: (body) => new Uint8Array([

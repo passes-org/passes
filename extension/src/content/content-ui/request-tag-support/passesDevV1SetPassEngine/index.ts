@@ -3,7 +3,7 @@ import { mountToaster } from "../../_common/toaster";
 import { getRequestBody } from "../../request/utils";
 import ConfirmToast from "./ConfirmToast.svelte";
 
-export const REQUEST_TAG = 'https://passes.dev/v1/set-pass-engine';
+export const REQUEST_TAG = 'https://passes.org/v1/set-pass-engine';
 
 export function support(request: Uint8Array): Promise<Uint8Array> {
   const { uri, userkey } = JSON.parse(decoder.decode(getRequestBody(request)));

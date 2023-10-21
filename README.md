@@ -9,7 +9,7 @@ Passes is designed to invert the relationship between user identity and the serv
 - Old: User is downstream of their identity, which is held by upstream servers
 - New: Services are downstream of users and their identities
 
-[Visit the documentation](https://docs.passes.dev) to learn more about building with passes.
+[Visit the documentation](https://docs.passes.org) to learn more about building with passes.
 
 ## How it works
 
@@ -21,7 +21,7 @@ Passes is designed to invert the relationship between user identity and the serv
 
 ## Passes work in any web browser
 
-Passes.dev publishes a web extension [TODO: Download link] that adds first-class support for passes to Chromium, Firefox, and Safari browsers.
+passes.org publishes a web extension [TODO: Download link] that adds first-class support for passes to Chromium, Firefox, and Safari browsers.
 There's also a JS polyfill [TODO: link to @passes/polyfill] web apps can use to ensure their pass requests work in any browser.
 
 ## Usage
@@ -43,7 +43,7 @@ export interface PassesABI {
 
 declare global {
   interface Document {
-		/** document.passes will be defined if it's supported (i.e. if the extension is installed or passes.dev JS script has run) */
+		/** document.passes will be defined if it's supported (i.e. if the extension is installed or passes.org JS script has run) */
     passes?: PassesABI;
   }
 }
@@ -55,11 +55,11 @@ declare global {
 
 Here's an overview of the structure of this repo:
 
-- `docs/` – The site at [docs.passes.dev](https://docs.passes.dev)
+- `docs/` – The site at [docs.passes.org](https://docs.passes.org)
 - `extension/` – The Passes web extension
 - `packages/` – Packages published by the `@passes` org on npm
   - `polyfill/` – A polyfill that provides the `document.passes` ABI
   - `reqs/` – A friendly and typesafe API for making common pass requests, and creating your own request types
   - `types/` – Type declarations related to the Passes Protocol APIs
-- `passes.dev/` – The web application at [passes.dev](https://passes.dev), which consists of a splash screen, and routes used by the `@passes/polyfill` package
+- `passes.org/` – The web application at [passes.org](https://passes.org), which consists of a splash screen, and routes used by the `@passes/polyfill` package
 
