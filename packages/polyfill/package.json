@@ -1,6 +1,6 @@
 {
   "name": "@passes/polyfill",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
