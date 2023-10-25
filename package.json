@@ -8,6 +8,7 @@
   ],
   "devDependencies": {
     "bun-types": "latest",
+    "lerna": "^7.4.1",
     "vitepress": "^1.0.0-rc.22"
   },
   "peerDependencies": {
