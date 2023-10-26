@@ -1,6 +1,6 @@
 {
   "name": "@passes/reqs",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "exports": {
     ".": {
       "bun": "./src/index.ts",
