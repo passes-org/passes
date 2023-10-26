@@ -36,4 +36,4 @@ const resultCodec: Codec<boolean> = {
 export const setPassEngine = new RequestBuilder<SetPassEngineRequestBody, boolean>(requestCodec, resultCodec);
 
 // usage
-const result = await setPassEngine.request({ uri: '', userkey: '' });
+// const result = await setPassEngine.request({ uri: '', userkey: '' });

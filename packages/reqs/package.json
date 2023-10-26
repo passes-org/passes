@@ -1,8 +1,20 @@
 {
   "name": "@passes/reqs",
   "version": "0.0.1-alpha.0",
-  "module": "src/index.ts",
-  "type": "module",
+  "exports": {
+    ".": {
+      "bun": "./src/index.ts",
+      "default": "./dist/index.ts"
+    },
+    "./pass-engines": {
+      "bun": "./src/pass-engines/index.ts",
+      "default": "./dist/pass-engines/index.js"
+    }
+  },
+  "scripts": {
+    "build": "bun run build.ts",
+    "prepublishOnly": "bun run build"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },

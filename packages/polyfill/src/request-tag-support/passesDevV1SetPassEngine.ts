@@ -1,4 +1,4 @@
-import { RequestResult } from "passes-protocol";
+import { RequestResult } from "@passes/types";
 import { PASSES_BASE_URL } from "../constants";
 import { getRequestBody } from "../utils";
 
