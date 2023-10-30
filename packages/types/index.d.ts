@@ -2,10 +2,10 @@
 /// <reference lib="dom.iterable" />
 
 export interface DocumentWithPasses extends Document {
-	passes?: PassesAPI; // defined if supported (i.e. if extension is installed or fallback JS script has run)
+	passes?: PassesABI; // defined if supported (i.e. if extension is installed or fallback JS script has run)
 }
 
-export interface PassesAPI {
+export interface PassesABI {
 	/** Request the user to complete a pass request */
 	request(
 		/** The raw pass request bytes */
@@ -21,6 +21,6 @@ export type RequestResult = {
 
 declare global {
   interface Document {
-    passes?: PassesAPI;
+    passes?: PassesABI;
   }
 }

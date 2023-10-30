@@ -10,6 +10,7 @@
     "composite": true,
     "strict": true,
     "downlevelIteration": true,
+    "isolatedModules": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,

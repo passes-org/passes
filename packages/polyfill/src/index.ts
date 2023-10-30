@@ -1,5 +1,6 @@
+/// <reference types="@passes/types" />
+
 import { request } from "./polyfill-request";
-import './declarations.d';
 
 function isPassesSupported(): boolean {
   return typeof document.passes !== 'undefined'

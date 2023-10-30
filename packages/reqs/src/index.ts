@@ -1,6 +1,6 @@
-/// <reference path="./declarations.d.ts" />
+/// <reference types="@passes/types" />
 
-import type { PassesABI } from './abi';
+import { PassesABI } from "@passes/types";
 
 export type Codec<T> = {
   encode: (value: T) => Uint8Array;
