@@ -7,7 +7,7 @@
   "types": "dist/types.d.ts",
   "scripts": {
     "build": "parcel build",
-    "prepublishOnly": "build"
+    "prepublishOnly": "bun run build"
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.10.1",
