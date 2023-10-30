@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.10.1",
+    "@parcel/transformer-typescript-types": "2.10.1",
     "@passes/types": "^0.0.1-alpha.7",
     "bun-types": "latest",
     "parcel": "^2.10.1"
