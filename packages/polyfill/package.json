@@ -1,6 +1,6 @@
 {
   "name": "@passes/polyfill",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.7",
   "source": "src/index.ts",
   "main": "dist/main.js",
   "module": "dist/module.js",
@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.10.1",
-    "@passes/types": "^0.0.1-alpha.3",
+    "@passes/types": "^0.0.1-alpha.7",
     "bun-types": "latest",
     "parcel": "^2.10.1"
   },
