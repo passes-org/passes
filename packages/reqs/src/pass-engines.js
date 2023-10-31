@@ -1,5 +1,5 @@
 // Assuming that the relative imports will be the same in JS
-import { Codec, RequestBuilder } from "./main";
+import { RequestBuilder } from "./main";
 import { EnvelopeV0x00 } from "./envelope-v0x00";
 
 /**
@@ -13,7 +13,7 @@ const requestTag = 'https://passes.org/v1/set-pass-engine';
 
 /**
  * Codec for encoding and decoding SetPassEngineRequestBody.
- * @type {Codec<SetPassEngineRequestBody>}
+ * @type {import('./main').Codec<SetPassEngineRequestBody>}
  */
 const requestCodec = {
   encode: (body) => new Uint8Array([
@@ -30,7 +30,7 @@ const requestCodec = {
 
 /**
  * Codec for encoding and decoding result as boolean.
- * @type {Codec<boolean>}
+ * @type {import('./main').Codec<boolean>}
  */
 const resultCodec = {
   encode: () => new Uint8Array([

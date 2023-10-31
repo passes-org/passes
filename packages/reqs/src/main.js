@@ -4,7 +4,6 @@
  * @property {(value: T) => Uint8Array} encode
  * @property {(bytes: Uint8Array) => T} decode
  */
-// Codec typedef is added here to define the structure
 
 /**
  * @template TResult
@@ -13,7 +12,6 @@
  * @property {TResult} [result]
  * @property {string} [message]
  */
-// RequestResult typedef added here
 
 /**
  * @type {Codec<any>}
@@ -35,7 +33,9 @@ export class RequestBuilder {
    * @param {PassesABI} [abi]
    */
   constructor(requestCodec, resultCodec, abi) {
-    const _abi = abi ?? document.passes;
+    /** @type {globalThis.Document & { passes?: PassesABI }} */
+    const _document = document;
+    const _abi = abi ?? _document.passes;
     if (!_abi) throw new ErrorPassesABINotAvailable();
     /** @type {PassesABI} */
     this.abi = _abi;
@@ -104,13 +104,6 @@ export class ErrorPassesABINotAvailable extends Error {
  * Interface representing the PassesABI.
  * @typedef {Object} PassesABI
  * @property {(raw: Uint8Array) => Promise<Uint8Array>} request - Request the user to complete a pass request.
- */
-
-/**
- * Represents the result of a request call, sent from a pass engine to a relying party via `postMessage`.
- * @typedef {Object} RequestResult
- * @property {'request-result'} type
- * @property {Uint8Array} result
  */
 
 /**
