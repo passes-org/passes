@@ -25,12 +25,7 @@ export class RequestBuilder {
    * @param {import("@passes/types").PassesABI} [abi]
    */
   constructor(requestCodec, resultCodec, abi) {
-    /** @type {import("@passes/types").DocumentWithPasses} */
-    const _document = document;
-    const _abi = abi ?? _document.passes;
-    if (!_abi) throw new ErrorPassesABINotAvailable();
-    /** @type {import("@passes/types").PassesABI} */
-    this.abi = _abi;
+    this.abi = resolvePassesABI(abi);;
     /** @type {Codec<TRequest>} */
     this.requestCodec = requestCodec;
     /** @type {Codec<TResult>} */
@@ -64,9 +59,6 @@ export class RequestBuilder {
   }
 }
 
-/**
- * Represents an error when the request envelope version is unsupported.
- */
 export class ErrorRequestEnvelopeVersionUnsupported extends Error {
   constructor() {
     super();
@@ -75,13 +67,25 @@ export class ErrorRequestEnvelopeVersionUnsupported extends Error {
   }
 }
 
-/**
- * Represents an error when the Passes ABI is not available.
- */
 export class ErrorPassesABINotAvailable extends Error {
   constructor() {
     super();
     this.name = 'Passes ABI not available';
     this.message = 'A value for `abi` must be passed to RequestBuilder if `document.passes` is not set';
   }
+}
+
+/**
+ * A helper for resolving the PassesABI. Given an optional PassesABI, returns it. If no abi is passed, it returns document.passes if it's available.
+ * 
+ * @param {import("@passes/types").PassesABI} [abi]
+ * @returns {import("@passes/types").PassesABI}
+ * @throws {ErrorPassesABINotAvailable} document.passes must be available if `abi` is not passed.
+ */
+function resolvePassesABI(abi) {
+  if (abi) return abi;
+  /** @type {import("@passes/types").DocumentWithPasses} */
+  const _document = typeof document !== 'undefined' ? document : null;
+  if (!_document?.passes) throw new ErrorPassesABINotAvailable();
+  return _document.passes;
 }
