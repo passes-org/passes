@@ -17,6 +17,9 @@
  * Represents a request builder.
  * @template TRequest
  * @template TResult
+ * @property {Codec<TRequest>} requestCodec
+ * @property {Codec<TResult>} resultCodec
+ * @property {import("@passes/types").PassesABI} [abi]
  */
 export class RequestBuilder {
   /**
@@ -25,7 +28,7 @@ export class RequestBuilder {
    * @param {import("@passes/types").PassesABI} [abi]
    */
   constructor(requestCodec, resultCodec, abi) {
-    this.abi = resolvePassesABI(abi);;
+    this.abi = abi;
     /** @type {Codec<TRequest>} */
     this.requestCodec = requestCodec;
     /** @type {Codec<TResult>} */
@@ -38,9 +41,10 @@ export class RequestBuilder {
    * @returns {Promise<DecodedRequestResult<TResult>>}
    */
   async request(req) {
+    const abi = resolvePassesABI(this.abi);
     const requestBytes = this.requestCodec.encode(req);
     if (requestBytes.at(0) !== 0x00) throw new ErrorRequestEnvelopeVersionUnsupported();
-    const resultBytes = await this.abi.request(requestBytes);
+    const resultBytes = await abi.request(requestBytes);
     const resultStatusByte = resultBytes.at(0);
     switch (resultStatusByte) {
       case 0x00:
