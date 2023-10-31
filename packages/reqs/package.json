@@ -9,6 +9,7 @@
     "prepublishOnly": "tsc"
   },
   "devDependencies": {
+    "@passes/types": "^0.0.1-alpha.7",
     "bun-types": "latest",
     "typescript": "^5.2.2"
   },

@@ -9,19 +9,11 @@ export * as PassEngines from './pass-engines';
 
 /**
  * @template TResult
- * @typedef {Object} RequestResult
+ * @typedef {Object} DecodedRequestResult
  * @property {'accepted' | 'rejected' | 'unsupported' | 'exception'} status
  * @property {TResult} [result]
  * @property {string} [message]
  */
-
-/**
- * @type {Codec<any>}
- */
-export const identityCodec = {
-  encode: (v) => v,
-  decode: (v) => v,
-}
 
 /**
  * Represents a request builder.
@@ -32,14 +24,14 @@ export class RequestBuilder {
   /**
    * @param {Codec<TRequest>} requestCodec
    * @param {Codec<TResult>} resultCodec
-   * @param {PassesABI} [abi]
+   * @param {import("@passes/types").PassesABI} [abi]
    */
   constructor(requestCodec, resultCodec, abi) {
-    /** @type {globalThis.Document & { passes?: PassesABI }} */
+    /** @type {import("@passes/types").DocumentWithPasses} */
     const _document = document;
     const _abi = abi ?? _document.passes;
     if (!_abi) throw new ErrorPassesABINotAvailable();
-    /** @type {PassesABI} */
+    /** @type {import("@passes/types").PassesABI} */
     this.abi = _abi;
     /** @type {Codec<TRequest>} */
     this.requestCodec = requestCodec;
@@ -50,7 +42,7 @@ export class RequestBuilder {
   /**
    * Makes a request.
    * @param {TRequest} req
-   * @returns {Promise<RequestResult<TResult>>}
+   * @returns {Promise<DecodedRequestResult<TResult>>}
    */
   async request(req) {
     const requestBytes = this.requestCodec.encode(req);
@@ -95,21 +87,3 @@ export class ErrorPassesABINotAvailable extends Error {
     this.message = 'A value for `abi` must be passed to RequestBuilder if `document.passes` is not set';
   }
 }
-
-/**
- * Extends the Document interface with potential PassesABI support.
- * @typedef {Object} DocumentWithPasses
- * @property {PassesABI} [passes] - Defined if supported (i.e. if extension is installed or fallback JS script has run).
- */
-
-/**
- * Interface representing the PassesABI.
- * @typedef {Object} PassesABI
- * @property {(raw: Uint8Array) => Promise<Uint8Array>} request - Request the user to complete a pass request.
- */
-
-/**
- * Extends the global Document interface to potentially support PassesABI.
- * @typedef {Object} Document
- * @property {PassesABI} [passes]
- */
