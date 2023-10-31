@@ -5,8 +5,14 @@
   "main": "src/main.js",
   "types": "types/main.d.ts",
   "exports": {
-    ".": "./src/main.js",
-    "./pass-engines": "./src/pass-engines.js"
+    ".": {
+      "import": "./src/main.js",
+      "types": "./types/main.d.ts"
+    },
+    "./pass-engine": {
+      "import": "./src/pass-engine.js",
+      "types": "./types/pass-engine.d.ts"
+    }
   },
   "scripts": {
     "build": "tsc",
