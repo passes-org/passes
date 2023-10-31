@@ -7,5 +7,8 @@ export function getPassEngine({ cookies }: Pick<RequestEvent, 'cookies'>): strin
 }
 
 export function setPassEngine({ cookies }: Pick<RequestEvent, 'cookies'>, domain: string): void {
-  cookies.set(PASS_ENGINE_COOKIE_NAME, domain, { sameSite: 'none', path: '/' });
+  const expires = new Date();
+  expires.setFullYear(expires.getFullYear() + 10);
+
+  cookies.set(PASS_ENGINE_COOKIE_NAME, domain, { sameSite: 'lax', path: '/', expires });
 }
