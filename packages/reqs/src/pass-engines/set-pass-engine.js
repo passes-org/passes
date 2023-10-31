@@ -1,6 +1,6 @@
 // Assuming that the relative imports will be the same in JS
-import { EnvelopeV0x00 } from "../envelope-v0x00";
-import { RequestBuilder } from "../request-builder";
+import { EnvelopeV0x00 } from "../envelope-v0x00.js";
+import { RequestBuilder } from "../request-builder.js";
 
 /**
  * Represents the body of a SetPassEngine request.
