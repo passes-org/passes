@@ -1,20 +1,20 @@
 {
   "name": "@passes/reqs",
   "version": "0.0.1-alpha.8",
-  "source": "src/index.ts",
-  "main": "dist/main.js",
-  "module": "dist/module.js",
+  "module": "dist/index.js",
   "types": "dist/types.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./pass-engines": "./dist/pass-engines.js"
+  },
   "scripts": {
-    "build": "parcel build",
+    "build": "bun build.mjs",
     "prepublishOnly": "bun run build"
   },
   "devDependencies": {
-    "@parcel/packager-ts": "2.10.1",
-    "@parcel/transformer-typescript-types": "2.10.1",
     "@passes/types": "^0.0.1-alpha.7",
-    "bun-types": "latest",
-    "parcel": "^2.10.1"
+    "bun-plugin-dts": "^0.2.1",
+    "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

@@ -1,5 +1,5 @@
-import { Codec, RequestBuilder } from "..";
-import { EnvelopeV0x00 } from "../envelope-v0x00";
+import { Codec, RequestBuilder } from ".";
+import { EnvelopeV0x00 } from "./envelope-v0x00";
 
 export type SetPassEngineRequestBody = {
 	/** The value to be used as the user's pass engine URI */

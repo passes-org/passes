@@ -1,9 +1,6 @@
 /// <reference types="@passes/types" />
 
 import { PassesABI } from "@passes/types";
-import * as PassEngines from './pass-engines';
-
-export { PassEngines };
 
 export type Codec<T> = {
   encode: (value: T) => Uint8Array;
