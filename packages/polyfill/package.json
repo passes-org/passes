@@ -1,19 +1,16 @@
 {
   "name": "@passes/polyfill",
   "version": "0.0.1-alpha.8",
-  "source": "src/index.ts",
-  "main": "dist/main.js",
-  "module": "dist/module.js",
-  "types": "dist/types.d.ts",
+  "type": "module",
+  "main": "src/main.js",
+  "types": "types/main.d.ts",
   "scripts": {
-    "build": "parcel build",
-    "prepublishOnly": "bun run build"
+    "build": "tsc",
+    "prepublishOnly": "tsc"
   },
   "devDependencies": {
-    "@parcel/packager-ts": "2.10.1",
     "@passes/types": "^0.0.1-alpha.7",
-    "bun-types": "latest",
-    "parcel": "^2.10.1"
+    "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

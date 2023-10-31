@@ -1,7 +1,18 @@
-export function openWindowWithPost(url: string, formData: FormData) {
+/// <reference lib="dom" />
+
+/**
+ * Submits a POST request with the provided form data to the provided url. 
+ * Under the hood, this uses a hidden form that's temporarily added to the DOM until it's submitted.
+ * 
+ * @param {string} url 
+ * @param {FormData} formData 
+ * @returns {Window} (the opened window)
+ */
+export function openWindowWithPost(url, formData) {
   // Open a new window
   const target = crypto.randomUUID();
-  const newWin = window.open('', target)!;
+  const newWin = window.open('', target);
+  if (!newWin) throw new Error('Failed to open new window for POST');
 
   // Create a form dynamically
   const form = document.createElement('form');
@@ -41,13 +52,17 @@ export function openWindowWithPost(url: string, formData: FormData) {
     // Remove the form from the body (cleanup)
     document.body.removeChild(form);
   }, 100);
-  // form.submit();
-
 
   return newWin;
 }
 
-export function getRequestTag(request: Uint8Array): string {
+/**
+ * Returns a string view of tag of a Uint8Array-encoded pass request.
+ * 
+ * @param {Uint8Array} request 
+ * @returns {string}
+ */
+export function getRequestTag(request) {
   const tagBegin = 2;
   const tagLength = (request.at(1) ?? 0) + 1;
   const tagEnd = tagBegin + tagLength;
@@ -55,7 +70,13 @@ export function getRequestTag(request: Uint8Array): string {
   return new TextDecoder().decode(tagBytes);
 }
 
-export function getRequestBody(request: Uint8Array): Uint8Array {
+/**
+ * Selects and returns the body segment of a Uint8Array-encoded pass request.
+ * 
+ * @param {Uint8Array} request 
+ * @returns {Uint8Array}
+ */
+export function getRequestBody(request) {
   const tagBegin = 2;
   const tagLength = (request.at(1) ?? 0) + 1;
   const tagEnd = tagBegin + tagLength;

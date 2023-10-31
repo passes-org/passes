@@ -1,5 +1,6 @@
 import * as passesDevV1SetPassEngine from './passesDevV1SetPassEngine';
 
-export const SUPPORTED_REQUEST_TAGS: Record<string, (request: Uint8Array) => Promise<Uint8Array>> = {
+/** @type {Record<string, (request: Uint8Array) => Promise<Uint8Array>>} */
+export const SUPPORTED_REQUEST_TAGS = {
   [passesDevV1SetPassEngine.REQUEST_TAG]: passesDevV1SetPassEngine.support,
 };

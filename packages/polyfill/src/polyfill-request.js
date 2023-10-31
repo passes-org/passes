@@ -1,9 +1,14 @@
-import { RequestResult } from "@passes/types";
 import { PASSES_BASE_URL } from "./constants";
-import { getRequestTag, openWindowWithPost } from "./utils";
 import { SUPPORTED_REQUEST_TAGS } from "./request-tag-support";
+import { getRequestTag, openWindowWithPost } from "./utils";
 
-export async function request(raw: Uint8Array): Promise<Uint8Array> {
+/**
+ * Provides a polyfill implementation of the document.passes.request ABI using a POST request to passes.org in a new window which forwards the end user to their pass engine to handle the request.
+ * 
+ * @param {Uint8Array} raw 
+ * @returns {Promise<Uint8Array>}
+ */
+export async function request(raw) {
   // Get the request tag to check if it has built-in support
   const requestTag = getRequestTag(raw);
 
@@ -19,10 +24,18 @@ export async function request(raw: Uint8Array): Promise<Uint8Array> {
   const passEngineWindow = openWindowWithPost(`${PASSES_BASE_URL}/v1/request`, formData);
 
   // Create a promise and resolver fn which will be used to return a promise that gets resolved from handleMessage once there's a result
-  let resolveResultPromise: (result: Uint8Array) => void;
-  const resultPromise = new Promise<Uint8Array>((resolve) => { resolveResultPromise = resolve; });
+  /** @type {(result: Uint8Array) => void} */
+  let resolveResultPromise;
+  /** @type {Promise<Uint8Array>} */
+  const resultPromise = new Promise((resolve) => { resolveResultPromise = resolve; });
 
-  function handleMessage(event: MessageEvent<RequestResult>) {
+  /**
+   * Handles request-result messages from the pass engine window.
+   * 
+   * @param {MessageEvent<import("@passes/types").RequestResult>} event 
+   * @returns {void}
+   */
+  function handleMessage(event) {
     const message = event.data;
 
     // Ignore messages that aren't from the pass engine window opened in this call

@@ -170,3 +170,6 @@ dist
 
 # IntelliJ based IDEs
 .idea
+
+# Built d.ts files
+types/
