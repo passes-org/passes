@@ -2,23 +2,13 @@
   "name": "@passes/reqs",
   "version": "0.0.1-alpha.10",
   "type": "module",
-  "module": "dist/index.js",
-  "types": "dist/types.d.ts",
+  "main": "src/main.js",
   "exports": {
-    ".": "./dist/index.js",
-    "./pass-engines": "./dist/pass-engines.js"
-  },
-  "scripts": {
-    "build": "bun build.mjs",
-    "prepublishOnly": "bun run build"
+    ".": "./src/main.js",
+    "./pass-engines": "./src/pass-engines.js"
   },
   "devDependencies": {
-    "@passes/types": "^0.0.1-alpha.7",
-    "bun-plugin-dts": "^0.2.1",
     "bun-types": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
   },
   "gitHead": "196eb5f98060061f2bfaedbb15e3e99fe4cc4fb5"
 }

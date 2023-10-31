@@ -1,7 +1,16 @@
+/**
+ * Pass Request Envelope Version 0x00
+ */
 export const EnvelopeV0x00 = {
   VERSION: 0x00,
   
-  encodeRequestHeader(tag: string): Uint8Array {
+  /**
+   * Returns an encoded request header with the provided string tag.
+   * 
+   * @param {string} tag 
+   * @returns {Uint8Array}
+   */
+  encodeRequestHeader(tag) {
     const tagBytes = new TextEncoder().encode(tag);
   
     return new Uint8Array([
@@ -11,7 +20,13 @@ export const EnvelopeV0x00 = {
     ]);
   },
 
-  parseRequest(bytes: Uint8Array) {
+  /**
+   * Returns a structured view of the provided request bytes.
+   * 
+   * @param {Uint8Array} bytes 
+   * @returns {{ tag: string; body: Uint8Array }}
+   */
+  parseRequest(bytes) {
     const version = bytes.at(0);
     if (version !== this.VERSION) throw new this.errors.REQUEST_INCORRECT_VERSION(version);
     const tagLengthField = bytes.at(1);
@@ -22,10 +37,16 @@ export const EnvelopeV0x00 = {
     const tagBytes = bytes.slice(tagStart, tagEnd);
     const tag = new TextDecoder().decode(tagBytes);
     const body = bytes.slice(tagEnd + 1);
-    return { tag, body } as const;
+    return { tag, body };
   },
 
-  encodeResultStatusByte(status: 'accepted' | 'rejected' | 'unsupported' | 'exception') {
+  /**
+   * Returns the encoded number (1 byte) representation of the provided result status.
+   * 
+   * @param {'accepted' | 'rejected' | 'unsupported' | 'exception'} status 
+   * @returns {number}
+   */
+  encodeResultStatusByte(status) {
     switch (status) {
       case 'accepted':
         return 0x00;
@@ -38,7 +59,13 @@ export const EnvelopeV0x00 = {
     }
   },
   
-  parseResultStatusByte(status: number) {
+  /**
+   * Returns the string representation of the provided encoded result status number.
+   * 
+   * @param {number} status 
+   * @returns {'accepted' | 'rejected' | 'unsupported' | 'exception'}
+   */
+  parseResultStatusByte(status) {
     switch (status) {
       case 0x00:
         return 'accepted';
@@ -53,12 +80,18 @@ export const EnvelopeV0x00 = {
     }
   },
 
-  parseResult(bytes: Uint8Array) {
+  /**
+   * Returns a structured view of the provided result bytes
+   * 
+   * @param {Uint8Array} bytes 
+   * @returns {{ status: 'accepted' | 'rejected' | 'unsupported' | 'exception'; body: Uint8Array }}
+   */
+  parseResult(bytes) {
     const statusByte = bytes.at(0);
     if (typeof statusByte === 'undefined') throw new this.errors.RESULT_MISSING_STATUS_BYTE();
     const status = this.parseResultStatusByte(statusByte);
     const body = bytes.slice(1);
-    return { status, body } as const;
+    return { status, body };
   },
 
   errors: {
@@ -68,11 +101,13 @@ export const EnvelopeV0x00 = {
     // –
 
     REQUEST_INCORRECT_VERSION: class EnvelopeV0x00ErrorIncorrectVersion extends Error {
-      name = "Incorrect Request Envelope Version";
-      version?: number;
-      constructor(version?: number) {
+      /**
+       * @param {number} [version]
+       */
+      constructor(version) {
         super();
-        this.message = `EnvelopeV0x00 can only parse request envelope version 0. Received version ${version ?? 'undefined'}`
+        this.name = "Incorrect Request Envelope Version";
+        this.message = `EnvelopeV0x00 can only parse request envelope version 0. Received version ${version ?? 'undefined'}`;
         this.version = version;
       }
     },
