@@ -1,0 +1,3 @@
+# Ethereum JSON-RPC Methods Example
+
+Demonstrate using passes to handle a set of different ethereum JSON-RPC requests...

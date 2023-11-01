@@ -1,0 +1,9 @@
+:root {
+  --vp-font-family-base: ui-rounded, sans-serif;
+  /* --vp-font-family-mono: monospace; */
+
+  --vp-c-brand-1: var(--vp-c-black);
+  --vp-c-brand-2: var(--vp-c-black);
+  --vp-c-brand-3: var(--vp-c-black);
+  --vp-c-brand-soft: var(--vp-c-black);
+}

@@ -2,7 +2,7 @@
 Reference for the low-level ABI for making pass requests.
 
 ```typescript
-export interface PassesAPI {
+export interface PassesABI {
 	/** Request the user to complete a pass request */
 	request(
 		/** The raw pass request bytes */
@@ -13,7 +13,7 @@ export interface PassesAPI {
 declare global {
   interface Document {
 		/** document.passes will be defined if it's supported (i.e. if the extension is installed or passes.org JS script has run) */
-    passes?: PassesAPI;
+    passes?: PassesABI;
   }
 }
 ```

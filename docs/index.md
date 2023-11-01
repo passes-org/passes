@@ -4,22 +4,29 @@ layout: home
 
 hero:
   name: "Passes"
-  text: "Open and portable identity and authentication for the web"
-  # tagline: My great project tagline
+  text: "The web API for portable identity and authentication"
+  tagline: "Create apps that offer the best sign-in experience, seamlessly interoperate with other apps, etc etc"
   actions:
     - theme: brand
-      text: Quickstart
-      link: /quickstart
-    # - theme: alt
-    #   text: API Examples
-    #   link: /api-examples
+      text: Try Passes
+      link: /examples/identity
+    - theme: alt
+      text: Getting Started
+      link: /introduction/getting-started
+    - theme: alt
+      text: Download Extension
+      link: /downloads
 
-# features:
-#   - title: Feature A
-#     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-#   - title: Feature B
-#     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-#   - title: Feature C
-#     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+features:
+  - title: Open
+    details: Passes is an open protocol. Passes.org is maintained by the passes.org foundation
+  - title: Portable
+    details: Users use the same pass across their various sites and apps
+  - title: Interoperable
+    details: Seamlessly use data associated with users, even from other apps, without complicated APIs
+  - title: Web Standards
+    details: Passes is built on web standards
+  - title: Ubiquitous
+    details: Pass requests work in any web browser or operating system
 ---
 
