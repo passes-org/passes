@@ -18,6 +18,8 @@ hero:
       link: /downloads
 
 features:
+  - title: Simple
+    details: "The core of passes is a single ABI for making authn requests. In fact, 'identity' is just an application of a pass request"
   - title: Open
     details: Passes is an open protocol. Passes.org is maintained by the passes.org foundation
   - title: Portable

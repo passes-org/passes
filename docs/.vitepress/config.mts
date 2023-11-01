@@ -64,23 +64,31 @@ export default defineConfig({
         ],
       },
       {
-        text: '@passes/reqs',
+        text: 'Packages',
         items: [
-          { text: 'Quickstart', link: '/packages/reqs/quickstart' },
-          { text: 'Common pass requests', link: '/packages/reqs/common-requests' },
-          { text: 'Defining a pass request type', link: '/packages/reqs/request-builder' },
-        ],
-      },
-      {
-        text: '@passes/polyfill',
-        items: [
-          { text: 'Quickstart', link: '/packages/polyfill/quickstart' },
-        ],
-      },
-      {
-        text: '@passes/types',
-        items: [
-          { text: 'Installation', link: '/packages/types/installation' },
+          {
+            text: '@passes/reqs',
+            link: '/packages/reqs/quickstart',
+            items: [
+              { text: 'Quickstart', link: '/packages/reqs/quickstart' },
+              { text: 'Common pass requests', link: '/packages/reqs/common-requests' },
+              { text: 'Defining a pass request type', link: '/packages/reqs/request-builder' },
+            ],
+          },
+          {
+            text: '@passes/polyfill',
+            link: '/packages/polyfill/quickstart',
+            items: [
+              { text: 'Quickstart', link: '/packages/polyfill/quickstart' },
+            ],
+          },
+          {
+            text: '@passes/types',
+            link: '/packages/types/installation',
+            items: [
+              { text: 'Installation', link: '/packages/types/installation' },
+            ],
+          },
         ],
       },
       {
@@ -94,9 +102,9 @@ export default defineConfig({
       },
       {
         text: 'Foundation',
-        link: '/',
+        link: '/foundation/',
         items: [
-          { text: 'Roadmap', link: '/' },
+          { text: 'Roadmap', link: '/foundation/roadmap' },
         ],
       },
     ],
