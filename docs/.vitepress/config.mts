@@ -5,7 +5,7 @@ const POLYFILL_MODULE_URL = 'https://unpkg.com/@passes/polyfill@0.0.1-alpha.16/s
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Passes",
-  description: "User identity and authn for the web",
+  description: "The web API for portable identity",
   head: [
     ['link', { rel: 'icon', href: '/favicon.png' }],
     ['script', { type: 'module', src: POLYFILL_MODULE_URL }],
