@@ -1,4 +1,36 @@
 /**
+ * @typedef {'accepted' | 'rejected' | 'unsupported' | 'exception'} ResultStatus
+ */
+
+/**
+ * @template T
+ * @typedef {Object} AcceptedResult<T>
+ * @property {'accepted'} status - The status of the result when accepted.
+ * @property {T} result - The result of the decoded request.
+ */
+
+/**
+ * @typedef {Object} RejectedResult
+ * @property {'rejected'} status - The status of the result when rejected.
+ */
+
+/**
+ * @typedef {Object} UnsupportedResult
+ * @property {'unsupported'} status - The status of the result when unsupported.
+ */
+
+/**
+ * @typedef {Object} ExceptionResult
+ * @property {'exception'} status - The status of the result when there is an exception.
+ * @property {string} message - The message explaining the exception.
+ */
+
+/**
+ * @template TResult
+ * @typedef {AcceptedResult<TResult> | RejectedResult | UnsupportedResult | ExceptionResult} RequestResult<TResult>
+ */
+
+/**
  * Pass Request Envelope Version 0x00
  */
 export const EnvelopeV0x00 = {
@@ -43,7 +75,7 @@ export const EnvelopeV0x00 = {
   /**
    * Returns the encoded number (1 byte) representation of the provided result status.
    * 
-   * @param {'accepted' | 'rejected' | 'unsupported' | 'exception'} status 
+   * @param {ResultStatus} status 
    * @returns {number}
    */
   encodeResultStatusByte(status) {
@@ -63,7 +95,7 @@ export const EnvelopeV0x00 = {
    * Returns the string representation of the provided encoded result status number.
    * 
    * @param {number} status 
-   * @returns {'accepted' | 'rejected' | 'unsupported' | 'exception'}
+   * @returns {ResultStatus}
    */
   parseResultStatusByte(status) {
     switch (status) {
@@ -84,14 +116,23 @@ export const EnvelopeV0x00 = {
    * Returns a structured view of the provided result bytes
    * 
    * @param {Uint8Array} bytes 
-   * @returns {{ status: 'accepted' | 'rejected' | 'unsupported' | 'exception'; body: Uint8Array }}
+   * @returns {RequestResult<Uint8Array>}
    */
   parseResult(bytes) {
     const statusByte = bytes.at(0);
     if (typeof statusByte === 'undefined') throw new this.errors.RESULT_MISSING_STATUS_BYTE();
     const status = this.parseResultStatusByte(statusByte);
-    const body = bytes.slice(1);
-    return { status, body };
+    const rawBody = bytes.slice(1);
+    switch (status) {
+      case 'accepted':
+        return { status: 'accepted', result: rawBody };
+      case 'rejected':
+        return { status: 'rejected' };
+      case 'unsupported':
+        return { status: 'unsupported' };
+      case 'exception':
+        return { status: 'exception', message: new TextDecoder().decode(rawBody) };
+    }
   },
 
   errors: {

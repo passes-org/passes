@@ -1,6 +1,4 @@
-// Assuming that the relative imports will be the same in JS
-import { EnvelopeV0x00 } from "../envelope-v0x00.js";
-import { RequestBuilder } from "../request-builder.js";
+import { RequestTypeBuilder } from "../request-type-builder.js";
 
 /**
  * Represents the body of a SetPassEngine request.
@@ -15,35 +13,22 @@ const requestTag = 'https://passes.org/v1/set-pass-engine';
  * Codec for encoding and decoding SetPassEngineRequestBody.
  * @type {import('../main').Codec<SetPassEngineRequestBody>}
  */
-const requestCodec = {
-  encode: (body) => new Uint8Array([
-    ...EnvelopeV0x00.encodeRequestHeader(requestTag),
-    ...new TextEncoder().encode(JSON.stringify(body)),
-  ]),
-  decode: (bytes) => {
-    const { tag, body } = EnvelopeV0x00.parseRequest(bytes);
-    // FIXME: Verify tag === requestTag
-    const bodyText = new TextDecoder().decode(body);
-    return JSON.parse(bodyText);
-  }
+const requestBodyCodec = {
+  encode: (body) => new TextEncoder().encode(JSON.stringify(body)),
+  decode: (bytes) => JSON.parse(new TextDecoder().decode(bytes)),
 };
 
 /**
  * Codec for encoding and decoding result as boolean.
- * @type {import('../main').Codec<boolean>}
+ * @type {import('../main').Codec<true>}
  */
-const resultCodec = {
-  encode: () => new Uint8Array([
-    EnvelopeV0x00.encodeResultStatusByte('accepted'),
-  ]),
-  decode: (bytes) => {
-    const { status } = EnvelopeV0x00.parseResult(bytes);
-    return status === 'accepted';
-  }
+const resultBodyCodec = {
+  encode: () => undefined,
+  decode: () => true,
 };
 
 /** 
  * RequestBuilder for SetPassEngine requests.
- * @type {RequestBuilder<SetPassEngineRequestBody, boolean>}
+ * @type {RequestTypeBuilder<SetPassEngineRequestBody, boolean>}
  */
-export const setPassEngine = new RequestBuilder(requestCodec, resultCodec);
+export const setPassEngine = new RequestTypeBuilder(requestTag, requestBodyCodec, resultBodyCodec);
