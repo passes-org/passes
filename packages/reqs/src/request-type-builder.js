@@ -83,7 +83,6 @@ export class RequestTypeBuilder {
    */
   decodeResult(bytes) {
     const parsedResult = EnvelopeV0x00.parseResult(bytes);
-    console.log('parsedResult', parsedResult);
 
     // If the result status is 'accepted', decode the result body into a TResultBody
     if (parsedResult.status === 'accepted') {
@@ -97,11 +96,11 @@ export class RequestTypeBuilder {
   }
 
   /**
-   * Makes a request.
+   * Sends a request.
    * @param {TRequestBody} reqBody
    * @returns {Promise<RequestResult<TResultBody>>}
    */
-  async request(reqBody) {
+  async sendRequest(reqBody) {
     const abi = this.resolveABI();
     const requestBytes = this.encodeRequest(reqBody);
     const resultBytes = await abi.request(requestBytes);
