@@ -1,20 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { EnvelopeV0x00 } from '../../../packages/reqs/src/main';
 import Button from './Button.vue';
 import PaneTabs from './PaneTabs.vue';
 import { useStore } from './store';
 
 const store = useStore();
 
-const { tag: requestTag } = EnvelopeV0x00.parseRequest(store.value.request);
-const decodedRequestBody = store.value.builder.requestCodec.decode(store.value.request);
-
-const resultStatus = computed(() => store.value.result
-  ? EnvelopeV0x00.parseResult(store.value.result).status
-  : store.value.requestPending ? '(pending)' : '(awaiting request)');
-const decodedResultBody = computed(() => store.value.result
-  ? store.value.builder.resultCodec.decode(store.value.result)
+const decodedRequest = store.value.builder.decodeRequest(store.value.request);
+const decodedResult = computed(() => store.value.result
+  ? store.value.builder.decodeResult(store.value.result)
   : undefined);
 </script>
 
@@ -28,26 +22,26 @@ const decodedResultBody = computed(() => store.value.result
     <div v-if="store.dataPaneActiveTab === 'request'" :class="$style.content">
       <label>
         <span>Tag</span>
-        <div :class="$style.code">{{ requestTag }}</div>
+        <div :class="$style.code">{{ store.builder.requestTag }}</div>
       </label>
       <label>
         <span>Body</span>
-        <pre :class="$style.code">{{ decodedRequestBody ? JSON.stringify(decodedRequestBody, null, 2) : '(empty)' }}</pre>
+        <pre :class="$style.code">{{ decodedRequest ? JSON.stringify(decodedRequest, null, 2) : '(empty)' }}</pre>
       </label>
+    </div>
+    <div v-if="store.dataPaneActiveTab === 'request'" :class="$style.actions">
+      <Button @click="store.makeRequest()">Send Request</Button>
     </div>
     <!-- Result View -->
     <div v-else :class="$style.content">
       <label>
         <span>Status</span>
-        <div :class="$style.code">{{ resultStatus }}</div>
+        <div :class="$style.code">{{ decodedResult?.status ?? (store.requestPending ? '(request pending)' : '(awaiting request)') }}</div>
       </label>
       <label v-if="store.result">
         <span>Body</span>
-        <pre :class="$style.code">{{ decodedResultBody ? JSON.stringify(decodedResultBody, null, 2) : '(empty)' }}</pre>
+        <pre :class="$style.code">{{ decodedResult?.status === 'accepted' ? JSON.stringify(decodedResult.body, null, 2) : '(empty)' }}</pre>
       </label>
-    </div>
-    <div :class="$style.actions">
-      <Button @click="store.makeRequest()">Send Request</Button>
     </div>
   </div>
 </template>

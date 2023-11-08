@@ -22,7 +22,8 @@ export default defineConfig({
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/passes-org/passes' }
-    ],    
+    ],
+    search: { provider: 'local' },
 
     sidebar: [
       {
@@ -54,7 +55,7 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Pass Engines',
+        text: 'Pass Engines', // TODO: Rename to "Passes"?
         items: [
           { text: 'Introduction', link: '/engines/introduction' },
           { text: 'Alternatives', link: '/engines/alternatives' },

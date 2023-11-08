@@ -1,7 +1,22 @@
 <script setup lang="ts">
+import { RequestTypeBuilder } from '../../../packages/reqs/src/request-type-builder';
 import DataPane from './DataPane.vue';
-import EmulatorPane from './EmulatorPane.vue';
+import PassPane from './PassPane.vue';
 import PlaygroundHeader from './PlaygroundHeader.vue';
+import { provideStore } from './store';
+
+const { builder, requestBody } = defineProps<{
+  builder: RequestTypeBuilder<any, any>;
+  requestBody: any;
+  resultBody?: any;
+  acceptButtonTitle?: string;
+  rejectButtonTitle?: string;
+}>();
+
+const store = provideStore({
+  builder,
+  request: builder.encodeRequest(requestBody),
+});
 </script>
 
 <template>
@@ -11,9 +26,14 @@ import PlaygroundHeader from './PlaygroundHeader.vue';
     <!-- Row: Content -->
     <div :class="$style.content">
       <DataPane />
-      <EmulatorPane>
-        <slot></slot>
-      </EmulatorPane>
+      <PassPane
+        @accept="store.setResult(builder.encodeResult({ status: 'accepted', body: resultBody }))"
+        @reject="store.setResult(builder.encodeResult({ status: 'rejected' }))"
+        :acceptButtonTitle="acceptButtonTitle"
+        :rejectButtonTitle="rejectButtonTitle"
+      >
+        <slot name="pass-emulator-ui"></slot>
+      </PassPane>
     </div>
   </div>
 </template>
