@@ -6,7 +6,7 @@
  * @template T
  * @typedef {Object} AcceptedResult<T>
  * @property {'accepted'} status - The status of the result when accepted.
- * @property {T} result - The result of the decoded request.
+ * @property {T} body - The body of the result.
  */
 
 /**
@@ -113,7 +113,7 @@ export const EnvelopeV0x00 = {
   },
 
   /**
-   * Returns a structured view of the provided result bytes
+   * Returns a structured view of the provided result
    * 
    * @param {Uint8Array} bytes 
    * @returns {RequestResult<Uint8Array>}
@@ -125,7 +125,7 @@ export const EnvelopeV0x00 = {
     const rawBody = bytes.slice(1);
     switch (status) {
       case 'accepted':
-        return { status: 'accepted', result: rawBody };
+        return { status: 'accepted', body: rawBody };
       case 'rejected':
         return { status: 'rejected' };
       case 'unsupported':
@@ -133,6 +133,34 @@ export const EnvelopeV0x00 = {
       case 'exception':
         return { status: 'exception', message: new TextDecoder().decode(rawBody) };
     }
+  },
+
+  /**
+   * Returns the encoded representation of the provided result
+   * 
+   * @param {RequestResult<Uint8Array>} result
+   * @returns {Uint8Array}
+   */
+  encodeResult(result) {
+    const statusByte = this.encodeResultStatusByte(result.status);
+
+    let body;
+    switch (result.status) {
+      case 'accepted':
+        body = result.body;
+        break;
+      case 'rejected':
+      case 'unsupported':
+        body = new Uint8Array(); // empty
+        break;
+      case 'exception':
+        body = new TextEncoder().encode(result.message);
+    }
+
+    return new Uint8Array([
+      statusByte,
+      ...body,
+    ]);
   },
 
   errors: {

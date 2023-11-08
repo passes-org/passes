@@ -64,15 +64,16 @@ export class RequestTypeBuilder {
   /**
    * Encodes a structured result body into an envelope-v0x00 result.
    * 
-   * @param {import('./envelope-v0x00').ResultStatus} status 
-   * @param {TResultBody} body 
+   * @param {RequestResult<TResultBody>} result
    * @returns {Uint8Array}
    */
-  encodeResult(status, body) {
-    return new Uint8Array([
-      EnvelopeV0x00.encodeResultStatusByte(status),
-      ...this.resultBodyCodec.encode(body),
-    ]);
+  encodeResult(result) {
+    return EnvelopeV0x00.encodeResult(
+      // If the result status is 'accepted', encode the result body into bytes
+      result.status === 'accepted'
+        ? { status: 'accepted', body: this.resultBodyCodec.encode(result.body) }
+        : result
+    );
   }
 
   /**
@@ -88,7 +89,7 @@ export class RequestTypeBuilder {
     if (parsedResult.status === 'accepted') {
       return {
         status: 'accepted',
-        result: this.resultBodyCodec.decode(parsedResult.result),
+        body: this.resultBodyCodec.decode(parsedResult.body),
       };
     }
 
