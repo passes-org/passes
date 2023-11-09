@@ -8,8 +8,6 @@
 We should add a diagram illustrating how a pass request works.
 :::
 
-[ [Diagram] ]
-
 ## Why?
 
 ::: warning Missing Diagram
