@@ -50,7 +50,7 @@ This needs to specify where developers can create RFCs.
 Developers can also create their own types of pass requests – you just need specification that apps can use to format the request, and that pass providers can use to interpret them. The best way to do this is create an RFC.
 
 ## Pass requests are easy to support
-Passes.org publishes a TypeScript package `@passes/reqs` which provides friendly and type-safe APIs for creating common types of pass requests, as well create defining your own pass request types.
+Passes.org publishes a TypeScript package [`@passes/reqs`](https://npmjs.com/package/@passes/reqs) which provides friendly and type-safe APIs for creating common types of pass requests, as well create defining your own pass request types.
 
 Learn more about `@passes/reqs`: [Reqs Docs](../packages/reqs/quickstart.md)
 

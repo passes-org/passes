@@ -88,9 +88,9 @@ const userPubkey = getPubkeyResult.body;
 
 ## Pass Provider Handling Code
 ```typescript
-import { EnvelopeV0x00 } from '@passes/reqs';
+import { Envelope } from '@passes/reqs';
 
-const { tag: requestTag } = EnvelopeV0x00.parseRequest(rawRequest);
+const { tag: requestTag } = Envelope.parseRequest(rawRequest);
 
 switch (requestTag) {
   // ...
