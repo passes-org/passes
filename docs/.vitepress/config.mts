@@ -29,9 +29,10 @@ export default defineConfig({
       {
         text: 'Introduction',
         items: [
+          { text: 'What is Passes?', link: '/introduction/what-is-passes' },
+          { text: 'What are Pass Providers?', link: '/introduction/what-are-pass-providers' },
+          { text: 'Where can I use Passes?', link: '/introduction/where-can-i-use-passes' },
           { text: 'Getting Started', link: '/introduction/getting-started' },
-          { text: 'Why Passes?', link: '/introduction/why-passes' },
-          { text: 'Browser and OS Support', link: '/introduction/support' },
         ]
       },
       {

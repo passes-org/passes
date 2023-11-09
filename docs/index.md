@@ -12,7 +12,7 @@ hero:
       link: /examples/identity
     - theme: alt
       text: Getting Started
-      link: /introduction/getting-started
+      link: /introduction/what-is-passes
     # - theme: alt
     #   text: Download Extension
     #   link: /downloads
