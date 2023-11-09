@@ -39,31 +39,10 @@ export default defineConfig({
         text: 'Examples',
         items: [
           { text: 'Identity', link: '/examples/identity' },
-          { text: 'User-Associated Data', link: '/examples/user-associated-data' },
-          { text: 'Commerce', link: '/examples/commerce' },
-          { text: 'Portable Data', link: '/examples/portable-data' },
-          { text: 'Portable Media', link: '/examples/portable-media' },
+          { text: 'Permissions', link: '/examples/permissions' },
           { text: 'Ethereum JSON-RPC', link: '/examples/ethereum' },
-          { text: 'Bitcoin JSON-RPC', link: '/examples/bitcoin' },
+          // { text: 'Bitcoin JSON-RPC', link: '/examples/bitcoin' },
         ]
-      },
-      {
-        text: 'Pass Requests',
-        items: [
-          { text: 'Walkthrough', link: '/requests/walkthrough' },
-          { text: 'Custom request types', link: '/requests/custom-types' },
-          { text: 'Native', link: '/requests/native' },
-        ],
-      },
-      {
-        text: 'Pass Engines', // TODO: Rename to "Passes"?
-        items: [
-          { text: 'Introduction', link: '/engines/introduction' },
-          { text: 'Alternatives', link: '/engines/alternatives' },
-          // { text: 'Interoperability', link: '/' }, // I Don't remember where I was going with this currently
-          // { text: 'Pass Portability', link: '/' }, // This either... this might be better in "guidelines?" ... but maybe we should also offer guidelines for pass engines
-          { text: 'Creating a Pass Engine', link: '/engines/creating' },
-        ],
       },
       {
         text: 'Packages',
@@ -96,17 +75,8 @@ export default defineConfig({
       {
         text: 'Protocol',
         items: [
-          { text: 'ABI', link: '/protocol/abi' },
           { text: 'Standards', link: '/protocol/standards' },
-          { text: 'Guidelines', link: '/protocol/guidelines' },
           { text: 'Community', link: '/protocol/community' },
-        ],
-      },
-      {
-        text: 'Foundation',
-        link: '/foundation/',
-        items: [
-          { text: 'Roadmap', link: '/foundation/roadmap' },
         ],
       },
     ],
