@@ -17,7 +17,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Examples', link: '/examples/identity' },
-      { text: 'Downloads', link: '/downloads' },
+      // { text: 'Downloads', link: '/downloads' },
       { text: 'ABI Reference', link: '/abi-reference' }
     ],
     socialLinks: [
@@ -29,7 +29,7 @@ export default defineConfig({
       {
         text: 'Introduction',
         items: [
-          { text: 'What is Passes?', link: '/introduction/what-is-passes' },
+          { text: 'What is Passes?', link: '/' },
           { text: 'What are Pass Requests?', link: '/introduction/what-are-pass-requests' },
           { text: 'What are Pass Providers?', link: '/introduction/what-are-pass-providers' },
           { text: 'Where can I use Passes?', link: '/introduction/where-can-i-use-passes' },
@@ -54,7 +54,7 @@ export default defineConfig({
             items: [
               { text: 'Quickstart', link: '/packages/reqs/quickstart' },
               { text: 'Common pass requests', link: '/packages/reqs/common-requests' },
-              { text: 'Defining a pass request type', link: '/packages/reqs/request-builder' },
+              { text: 'Creating your own pass request type', link: '/packages/reqs/request-type-builder' },
             ],
           },
           {

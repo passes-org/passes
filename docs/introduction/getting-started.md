@@ -1,5 +1,9 @@
 # Getting Started
 
+::: warning Writing In Progress
+This content is just a sketch and needs to be rewritten and edited.
+:::
+
 ### Installing `@passes/reqs`
 
 `@passes/reqs` is a convenient SDK for making pass requests from apps, and building support for them in pass engines.

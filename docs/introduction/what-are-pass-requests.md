@@ -1,7 +1,7 @@
 # What are Pass Requests?
 
-::: warning In Progress
-This content is just a sketch.
+::: warning Writing In Progress
+This content is just a sketch and needs to be rewritten and edited.
 :::
 
 Some effects of this model:

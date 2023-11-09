@@ -1,5 +1,6 @@
 # Permissions Example
 
-Permissions to access user associated data...
+::: warning Example In Progress
+This should demonstrate a pass request that requests to access a user's email address.
+:::
 
-App wants to access your email address. Allow?

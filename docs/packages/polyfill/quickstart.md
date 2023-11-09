@@ -5,3 +5,7 @@ Add the polyfill script to your page. This will make the `document.passes` ABI a
 ```html
 <script type="module" src="https://unpkg.com/@passes/polyfill@0.0.1-alpha.16/src/main.js"></script>
 ```
+
+::: warning Writing In Progress
+This section is incomplete. It should cover how the polyfill behaves.
+:::

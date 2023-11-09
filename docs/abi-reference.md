@@ -1,4 +1,9 @@
 # Low-Level ABI
+
+::: warning Writing In Progress
+This content is just a sketch and needs to be rewritten and edited.
+:::
+
 Reference for the low-level ABI for making pass requests.
 
 ```typescript
@@ -18,7 +23,9 @@ declare global {
 }
 ```
 
-- Request Binary Format
+## Envelope v0 Format
+
+- Request Binary Format:
     - Byte 0: envelope version = 0x00
     - Byte 1: N = request tag length - 1
     - Bytes 2→N+1: request tag (up to 256 bytes long)

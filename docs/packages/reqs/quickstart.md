@@ -2,8 +2,8 @@
 
 `@passes/reqs` provides a high-level interface for making common pass requests, and building your own pass request types.
 
-::: info TODO: Document this
-Continue writing...
+::: warning Writing In Progress
+This content is incomplete. It should document or link to documentation on `RequestTypeBuilder` and the other APIs it exports.
 :::
 
 ## Installation
