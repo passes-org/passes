@@ -38,8 +38,8 @@ export default defineConfig({
       {
         text: 'Examples',
         items: [
-          { text: 'Identity, Registration, Sign-In', link: '/examples/identity' },
-          { text: 'User Info Permissions', link: '/examples/permissions' },
+          { text: 'Identity', link: '/examples/identity' },
+          { text: 'User-Associated Data', link: '/examples/user-associated-data' },
           { text: 'Commerce', link: '/examples/commerce' },
           { text: 'Portable Data', link: '/examples/portable-data' },
           { text: 'Portable Media', link: '/examples/portable-media' },
