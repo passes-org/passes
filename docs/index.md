@@ -41,7 +41,7 @@ Pass requests are represented using an opaque binary format. At the time of this
 
 Pass requests can be used to build a wide variety of features including sign-in, permissions, payments, client-side delegation, and much more.
 
-[Check out some interactive examples.](../examples/identity.md)
+[Check out some interactive examples.](./examples/identity.md)
 
 ::: warning Incomplete Section
 This needs to specify where developers can create RFCs.
@@ -52,12 +52,12 @@ Developers can also create their own types of pass requests – you just need sp
 ## Pass requests are easy to support
 Passes.org publishes a TypeScript package [`@passes/reqs`](https://npmjs.com/package/@passes/reqs) which provides friendly and type-safe APIs for creating common types of pass requests, as well create defining your own pass request types.
 
-Learn more about `@passes/reqs`: [Reqs Docs](../packages/reqs/quickstart.md)
+Learn more about `@passes/reqs`: [Reqs Docs](./packages/reqs/quickstart.md)
 
 ## Pass requests work today
 Passes.org hosts a polyfill script that implements the `document.passes.request` ABI. Using the polyfill script, your app can make pass requests regardless of whether the user has a browser or extension that implements the pass request ABI.
 
-Learn more and try the polyfill: [Polyfill Docs](../packages/polyfill/quickstart.md)
+Learn more and try the polyfill: [Polyfill Docs](./packages/polyfill/quickstart.md)
 ## Pass requests work on the web
 On the web, the pass request ABI is available at `document.passes.request`. The ABI is really simple, and designed for backwards and forwards compatibility as the adoption and usage of pass requests matures. The ABI is:
 
