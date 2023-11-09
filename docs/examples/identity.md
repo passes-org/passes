@@ -53,3 +53,48 @@ const builder = new RequestTypeBuilder<void, string>(
   padding: 0.5rem;
 }
 </style>
+
+## Request Type Code
+
+```typescript
+import { RequestTypeBuilder } from '@passes/reqs'
+
+const getPubkey = new RequestTypeBuilder<void, string>(
+  'org.passes.example.get-pubkey',
+  // Request body codec (void)
+  {
+    encode: () => new Uint8Array(),
+    decode: () => undefined,
+  },
+  // Result body codec (utf8)
+  {
+    encode: (pubkey: string) => new TextEncoder().encode(pubkey),
+    decode: (bytes) => new TextDecoder().decode(bytes),
+  },
+);
+```
+
+## Request Code
+
+```typescript
+const getPubkeyResult = await getPubkey.sendRequest();
+
+if (getPubkeyResult.status !== 'accepted') {
+  throw new Error('User rejected getPubkey request');
+}
+
+const userPubkey = getPubkeyResult.body;
+```
+
+## Pass Provider Handling Code
+```typescript
+import { EnvelopeV0x00 } from '@passes/reqs';
+
+const { tag: requestTag } = EnvelopeV0x00.parseRequest(rawRequest);
+
+switch (requestTag) {
+  // ...
+  case 'org.passes.example.get-pubkey':
+	  // render UI for handling getPubkey
+}
+```
