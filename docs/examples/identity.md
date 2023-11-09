@@ -1,6 +1,6 @@
 # Pubkey Identity Example
 
-Let's assume there's a pass request type called `{{ requestTag }}` whose interface is as follows:
+Let's define a new pass request type called `{{ requestTag }}` whose interface is as follows:
 - Request: void
 - Result: The user's P256K public key bytes
 
