@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RequestTypeBuilder } from '../../../packages/reqs/src/request-type-builder';
 import DataPane from './DataPane.vue';
-import PassPane from './PassPane.vue';
+import EmulatorPane from './EmulatorPane.vue';
 import PlaygroundHeader from './PlaygroundHeader.vue';
 import { provideStore } from './store';
 
@@ -26,14 +26,14 @@ const store = provideStore({
     <!-- Row: Content -->
     <div :class="$style.content">
       <DataPane />
-      <PassPane
+      <EmulatorPane
         @accept="store.setResult(builder.encodeResult({ status: 'accepted', body: resultBody }))"
         @reject="store.setResult(builder.encodeResult({ status: 'rejected' }))"
         :acceptButtonTitle="acceptButtonTitle"
         :rejectButtonTitle="rejectButtonTitle"
       >
         <slot name="pass-emulator-ui"></slot>
-      </PassPane>
+      </EmulatorPane>
     </div>
   </div>
 </template>

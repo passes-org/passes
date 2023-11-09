@@ -14,13 +14,13 @@ const props = defineProps<{
 <template>
   <div :class="$style.pane">
     <PaneTabs
-      :tabs="['pass emulator', 'document.passes']"
-      v-model="store.passDriver"
+      :tabs="['emulator', 'document.passes']"
+      v-model="store.abi"
     />
-    <div v-if="store.passDriver === 'pass emulator'" :class="$style.content">
+    <div v-if="store.abi === 'emulator'" :class="$style.content">
       <slot v-if="store.requestPending">
         <div :class="$style.status">
-          <div>(missing pass emulator UI)</div>
+          <div>(missing emulator UI)</div>
         </div>
       </slot>
       <div v-else-if="store.result" :class="$style.status">

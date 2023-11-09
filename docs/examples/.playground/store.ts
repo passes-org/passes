@@ -3,9 +3,9 @@ import { RequestTypeBuilder } from '../../../packages/reqs/src/main';
 import { PassesABI } from '../../../packages/types/index';
 
 type Store = {
+  abi: 'emulator' | 'document.passes';
   builder: RequestTypeBuilder<any, any>;
   dataPaneActiveTab: 'request' | 'result';
-  passDriver: 'pass emulator' | 'document.passes';
   request: Uint8Array;
   requestPending: false;
   result?: Uint8Array;
@@ -20,9 +20,9 @@ export function provideStore({ builder, request }: Pick<Store, 'builder' | 'requ
   const resultPromise = ref<Promise<Uint8Array>>();
 
   const store = ref<Store>({
+    abi: 'emulator',
     builder,
     dataPaneActiveTab: 'request',
-    passDriver: 'pass emulator',
     request,
     requestPending: false,
     result: undefined,
@@ -37,7 +37,7 @@ export function provideStore({ builder, request }: Pick<Store, 'builder' | 'requ
       };
       const passEmulatorABI: PassesABI = { request: passEmulatorABIRequest };
 
-      this.builder.abi = this.passDriver === 'document.passes'
+      this.builder.abi = this.abi === 'document.passes'
         ? document.passes
         : passEmulatorABI;
       

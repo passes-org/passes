@@ -1,6 +1,6 @@
 # What is Passes?
 
-**Passes** is a free, open-source web API that enables apps to make arbitrary (but generally identity and authentication-related) requests directly to the user on the client side, enabling the user to be represented by a common portable identity across the various apps they visit.
+**Passes** is a free, open-source web API that enables apps to make arbitrary requests directly to the user on the client side, enabling the user to use a common identity across the various apps they visit.
 
 **Pass Requests** are sent from an app via a client-side API, which presents a UI with a rich interpretation of the request, allowing the user to review and approve or reject the request.
 
