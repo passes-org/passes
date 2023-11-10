@@ -41,7 +41,7 @@ Pass requests are represented using an opaque binary format. At the time of this
 
 Pass requests can be used to build a wide variety of features including sign-in, permissions, payments, client-side delegation, and much more.
 
-[Check out some interactive examples.](./examples/identity.md)
+[Check out some interactive examples.](./examples/signing-in.md)
 
 ::: warning Incomplete Section
 This needs to specify where developers can create RFCs.

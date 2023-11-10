@@ -16,7 +16,7 @@ export default defineConfig({
 
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Examples', link: '/examples/identity' },
+      { text: 'Examples', link: '/examples/signing-in' },
       // { text: 'Downloads', link: '/downloads' },
       { text: 'ABI Reference', link: '/abi-reference' }
     ],
