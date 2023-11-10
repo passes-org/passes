@@ -33,7 +33,7 @@
 /**
  * Pass Request Envelope Version 0x00
  */
-export const EnvelopeV0x00 = {
+export const EnvelopeV0 = {
   VERSION: 0x00,
   
   /**
@@ -65,10 +65,10 @@ export const EnvelopeV0x00 = {
     if (typeof tagLengthField === 'undefined') throw new this.errors.REQUEST_MISSING_TAG_LENGTH();
     const tagLength = tagLengthField + 1;
     const tagStart = 2;
-    const tagEnd = 2 + tagLength;
+    const tagEnd = tagStart + (tagLength - 1);
     const tagBytes = bytes.slice(tagStart, tagEnd);
     const tag = new TextDecoder().decode(tagBytes);
-    const body = bytes.slice(tagEnd + 1);
+    const body = bytes.slice(tagEnd);
     return { tag, body };
   },
 
@@ -169,33 +169,33 @@ export const EnvelopeV0x00 = {
     // Request Errors
     // –
 
-    REQUEST_INCORRECT_VERSION: class EnvelopeV0x00ErrorIncorrectVersion extends Error {
+    REQUEST_INCORRECT_VERSION: class EnvelopeV0ErrorIncorrectVersion extends Error {
       /**
        * @param {number} [version]
        */
       constructor(version) {
         super();
         this.name = "Incorrect Request Envelope Version";
-        this.message = `EnvelopeV0x00 can only parse request envelope version 0. Received version ${version ?? 'undefined'}`;
+        this.message = `EnvelopeV0 can only parse request envelope version 0. Received version ${version ?? 'undefined'}`;
         this.version = version;
       }
     },
-    REQUEST_MISSING_TAG_LENGTH: class EnvelopeV0x00RequestMissingTagLength extends Error {
+    REQUEST_MISSING_TAG_LENGTH: class EnvelopeV0RequestMissingTagLength extends Error {
       name = 'Missing Request Envelope Tag Length';
-      message = 'EnvelopeV0x00 request must have its tag length at byte 1';
+      message = 'EnvelopeV0 request must have its tag length at byte 1';
     },
 
     // –
     // Result Errors
     // –
 
-    RESULT_INVALID_STATUS_BYTE: class EnvelopeV0x00ResultMissingStatusByte extends Error {
+    RESULT_INVALID_STATUS_BYTE: class EnvelopeV0ResultMissingStatusByte extends Error {
       name = 'Invalid Result Envelope Status Byte';
-      message = 'EnvelopeV0x00 result status byte must be between 0x00 and 0x03';
+      message = 'EnvelopeV0 result status byte must be between 0x00 and 0x03';
     },
-    RESULT_MISSING_STATUS_BYTE: class EnvelopeV0x00ResultMissingStatusByte extends Error {
+    RESULT_MISSING_STATUS_BYTE: class EnvelopeV0ResultMissingStatusByte extends Error {
       name = 'Missing Result Envelope Status Byte';
-      message = 'EnvelopeV0x00 result must have its status at byte 0';
+      message = 'EnvelopeV0 result must have its status at byte 0';
     },
   },
 };

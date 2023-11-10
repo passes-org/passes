@@ -1,8 +1,8 @@
-import { EnvelopeV0x00 } from './envelope-v0x00';
+import { EnvelopeV0 } from './envelope-v0';
 
 /**
  * @template TResult
- * @typedef {import('./envelope-v0x00').RequestResult<TResult>} RequestResult
+ * @typedef {import('./envelope-v0').RequestResult<TResult>} RequestResult
  */
 
 /**
@@ -22,7 +22,7 @@ import { EnvelopeV0x00 } from './envelope-v0x00';
  * @property {Codec<TResultBody>} resultBodyCodec
  * @property {import("@passes/types").PassesABI} [abi]
  */
-export class RequestTypeBuilder {
+export class RequestType {
   /**
    * @param {string} requestTag
    * @param {Codec<TRequestBody>} requestBodyCodec
@@ -44,7 +44,7 @@ export class RequestTypeBuilder {
    */
   encodeRequest(body) {
     return new Uint8Array([
-      ...EnvelopeV0x00.encodeRequestHeader(this.requestTag),
+      ...EnvelopeV0.encodeRequestHeader(this.requestTag),
       ...this.requestBodyCodec.encode(body),
     ]);
   }
@@ -56,8 +56,8 @@ export class RequestTypeBuilder {
    * @returns {TRequestBody}
    */
   decodeRequest(bytes) {
-    const { tag, body } = EnvelopeV0x00.parseRequest(bytes);
-    if (tag !== this.requestTag) throw new RequestTypeBuilder.Errors.INCORRECT_TAG(this.requestTag, tag);
+    const { tag, body } = EnvelopeV0.parseRequest(bytes);
+    if (tag !== this.requestTag) throw new RequestType.Errors.INCORRECT_TAG(this.requestTag, tag);
     return this.requestBodyCodec.decode(body);
   }
 
@@ -68,7 +68,7 @@ export class RequestTypeBuilder {
    * @returns {Uint8Array}
    */
   encodeResult(result) {
-    return EnvelopeV0x00.encodeResult(
+    return EnvelopeV0.encodeResult(
       // If the result status is 'accepted', encode the result body into bytes
       result.status === 'accepted'
         ? { status: 'accepted', body: this.resultBodyCodec.encode(result.body) }
@@ -83,7 +83,7 @@ export class RequestTypeBuilder {
    * @returns {RequestResult<TResultBody>}
    */
   decodeResult(bytes) {
-    const parsedResult = EnvelopeV0x00.parseResult(bytes);
+    const parsedResult = EnvelopeV0.parseResult(bytes);
 
     // If the result status is 'accepted', decode the result body into a TResultBody
     if (parsedResult.status === 'accepted') {
@@ -113,7 +113,7 @@ export class RequestTypeBuilder {
      * @property {string} expected
      * @property {string} actual
      */
-    INCORRECT_TAG: class RequestTypeBuilderIncorrectTagError extends Error {
+    INCORRECT_TAG: class RequestTypeIncorrectTagError extends Error {
       /**
        * @param {string} expected
        * @param {string} actual
@@ -131,7 +131,7 @@ export class RequestTypeBuilder {
      * @property {string} expected
      * @property {string} actual
      */
-    ABI_NOT_AVAILABLE: class RequestTypeBuilderABINotAvailable extends Error {
+    ABI_NOT_AVAILABLE: class RequestTypeABINotAvailable extends Error {
       constructor() {
         super();
         this.name = 'Passes ABI not available';
@@ -144,13 +144,13 @@ export class RequestTypeBuilder {
    * A helper for resolving the PassesABI. If the instance has no abi property, it returns document.passes if it's available.
    * 
    * @returns {import("@passes/types").PassesABI}
-   * @throws {RequestTypeBuilder.Errors.ABI_NOT_AVAILABLE} - document.passes must be available if `abi` is not passed.
+   * @throws {RequestType.Errors.ABI_NOT_AVAILABLE} - document.passes must be available if `abi` is not passed.
    */
   resolveABI() {
     if (this.abi) return this.abi;
     /** @type {import("@passes/types").DocumentWithPasses} */
     const _document = typeof document !== 'undefined' ? document : null;
-    if (!_document?.passes) throw new RequestTypeBuilder.Errors.ABI_NOT_AVAILABLE();
+    if (!_document?.passes) throw new RequestType.Errors.ABI_NOT_AVAILABLE();
     return _document.passes;
   }
 };
