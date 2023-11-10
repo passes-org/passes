@@ -1,6 +1,8 @@
 # Requesting Permissions
 
-
+::: warning Example In Progress
+This section is incomplete and the example implementation is actively in progress.
+:::
 
 Let's define a new pass request type called `{{ requestTag }}` whose interface is as follows:
 - Request: void
