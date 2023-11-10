@@ -1,4 +1,7 @@
-# Pubkey Identity Example
+# Signing in with a Public Key
+
+Signing in is one of the most basic uses of a pass request. In this example, we'll demonstrate a pass request that allows an app to request a user's public key, 
+which acts as a common identifier for the user across the various apps they use.
 
 Let's define a new pass request type called `{{ requestTag }}` whose interface is as follows:
 - Request: void
@@ -9,28 +12,21 @@ If the user approves this pass request, the application that made the request wi
 <script setup lang="ts">
 import Button from './.playground/Button.vue'
 import Playground from './.playground/Playground.vue'
-import { RequestTypeBuilder } from '../../packages/reqs/src/main'
+import { Codecs, RequestType } from '../../packages/reqs/src/main'
 
 const requestTag = 'org.passes.example.get-pubkey';
-
-const builder = new RequestTypeBuilder<void, string>(
+const requestType = new RequestType<void, string>(
   requestTag,
   // Request body codec (void)
-  {
-    encode: () => new Uint8Array(),
-    decode: () => undefined,
-  },
-  // Result body codec (utf8)
-  {
-    encode: (pubkey: string) => new TextEncoder().encode(pubkey),
-    decode: (bytes) => new TextDecoder().decode(bytes),
-  },
+  Codecs.Void,
+  // Result body codec (utf8 string)
+  Codecs.String,
 );
 </script>
 
 <Playground
-  :builder="builder"
   :requestBody="undefined"
+  :requestType="requestType"
   :resultBody="'example-user-pubkey'"
   acceptButtonTitle="Sign In"
   rejectButtonTitle="Cancel"
@@ -57,20 +53,14 @@ const builder = new RequestTypeBuilder<void, string>(
 ## Request Type Code
 
 ```typescript
-import { RequestTypeBuilder } from '@passes/reqs'
+import { Codecs, RequestType } from '@passes/reqs'
 
-const getPubkey = new RequestTypeBuilder<void, string>(
+const getPubkey = new RequestType<void, string>(
   'org.passes.example.get-pubkey',
   // Request body codec (void)
-  {
-    encode: () => new Uint8Array(),
-    decode: () => undefined,
-  },
-  // Result body codec (utf8)
-  {
-    encode: (pubkey: string) => new TextEncoder().encode(pubkey),
-    decode: (bytes) => new TextDecoder().decode(bytes),
-  },
+  Codecs.Void,
+  // Result body codec (utf8 string)
+  Codecs.String,
 );
 ```
 
@@ -88,13 +78,15 @@ const userPubkey = getPubkeyResult.body;
 
 ## Pass Provider Handling Code
 ```typescript
-import { Envelope } from '@passes/reqs';
+import { RequestRouter } from '@passes/reqs';
 
-const { tag: requestTag } = Envelope.parseRequest(rawRequest);
+// Implements support for the request tags supported by the pass provider
+const router = new RequestRouter({
+  'org.passes.example.get-pubkey': (rawRequest: Uint8Array) => {
+    const request = getPubkey.decodeRequest(rawRequest); // void
+    return /** render UI for handling get-pubkey */;
+  },
 
-switch (requestTag) {
-  // ...
-  case 'org.passes.example.get-pubkey':
-	  // render UI for handling getPubkey
-}
+  // Additional entries for other supported request types
+});
 ```

@@ -39,7 +39,7 @@ export default defineConfig({
       {
         text: 'Examples',
         items: [
-          { text: 'Identity', link: '/examples/identity' },
+          { text: 'Signing In', link: '/examples/signing-in' },
           { text: 'Permissions', link: '/examples/permissions' },
           { text: 'Ethereum JSON-RPC', link: '/examples/ethereum' },
           // { text: 'Bitcoin JSON-RPC', link: '/examples/bitcoin' },
@@ -54,7 +54,8 @@ export default defineConfig({
             items: [
               { text: 'Quickstart', link: '/packages/reqs/quickstart' },
               { text: 'Common pass requests', link: '/packages/reqs/common-requests' },
-              { text: 'Creating your own pass request type', link: '/packages/reqs/request-type-builder' },
+              { text: 'Creating a RequestType', link: '/packages/reqs/request-type' },
+              { text: 'Using RequestRouter to build a Pass Provider', link: '/packages/reqs/request-router' },
             ],
           },
           {

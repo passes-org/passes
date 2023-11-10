@@ -6,9 +6,9 @@ import { useStore } from './store';
 
 const store = useStore();
 
-const decodedRequest = store.value.builder.decodeRequest(store.value.request);
+const decodedRequest = store.value.requestType.decodeRequest(store.value.request);
 const decodedResult = computed(() => store.value.result
-  ? store.value.builder.decodeResult(store.value.result)
+  ? store.value.requestType.decodeResult(store.value.result)
   : undefined);
 </script>
 
@@ -22,7 +22,7 @@ const decodedResult = computed(() => store.value.result
     <div v-if="store.dataPaneActiveTab === 'request'" :class="$style.content">
       <label>
         <span>Tag</span>
-        <div :class="$style.code">{{ store.builder.requestTag }}</div>
+        <div :class="$style.code">{{ store.requestType.requestTag }}</div>
       </label>
       <label>
         <span>Body</span>

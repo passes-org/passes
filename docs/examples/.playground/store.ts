@@ -1,13 +1,13 @@
 import { inject, provide, ref, Ref } from 'vue';
-import { RequestTypeBuilder } from '../../../packages/reqs/src/main';
+import { RequestType } from '../../../packages/reqs/src/main';
 import { PassesABI } from '../../../packages/types/index';
 
 type Store = {
   abi: 'emulator' | 'document.passes';
-  builder: RequestTypeBuilder<any, any>;
   dataPaneActiveTab: 'request' | 'result';
   request: Uint8Array;
   requestPending: false;
+  requestType: RequestType<any, any>;
   result?: Uint8Array;
 
   // Actions
@@ -15,16 +15,16 @@ type Store = {
   setResult: (res: Uint8Array) => void;
 };
 
-export function provideStore({ builder, request }: Pick<Store, 'builder' | 'request'>) {
+export function provideStore({ request, requestType }: Pick<Store, 'request' | 'requestType'>) {
   const resultPromiseResolver = ref<(v: Uint8Array) => void>();
   const resultPromise = ref<Promise<Uint8Array>>();
 
   const store = ref<Store>({
     abi: 'emulator',
-    builder,
     dataPaneActiveTab: 'request',
     request,
     requestPending: false,
+    requestType,
     result: undefined,
 
     makeRequest() {
@@ -37,11 +37,11 @@ export function provideStore({ builder, request }: Pick<Store, 'builder' | 'requ
       };
       const passEmulatorABI: PassesABI = { request: passEmulatorABIRequest };
 
-      this.builder.abi = this.abi === 'document.passes'
+      this.requestType.abi = this.abi === 'document.passes'
         ? document.passes
         : passEmulatorABI;
       
-      this.builder.sendRequest(request);
+      this.requestType.sendRequest(request);
     },
     setResult(res: Uint8Array) {
       this.requestPending = false;

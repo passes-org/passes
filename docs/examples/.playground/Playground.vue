@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { RequestTypeBuilder } from '../../../packages/reqs/src/request-type-builder';
+import { RequestType } from '../../../packages/reqs/src/main';
 import DataPane from './DataPane.vue';
 import EmulatorPane from './EmulatorPane.vue';
 import PlaygroundHeader from './PlaygroundHeader.vue';
 import { provideStore } from './store';
 
-const { builder, requestBody } = defineProps<{
-  builder: RequestTypeBuilder<any, any>;
+const { requestBody, requestType } = defineProps<{
   requestBody: any;
+  requestType: RequestType<any, any>;
   resultBody?: any;
   acceptButtonTitle?: string;
   rejectButtonTitle?: string;
 }>();
 
 const store = provideStore({
-  builder,
-  request: builder.encodeRequest(requestBody),
+  request: requestType.encodeRequest(requestBody),
+  requestType,
 });
 </script>
 
@@ -27,8 +27,8 @@ const store = provideStore({
     <div :class="$style.content">
       <DataPane />
       <EmulatorPane
-        @accept="store.setResult(builder.encodeResult({ status: 'accepted', body: resultBody }))"
-        @reject="store.setResult(builder.encodeResult({ status: 'rejected' }))"
+        @accept="store.setResult(requestType.encodeResult({ status: 'accepted', body: resultBody }))"
+        @reject="store.setResult(requestType.encodeResult({ status: 'rejected' }))"
         :acceptButtonTitle="acceptButtonTitle"
         :rejectButtonTitle="rejectButtonTitle"
       >

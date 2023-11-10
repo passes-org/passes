@@ -1,15 +1,16 @@
-# Request Builder
+# Request Type
 
 ::: warning Writing In Progress
 This section is incomplete.
 :::
 
-Demonstrate how to use `RequestTypeBuilder` from `@passes/reqs` to create your own pass request types.
+Demonstrate how to use `RequestType` from `@passes/reqs` to create your own pass request types.
+- Cover Codecs
 
 ## Interface 
 
 ```typescript
-import { EnvelopeV0x00 } from './envelope-v0x00';
+import { EnvelopeV0 } from './envelope-v0x00';
 
 /**
  * @template TResult
@@ -33,7 +34,7 @@ import { EnvelopeV0x00 } from './envelope-v0x00';
  * @property {Codec<TResultBody>} resultBodyCodec
  * @property {import("@passes/types").PassesABI} [abi]
  */
-export class RequestTypeBuilder {
+export class RequestType {
   /**
    * @param {string} requestTag
    * @param {Codec<TRequestBody>} requestBodyCodec
@@ -55,7 +56,7 @@ export class RequestTypeBuilder {
    */
   encodeRequest(body) {
     return new Uint8Array([
-      ...EnvelopeV0x00.encodeRequestHeader(this.requestTag),
+      ...EnvelopeV0.encodeRequestHeader(this.requestTag),
       ...this.requestBodyCodec.encode(body),
     ]);
   }
@@ -67,7 +68,7 @@ export class RequestTypeBuilder {
    * @returns {TRequestBody}
    */
   decodeRequest(bytes) {
-    const { tag, body } = EnvelopeV0x00.parseRequest(bytes);
+    const { tag, body } = EnvelopeV0.parseRequest(bytes);
     if (tag !== this.requestTag) throw new RequestTypeBuilder.Errors.INCORRECT_TAG(this.requestTag, tag);
     return this.requestBodyCodec.decode(body);
   }
@@ -79,7 +80,7 @@ export class RequestTypeBuilder {
    * @returns {Uint8Array}
    */
   encodeResult(result) {
-    return EnvelopeV0x00.encodeResult(
+    return EnvelopeV0.encodeResult(
       // If the result status is 'accepted', encode the result body into bytes
       result.status === 'accepted'
         ? { status: 'accepted', body: this.resultBodyCodec.encode(result.body) }
@@ -94,7 +95,7 @@ export class RequestTypeBuilder {
    * @returns {RequestResult<TResultBody>}
    */
   decodeResult(bytes) {
-    const parsedResult = EnvelopeV0x00.parseResult(bytes);
+    const parsedResult = EnvelopeV0.parseResult(bytes);
 
     // If the result status is 'accepted', decode the result body into a TResultBody
     if (parsedResult.status === 'accepted') {
