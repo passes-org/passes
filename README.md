@@ -1,28 +1,20 @@
-# Passes
+**Passes** is a free, open-source web API that enables apps to make arbitrary requests directly to the user on the client side, enabling the user to use a common identity across the various apps they visit.
 
-Open and portable identity and authentication for the web.
+**Pass Requests** are sent from an app via a client-side API, which presents a UI with a rich interpretation of the request, allowing the user to review and approve or reject the request.
 
-## Introduction
+[Visit the documentation](https://docs.passes.org) to learn more.
 
-Passes is designed to invert the relationship between user identity and the services they use.
+## Why?
 
-- Old: User is downstream of their identity, which is held by upstream servers
-- New: Services are downstream of users and their identities
+**The web platform lacks a notion of a portable user identity.**
 
-[Visit the documentation](https://docs.passes.org) to learn more about building with passes.
+Historically, user identity has been a separate bespoke implementation for *every app you use*. 
 
-## How it works
+Newer web APIs like WebAuthn (including Passkeys) create user identifiers that are specific to the domain they were created on.
 
-- The Passes protocol allows any web application to make identity and authn related requests directly to the user on the client
-- Users create their passes on a web application called a "Pass Engine", which anyone can create. You can even self-host your own pass engine
-- Web apps that make pass requests don't know which pass engine you use. To them, it makes no difference
-- Pass requests can represent all kinds of things: signing into an app, granting access to information like your email, purchasing something, 
-- Anyone can create their own type of pass requests. Pass request RFCs and standards are accessible at [TODO]
+Virtually every end-user experience is affected by this, it greatly contributes the massive-hubs/tiny-spokes form the web of today has matured into, and it constrains the kinds of apps that can be built.
 
-## Passes work in any web browser
-
-passes.org publishes a web extension [TODO: Download link] that adds first-class support for passes to Chromium, Firefox, and Safari browsers.
-There's also a JS polyfill [TODO: link to @passes/polyfill] web apps can use to ensure their pass requests work in any browser.
+It's plausible that entire categories of valuable apps are blocked by the web's lack of portable user identity.
 
 ## Usage
 
