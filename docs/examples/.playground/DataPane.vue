@@ -53,12 +53,12 @@ const decodedResult = computed(() => store.value.result
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-height: 16rem;
+  height: 16rem;
   overflow-x: hidden;
   overflow-y: scroll;
 }
 
-.pane .content {
+.content {
   display: flex;
   flex: 1;
   flex-direction: column;
