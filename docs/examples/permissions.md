@@ -1,14 +1,18 @@
 # Requesting Permissions
 
-::: warning Example In Progress
-This section is incomplete and the example implementation is actively in progress.
-:::
+This example demonstrates how applications might request information associated with the user, such as email, avatar image, name, etc.
 
-Let's define a new pass request type called `{{ requestTag }}` whose interface is as follows:
-- Request: void
-- Result: The user's P256K public key bytes
+Let's define a request type called `{{ requestTag }}` with the following interface:
 
-If the user approves this pass request, the application that made the request will receive the public key associated with the pass they used to approve it.
+```typescript
+// The types of permissions that can be requested
+type PermissionType = 'avatar-uri' | 'email' | 'full-name';
+
+// Array of requested permissions
+type RequestBody = PermissionType[];
+// Record from permission type to value
+type ResultBody = Record<PermissionType, string>;
+``` 
 
 <script setup lang="ts">
 import Button from './.playground/Button.vue'
