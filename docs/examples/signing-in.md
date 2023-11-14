@@ -3,9 +3,12 @@
 Signing in is one of the most basic uses of a pass request. In this example, we'll demonstrate a pass request that allows an app to request a user's public key, 
 which acts as a common identifier for the user across the various apps they use.
 
-Let's define a new pass request type called `{{ requestTag }}` whose interface is as follows:
-- Request: void
-- Result: The user's P256K public key bytes
+Let's define a new pass request type called `{{ requestTag }}` with the following interface:
+
+```typescript
+type RequestBody = void;
+type ResultBody = string; // The user's public key as a base64 string
+```
 
 If the user approves this pass request, the application that made the request will receive the public key associated with the pass they used to approve it.
 
