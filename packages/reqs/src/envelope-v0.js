@@ -2,6 +2,8 @@
  * @typedef {'accepted' | 'rejected' | 'unsupported' | 'exception'} ResultStatus
  */
 
+import { formatRLE, parseRLE } from "./utils/rle";
+
 /**
  * @template T
  * @typedef {Object} AcceptedResult<T>
@@ -47,8 +49,7 @@ export const EnvelopeV0 = {
   
     return new Uint8Array([
       this.VERSION,
-      tagBytes.length,
-      ...tagBytes,
+      ...formatRLE(tagBytes, { length: 1 }),
     ]);
   },
 
@@ -63,12 +64,8 @@ export const EnvelopeV0 = {
     if (version !== this.VERSION) throw new this.errors.REQUEST_INCORRECT_VERSION(version);
     const tagLengthField = bytes.at(1);
     if (typeof tagLengthField === 'undefined') throw new this.errors.REQUEST_MISSING_TAG_LENGTH();
-    const tagLength = tagLengthField + 1;
-    const tagStart = 2;
-    const tagEnd = tagStart + (tagLength - 1);
-    const tagBytes = bytes.slice(tagStart, tagEnd);
+    const { range: tagBytes, remainder: body } = parseRLE(bytes, 1, { length: 1 });
     const tag = new TextDecoder().decode(tagBytes);
-    const body = bytes.slice(tagEnd);
     return { tag, body };
   },
 
