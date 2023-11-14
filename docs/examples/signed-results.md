@@ -35,6 +35,11 @@ const requestType = new RequestType<void, string>(
 let resultBody = ref({ _error: 'Not Ready' });
 
 (async () => {
+  if (typeof crypto === 'undefined') {
+    console.warn('SubtleCrypto API not available');
+    return;
+  }
+
   const keyPair = await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']);
   
   const resultBodyValue = 'oh, hello there';
