@@ -3,13 +3,12 @@ import { computed } from 'vue';
 import Button from './Button.vue';
 import PaneTabs from './PaneTabs.vue';
 import { useStore } from './store';
+import { SignedAcceptedResult, SignedRequestResult, SignedRequestType } from '../../../packages/reqs/src/main';
 
 const store = useStore();
 
-const decodedRequest = store.value.requestType.decodeRequest(store.value.request);
-const decodedResult = computed(() => store.value.result
-  ? store.value.requestType.decodeResult(store.value.result)
-  : undefined);
+const decodedRequestBody = store.value.requestBody;
+const decodedResult = computed(() => store.value.result);
 </script>
 
 <template>
@@ -26,7 +25,7 @@ const decodedResult = computed(() => store.value.result
       </label>
       <label>
         <span>Body</span>
-        <pre :class="$style.code">{{ decodedRequest ? JSON.stringify(decodedRequest, null, 2) : '(empty)' }}</pre>
+        <pre :class="$style.code">{{ decodedRequestBody ? JSON.stringify(decodedRequestBody, null, 2) : '(empty)' }}</pre>
       </label>
     </div>
     <div v-if="store.dataPaneActiveTab === 'request'" :class="$style.actions">
@@ -38,9 +37,17 @@ const decodedResult = computed(() => store.value.result
         <span>Status</span>
         <div :class="$style.code">{{ decodedResult?.status ?? (store.requestPending ? '(request pending)' : '(awaiting request)') }}</div>
       </label>
-      <label v-if="store.result">
+      <label v-if="decodedResult">
         <span>Body</span>
-        <pre :class="$style.code">{{ decodedResult?.status === 'accepted' ? JSON.stringify(decodedResult.body, null, 2) : '(empty)' }}</pre>
+        <pre :class="$style.code">{{ decodedResult?.status === 'accepted' ? JSON.stringify(decodedResult.body, null, 2) || '(empty)' : '(not accepted)' }}</pre>
+      </label>
+      <label v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
+        <span>Signature</span>
+        <code :class="$style.code">✅ Valid ({{ (decodedResult as SignedAcceptedResult<any>).signed.signature }})</code>
+      </label>
+      <label v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
+        <span>Public Key</span>
+        <code :class="$style.code">{{ JSON.stringify((decodedResult as SignedAcceptedResult<any>).signed.publicKey) }}</code>
       </label>
     </div>
   </div>
@@ -53,9 +60,8 @@ const decodedResult = computed(() => store.value.result
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 16rem;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  min-height: 16rem;
+  overflow: scroll;
 }
 
 .content {
@@ -92,10 +98,12 @@ label > pre {
   background-color: var(--vp-c-default-soft);
   border-radius: 0.3rem;
   color: var(--vp-code-color);
-  display: inline-block;
   font-family: var(--vp-font-family-mono);
   font-size: var(--vp-code-font-size);
   line-height: var(--vp-code-line-height);
+  max-height: 6rem;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
   padding: 0.1rem;
 }
 </style>

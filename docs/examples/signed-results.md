@@ -7,14 +7,8 @@ One way we can do this is to make our pass request type use a signed codec. Let'
 Let's define a request type called `{{ requestTag }}` with the following interface:
 
 ```typescript
-type SignedBody<T> = {
-  body: T;
-  publicKey: JsonWebKey;
-  signature: Uint8Array;
-};
-
-type RequestBody = 'hello';
-type ResultBody = SignedBody<'oh, hello there'>;
+type RequestBody = void;
+type ResultBody = void;
 ```
 
 If the user approves this pass request, the application that made the request will receive the public key associated with the pass they used to approve it.
@@ -23,42 +17,65 @@ If the user approves this pass request, the application that made the request wi
 import { ref } from 'vue';
 import Button from './.playground/Button.vue'
 import Playground from './.playground/Playground.vue'
-import { Codecs, RequestType } from '../../packages/reqs/src/main'
+import { Codecs, RequestType, SignedBodyWrapper, SignedRequestType } from '../../packages/reqs/src/main'
 
 const requestTag = 'org.passes.example.signed-get-pubkey';
-const requestType = new RequestType<void, string>(
-  requestTag,
-  Codecs.String,
-  Codecs.Signed(Codecs.Json), // FIXME: Codecs.Signed.decode should return body... Codecs.Signed.verify should return valid/pubkey info; Codecs.Signed.sign should ...?
-);
+const requestType = new SignedRequestType<void, string>({
+  requestType: new RequestType(
+    requestTag,
+    Codecs.Void,
+    Codecs.Void,
+  ),
+  signResult,
+  verifyResult
+});
 
+let keyPair = ref();
 let resultBody = ref({ _error: 'Not Ready' });
 
+const keyFormat = 'jwk';
+const keyParams = { name: 'ECDSA', namedCurve: 'P-256', hash: 'SHA-384' };
+async function signResult(body: string): Promise<SignedBodyWrapper<TResultBody>> {
+  if (!keyPair.value) throw new Error('Keypair not ready');
+  return {
+    header: {
+      signature: new Uint8Array(await crypto.subtle.sign(
+        keyParams,
+        keyPair.value.privateKey,
+        Codecs.String.encode(body)
+      )),
+      publicKey: await crypto.subtle.exportKey(keyFormat, keyPair.value.publicKey),
+    },
+    body,
+  };
+}
+async function verifyResult(signed: SignedBodyWrapper): Promise<boolean> {
+  const publicKey = await crypto.subtle.importKey(keyFormat, signed.header.publicKey, keyParams, true, ['verify']);
+
+  return crypto.subtle.verify(
+    keyParams,
+    publicKey,
+    signed.header.signature,
+    Codecs.String.encode(signed.body)
+  );
+}
+
+// Generate keypair
 (async () => {
   if (typeof crypto === 'undefined') {
     console.warn('SubtleCrypto API not available');
     return;
   }
 
-  const keyPair = await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']);
-  
-  const resultBodyValue = 'oh, hello there';
-  
-
-  const sigParams = { name: 'ECDSA', hash: 'SHA-384' };
-  const signedResultBody = new Uint8Array(await crypto.subtle.sign(sigParams, keyPair.privateKey, Codecs.String.encode(resultBodyValue)));
-
-  const result = { body: resultBodyValue, signature: signedResultBody, publicKey: await crypto.subtle.exportKey('jwk', keyPair.publicKey) };
-  console.log('result', result);
-  resultBody.value = result
+  keyPair.value = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verify']);
 })();
 
 </script>
 
 <Playground
-  requestBody="hello"
+  :requestBody="undefined"
   :requestType="requestType"
-  :resultBody="resultBody"
+  :resultBody="undefined"
   acceptButtonTitle="Sign In"
   rejectButtonTitle="Cancel"
 >

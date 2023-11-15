@@ -1,36 +1,36 @@
 import { inject, provide, ref, Ref } from 'vue';
-import { RequestType } from '../../../packages/reqs/src/main';
+import { IRequestType, RequestResult, SignedRequestResult } from '../../../packages/reqs/src/main';
 import { PassesABI } from '../../../packages/types/index';
 
 type Store = {
   abi: 'emulator' | 'document.passes';
   dataPaneActiveTab: 'request' | 'result';
-  request: Uint8Array;
+  requestBody: any;
   requestPending: false;
-  requestType: RequestType<any, any>;
-  result?: Uint8Array;
+  requestType: IRequestType<any, any>;
+  result?: RequestResult<any> | SignedRequestResult<any>;
 
   // Actions
-  makeRequest: () => void;
-  setResult: (res: Uint8Array) => void;
+  makeRequest: () => Promise<void>;
+  setResult: (bytes: Uint8Array) => Promise<void>;
 };
 
-export function provideStore({ request, requestType }: Pick<Store, 'request' | 'requestType'>) {
+export function provideStore({ requestBody, requestType }: Pick<Store, 'requestBody' | 'requestType'>) {
   const resultPromiseResolver = ref<(v: Uint8Array) => void>();
   const resultPromise = ref<Promise<Uint8Array>>();
 
   const store = ref<Store>({
     abi: 'emulator',
     dataPaneActiveTab: 'request',
-    request,
+    requestBody,
     requestPending: false,
     requestType,
     result: undefined,
 
-    makeRequest() {
-      const passEmulatorABIRequest = (raw: Uint8Array) => {
+    async makeRequest() {
+      const passEmulatorABIRequest = async (raw: Uint8Array) => {
         resultPromise.value
-        this.request = raw;
+        this.requestBody = await this.requestType.decodeRequest(raw);
         this.requestPending = true;
         resultPromise.value = new Promise((resolve) => { resultPromiseResolver.value = resolve })
         return resultPromise.value;
@@ -41,11 +41,11 @@ export function provideStore({ request, requestType }: Pick<Store, 'request' | '
         ? document.passes
         : passEmulatorABI;
       
-      this.requestType.sendRequest(request);
+      this.requestType.sendRequest(requestBody);
     },
-    setResult(res: Uint8Array) {
+    async setResult(bytes: Uint8Array) {
       this.requestPending = false;
-      this.result = res;
+      this.result = await this.requestType.decodeResult(bytes);
       this.dataPaneActiveTab = 'result';
     },
   });

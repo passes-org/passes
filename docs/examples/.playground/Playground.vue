@@ -1,22 +1,30 @@
 <script setup lang="ts">
-import { RequestType } from '../../../packages/reqs/src/main';
+import { IRequestType, SignedRequestType } from '../../../packages/reqs/src/main';
 import DataPane from './DataPane.vue';
 import EmulatorPane from './EmulatorPane.vue';
 import PlaygroundHeader from './PlaygroundHeader.vue';
 import { provideStore } from './store';
 
-const { requestBody, requestType } = defineProps<{
+const { requestBody, requestType, resultBody } = defineProps<{
   requestBody: any;
-  requestType: RequestType<any, any>;
+  requestType: IRequestType<any, any>;
   resultBody?: any;
   acceptButtonTitle?: string;
   rejectButtonTitle?: string;
 }>();
 
 const store = provideStore({
-  request: requestType.encodeRequest(requestBody),
+  requestBody,
   requestType,
 });
+
+async function handleAccept () {
+  store.value.setResult(await store.value.requestType.encodeResult({ status: 'accepted', body: resultBody }));
+}
+
+async function handleReject() {
+  store.value.setResult(await store.value.requestType.encodeResult({ status: 'rejected' }));
+}
 </script>
 
 <template>
@@ -25,15 +33,25 @@ const store = provideStore({
 
     <!-- Row: Content -->
     <div :class="$style.content">
-      <DataPane />
-      <EmulatorPane
-        @accept="store.setResult(requestType.encodeResult({ status: 'accepted', body: resultBody }))"
-        @reject="store.setResult(requestType.encodeResult({ status: 'rejected' }))"
-        :acceptButtonTitle="acceptButtonTitle"
-        :rejectButtonTitle="rejectButtonTitle"
-      >
-        <slot name="pass-emulator-ui"></slot>
-      </EmulatorPane>
+      <Suspense>
+        <DataPane />
+        <template #fallback>
+          <p>loading...</p>
+        </template>
+      </Suspense>
+      <Suspense>
+        <EmulatorPane
+          @accept="handleAccept"
+          @reject="handleReject"
+          :acceptButtonTitle="acceptButtonTitle"
+          :rejectButtonTitle="rejectButtonTitle"
+        >
+          <slot name="pass-emulator-ui"></slot>
+        </EmulatorPane>
+        <template #fallback>
+          <p>loading...</p>
+        </template>
+      </Suspense>
     </div>
   </div>
 </template>
