@@ -1,22 +1,16 @@
 import { EnvelopeV0 } from './envelope-v0';
 
-/**
- * @template TResult
- * @typedef {import('./envelope-v0').RequestResult<TResult>} RequestResult
- */
-
-/**
- * @template T
- * @typedef {Object} Codec
- * @property {(value: T) => Uint8Array} encode
- * @property {(bytes: Uint8Array) => T} decode
- */
+// JSDoc Type Imports
+/** @template TRequestBody @template TResultBody @typedef {import('./request-type.jsdoc.mjs').IRequestType<TRequestBody, TResultBody>} IRequestType */
+/** @template TResultBody @typedef {import('./request-type.jsdoc.mjs').RequestResult<TResultBody>} RequestResult */
+/** @template T @typedef {import('./request-type.jsdoc.mjs').Codec<T>} Codec */
 
 /**
  * Builds an Envelope-v0x00 request type interface.
  * 
  * @template TRequestBody
  * @template TResultBody
+ * @implements {IRequestType<TRequestBody, TResultBody>}
  * @property {string} requestTag
  * @property {Codec<TRequestBody>} requestBodyCodec
  * @property {Codec<TResultBody>} resultBodyCodec
@@ -40,9 +34,9 @@ export class RequestType {
    * Encodes a structured request body into an envelope-v0x00 request.
    * 
    * @param {TRequestBody} body 
-   * @returns {Uint8Array}
+   * @returns {Promise<Uint8Array>}
    */
-  encodeRequest(body) {
+  async encodeRequest(body) {
     return new Uint8Array([
       ...EnvelopeV0.encodeRequestHeader(this.requestTag),
       ...this.requestBodyCodec.encode(body),
@@ -53,9 +47,9 @@ export class RequestType {
    * Decodes an envelope-v0x00 request into a structured request body.
    * 
    * @param {Uint8Array} bytes 
-   * @returns {TRequestBody}
+   * @returns {Promise<TRequestBody>}
    */
-  decodeRequest(bytes) {
+  async decodeRequest(bytes) {
     const { tag, body } = EnvelopeV0.parseRequest(bytes);
     if (tag !== this.requestTag) throw new RequestType.Errors.INCORRECT_TAG(this.requestTag, tag);
     return this.requestBodyCodec.decode(body);
@@ -65,9 +59,9 @@ export class RequestType {
    * Encodes a structured result body into an envelope-v0x00 result.
    * 
    * @param {RequestResult<TResultBody>} result
-   * @returns {Uint8Array}
+   * @returns {Promise<Uint8Array>}
    */
-  encodeResult(result) {
+  async encodeResult(result) {
     return EnvelopeV0.encodeResult(
       // If the result status is 'accepted', encode the result body into bytes
       result.status === 'accepted'
@@ -80,9 +74,9 @@ export class RequestType {
    * Decodes an envelope-v0x00 request into a structured request body.
    * 
    * @param {Uint8Array} bytes 
-   * @returns {RequestResult<TResultBody>}
+   * @returns {Promise<RequestResult<TResultBody>>}
    */
-  decodeResult(bytes) {
+  async decodeResult(bytes) {
     const parsedResult = EnvelopeV0.parseResult(bytes);
 
     // If the result status is 'accepted', decode the result body into a TResultBody
@@ -103,7 +97,7 @@ export class RequestType {
    */
   async sendRequest(reqBody) {
     const abi = this.resolveABI();
-    const requestBytes = this.encodeRequest(reqBody);
+    const requestBytes = await this.encodeRequest(reqBody);
     const resultBytes = await abi.request(requestBytes);
     return this.decodeResult(resultBytes);
   }

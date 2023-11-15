@@ -1,9 +1,7 @@
 import { EnvelopeV0 } from './envelope-v0';
 
-/**
- * @template TSupport
- * @typedef {Record<string, (rawRequest: Uint8Array) => TSupport>} SupportMap
- */
+// JSDoc Type Imports
+/** @template TSupport @typedef {import('./request-router.jsdoc.mjs').SupportMap<TSupport>} SupportMap */
 
 /**
  * @template TRoute

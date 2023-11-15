@@ -1,36 +1,8 @@
-/**
- * @typedef {'accepted' | 'rejected' | 'unsupported' | 'exception'} ResultStatus
- */
-
 import { formatRLE, parseRLE } from "./utils/rle";
 
-/**
- * @template T
- * @typedef {Object} AcceptedResult<T>
- * @property {'accepted'} status - The status of the result when accepted.
- * @property {T} body - The body of the result.
- */
-
-/**
- * @typedef {Object} RejectedResult
- * @property {'rejected'} status - The status of the result when rejected.
- */
-
-/**
- * @typedef {Object} UnsupportedResult
- * @property {'unsupported'} status - The status of the result when unsupported.
- */
-
-/**
- * @typedef {Object} ExceptionResult
- * @property {'exception'} status - The status of the result when there is an exception.
- * @property {string} message - The message explaining the exception.
- */
-
-/**
- * @template TResult
- * @typedef {AcceptedResult<TResult> | RejectedResult | UnsupportedResult | ExceptionResult} RequestResult<TResult>
- */
+// JSDoc Type Imports
+/** @template T @typedef {import('./envelope-v0.jsdoc.mjs').RequestResult<T>} RequestResult */
+/** @typedef {import('./envelope-v0.jsdoc.mjs').ResultStatus} ResultStatus */
 
 /**
  * Pass Request Envelope Version 0x00
@@ -72,7 +44,7 @@ export const EnvelopeV0 = {
   /**
    * Returns the encoded number (1 byte) representation of the provided result status.
    * 
-   * @param {ResultStatus} status 
+   * @param {import("./envelope-v0.jsdoc.mjs").ResultStatus} status 
    * @returns {number}
    */
   encodeResultStatusByte(status) {
