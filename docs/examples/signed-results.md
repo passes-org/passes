@@ -38,15 +38,12 @@ const keyParams = { name: 'ECDSA', namedCurve: 'P-256', hash: 'SHA-384' };
 async function signResult(body: string): Promise<SignedBodyWrapper<TResultBody>> {
   if (!keyPair.value) throw new Error('Keypair not ready');
   return {
-    header: {
-      signature: new Uint8Array(await crypto.subtle.sign(
-        keyParams,
-        keyPair.value.privateKey,
-        Codecs.String.encode(body)
-      )),
-      publicKey: await crypto.subtle.exportKey(keyFormat, keyPair.value.publicKey),
-    },
-    body,
+    signature: new Uint8Array(await crypto.subtle.sign(
+      keyParams,
+      keyPair.value.privateKey,
+      Codecs.String.encode(body)
+    )),
+    publicKey: await crypto.subtle.exportKey(keyFormat, keyPair.value.publicKey),
   };
 }
 async function verifyResult(signed: SignedBodyWrapper): Promise<boolean> {
@@ -92,3 +89,70 @@ async function verifyResult(signed: SignedBodyWrapper): Promise<boolean> {
   padding: 0.5rem;
 }
 </style>
+
+
+## Request Type Code
+
+```typescript
+import { Codecs, RequestType, SignedRequestType } from '@passes/reqs'
+
+const signedGetPubkey = new SignedRequestType<void, string>({
+  requestType: new RequestType(
+    'org.passes.example.signed-get-pubkey',
+    Codecs.Void,
+    Codecs.Void,
+  ),
+  signResult,
+  verifyResult
+});
+
+async function signResult(body: string): Promise<SignedBodyWrapperHeader> {
+  return {
+    signature: new Uint8Array(await crypto.subtle.sign(
+      keyParams,
+      keyPair.privateKey, // CryptoKey
+      Codecs.String.encode(body)
+    )),
+    publicKey: await crypto.subtle.exportKey(keyFormat, keyPair.publicKey),
+  };
+}
+
+async function verifyResult(signed: SignedBodyWrapper): Promise<boolean> {
+  const publicKey = await crypto.subtle.importKey(keyFormat, signed.header.publicKey, keyParams, true, ['verify']);
+
+  return crypto.subtle.verify(
+    keyParams,
+    publicKey,
+    signed.header.signature,
+    Codecs.String.encode(signed.body)
+  );
+}
+```
+
+## Request Code
+
+```typescript
+const signedGetPubkeyResult = await signedGetPubkey.sendRequest();
+
+if (signedGetPubkeyResult.status !== 'accepted') {
+  throw new Error('User rejected signedGetPubkey request');
+}
+
+const userPubkey = getPubkeyResult.signed.publicKey;
+```
+
+## Pass Provider Handling Code
+```typescript
+import { RequestRouter } from '@passes/reqs';
+
+// Implements support for the request tags supported by the pass provider
+const router = new RequestRouter({
+  'org.passes.example.signed-get-pubkey': (rawRequest: Uint8Array) => {
+    const request = signedGetPubkey.decodeRequest(rawRequest); // void
+    const result = signedGetPubkey.encodeResult(resultBody); // signs result body
+    return /** render UI for handling get-pubkey */;
+  },
+
+  // Additional entries for other supported request types
+});
+```

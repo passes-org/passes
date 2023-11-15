@@ -12,7 +12,7 @@ import { formatRLE, parseRLE } from './utils/rle';
  * @template TResultBody
  * @typedef SignedRequestTypeParams
  * @property {import('./request-type').RequestType<TRequestBody, TResultBody>} requestType - The RequestType to sign/verify results for
- * @property {(body: TResultBody) => Promise<SignedBodyWrapper<TResultBody>>} [signResult]
+ * @property {(body: TResultBody) => Promise<SignedBodyWrapperHeader>} [signResult]
  * @property {(signed: SignedBodyWrapper<TResultBody>) => Promise<boolean>} [verifyResult]
  */
 
@@ -22,7 +22,7 @@ import { formatRLE, parseRLE } from './utils/rle';
  * @template TRequestBody
  * @template TResultBody
  * @implements {IRequestType<TRequestBody, TResultBody>}
- * @property {(body: Uint8Array) => Promise<SignedBodyWrapper<Uint8Array>>} [signResult]
+ * @property {(body: Uint8Array) => Promise<SignedBodyWrapperHeader>} [signResult]
  * @property {(signed: SignedBodyWrapper<TResultBody>) => Promise<boolean>} [verifyResult]
  */
 export class SignedRequestType extends RequestType {
@@ -50,7 +50,10 @@ export class SignedRequestType extends RequestType {
     return EnvelopeV0.encodeResult({
       status: 'accepted',
       body: SignedCodec(this.resultBodyCodec)
-        .encode(await this.signResult(result.body)),
+        .encode({
+          header: await this.signResult(result.body),
+          body: result.body,
+        }),
     });
   }
 
