@@ -13,3 +13,9 @@ function isPassesSupported() {
 if (!isPassesSupported()) {
   document.passes = { request };
 }
+
+/**
+ * If `document.passes` isn't already set, loading this module will set it to the polyfill implementation:
+ * {@inheritdoc request}
+ */
+export {};

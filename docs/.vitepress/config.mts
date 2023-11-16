@@ -54,9 +54,8 @@ export default defineConfig({
             link: '/packages/reqs/quickstart',
             items: [
               { text: 'Quickstart', link: '/packages/reqs/quickstart' },
-              { text: 'Common pass requests', link: '/packages/reqs/common-requests' },
-              { text: 'Creating a RequestType', link: '/packages/reqs/request-type' },
-              { text: 'Using RequestRouter to build a Pass Provider', link: '/packages/reqs/request-router' },
+              { text: 'API', link: '/packages/reqs/api/modules.md' },
+              // { text: 'Common pass requests', link: '/packages/reqs/common-requests' },
             ],
           },
           {
@@ -71,6 +70,7 @@ export default defineConfig({
             link: '/packages/types/installation',
             items: [
               { text: 'Installation', link: '/packages/types/installation' },
+              { text: 'API', link: '/packages/types/api/modules.md' },
             ],
           },
         ],

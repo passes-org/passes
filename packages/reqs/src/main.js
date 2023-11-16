@@ -1,6 +1,8 @@
 export * as Codecs from './codecs/index.js';
 export * from './pass-providers/index.js';
 
+export * from './envelope-v0.jsdoc.mjs';
+
 export { RequestRouter } from './request-router.js';
 export * from './request-router.jsdoc.mjs';
 

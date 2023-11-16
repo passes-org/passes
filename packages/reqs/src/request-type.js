@@ -2,7 +2,7 @@ import { EnvelopeV0 } from './envelope-v0';
 
 // JSDoc Type Imports
 /** @template TRequestBody @template TResultBody @typedef {import('./request-type.jsdoc.mjs').IRequestType<TRequestBody, TResultBody>} IRequestType */
-/** @template TResultBody @typedef {import('./request-type.jsdoc.mjs').RequestResult<TResultBody>} RequestResult */
+/** @template TResultBody @typedef {import('./envelope-v0.jsdoc.mjs').RequestResult<TResultBody>} RequestResult */
 /** @template T @typedef {import('./request-type.jsdoc.mjs').Codec<T>} Codec */
 
 /**

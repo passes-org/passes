@@ -9,5 +9,5 @@ Conventionally, a Pass Provider is a web or native app, but it's possible one co
 To be compatible with the Passes.org polyfill and upcoming Passes web extension, a Pass Provider must be a web application that accepts multi-part POST requests with a `File` attachment called `request` containing a `Blob` representing the request's raw bytes. 
 
 ::: warning Incomplete Page
-This inevitably raises important questions it doesn't answer.
+This raises important questions it doesn't answer.
 :::

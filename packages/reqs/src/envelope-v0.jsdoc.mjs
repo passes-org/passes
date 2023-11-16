@@ -1,6 +1,6 @@
 /**
  * @template T
- * @typedef {Object} AcceptedResult<T>
+ * @typedef {Object} AcceptedResult
  * @property {'accepted'} status - The status of the result when accepted.
  * @property {T} body - The body of the result.
  */
@@ -23,7 +23,7 @@
 
 /**
  * @template TResult
- * @typedef {AcceptedResult<TResult> | RejectedResult | UnsupportedResult | ExceptionResult} RequestResult<TResult>
+ * @typedef {AcceptedResult<TResult> | RejectedResult | UnsupportedResult | ExceptionResult} RequestResult
  */
 
 /**

@@ -2,6 +2,11 @@
   "name": "@passes/types",
   "version": "0.0.1-alpha.7",
   "types": "index.d.ts",
+  "scripts": {
+    "build:docs": "typedoc --plugin typedoc-plugin-markdown --out ../../docs/packages/types/api --tsconfig ./tsconfig.json ./index.d.ts",
+    "build": "tsc && build:docs",
+    "prepublishOnly": "tsc"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },

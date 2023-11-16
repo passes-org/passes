@@ -6,6 +6,8 @@ import { formatRLE, parseRLE } from './utils/rle';
 // JSDoc Type Imports
 /** @template TRequestBody @template TResultBody @typedef {import('./request-type.jsdoc.mjs').IRequestType<TRequestBody, TResultBody>} IRequestType */
 /** @template TResultBody @typedef {import('./signed-request-type.jsdoc.mjs').SignedRequestResult<TResultBody>} SignedRequestResult */
+/** @template TResultBody @typedef {import('./signed-request-type.jsdoc.mjs').SignedBodyWrapper<TResultBody>} SignedBodyWrapper */
+/** @typedef {import('./signed-request-type.jsdoc.mjs').SignedBodyWrapperHeader} SignedBodyWrapperHeader */
 
 /**
  * @template TRequestBody
@@ -40,8 +42,11 @@ export class SignedRequestType extends RequestType {
    * 
    * @param {SignedRequestResult<TResultBody>} result
    * @returns {Promise<Uint8Array>}
+   * @throws {SignedRequestType.Errors.CANNOT_SIGN} - Throws a CANNOT_SIGN error if no signResult implementation was provided at construction
    */
   async encodeResult(result) {
+    if (!this.signResult) throw new SignedRequestType.Errors.CANNOT_SIGN(this.requestTag);
+
     // Don't sign result if it's not accepted
     if (result.status !== 'accepted') {
       return super.encodeResult(result);
@@ -62,9 +67,12 @@ export class SignedRequestType extends RequestType {
    * 
    * @param {Uint8Array} bytes 
    * @returns {Promise<SignedRequestResult<TResultBody>>}
-   * @throws {SignedRequestType.Errors.INVALID_SIGNATURE}
+   * @throws {SignedRequestType.Errors.INVALID_SIGNATURE} - Throws an INVALID_SIGNATURE error if the signature does not represent match the body and public key
+   * @throws {SignedRequestType.Errors.CANNOT_VERIFY} - Throws a CANNOT_VERIFY error if no verifyResult implementation was provided at construction
    */
   async decodeResult(bytes) {
+    if (!this.verifyResult) throw new SignedRequestType.Errors.CANNOT_VERIFY(this.requestTag);
+
     const parsedResult = EnvelopeV0.parseResult(bytes);
 
     // Don't verify result if it's not accepted
@@ -107,21 +115,30 @@ export class SignedRequestType extends RequestType {
         this.signed = signed;
       }
     },
+
+    CANNOT_SIGN: class SignedRequestTypeCannotSign extends Error {
+      /**
+       * @param {string} requestTag
+       */
+      constructor(requestTag) {
+        super();
+        this.name = "SignedRequestType Cannot Sign";
+        this.message = `SignedRequestType "${requestTag}" has no signResult implementation. Ensure one is provided during construction if encodeResult is called`;
+      }
+    },
+
+    CANNOT_VERIFY: class SignedRequestTypeCannotVerify extends Error {
+      /**
+       * @param {string} requestTag
+       */
+      constructor(requestTag) {
+        super();
+        this.name = "SignedRequestType Cannot Verify";
+        this.message = `SignedRequestType "${requestTag}" has no verifyResult implementation. Ensure one is provided during construction if decodeResult is called`;
+      }
+    },
   };
 };
-
-/**
- * @typedef SignedBodyWrapperHeader
- * @property {JsonWebKey} publicKey
- * @property {Uint8Array} signature
- */
-
-/**
- * @template TBody
- * @typedef SignedBodyWrapper
- * @property {SignedBodyWrapperHeader} header
- * @property {TBody} body 
- */
 
 /**
  * @template T
