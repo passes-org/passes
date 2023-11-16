@@ -30,7 +30,6 @@ export default defineConfig({
         text: 'Introduction',
         items: [
           { text: 'What is Passes?', link: '/' },
-          { text: 'What are Pass Requests?', link: '/introduction/what-are-pass-requests' },
           { text: 'What are Pass Providers?', link: '/introduction/what-are-pass-providers' },
           { text: 'Where can I use Passes?', link: '/introduction/where-can-i-use-passes' },
           { text: 'Getting Started', link: '/introduction/getting-started' },

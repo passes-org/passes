@@ -1,40 +1,67 @@
 # What is Passes?
 
-**Passes** is a free, open-source web API that enables apps to make arbitrary requests directly to the user on the client side, enabling the user to use a common identity across the various apps they visit.
+**Passes** is a client-side web API that enables apps to make arbitrary requests directly to the user, enabling the user to use a common identity across the various apps they visit.
 
-**Pass Requests** are sent from an app via a client-side API, which presents a UI with a rich interpretation of the request, allowing the user to review and approve or reject the request.
+At the core of Passes are **Pass Requests**. Apps use pass requests to access representations of the user, such as identity-related information or intents to perform some action like making a purchase or creating a file.
 
-::: warning Missing Diagram
-We should add a diagram illustrating how a pass request works.
+When an app sends the user a Pass Request, the user's **Pass Provider** presents a UI with a friendly interpretation of the reqest, allowing the user to review and approve or reject it.
+
+:::info Too Much Thinky?
+"**Representations of the user**" of the user is a kinda intellectual way of drawing a box that includes both attributes of user identity (like profile info) and user intent (the user represents that they want to do X).
+
+Is this too much?
 :::
 
-## Why?
+Generally, the user chooses which Pass Provider they use. It could be a web app, native app, hardware device, or built into the browser or operating system they use.
+
+::: warning Need a section on Pass Providers
+TODO: Put a link here for "More on Pass Providers" and have it link to a more in-depth discussion about them, protocols for web Pass Providers, and how anyone can create a Pass Provider / how any Pass Provider works with any site (provided it implements the Request Types made by the site).
+:::
+
+## Why? The web is missing an identity layer.
 
 ::: warning Missing Diagram
 We should add a diagram illustrating identity on the web today, where end users are downstream of their own identities, to identity on the web with passes, where end users bring their same identity to the various apps they visit.
 :::
 
-**The web platform lacks a notion of a portable user identity.**
+### User identity is not portable
 
-Historically, user identity has been a separate bespoke implementation for *every app you use*. 
+You need a separate account for every app you use.
 
-Newer web APIs like WebAuthn (including Passkeys) create user identifiers that are specific to the domain they were created on.
+The closest modern solution to this is OAuth, which lets you "Sign in with" an existing account you have elsewhere. However in practice as a user, only household names are commonly supported across as identity providers across the various apps you use.
 
-Virtually every end-user experience is affected by this, it greatly contributes the massive-hubs/tiny-spokes form the web of today has matured into, and it constrains the kinds of apps that can be built.
+On the bright side, this lack of portable identity slightly complicates things for anyone who may try to spy on you, but not quite effectively (todo: link to resource about third-party cookies?).
+
+### API soup constrains apps and users
+
+In most modern software. your interactions will cause requests to the app's API, or the APIs of other apps it integrates with. If you chose to "Sign in with" an existing account from another app, some API requests will be made on your behalf to that app's API.
+
+API requests are generally considered authentic on the basis of trust. When my user signs in with Booble, I get a secret token I can use to request more of their information. My app can request their name and email, and Booble's API will give me a result because I have the secret token they entrusted to me. My app will consider the result the be correct because it's from Booble (of course!)
+
+If my app wants to do create a Slaylist on behalf of the user via a third party called _Bopify_'s API, and they integrate with Booble, I can make a request to Booble's API with the user's secret token, and Booble will give me another secret token that I can send to Bopify with the Create Slaylist request, and Bopify can independtly verify it with Booble to make sure it's legit.
+
+For Booble this is great, because– as a household name –most apps support signing in with Booble, and most users have a Booble account. Effectively, a good portion of apps and their users are downstream of Booble. 
+
+On the web today, users exist downstream of their own identities.
+
+The effects of this model are:
+- Each OAuth identity provider an app supports has a separate, explicit implementation, often accompanied by more bespoke API integrations
+- Household names are the only viable OAuth identity providers worth implementing support for in apps
+- Users and the apps they use exist downstream of the ability to access identity information and authenticate actions on behalf of users. They must either accept upstream constraints, or implement their own bespoke user identity system
+- The kinds of things users can do on behalf of their identities across the entire web are constrained by a small set of household names
 
 It's plausible that entire categories of valuable apps are blocked by the web's lack of portable user identity.
 
-::: details More on the impact of bespoke identity on the web
-  **This needs editing. It's just a first-pass.**
-- End users have different accounts for every app they use
-- Passwords beget security breaches and lost access, call for password managers
-- The inconvenience of having yet another account incentivizes users to sign in via OAuth using one of their massive hubs as their identity provider -> end users and the apps they use are downstream of the user's identity provider, and to to request additional information associated with the user's identity on their identity provider or authenticate via their identity provider, apps need to make API requests to the identity provider
-- Massive-hub identity providers attract a bombardment of threats like data breaches/exfiltration and are incentivized to defend data they possess from being used to train ML models. As a result, they tend change their API terms, and can at any time render infeasible categories of downstream applications they once enabled.
-- APIs need to be designed defensively, for example with rate limiting and usage-based pricing. This constrains new types of applications like AI agents.
-- The kinds of things you can do on behalf of a user's identity using an upstream API are constrained by the API. If you're a tiny spoke, and the upstream API is a massive hub, you may not be able to do anything about it.
-- Adding each new "Sign in with ..." identity provider means doing and maintaining a separate bespoke implementation each time. To a downstream app, the cost compounds with each additional provider.
-- End users can use different "Sign in with ..." identity providers in the various apps they visit. In turn, apps are designed generally not to expect or use valuable properties of portable identity.
-:::
+### Passwords and their accopanying issues are ubiquitous
+
+Phishing, Phorgetting, Password Managers...
+
+Virtually every end-user experience is affected by this, it greatly contributes the massive-hubs/tiny-spokes form the web of today has matured into, and it constrains the kinds of apps that can be built.
+
+<!-- ### Apps aren't interoperable -->
+
+* * *
+
 
 ## Pass requests are flexible
 Pass requests are represented using an opaque binary format. At the time of this writing, there is one simple standard for pass request and result serialization – envelope version zero. This format prefixes the request body with a <=256 byte identifier, conventionally the URI of the request type specification, which documents how to interpret the request body.
