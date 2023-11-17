@@ -6,8 +6,8 @@ At the core of Passes are **Pass Requests**. Apps use pass requests to access re
 
 When an app sends the user a Pass Request, the user's **Pass Provider** presents a UI with a friendly interpretation of the reqest, allowing the user to review and approve or reject it.
 
-:::info Too Much Thinky?
-"**Representations of the user**" of the user is a kinda intellectual way of drawing a box that includes both attributes of user identity (like profile info) and user intent (the user represents that they want to do X).
+:::info Overcomplicated
+"**Representations of the user**" is a kinda intellectual way of drawing a box that includes both attributes of user identity (like profile info) and user intent (the user represents that they want to do X).
 
 Is this too much?
 :::
