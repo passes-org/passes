@@ -1,3 +1,12 @@
+<svelte:head>
+  <title>Passes - The Web's Identity Layer</title>
+  <meta name="description" content="Passes put users in control of their data and privacy by giving them a common client-side identity that any app can request to recognize them or act on their behalf.">
+  <meta name="keywords" content="Passes, Identity, Web, Privacy, Security, Authentication" />
+  <meta name="author" content="Passes" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+</svelte:head>
+
 <div class="min-h-screen p-10 bg-white dark:bg-black md:p-16 font-text dark:text-white">
 	<!-- Header -->
   <div class="flex items-center justify-between pb-5 border-b border-black lg:pb-10 dark:border-white">

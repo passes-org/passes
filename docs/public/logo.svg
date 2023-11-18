@@ -1,19 +1,17 @@
-<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0.5" y="0.5" width="15" height="10" rx="1.5" fill="white" stroke="black"/>
-  <rect x="0.5" y="2.5" width="15" height="10" rx="1.5" fill="white" stroke="black"/>
-  <rect x="0.5" y="4.5" width="15" height="10" rx="1.5" fill="white" stroke="black"/>
-  <rect x="9" y="10" width="1" height="1" fill="black"/>
-  <rect x="10" y="9" width="1" height="1" fill="black"/>
-  <rect x="9" y="9" width="1" height="1" fill="black"/>
-  <rect x="8" y="9" width="1" height="1" fill="black"/>
-  <rect x="7" y="8" width="1" height="1" fill="black"/>
-  <rect x="7" y="9" width="1" height="1" fill="black"/>
-  <rect x="7" y="10" width="1" height="1" fill="black"/>
-  <rect x="6" y="10" width="1" height="1" fill="black"/>
-  <rect x="6" y="9" width="1" height="1" fill="black"/>
-  <rect x="6" y="8" width="1" height="1" fill="black"/>
-  <rect x="6" y="8" width="1" height="1" fill="black"/>
-  <rect x="5" y="8" width="1" height="1" fill="black"/>
-  <rect x="5" y="9" width="1" height="1" fill="black"/>
-  <rect x="5" y="10" width="1" height="1" fill="black"/>
+<svg class="w-14 h-9" viewBox="0 0 140 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="140" height="90" rx="10" fill="black" />
+  <rect x="80" y="50" width="10" height="10" fill="white" />
+  <rect x="90" y="40" width="10" height="10" fill="white" />
+  <rect x="80" y="40" width="10" height="10" fill="white" />
+  <rect x="70" y="40" width="10" height="10" fill="white" />
+  <rect x="60" y="30" width="10" height="10" fill="white" />
+  <rect x="60" y="40" width="10" height="10" fill="white" />
+  <rect x="60" y="50" width="10" height="10" fill="white" />
+  <rect x="50" y="50" width="10" height="10" fill="white" />
+  <rect x="50" y="40" width="10" height="10" fill="white" />
+  <rect x="50" y="30" width="10" height="10" fill="white" />
+  <rect x="50" y="30" width="10" height="10" fill="white" />
+  <rect x="40" y="30" width="10" height="10" fill="white" />
+  <rect x="40" y="40" width="10" height="10" fill="white" />
+  <rect x="40" y="50" width="10" height="10" fill="white" />
 </svg>
