@@ -109,3 +109,15 @@
   font-style: normal;
   src: url('/fonts/SF-Pro-Rounded-Regular.otf') format('opentype');
 }
+
+/* Root background color */
+html,
+body {
+  background-color: white;
+}
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    background-color: black;
+  }
+}

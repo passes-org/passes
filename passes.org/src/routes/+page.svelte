@@ -27,20 +27,51 @@
     <a href="//github.com/passes-org/passes">Github</a>
   </div>
 
-  <!-- Hero Content -->
-  <main class="flex flex-col items-start py-24 space-y-10 lg:px-12 lg:w-4/5">
-    <h1 class="text-5xl leading-tight font-display lg:text-7xl whitespace-break-spaces">
-      Many Apps. One Account. No Passwords.
-    </h1>
-    <p class="text-2xl font-text">
-      Passes put users in control of their identity and privacy by giving them a common client-side identity that any app can request to identify them or do something on their behalf.
-    </p>
+  <!-- Main Content -->
+  <main class="py-24 space-y-20 lg:px-12">
+    <!-- Hero Section -->
+    <div class="flex flex-col items-start space-y-10 lg:w-4/5">
+      <h1 class="text-5xl leading-tight font-display lg:text-7xl whitespace-break-spaces" style="text-wrap: balance">
+        Many Apps. One Account. No Passwords.
+      </h1>
+      <p class="text-2xl font-text">
+        Passes put users in control of their data and privacy by giving them a common client-side identity that any app can request to recognize them or act on their behalf.
+      </p>
+  
+      <a href="//docs.passes.org" class="flex items-baseline gap-4 px-6 py-5 text-lg text-white bg-black rounded dark:bg-white dark:text-black">
+        <span>Developer Docs</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-white dark:fill-black">
+          <path d="M4 0H12V8H10V4H8V6H6V8H4V10H2V12H0V10H2V8H4V6H6V4H8V2H4V0Z" />
+        </svg>        
+      </a>
+    </div>
+  
+    <!-- Features Section -->
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-5">
+      <!-- Feature 1 -->
+      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
+        <h2 class="text-2xl font-semibold font-display">Flexible and extensible</h2>
+        <p class="text-xl font-text">
+          If there's no pass request for what you need, you can create your own.
+        </p>
+      </div>
 
-    <a href="//docs.passes.org" class="flex items-baseline gap-4 px-6 py-5 text-lg text-white bg-black rounded dark:bg-white dark:text-black">
-      <span>Developer Docs</span>
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-white dark:fill-black">
-        <path d="M4 0H12V8H10V4H8V6H6V8H4V10H2V12H0V10H2V8H4V6H6V4H8V2H4V0Z" />
-      </svg>        
-    </a>
+      <!-- Feature 2 -->
+      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
+        <h2 class="text-2xl font-semibold font-display">Simple sign-in</h2>
+        <p class="text-xl font-text">
+          No more auth screens littered with text fields and 5 different identity providers.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
+        <h2 class="text-2xl font-semibold font-display">Client-side</h2>
+        <p class="text-xl font-text">
+          Users control how they handle pass requests.
+        </p>
+      </div>
+    </div>
   </main>
+    
 </div>

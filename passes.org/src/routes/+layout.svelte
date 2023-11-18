@@ -1,6 +1,6 @@
 <script>
 	import '../app.postcss';
-	import '../fonts.css';
+	import '../root.css';
 </script>
 
 <slot />
