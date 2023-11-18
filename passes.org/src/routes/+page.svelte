@@ -33,7 +33,7 @@
       Many Apps. One Account.<br/>No Passwords.
     </h1>
     <p class="text-2xl font-text">
-      Passes puts users in control of their identity and privacy by giving them a common client-side identity that any app can request to identify them or do something on their behalf.
+      Passes put users in control of their identity and privacy by giving them a common client-side identity that any app can request to identify them or do something on their behalf.
     </p>
 
     <a href="//docs.passes.org" class="flex items-baseline gap-4 px-6 py-5 text-lg text-white bg-black rounded">
