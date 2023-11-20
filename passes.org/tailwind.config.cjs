@@ -9,7 +9,9 @@ const config = {
       'rounded': ['"SF Pro Rounded"', 'system-ui-rounded', 'sans-serif'],
     },
 
-		extend: {}
+		extend: {
+			container: { center: true },
+		}
 	},
 
 	plugins: []
