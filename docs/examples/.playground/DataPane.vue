@@ -5,12 +5,18 @@ import PaneTabs from './PaneTabs.vue';
 import { useStore } from './store';
 import { SignedAcceptedResult, SignedRequestType } from '../../../packages/reqs/src/main';
 import { calculateJwkThumbprint, base64url, JWK } from 'jose';
+import makeBlockie from 'ethereum-blockies-base64';
 
 const store = useStore();
 
 const decodedRequestBody = store.value.requestBody;
 const decodedResult = computed(() => store.value.result);
 
+const signatureBase64 = computed(() => {
+  if (store.value.requestType instanceof SignedRequestType && decodedResult.value?.status === 'accepted') {
+    return base64url.encode((decodedResult.value as SignedAcceptedResult<any>).signed.signature);
+  }
+});
 const publicKeyThumbprint = ref();
 watchEffect(async () => {
   if (store.value.requestType instanceof SignedRequestType && decodedResult.value?.status === 'accepted') {
@@ -49,15 +55,31 @@ watchEffect(async () => {
         <span>Body</span>
         <pre :class="$style.code">{{ decodedResult?.status === 'accepted' ? JSON.stringify(decodedResult.body, null, 2) || '(empty)' : '(not accepted)' }}</pre>
       </label>
-      <details v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
+      <details v-if="signatureBase64 && publicKeyThumbprint">
         <summary>✅ Result Signature</summary>
-        <label v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
+        <label>
           <span>Signature (base64url)</span>
-          <code :class="$style.code">{{ base64url.encode((decodedResult as SignedAcceptedResult<any>).signed.signature) }}</code>
+          <div :class="$style.key">
+            <img
+              :src="makeBlockie(signatureBase64)"
+              :alt="signatureBase64"
+              :title="signatureBase64"
+              :class="$style.thumb"
+            />
+            <div :class="$style.code">{{ signatureBase64 }}</div>
+          </div>
         </label>
-        <label v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
+        <label>
           <span>Public Key (JWK Thumbprint)</span>
-          <code :class="$style.code">{{ publicKeyThumbprint }}</code>
+          <div :class="$style.key">
+            <img
+              :src="makeBlockie(publicKeyThumbprint)"
+              :alt="publicKeyThumbprint"
+              :title="publicKeyThumbprint"
+              :class="$style.thumb"
+            />
+            <div :class="$style.code">{{ publicKeyThumbprint }}</div>
+          </div>
         </label>
       </details>
     </div>
@@ -71,6 +93,7 @@ watchEffect(async () => {
   display: flex;
   flex-direction: column;
   flex: 1;
+  flex-shrink: 0;
   min-height: 16rem;
   overflow: scroll;
 }
@@ -105,6 +128,18 @@ label > pre {
   padding: 0.5rem;
 }
 
+.key {
+  align-items: stretch;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.thumb {
+  float: left;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
 .code {
   background-color: var(--vp-c-default-soft);
   border-radius: 0.3rem;
@@ -116,5 +151,6 @@ label > pre {
   overflow-wrap: break-word;
   overflow-y: scroll;
   padding: 0.1rem;
+  user-select: all;
 }
 </style>
