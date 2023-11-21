@@ -5,9 +5,10 @@
 <script setup>import IndexExample from './IndexExample.vue';</script>
 <IndexExample />
 
-## Why should I use Passes?
 
-Passes is founded on the belief that software should work together more seamlessly, and a web that recognizes you is better than one where you have different accounts for every app, as long as it respects and puts you in control of your privacy. 
+## Why Passes?
+
+Passes is founded on the belief that software should work together seamlessly, and a web that recognizes you is better than one where you have different accounts for every app, as long as it respects and puts you in control of your privacy. 
 
 The key design goals of Passes are:
 
@@ -22,9 +23,36 @@ Apps make requests for one-off information, or to request permission to establis
 ### Interoperability
 If two parties support the same pass request type, they're compatible. Since integration happens on the client, there's no need for canonical addresses or authorities.
 
+### ABI stability
+The core ABI for making pass requests is designed in order to remain stable as use cases for pass requests change and adoption progresses.
+
+At its core, the protocol merely assumes a client-side interface for sending request bytes and asynchronously returning result bytes. This way, versioning can happen on a per-request-type basis.
+
 ::: warning Writing In Progress
 The content below this message is incomplete or needs editing.
 :::
+
+
+## Use Cases
+
+Passes allows apps to make "pass requests" directly to users on the client, which get presented out-of-band by their browser for them to review, and if they accept, a result is sent back to the requesting app.
+
+Use cases for pass requests include:
+- Sign in, account creation, accountless user recognition
+- Permissions requests
+- Cryptographic attestations
+- Features backed by blockchains and other systems requiring client-side signatures
+
+
+## How are pass requests presented and handled? 
+
+Passes is designed to work across platforms. To use pass requests on the web today, developers can use the `@passes/polyfill` package. The polyfill implements client-side support for pass requests by making a top-level HTTP POST request to `passes.org/request` containing the request body. `passes.org/request` then redirects the user to their "Pass Provider".
+
+A Pass Provider is a web application the user chooses to use to handle pass requests. Anyone can create a Pass Provider, and sites that make pass requests are agnostic to which one a user uses.
+
+Passes specifies a client-side interface for making a request and asynchronously returning a result. _What_ actually receives, presents and handles a request and _how_ a result is returned is up to the implementation of the client.
+
+
 
 
 ## Related Technologies

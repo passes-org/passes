@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import Button from './Button.vue';
 import PaneTabs from './PaneTabs.vue';
 import { useStore } from './store';
-import { SignedAcceptedResult, SignedRequestResult, SignedRequestType } from '../../../packages/reqs/src/main';
+import { SignedAcceptedResult, SignedRequestType } from '../../../packages/reqs/src/main';
+import { calculateJwkThumbprint, base64url, JWK } from 'jose';
 
 const store = useStore();
 
 const decodedRequestBody = store.value.requestBody;
 const decodedResult = computed(() => store.value.result);
+
+const publicKeyThumbprint = ref();
+watchEffect(async () => {
+  if (store.value.requestType instanceof SignedRequestType && decodedResult.value?.status === 'accepted') {
+    publicKeyThumbprint.value = await calculateJwkThumbprint((decodedResult.value as SignedAcceptedResult<any>).signed.publicKey as JWK);
+  }
+})
 </script>
 
 <template>
@@ -41,14 +49,17 @@ const decodedResult = computed(() => store.value.result);
         <span>Body</span>
         <pre :class="$style.code">{{ decodedResult?.status === 'accepted' ? JSON.stringify(decodedResult.body, null, 2) || '(empty)' : '(not accepted)' }}</pre>
       </label>
-      <label v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
-        <span>Signature</span>
-        <code :class="$style.code">✅ Valid ({{ (decodedResult as SignedAcceptedResult<any>).signed.signature }})</code>
-      </label>
-      <label v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
-        <span>Public Key</span>
-        <code :class="$style.code">{{ JSON.stringify((decodedResult as SignedAcceptedResult<any>).signed.publicKey) }}</code>
-      </label>
+      <details v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
+        <summary>✅ Result Signature</summary>
+        <label v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
+          <span>Signature (base64url)</span>
+          <code :class="$style.code">{{ base64url.encode((decodedResult as SignedAcceptedResult<any>).signed.signature) }}</code>
+        </label>
+        <label v-if="(store.requestType instanceof SignedRequestType && decodedResult?.status === 'accepted')">
+          <span>Public Key (JWK Thumbprint)</span>
+          <code :class="$style.code">{{ publicKeyThumbprint }}</code>
+        </label>
+      </details>
     </div>
   </div>
 </template>
