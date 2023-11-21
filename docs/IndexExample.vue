@@ -18,7 +18,7 @@ const requestType = new SignedRequestType<string, string>({
 let keyPair = ref();
 let requestBody = 'Can I have your email address?';
 let resultBody = ref({ _error: 'Not Ready' });
-let email = ref('example@passes.org');
+let email = ref('you@passes.org');
 
 const keyFormat = 'jwk';
 const keyParams = { name: 'ECDSA', namedCurve: 'P-256', hash: 'SHA-384' };
@@ -59,6 +59,7 @@ async function verifyResult(signed: SignedBodyWrapper<string>): Promise<boolean>
   <Playground
     title="Try an Example"
     description="A basic demo request that requests an email address and returns it as a signed string."
+    emulatorOnly
     :requestBody="requestBody"
     :requestType="requestType"
     :resultBody="email"
@@ -67,8 +68,10 @@ async function verifyResult(signed: SignedBodyWrapper<string>): Promise<boolean>
     >
     <template #pass-emulator-ui>
       <div :class="$style.content">
-        <div>Request body from <b>docs.passes.org</b>: <code>{{ requestBody }}</code></div>
-        <div><label>Result Email: <input :class="$style.input" v-model="email" placeholder="you@yoursite.com" /></label></div>
+        <div>Request body from <b>docs.passes.org</b>:</div>
+        <div><code>{{ requestBody }}</code></div>
+        <hr />
+        <div><label>Enter Result Email: <input :class="$style.input" v-model="email" placeholder="you@yoursite.com" /></label></div>
       </div>
     </template>
   </Playground>

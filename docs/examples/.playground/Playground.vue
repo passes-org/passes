@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IRequestType, SignedRequestType } from '../../../packages/reqs/src/main';
+import { IRequestType } from '../../../packages/reqs/src/main';
 import DataPane from './DataPane.vue';
 import EmulatorPane from './EmulatorPane.vue';
 import PlaygroundHeader from './PlaygroundHeader.vue';
@@ -13,6 +13,7 @@ const { requestBody, requestType, resultBody } = defineProps<{
   resultBody?: any;
   acceptButtonTitle?: string;
   rejectButtonTitle?: string;
+  emulatorOnly?: boolean;
 }>();
 
 const store = provideStore({
@@ -48,6 +49,7 @@ async function handleReject() {
         <EmulatorPane
           @accept="handleAccept(resultBody)"
           @reject="handleReject()"
+          :emulatorOnly="emulatorOnly"
           :acceptButtonTitle="acceptButtonTitle"
           :rejectButtonTitle="rejectButtonTitle"
         >

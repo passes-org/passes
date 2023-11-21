@@ -8,6 +8,7 @@ const store = useStore();
 const props = defineProps<{
   acceptButtonTitle?: string;
   rejectButtonTitle?: string;
+  emulatorOnly?: boolean;
 }>();
 </script>
 
@@ -16,6 +17,7 @@ const props = defineProps<{
     <PaneTabs
       :tabs="['emulator', 'document.passes']"
       v-model="store.abi"
+      v-if="!emulatorOnly"
     />
     <div v-if="store.abi === 'emulator'" :class="$style.content">
       <slot v-if="store.requestPending">
