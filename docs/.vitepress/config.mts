@@ -27,15 +27,6 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Introduction',
-        items: [
-          { text: 'What is Passes?', link: '/' },
-          { text: 'What are Pass Providers?', link: '/introduction/what-are-pass-providers' },
-          { text: 'Where can I use Passes?', link: '/introduction/where-can-i-use-passes' },
-          { text: 'Getting Started', link: '/introduction/getting-started' },
-        ]
-      },
-      {
         text: 'Examples',
         items: [
           { text: 'Signing In', link: '/examples/signing-in' },

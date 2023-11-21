@@ -32,6 +32,7 @@ export function provideStore({ requestBody, requestType }: Pick<Store, 'requestB
         resultPromise.value
         this.requestBody = await this.requestType.decodeRequest(raw);
         this.requestPending = true;
+        this.result = undefined;
         resultPromise.value = new Promise((resolve) => { resultPromiseResolver.value = resolve })
         return resultPromise.value;
       };

@@ -6,6 +6,8 @@ import PlaygroundHeader from './PlaygroundHeader.vue';
 import { provideStore } from './store';
 
 const { requestBody, requestType, resultBody } = defineProps<{
+  title?: string;
+  description?: string;
   requestBody: any;
   requestType: IRequestType<any, any>;
   resultBody?: any;
@@ -18,8 +20,8 @@ const store = provideStore({
   requestType,
 });
 
-async function handleAccept () {
-  store.value.setResult(await store.value.requestType.encodeResult({ status: 'accepted', body: resultBody }));
+async function handleAccept(body) {
+  store.value.setResult(await store.value.requestType.encodeResult({ status: 'accepted', body }));
 }
 
 async function handleReject() {
@@ -29,20 +31,23 @@ async function handleReject() {
 
 <template>
   <div :class="$style.container">
-    <PlaygroundHeader />
+    <PlaygroundHeader>
+      <template #title>{{ title ?? 'Request Playground' }}</template>
+      <template #description>{{ description }}</template>
+    </PlaygroundHeader>
 
     <!-- Row: Content -->
     <div :class="$style.content">
       <Suspense>
-        <DataPane />
+        <DataPane :class="{ [$style.dimmed]: store.requestPending }" />
         <template #fallback>
           <p>loading...</p>
         </template>
       </Suspense>
       <Suspense>
         <EmulatorPane
-          @accept="handleAccept"
-          @reject="handleReject"
+          @accept="handleAccept(resultBody)"
+          @reject="handleReject()"
           :acceptButtonTitle="acceptButtonTitle"
           :rejectButtonTitle="rejectButtonTitle"
         >
@@ -67,6 +72,11 @@ async function handleReject() {
   display: flex;
   gap: 0.5rem;
   padding: 0.5rem;
+}
+
+.dimmed {
+  opacity: 0.4;
+  transition: opacity 0.2s ease-out;
 }
 
 @media (max-width: 768px) {

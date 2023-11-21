@@ -1,7 +1,10 @@
 <template>
   <div :class="$style.header">
     <div :class="$style.title">
-      Request Playground
+      <slot name="title"></slot>
+    </div>
+    <div :class="$style.description">
+      <slot name="description"></slot>
     </div>
   </div>
 </template>
@@ -14,9 +17,13 @@
 
 .title {
   color: var(--vp-c-text-1);
-  flex: 1;
   font-size: 1.125rem;
   font-weight: bold;
+}
+
+.description {
+  color: var(--vp-c-text-1);
+  font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {
