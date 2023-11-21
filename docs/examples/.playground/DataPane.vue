@@ -56,7 +56,7 @@ watchEffect(async () => {
         <pre :class="$style.code">{{ decodedResult?.status === 'accepted' ? JSON.stringify(decodedResult.body, null, 2) || '(empty)' : '(not accepted)' }}</pre>
       </label>
       <details v-if="signatureBase64 && publicKeyThumbprint">
-        <summary>✅ Result Signature</summary>
+        <summary>✅ Valid Result Signature</summary>
         <label>
           <span>Signature (base64url)</span>
           <div :class="$style.key">
@@ -126,6 +126,10 @@ label > pre {
   display: flex;
   gap: 0.5rem;
   padding: 0.5rem;
+}
+
+summary {
+  cursor: pointer;
 }
 
 .key {
