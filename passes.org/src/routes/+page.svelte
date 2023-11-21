@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Passes - The Web's Identity Layer</title>
+  <title>Passes - The Web API for Portable Identity</title>
   <meta name="description" content="Passes give users a common client-side identity that any app can request to recognize them or act on their behalf, putting them in control of their data and privacy.">
   <meta name="keywords" content="Passes, Identity, Web, Privacy, Security, Authentication" />
   <meta name="author" content="Passes" />
@@ -40,11 +40,11 @@
   <main class="py-24 space-y-20 lg:px-12">
     <!-- Hero Section -->
     <div class="flex flex-col items-start space-y-10 lg:w-4/5">
-      <h1 class="text-5xl leading-tight font-display lg:text-7xl whitespace-break-spaces" style="text-wrap: balance">
-        Many Apps. One Account. No Passwords.
+      <h1 class="text-5xl leading-tight font-display lg:text-8xl" style="text-wrap: balance">
+        Many apps. One identity. No passwords.
       </h1>
       <p class="text-2xl font-text">
-        Passes give users a common client-side identity that any app can request to recognize them or act on their behalf, putting them in control of their data and privacy.
+        Passes give users a portable client-side identity any app can request to recognize them or act on their behalf, putting them in control of their data and privacy.
       </p>
   
       <a href="//docs.passes.org" class="flex items-baseline gap-4 px-6 py-5 text-lg text-white bg-black rounded dark:bg-white dark:text-black">
@@ -57,27 +57,42 @@
   
     <!-- Features Section -->
     <div class="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-5">
-      <!-- Feature 1 -->
       <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
-        <h2 class="text-2xl font-semibold font-display">Put users in control</h2>
+        <h2 class="text-2xl font-semibold font-display">Easy to use</h2>
         <p class="text-xl font-text">
-          Control how you're recognized– by a public key, name, pseudonym, or not at all –depending on the app.
+          Approachable and delightful end-user experience.
+        </p>
+      </div>
+      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
+        <h2 class="text-2xl font-semibold font-display">Simple to support</h2>
+        <p class="text-xl font-text">
+          Support for Passes is easy to add to any app.
+        </p>
+      </div>
+      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
+        <h2 class="text-2xl font-semibold font-display">Versatile capabilities</h2>
+        <p class="text-xl font-text">
+          Passes can be used for authentication, identity, permissions, and more.
         </p>
       </div>
 
-      <!-- Feature 2 -->
-      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
-        <h2 class="text-2xl font-semibold font-display">Solve sign-in once and for all</h2>
-        <p class="text-xl font-text">
-          No more auth screens littered with text fields and 5 different identity providers.
-        </p>
-      </div>
-
-      <!-- Feature 3 -->
+      <!-- Row 2 -->
       <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
         <h2 class="text-2xl font-semibold font-display">Seamlessly work with other apps</h2>
         <p class="text-xl font-text">
           If two parties support the same pass request type, they're compatible. Any app, any platform.
+        </p>
+      </div>
+      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
+        <h2 class="text-2xl font-semibold font-display">Put users in control</h2>
+        <p class="text-xl font-text">
+          Users control how they're recognized– by a public key, name, pseudonym, or not at all –depending on the app.
+        </p>
+      </div>
+      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
+        <h2 class="text-2xl font-semibold font-display">Solve sign-in</h2>
+        <p class="text-xl font-text">
+          No more auth screens littered with text fields and many different identity providers.
         </p>
       </div>
     </div>
