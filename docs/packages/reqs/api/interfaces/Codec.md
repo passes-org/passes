@@ -37,7 +37,7 @@
 
 #### Defined in
 
-[request-type.jsdoc.mjs:17](https://github.com/passes-org/passes/blob/3a6a81a/packages/reqs/src/request-type.jsdoc.mjs#L17)
+[request-type.jsdoc.mjs:17](https://github.com/passes-org/passes/blob/2bc4dfc/packages/reqs/src/request-type.jsdoc.mjs#L17)
 
 ___
 
@@ -61,4 +61,4 @@ ___
 
 #### Defined in
 
-[request-type.jsdoc.mjs:16](https://github.com/passes-org/passes/blob/3a6a81a/packages/reqs/src/request-type.jsdoc.mjs#L16)
+[request-type.jsdoc.mjs:16](https://github.com/passes-org/passes/blob/2bc4dfc/packages/reqs/src/request-type.jsdoc.mjs#L16)

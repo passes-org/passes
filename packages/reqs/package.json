@@ -6,7 +6,7 @@
   "types": "types/main.d.ts",
   "scripts": {
     "build:docs": "typedoc --plugin typedoc-plugin-markdown --out ../../docs/packages/reqs/api --tsconfig ./tsconfig.json ./src/main.js",
-    "build": "tsc && build:docs",
+    "build": "tsc && bun run build:docs",
     "prepublishOnly": "tsc"
   },
   "devDependencies": {
