@@ -39,7 +39,7 @@ Passes allows apps to make "pass requests" directly to users on the client, whic
 
 Use cases for pass requests include:
 - Sign in, account creation, accountless user recognition
-- Permissions requests
+- Permissions and data requests
 - Cryptographic attestations
 - Features backed by blockchains and other systems requiring client-side signatures
 
