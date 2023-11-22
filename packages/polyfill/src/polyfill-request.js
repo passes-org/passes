@@ -21,7 +21,7 @@ export async function request(raw) {
   // Create request context params
   const formData = new FormData();
   formData.set('request', new Blob([raw]));
-  const passEngineWindow = openWindowWithPost(`${PASSES_BASE_URL}/v1/request`, formData);
+  const passEngineWindow = openWindowWithPost(`${PASSES_BASE_URL}/request`, formData);
 
   // Create a promise and resolver fn which will be used to return a promise that gets resolved from handleMessage once there's a result
   /** @type {(result: Uint8Array) => void} */
