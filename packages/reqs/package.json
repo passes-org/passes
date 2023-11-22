@@ -1,6 +1,6 @@
 {
   "name": "@passes/reqs",
-  "version": "0.0.1-alpha.22",
+  "version": "0.0.1-alpha.23",
   "type": "module",
   "main": "src/main.js",
   "types": "types/main.d.ts",
@@ -10,7 +10,7 @@
     "prepublishOnly": "tsc"
   },
   "devDependencies": {
-    "@passes/types": "^0.0.1-alpha.7",
+    "@passes/types": "^0.0.1-alpha.23",
     "bun-types": "latest",
     "typescript": "^5.2.2"
   },
