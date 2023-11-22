@@ -28,4 +28,4 @@ Request the user to complete a pass request
 
 #### Defined in
 
-[packages/types/index.d.ts:10](https://github.com/passes-org/passes/blob/3a6a81a/packages/types/index.d.ts#L10)
+[packages/types/index.d.ts:10](https://github.com/passes-org/passes/blob/76ab3ca/packages/types/index.d.ts#L10)

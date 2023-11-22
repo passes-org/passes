@@ -30,4 +30,4 @@ The result of a request call, sent from a pass engine to a relying party via `po
 
 #### Defined in
 
-[packages/types/index.d.ts:17](https://github.com/passes-org/passes/blob/3a6a81a/packages/types/index.d.ts#L17)
+[packages/types/index.d.ts:17](https://github.com/passes-org/passes/blob/76ab3ca/packages/types/index.d.ts#L17)

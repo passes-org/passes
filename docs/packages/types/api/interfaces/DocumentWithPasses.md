@@ -3453,7 +3453,7 @@ Document.passes
 
 #### Defined in
 
-[packages/types/index.d.ts:5](https://github.com/passes-org/passes/blob/3a6a81a/packages/types/index.d.ts#L5)
+[packages/types/index.d.ts:5](https://github.com/passes-org/passes/blob/76ab3ca/packages/types/index.d.ts#L5)
 
 ___
 
