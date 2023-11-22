@@ -48,7 +48,7 @@ function formatRunLength(runLength, { length, offset = 1 }) {
       view.setUint16(0, runLength - offset);
       break;
     case 4:
-      view.setUint16(0, runLength - offset);
+      view.setUint32(0, runLength - offset);
       break;
   }
 
@@ -71,6 +71,6 @@ function parseRunLength(bytes, start, { length, offset = 1 }) {
     case 2:
       return view.getUint16(start) + offset;
     case 4:
-      return view.getUint16(start) + offset;
+      return view.getUint32(start) + offset;
   }
 }
