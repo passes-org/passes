@@ -7,7 +7,11 @@ import { base64url } from "jose";
 export const actions = {
   default: async (event) => {
     const request = await RequestBodySchema.parseAsync(await event.request.formData());
+    const referrerValue = event.request.headers.get('referer');
+    const referrer = referrerValue ? new URL(referrerValue).host : undefined;
+
     return {
+      referrer,
       request: {
         tag: request.tag,
         body: base64url.encode(request.body),
