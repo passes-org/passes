@@ -66,7 +66,7 @@
 </label>
 {#if form?.request.body}
   <pre>
-    {(Codecs[get(requestBodyCodec)].decode(base64url.decode(form.request.body)))}
+    {JSON.stringify((Codecs[get(requestBodyCodec)].decode(base64url.decode(form.request.body))), null, 2)}
   </pre>
 {/if}
 
