@@ -67,7 +67,7 @@
         <!-- Title Row -->
         <div class="flex justify-between">
           <div class="font-semibold opacity-50 font-sm">Request Body</div>
-          <select bind:value={requestBodyCodec} class="px-1 border border-black rounded-full dark:border white font-sm">
+          <select bind:value={requestBodyCodec} class="px-1 border border-black rounded-full dark:border-white font-sm">
             <option value="BigInt">BigInt</option>
             <option value="Boolean">Boolean</option>
             <option value="Bytes">Bytes</option>
@@ -87,7 +87,7 @@
       <!-- Result Body Codec -->
       <div class="flex justify-between p-3 border border-black/10">
         <div class="font-semibold opacity-50 font-sm">Result Body Codec</div>
-          <select bind:value={resultBodyCodec} class="px-1 border border-black rounded-full dark:border white font-sm">
+          <select bind:value={resultBodyCodec} class="px-1 border border-black rounded-full dark:border-white font-sm">
             <option value="BigInt">BigInt</option>
             <option value="Boolean">Boolean</option>
             <option value="Bytes">Bytes</option>

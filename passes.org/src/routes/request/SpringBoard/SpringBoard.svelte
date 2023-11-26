@@ -90,7 +90,7 @@
         <!-- Title Row -->
         <div class="flex justify-between">
           <div class="font-semibold opacity-50 font-sm">Request Body</div>
-          <select bind:value={requestBodyCodec} class="px-1 border border-black rounded-full dark:border white font-sm">
+          <select bind:value={requestBodyCodec} class="px-1 border border-black rounded-full dark:border-white font-sm">
             <option disabled={!requestBodyDecoders.includes('BigInt')} value="BigInt">BigInt</option>
             <option disabled={!requestBodyDecoders.includes('Boolean')} value="Boolean">Boolean</option>
             <option disabled={!requestBodyDecoders.includes('Bytes')} value="Bytes">Bytes</option>
@@ -111,7 +111,7 @@
         <!-- Title Row -->
         <div class="flex justify-between">
           <div class="font-semibold opacity-50 font-sm">Result Body</div>
-          <select bind:value={resultBodyCodec} class="px-1 border border-black rounded-full dark:border white font-sm">
+          <select bind:value={resultBodyCodec} class="px-1 border border-black rounded-full dark:border-white font-sm">
             <option value="BigInt">BigInt</option>
             <option value="Boolean">Boolean</option>
             <option value="Bytes">Bytes</option>
