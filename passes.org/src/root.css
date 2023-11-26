@@ -112,13 +112,19 @@
 
 /* Root background color */
 html,
-body {
+body,
+input,
+textarea,
+select {
   background-color: white;
   color: black;
 }
 @media (prefers-color-scheme: dark) {
   html,
-  body {
+  body,
+  input,
+  textarea,
+  select {
     background-color: black;
     color: white;
   }
