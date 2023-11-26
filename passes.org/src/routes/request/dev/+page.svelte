@@ -58,12 +58,12 @@
     <!-- Request -->
     <div class="flex flex-col px-4 py-8 space-y-4 border border-black rounded dark:border-white">
       <!-- Tag -->
-      <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10">
+      <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10 dark:border-white/10">
         <div class="font-semibold opacity-50 font-sm">Request Tag</div>
         <input bind:value={requestTag} placeholder="com.my-site.my-new-request-tag">
       </div>
       <!-- Request Body -->
-      <div class="flex flex-col flex-1 p-3 space-y-4 border border-black/10">
+      <div class="flex flex-col flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
         <!-- Title Row -->
         <div class="flex justify-between">
           <div class="font-semibold opacity-50 font-sm">Request Body</div>
@@ -85,7 +85,7 @@
         />
       </div>
       <!-- Result Body Codec -->
-      <div class="flex justify-between p-3 border border-black/10">
+      <div class="flex justify-between p-3 border border-black/10 dark:border-white/10">
         <div class="font-semibold opacity-50 font-sm">Result Body Codec</div>
           <select bind:value={resultBodyCodec} class="px-1 border border-black rounded-full dark:border-white font-sm">
             <option value="BigInt">BigInt</option>
@@ -109,17 +109,17 @@
     <div class="flex flex-col px-4 py-8 space-y-4 border border-black rounded dark:border-white">
       {#if decodedResultStatus && decodedResultBody}
         <!-- Status -->
-        <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10">
+        <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10 dark:border-white/10">
           <div class="font-semibold opacity-50 font-sm">Result Status</div>
           <pre class="flex-1 h-44">{decodedResultStatus}</pre>
         </div>
         <!-- Body -->
-        <div class="flex flex-col items-stretch flex-1 p-3 space-y-4 border border-black/10">
+        <div class="flex flex-col items-stretch flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
           <div class="font-semibold opacity-50 font-sm">Result Body</div>
           <pre class="flex-1 h-44">{decodedResultBody}</pre>
         </div>
       {:else}
-        <div class="flex flex-col items-center justify-center flex-1 p-3 space-y-4 border border-black/10">
+        <div class="flex flex-col items-center justify-center flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
           <div class="font-semibold opacity-50 font-sm">Click "Send Request"</div>
         </div>
       {/if}

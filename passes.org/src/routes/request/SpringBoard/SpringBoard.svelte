@@ -81,12 +81,12 @@
     <!-- Request -->
     <div class="flex flex-col px-4 py-8 space-y-4 border border-black rounded dark:border-white">
       <!-- Tag -->
-      <div class="p-3 space-y-4 border border-black/10">
+      <div class="p-3 space-y-4 border border-black/10 dark:border-white/10">
         <div class="font-semibold opacity-50 font-sm">Request Tag</div>
         <div>{request.tag}</div>
       </div>
       <!-- Body -->
-      <div class="flex-1 p-3 space-y-4 border border-black/10">
+      <div class="flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
         <!-- Title Row -->
         <div class="flex justify-between">
           <div class="font-semibold opacity-50 font-sm">Request Body</div>
@@ -107,7 +107,7 @@
   
     <!-- Result -->
     <div class="flex flex-col p-4 space-y-4 border border-black rounded dark:border-white">
-      <div class="flex flex-col flex-1 p-3 space-y-4 border border-black/10">
+      <div class="flex flex-col flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
         <!-- Title Row -->
         <div class="flex justify-between">
           <div class="font-semibold opacity-50 font-sm">Result Body</div>
