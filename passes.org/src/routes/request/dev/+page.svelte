@@ -34,7 +34,7 @@
       const decodedResult = await req.decodeResult(message.result);
       decodedResultStatus = decodedResult.status;
       decodedResultBody = decodedResult.status === 'accepted'
-        ? decodedResult.body
+        ? JSON.stringify(decodedResult.body, null, 2)
         : '(result not accepted)';
       // Close the window
       passEngineWindow.close();
