@@ -41,7 +41,7 @@
         case 'Boolean': return bodyText === 'true';
         case 'Bytes': return base64url.decode(bodyText); // TODO: Use hex instead
         case 'Json': return JSON.parse(bodyText);
-        case 'Number': return Number(resultBodyText);
+        case 'Number': return Number(resultBodyText)
         case 'String': return resultBodyText;
         case 'Void': return undefined;
       }
@@ -106,7 +106,7 @@
     </div>
   
     <!-- Result -->
-    <div class="flex flex-col p-4 border border-black rounded dark:border-white">
+    <div class="flex flex-col p-4 space-y-4 border border-black rounded dark:border-white">
       <div class="flex flex-col flex-1 p-3 space-y-4 border border-black/10">
         <!-- Title Row -->
         <div class="flex justify-between">
@@ -124,15 +124,14 @@
         <!-- Body -->
         <textarea 
           bind:value={resultBodyText}
-          class="flex-1 resize-none h-44"
+          class="flex-1 resize-none"
           placeholder="Result Body"
         />
       </div>
-
       <!-- Actions -->
       <div class="flex space-x-4">
-        <button on:click={() => onResult('accepted')}>Accept</button>
-        <button on:click={() => onResult('rejected')}>Reject</button>
+        <button on:click={() => onResult('accepted')} class="flex-1 px-4 py-2 font-semibold text-white bg-black rounded dark:bg-white dark:text-black">Accept</button>
+        <button on:click={() => onResult('rejected')} class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white">Reject</button>
       </div>
     </div>
   </main>

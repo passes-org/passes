@@ -3,11 +3,16 @@
   import { Codecs, RequestType } from "../../../../../packages/reqs";
   import type { RequestResult } from "../../../../../packages/types";
 
-  let result: any;
+  let requestTag = 'org.passes.example.my-request';
+  let requestBodyCodec: keyof typeof Codecs = 'Json';
+  let resultBodyCodec: keyof typeof Codecs = 'Json';
+  let requestBodyText = '';
+  let decodedResultStatus: string;
+  let decodedResultBody: string;
 
-  async function onClick() {
-    const req = new RequestType('this-is-a-demo', Codecs.String, Codecs.String);
-    const raw =  await req.encodeRequest('test test test!!!');
+  async function sendRequest() {
+    const req = new RequestType(requestTag, Codecs[requestBodyCodec], Codecs[resultBodyCodec]);
+    const raw =  await req.encodeRequest(requestBodyText);
 
     const formData = new FormData();
     formData.set('request', new Blob([raw]));
@@ -26,7 +31,11 @@
       // Ignore messages that aren't request results
       if (message.type !== 'request-result') return;
 
-      result = await req.decodeResult(message.result);
+      const decodedResult = await req.decodeResult(message.result);
+      decodedResultStatus = decodedResult.status;
+      decodedResultBody = decodedResult.status === 'accepted'
+        ? decodedResult.body
+        : '(result not accepted)';
       // Close the window
       passEngineWindow.close();
     }
@@ -39,9 +48,82 @@
   }
 </script>
 
-<button on:click={onClick}>Send Request to Springboard</button>
+<div class="flex flex-col space-y-20">
+  <!-- Title -->
+  <h1 class="text-3xl text-center opacity-50">Request Composer</h1>
 
-{#if result}
-  <h2>Result</h2>
-  <pre>{JSON.stringify(result)}</pre>
-{/if}
+  <!-- Main -->
+  <main class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+
+    <!-- Request -->
+    <div class="flex flex-col px-4 py-8 space-y-4 border border-black rounded dark:border-white">
+      <!-- Tag -->
+      <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10">
+        <div class="font-semibold opacity-50 font-sm">Request Tag</div>
+        <input bind:value={requestTag} placeholder="com.my-site.my-new-request-tag">
+      </div>
+      <!-- Request Body -->
+      <div class="flex flex-col flex-1 p-3 space-y-4 border border-black/10">
+        <!-- Title Row -->
+        <div class="flex justify-between">
+          <div class="font-semibold opacity-50 font-sm">Request Body</div>
+          <select bind:value={requestBodyCodec} class="px-1 border border-black rounded-full dark:border white font-sm">
+            <option value="BigInt">BigInt</option>
+            <option value="Boolean">Boolean</option>
+            <option value="Bytes">Bytes</option>
+            <option value="Json">JSON</option>
+            <option value="Number">Number</option>
+            <option value="String">String</option>
+            <option value="Void">Void</option>
+          </select>
+        </div>
+        <!-- Content -->
+        <textarea 
+          bind:value={requestBodyText}
+          class="resize-none h-44"
+          placeholder="Result Body"
+        />
+      </div>
+      <!-- Result Body Codec -->
+      <div class="flex justify-between p-3 border border-black/10">
+        <div class="font-semibold opacity-50 font-sm">Result Body Codec</div>
+          <select bind:value={resultBodyCodec} class="px-1 border border-black rounded-full dark:border white font-sm">
+            <option value="BigInt">BigInt</option>
+            <option value="Boolean">Boolean</option>
+            <option value="Bytes">Bytes</option>
+            <option value="Json">JSON</option>
+            <option value="Number">Number</option>
+            <option value="String">String</option>
+            <option value="Void">Void</option>
+          </select>
+      </div>
+      <!-- Actions -->
+      <div class="flex space-x-4">
+        <button class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white" on:click={sendRequest}>
+          Send Request
+        </button>
+      </div>
+    </div>
+  
+    <!-- Result -->
+    <div class="flex flex-col px-4 py-8 space-y-4 border border-black rounded dark:border-white">
+      {#if decodedResultStatus && decodedResultBody}
+        <!-- Status -->
+        <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10">
+          <div class="font-semibold opacity-50 font-sm">Result Status</div>
+          <pre class="flex-1 h-44">{decodedResultStatus}</pre>
+        </div>
+        <!-- Body -->
+        <div class="flex flex-col items-stretch flex-1 p-3 space-y-4 border border-black/10">
+          <div class="font-semibold opacity-50 font-sm">Result Body</div>
+          <pre class="flex-1 h-44">{decodedResultBody}</pre>
+        </div>
+      {:else}
+        <div class="flex flex-col items-center justify-center flex-1 p-3 space-y-4 border border-black/10">
+          <div class="font-semibold opacity-50 font-sm">Click "Send Request"</div>
+        </div>
+      {/if}
+    </div>
+
+  </main>
+</div>
