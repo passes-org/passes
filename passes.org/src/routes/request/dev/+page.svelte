@@ -2,20 +2,23 @@
   import { openWindowWithPost } from "../../../../../packages/polyfill/src/utils";
   import { Codecs, RequestType } from "../../../../../packages/reqs";
   import type { RequestResult } from "../../../../../packages/types";
+  import { bodyTextToBodyType } from "../SpringBoard/bodyTextToBodyType";
+    import { resultBodyToDisplayString } from "../SpringBoard/bodyToDisplayString";
 
   let requestTag = 'org.passes.example.my-request';
-  let requestBodyCodec: keyof typeof Codecs = 'Json';
-  let resultBodyCodec: keyof typeof Codecs = 'Json';
+  let requestBodyCodec: keyof typeof Codecs = 'String';
+  let resultBodyCodec: keyof typeof Codecs = 'String';
   let requestBodyText = '';
-  let decodedResultStatus: string;
-  let decodedResultBody: string;
+  let resultStatus: string;
+  let resultBodyText: string | null;
 
   async function sendRequest() {
-    const req = new RequestType(requestTag, Codecs[requestBodyCodec], Codecs[resultBodyCodec]);
-    const raw =  await req.encodeRequest(requestBodyText);
+    const reqType = new RequestType(requestTag, Codecs[requestBodyCodec], Codecs[resultBodyCodec]);
+    const richRequestBody = await bodyTextToBodyType(requestBodyText, Codecs[requestBodyCodec])
+    const rawRequestBody = await reqType.encodeRequest(richRequestBody);
 
     const formData = new FormData();
-    formData.set('request', new Blob([raw]));
+    formData.set('request', new Blob([rawRequestBody]));
     const passEngineWindow = openWindowWithPost(`../request`, formData);
 
     /**
@@ -31,11 +34,11 @@
       // Ignore messages that aren't request results
       if (message.type !== 'request-result') return;
 
-      const decodedResult = await req.decodeResult(message.result);
-      decodedResultStatus = decodedResult.status;
-      decodedResultBody = decodedResult.status === 'accepted'
-        ? JSON.stringify(decodedResult.body, null, 2)
-        : '(result not accepted)';
+      const decodedResult = await reqType.decodeResult(message.result);
+      resultStatus = decodedResult.status;
+      resultBodyText = decodedResult.status === 'accepted'
+        ? await resultBodyToDisplayString(message.result, Codecs[resultBodyCodec])
+        : null;
       // Close the window
       passEngineWindow.close();
     }
@@ -80,7 +83,7 @@
         <!-- Content -->
         <textarea 
           bind:value={requestBodyText}
-          class="resize-none h-44"
+          class="rounded-sm outline-none resize-none h-44 focus:ring-2 ring-white/30"
           placeholder="Result Body"
         />
       </div>
@@ -107,17 +110,19 @@
   
     <!-- Result -->
     <div class="flex flex-col px-4 py-8 space-y-4 border border-black rounded dark:border-white">
-      {#if decodedResultStatus && decodedResultBody}
+      {#if resultStatus}
         <!-- Status -->
         <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10 dark:border-white/10">
           <div class="font-semibold opacity-50 font-sm">Result Status</div>
-          <pre class="flex-1 h-44">{decodedResultStatus}</pre>
+          <pre class="flex-1 h-44">{resultStatus}</pre>
         </div>
         <!-- Body -->
-        <div class="flex flex-col items-stretch flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
-          <div class="font-semibold opacity-50 font-sm">Result Body</div>
-          <pre class="flex-1 h-44">{decodedResultBody}</pre>
-        </div>
+        {#if resultStatus === 'accepted'}
+          <div class="flex flex-col items-stretch flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
+            <div class="font-semibold opacity-50 font-sm">Result Body</div>
+            <pre class="flex-1 h-44">{resultBodyText}</pre>
+          </div>
+        {/if}
       {:else}
         <div class="flex flex-col items-center justify-center flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
           <div class="font-semibold opacity-50 font-sm">Click "Send Request"</div>

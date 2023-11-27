@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { base64url } from "jose";
     import type { ActionData } from "./$types";
+    import { ServerTransportCodec } from "./SpringBoard/ServerTransportCodec";
     import SpringBoard from "./SpringBoard/SpringBoard.svelte";
 
   export let form: ActionData;
@@ -11,9 +11,9 @@
     : undefined;
 </script>
 
-{#if form?.request.body}
+{#if form?.requestBase64Url}
   <SpringBoard
-    request={{ tag: form.request.tag, body: base64url.decode(form.request.body) }}
+    rawRequest={ServerTransportCodec.decode(form.requestBase64Url)}
     referrer={form.referrer ?? opener?.location.host ?? 'unknown referrer'}
   />
 {/if}

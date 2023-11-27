@@ -1,51 +1,32 @@
 <script lang="ts">
-  import { base64url } from "jose";
   import type { RequestResult, ResultStatus } from '../../../../../packages/reqs';
-  import { Codecs, RequestType } from '../../../../../packages/reqs';
+  import { Codecs, RequestType, parseRequestTag } from '../../../../../packages/reqs';
   import type * as PassesTypes from '../../../../../packages/types';
-  import { detectDecoders } from "./detectDecoders";
+  import { bodyTextToBodyType } from "./bodyTextToBodyType";
+  import { requestBodyToDisplayString } from "./bodyToDisplayString";
+  import { fetchFaviconUrl } from "./fetchFaviconUrl";
 
+  export let rawRequest: Uint8Array;
   export let referrer: string;
-  export let request: { tag: string; body: Uint8Array };
 
-  const requestBodyDecoders = detectDecoders(request.body);
-  let requestBodyCodec: keyof typeof Codecs = requestBodyDecoders[0];
-  let resultBodyCodec: keyof typeof Codecs = 'Json';
+  $: faviconUrlPromise = fetchFaviconUrl(referrer);
+
+  let requestBodyCodec: keyof typeof Codecs = 'String';
+  let resultBodyCodec: keyof typeof Codecs = 'String';
   let resultBodyText = '';
 
-  let decodedRequestBody: any;
-  $: {
-    // Try decoding the request body with each codec
-    decodedRequestBody = (() => {
-      switch (requestBodyCodec) {
-        case 'BigInt': return BigInt(`0x${base64url.encode(request.body)}`);
-        case 'Boolean': return request.body[0] === 1;
-        case 'Bytes': return base64url.encode(request.body);
-        case 'Json': return JSON.stringify(JSON.parse(base64url.encode(request.body)), null, 2);
-        case 'Number': return Number(`0x${base64url.encode(request.body)}`);
-        case 'String': return new TextDecoder().decode(request.body);
-        case 'Void': return undefined;
-      }
-    })();
-  }
+  let requestTag: string;
+  $: requestTag = parseRequestTag(rawRequest);
+  let requestBodyStringPromise: Promise<string>;
+  $: requestBodyStringPromise = requestBodyToDisplayString(rawRequest, Codecs[requestBodyCodec]);
 
   let requestType: RequestType<any, any>;
-  $: requestType = new RequestType(request.tag ?? 'unknown-request', Codecs[requestBodyCodec], Codecs[resultBodyCodec]);
+  $: requestType = new RequestType(requestTag, Codecs[requestBodyCodec], Codecs[resultBodyCodec]);
 
   async function onResult(status: ResultStatus) {
     const opener = window.opener ?? window.parent;
     const bodyText = resultBodyText;
-    const body = status === 'accepted' && (() => {
-      switch (resultBodyCodec) {
-        case 'BigInt': return BigInt(bodyText);
-        case 'Boolean': return bodyText === 'true';
-        case 'Bytes': return base64url.decode(bodyText); // TODO: Use hex instead
-        case 'Json': return JSON.parse(bodyText);
-        case 'Number': return Number(resultBodyText)
-        case 'String': return resultBodyText;
-        case 'Void': return undefined;
-      }
-    })();
+    const body = status === 'accepted' && await bodyTextToBodyType(bodyText, Codecs[resultBodyCodec]);
     const result = ((): RequestResult<any> => {
       switch (status) {
         case 'accepted': return { status, body };
@@ -67,7 +48,11 @@
   <div class="flex flex-col items-center self-center space-y-2">
     <!-- Favicon -->
     <div class="p-[3px] border border-black rounded-xl w-14 h-14 dark:border-white">
-      <div class="w-full bg-black rounded-lg aspect-square dark:bg-white"></div>
+      <div class="w-full bg-black rounded-lg aspect-square dark:bg-white">
+        {#await faviconUrlPromise then faviconUrl}
+          <img src={faviconUrl} class="w-full h-full rounded-lg" alt={referrer} />
+        {/await}
+      </div>
     </div>
     <!-- Title -->
     <div class="leading-tight text-center">
@@ -83,7 +68,7 @@
       <!-- Tag -->
       <div class="p-3 space-y-4 border border-black/10 dark:border-white/10">
         <div class="font-semibold opacity-50 font-sm">Request Tag</div>
-        <div>{request.tag}</div>
+        <div>{requestTag}</div>
       </div>
       <!-- Body -->
       <div class="flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">
@@ -91,17 +76,25 @@
         <div class="flex justify-between">
           <div class="font-semibold opacity-50 font-sm">Request Body</div>
           <select bind:value={requestBodyCodec} class="px-1 border border-black rounded-full dark:border-white font-sm">
-            <option disabled={!requestBodyDecoders.includes('BigInt')} value="BigInt">BigInt</option>
-            <option disabled={!requestBodyDecoders.includes('Boolean')} value="Boolean">Boolean</option>
-            <option disabled={!requestBodyDecoders.includes('Bytes')} value="Bytes">Bytes</option>
-            <option disabled={!requestBodyDecoders.includes('Json')} value="Json">JSON</option>
-            <option disabled={!requestBodyDecoders.includes('Number')} value="Number">Number</option>
-            <option disabled={!requestBodyDecoders.includes('String')} value="String">String</option>
-            <option disabled={!requestBodyDecoders.includes('Void')} value="Void">Void</option>
+            <option value="BigInt">BigInt</option>
+            <option value="Boolean">Boolean</option>
+            <option value="Bytes">Bytes</option>
+            <option value="Json">JSON</option>
+            <option value="Number">Number</option>
+            <option value="String">String</option>
+            <option value="Void">Void</option>
           </select>
         </div>
         <!-- Body -->
-        <pre class="flex-1 h-44">{decodedRequestBody}</pre>
+        <div class="flex-1 h-44">
+          {#await requestBodyStringPromise}
+            <span>(Decoding request body...)</span>
+          {:then requestBodyString} 
+            <pre>{requestBodyString}</pre>
+          {:catch error}
+            <span>(Error decoding request body: {error.message})</span>
+          {/await}
+        </div>
       </div>
     </div>
   
@@ -124,7 +117,7 @@
         <!-- Body -->
         <textarea 
           bind:value={resultBodyText}
-          class="flex-1 resize-none"
+          class="rounded-sm outline-none resize-none h-44 focus:ring-2 ring-white/30"
           placeholder="Result Body"
         />
       </div>
