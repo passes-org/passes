@@ -25,7 +25,7 @@ The body of the result.
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:5](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/envelope-v0.jsdoc.mjs#L5)
+[envelope-v0.jsdoc.mjs:5](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/envelope-v0.jsdoc.mjs#L5)
 
 ___
 
@@ -37,4 +37,4 @@ The status of the result when accepted.
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:4](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/envelope-v0.jsdoc.mjs#L4)
+[envelope-v0.jsdoc.mjs:4](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/envelope-v0.jsdoc.mjs#L4)

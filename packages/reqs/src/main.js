@@ -1,8 +1,8 @@
 export * as Codecs from './codecs/index.js';
 export * from './pass-providers/index.js';
-
-export { EnvelopeV0 } from './envelope-v0.js';
 export * from './envelope-v0.jsdoc.mjs';
+
+export { parseRequestTag } from './parse-request-tag.js';
 
 export { RequestRouter } from './request-router.js';
 export * from './request-router.jsdoc.mjs';

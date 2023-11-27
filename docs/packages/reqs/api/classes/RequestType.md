@@ -70,7 +70,7 @@ Builds an Envelope-v0x00 request type interface.
 
 #### Defined in
 
-[request-type.js:26](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L26)
+[request-type.js:26](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L26)
 
 ## Properties
 
@@ -80,7 +80,7 @@ Builds an Envelope-v0x00 request type interface.
 
 #### Defined in
 
-[request-type.js:30](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L30)
+[request-type.js:30](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L30)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[request-type.js:28](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L28)
+[request-type.js:28](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L28)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[request-type.js:27](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L27)
+[request-type.js:27](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L27)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[request-type.js:29](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L29)
+[request-type.js:29](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L29)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[request-type.js:105](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L105)
+[request-type.js:105](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L105)
 
 ## Methods
 
@@ -149,7 +149,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-type.js:52](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L52)
+[request-type.js:52](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L52)
 
 ___
 
@@ -171,7 +171,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-type.js:79](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L79)
+[request-type.js:79](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L79)
 
 ___
 
@@ -193,7 +193,7 @@ Encodes a structured request body into an envelope-v0x00 request.
 
 #### Defined in
 
-[request-type.js:39](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L39)
+[request-type.js:39](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L39)
 
 ___
 
@@ -215,7 +215,7 @@ Encodes a structured result body into an envelope-v0x00 result.
 
 #### Defined in
 
-[request-type.js:64](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L64)
+[request-type.js:64](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L64)
 
 ___
 
@@ -235,7 +235,7 @@ A helper for resolving the PassesABI. If the instance has no abi property, it re
 
 #### Defined in
 
-[request-type.js:143](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L143)
+[request-type.js:143](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L143)
 
 ___
 
@@ -257,4 +257,4 @@ Sends a request.
 
 #### Defined in
 
-[request-type.js:98](https://github.com/passes-org/passes/blob/76ab3ca/packages/reqs/src/request-type.js#L98)
+[request-type.js:98](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L98)
