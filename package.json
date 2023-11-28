@@ -13,7 +13,7 @@
     "lerna": "^7.4.1",
     "typedoc": "^0.25.3",
     "typedoc-plugin-markdown": "^3.17.1",
-    "vitepress": "^1.0.0-rc.22"
+    "vitepress": "^1.0.0-rc.31"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
