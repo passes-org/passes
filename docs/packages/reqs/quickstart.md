@@ -125,6 +125,19 @@ const yesOrNoQuestion = new SignedRequestType({
 
 For building a [Pass Provider](/#what-is-a-pass-provider), `reqs` exports a `PassProviders` namespace with relevent APIs, and some of the common APIs will be useful as well.
 
+#### parseRequestTag
+
+To get the tag of a Pass Request before you know its `RequestType`, you can use `parseRequestTag` on the raw request bytes.
+
+```typescript
+import { parseRequestTag } from '@passes/reqs';
+
+const requestTag = parseRequestTag(
+  // Replace this with a raw request
+  new Uint8Array([/* ... */]),
+);
+```
+
 #### PassProviders.setPassProvider
 
 When your user signs up or re-authenticates with your Pass Provider, you can send a `setPassProvider` Pass Request to ask them if they want to direct future Pass Requests to your Pass Provider.
@@ -139,15 +152,59 @@ if (status === 'accepted') {
 }
 ```
 
-#### parseRequestTag
+#### PassProviders.sendResult
 
-To get the tag of a Pass Request before you know its `RequestType`, you can use `parseRequestTag` on the raw request bytes.
+Once your user has accepted or rejected a pass request, you can send the result back to the requesting app via `PassProviders.sendResult`.
 
 ```typescript
-import { parseRequestTag } from '@passes/reqs';
+import { PassProviders } from '@passes/reqs';
 
-const requestTag = parseRequestTag(
-  // Replace this with a raw request
-  new Uint8Array([/* ... */]),
-);
+// Note: `handleRequest` is a placeholder for your handling logic for the given request type
+const result = await handleRequest(request);
+
+await PassProviders.sendResult(requestType, result);
+```
+
+### Putting It All Together
+
+Here's an example of how to use the above APIs together to implement support for a set of Pass Request types in a basic Web Pass Provider.
+
+```typescript
+import { PassProviders } from '@passes/reqs';
+import * as SupportedRequestTypes from './supported-request-types'; // A map of the request types supported by your Pass Provider
+
+// Called when your user signs in to set your app as their Pass Provider
+async function onUserAuthn(userToken) {
+  await PassProviders.setPassProvider(
+    // The URI of your pass provider
+    'https://your-pass-provider.com',
+    // A token you can use later to identify the user when presenting a Pass Request UI to them - for example, a JWT
+    userToken,
+  );
+}
+
+// Presents a UI for the user to review and handle the incoming Pass Request, and sends the result to the requesting app
+async function handlePassRequest(request: Uint8Array) {
+  const requestTag = parseRequestTag(request);
+
+  switch (requestTag) {
+    case SupportedRequestTypes.GetUserEmail.RequestTag: {
+      const requestType = SupportedRequestTypes.Example1.RequestType;
+      try {
+        const requestBody = await requestType.decodeRequest(request);
+        const result = await presentRequestReviewUIAndGetResult(requestType, requestBody);
+        await PassProviders.sendResult(result);
+      } catch (error) {
+        await PassProviders.sendResult({ type: 'exception', message: error.message });
+      }
+      break;
+    }
+
+    // ... (other supported request types)
+
+    default:
+      // Communicate to your user that the incoming request tag is not supported by your Pass Provider
+      await PassProviders.sendResult({ type: 'unsupported' });
+  }
+}
 ```
