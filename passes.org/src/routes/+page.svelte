@@ -4,7 +4,7 @@
   <meta name="keywords" content="Passes, Identity, Web, Privacy, Security, Authentication" />
   <meta name="author" content="Passes" />
   <meta name="robots" content="index, follow" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/png" href="/favicon.svg" />
 </svelte:head>
 
 <div class="container p-10 md:p-16 font-text dark:text-white">

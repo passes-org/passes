@@ -7,12 +7,15 @@ export default defineConfig({
   title: "Passes",
   description: "The web API for portable identity",
   head: [
-    ['link', { rel: 'icon', href: '/favicon.png' }],
+    ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['script', { type: 'module', src: POLYFILL_MODULE_URL }],
   ],
 
   themeConfig: {
-    logo: '/logo.svg',
+    logo: {
+      dark: '/logo_dark.svg',
+      light: '/logo_light.svg',
+    },
 
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -52,9 +55,8 @@ export default defineConfig({
       {
         text: 'Examples',
         items: [
-          { text: 'Signing In', link: '/examples/signing-in' },
+          { text: 'Recognizing Users', link: '/examples/recognizing-users' },
           { text: 'Signed Results', link: '/examples/signed-results' },
-          { text: 'Permissions', link: '/examples/permissions' },
           { text: 'Ethereum JSON-RPC', link: '/examples/ethereum' },
           // { text: 'Bitcoin JSON-RPC', link: '/examples/bitcoin' },
         ]

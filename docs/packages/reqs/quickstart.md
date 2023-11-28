@@ -88,7 +88,7 @@ It's generally recommended to use signed pass requests, since they use asymmetri
 To make a `RequestType` signed, we simply create a `SignedRequestType` to wrap it, and provide a `signResult` or `verifyResult` implementation...
 
 ```typescript
-import { Codecs, RequestType, SignedRequestType, SignedBodyWrapper } from '@passes/reqs';
+import { Codecs, RequestType, SignedRequestType, SignedBodyWrapper, SignedBodyWrapperHeader } from '@passes/reqs';
 
 // For this demo implementation, we'll use the SubtleCrypto API
 const keypair = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verify']);
@@ -100,7 +100,7 @@ const yesOrNoQuestion = new SignedRequestType({
     requestBodyCodec: Codecs.String,
     resultBodyCodec: Codecs.Boolean,
   }),
-  signResult: async (body: boolean): Promise<SignedBodyWrapper<boolean>> => ({
+  signResult: async (body: boolean): Promise<SignedBodyWrapperHeader> => ({
     publicKey: await crypto.subtle.exportKey(
       keyFormat,
       keyPair.value.publicKey

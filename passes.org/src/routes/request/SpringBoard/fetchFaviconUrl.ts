@@ -1,6 +1,6 @@
 export async function fetchFaviconUrl(urlString: string): Promise<string | null> {
   // List of common favicon file names
-  const faviconFiles = ['favicon.ico', 'favicon.png', 'icon.png', 'favicon.svg', 'icon.svg'];
+  const faviconFiles = ['favicon.ico', 'favicon.svg', 'icon.png', 'favicon.svg', 'icon.svg'];
   
   // Parse the URL to get the hostname
   const url = new URL(urlString);
