@@ -20,11 +20,11 @@ A Pass Request can represent anything, and can be defined by anyone. They are id
 ```typescript
 import { RequestType } from '@passes/reqs';
 
-const getEmail = new RequestType(
-  'com.example.get-email', // This request type is a get-email request
-  Codecs.Void, // The request body type is empty
-  Codecs.String // The result body type is a string of the user's email
-);
+const getEmail = new RequestType({
+  requestTag: 'com.example.get-email', // This request type is a get-email request
+  requestBodyCodec: Codecs.Void, // The request body type is empty
+  resultBodyCodec: Codecs.String // The result body type is a string of the user's email
+});
 ```
 
 To send a Pass Request, apps will use the high-level API of the [`RequestType`](/packages/reqs/api/classes/RequestType).
@@ -32,11 +32,11 @@ To send a Pass Request, apps will use the high-level API of the [`RequestType`](
 ```typescript
 import { RequestType } from '@passes/reqs';
 
-const getEmail = new RequestType(
-  'com.example.get-email', // This request type is a get-email request
-  Codecs.Void, // The request body type is empty
-  Codecs.String // The result body type is a string of the user's email
-);
+const getEmail = new RequestType({
+  requestTag: 'com.example.get-email', // This request type is a get-email request
+  requestBodyCodec: Codecs.Void, // The request body type is empty
+  resultBodyCodec: Codecs.String // The result body type is a string of the user's email
+});
 
 const getEmailResult = await getEmail.sendRequest();// [!code focus]
                                                     // [!code focus]

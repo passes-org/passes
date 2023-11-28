@@ -21,11 +21,11 @@ import { Codecs, RequestType, SignedBodyWrapper, SignedRequestType } from '../..
 
 const requestTag = 'org.passes.example.signed-get-pubkey';
 const requestType = new SignedRequestType<void, string>({
-  requestType: new RequestType(
+  requestType: new RequestType({
     requestTag,
-    Codecs.Void,
-    Codecs.Void,
-  ),
+    requestBodyCodec: Codecs.Void,
+    resultBodyCodec: Codecs.Void,
+  }),
   signResult,
   verifyResult
 });
@@ -97,11 +97,11 @@ async function verifyResult(signed: SignedBodyWrapper): Promise<boolean> {
 import { Codecs, RequestType, SignedRequestType } from '@passes/reqs'
 
 const signedGetPubkey = new SignedRequestType<void, string>({
-  requestType: new RequestType(
-    'org.passes.example.signed-get-pubkey',
-    Codecs.Void,
-    Codecs.Void,
-  ),
+  requestType: new RequestType({
+    requestTag: 'org.passes.example.signed-get-pubkey',
+    requestBodyCodec: Codecs.Void,
+    resultBodyCodec: Codecs.Void,
+  }),
   signResult,
   verifyResult
 });

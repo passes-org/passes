@@ -6,11 +6,11 @@ import Playground from './examples/.playground/Playground.vue';
 
 const requestTag = 'com.example.get-email';
 const requestType = new SignedRequestType<void, string>({
-  requestType: new RequestType(
+  requestType: new RequestType({
     requestTag,
-    Codecs.Void,
-    Codecs.String,
-  ),
+    requestBodyCodec: Codecs.Void,
+    resultBodyCodec: Codecs.String,
+  }),
   signResult,
   verifyResult
 });
