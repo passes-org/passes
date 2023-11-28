@@ -6,8 +6,6 @@ We invite you to read the documentation and [source code](https://github.com/pas
 These docs are under active development, and we'll be continuously publishing updates. We welcome your feedback – please [reach out](https://github.com/passes-org/passes/discussions).
 :::
 
-Passes is built upon the following layers:
-
 ## The Request ABI Protocol
 
 ```typescript
@@ -19,7 +17,7 @@ interface PassesABI {
 PassesABI is the protocol used to send raw Pass Requests to the user. On the web (via the Polyfill) it's available at `document.passes`.
 
     
-## Envelope V0 Transport Format
+## Envelope Transport Format
     
 ```typescript
 // Request message structure
@@ -38,6 +36,8 @@ type ResultEnvelopeV0 =
 ```
 
 This is the standard format for Pass Requests and their results. A "Tag" is a string that uniquely identifies a request type, conventionally using reverse-domain notation, or a URI to the request type's specification.
+
+This format includes a 1-byte version specifier to provide future-compatibility for changes to the transport encoding.
     
 ## Request Type Specs
 
@@ -60,7 +60,7 @@ An implementation of the [request ABI](#the-request-abi-protocol) is needed to p
 
 Some examples of how Pass Requests flow to Pass Providers given different ABI implementations include:
 
-#### @passes/polyfill ABI Implementation
+#### `@passes/polyfill` ABI Implementation
 <img src="/diagram_02_light.gif" alt="Diagram of Polyfill support for Pass Requests" class="light-mode-only" />
 <img src="/diagram_02_dark.gif" alt="Diagram of Polyfill support for Pass Requests" class="dark-mode-only" />
 
@@ -83,10 +83,12 @@ A Pass Provider can be a web or native mobile app, or a Pass Provider could be b
 To implement a Pass Provider on the web that works with the `@passes/polyfill` script and the upcoming Passes web extension, what you need is:
 
 #### HTTPS Server
-A HTTPS server at an arbitrary URI that accepts `POST` requests with `FormData` containing a `'request'` field which is a `Blob` of the Pass Request’s raw bytes.
+A HTTPS server at an arbitrary URI that accepts `POST` requests with [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) containing a `'request'` field which is a [`Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob) of the Pass Request’s raw bytes.
 
 #### Request Handling Page
-The response to the `POST` request should be a page including a rich representation of the request, implemented according to its [Request Type Spec](#request-type-specs). When the user approves or rejects, the page should [`postMessage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) to `window.opener ?? window.parent` with the message type:
+The response to the `POST` request should be a page including a rich representation of the request, implemented according to its [Request Type Spec](#request-type-specs).
+
+When the user approves or rejects, the page should [`postMessage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) to `window.opener ?? window.parent` with the message type:
 
 ```typescript
 export type RequestResult = {

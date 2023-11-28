@@ -53,8 +53,8 @@ export default defineConfig({
         text: 'Examples',
         items: [
           { text: 'Signing In', link: '/examples/signing-in' },
-          { text: 'Permissions', link: '/examples/permissions' },
           { text: 'Signed Results', link: '/examples/signed-results' },
+          { text: 'Permissions', link: '/examples/permissions' },
           { text: 'Ethereum JSON-RPC', link: '/examples/ethereum' },
           // { text: 'Bitcoin JSON-RPC', link: '/examples/bitcoin' },
         ]
