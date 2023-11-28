@@ -47,10 +47,6 @@ export default defineConfig({
             text: 'Polyfill',
             link: '/packages/polyfill/quickstart',
           },
-          {
-            text: 'Types',
-            link: '/packages/types/installation',
-          },
         ],
       },
       {
