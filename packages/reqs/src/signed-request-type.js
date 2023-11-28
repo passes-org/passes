@@ -32,7 +32,7 @@ export class SignedRequestType extends RequestType {
    * @param {SignedRequestTypeParams<TRequestBody, TResultBody>} params
   */
   constructor({ requestType, signResult, verifyResult }) {
-    super(requestType.requestTag, requestType.requestBodyCodec, requestType.resultBodyCodec);
+    super(requestType);
     this.signResult = signResult;
     this.verifyResult = verifyResult;
   }

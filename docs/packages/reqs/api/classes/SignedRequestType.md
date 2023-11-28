@@ -73,7 +73,7 @@ Wraps a RequestType to implement result signing and verification.
 
 #### Defined in
 
-[signed-request-type.js:34](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/signed-request-type.js#L34)
+[signed-request-type.js:34](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/signed-request-type.js#L34)
 
 ## Properties
 
@@ -87,7 +87,7 @@ Wraps a RequestType to implement result signing and verification.
 
 #### Defined in
 
-[request-type.js:30](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L30)
+[request-type.js:37](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/request-type.js#L37)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[request-type.js:28](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L28)
+[request-type.js:35](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/request-type.js#L35)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[request-type.js:27](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L27)
+[request-type.js:34](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/request-type.js#L34)
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 #### Defined in
 
-[request-type.js:29](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L29)
+[request-type.js:36](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/request-type.js#L36)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 #### Defined in
 
-[signed-request-type.js:36](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/signed-request-type.js#L36)
+[signed-request-type.js:36](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/signed-request-type.js#L36)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-[signed-request-type.js:37](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/signed-request-type.js#L37)
+[signed-request-type.js:37](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/signed-request-type.js#L37)
 
 ___
 
@@ -201,7 +201,7 @@ ___
 
 #### Defined in
 
-[signed-request-type.js:101](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/signed-request-type.js#L101)
+[signed-request-type.js:101](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/signed-request-type.js#L101)
 
 ## Methods
 
@@ -227,7 +227,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-type.js:52](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L52)
+[request-type.js:59](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/request-type.js#L59)
 
 ___
 
@@ -261,7 +261,7 @@ Returns the signed result's body if the result signature is valid. Throws if the
 
 #### Defined in
 
-[signed-request-type.js:73](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/signed-request-type.js#L73)
+[signed-request-type.js:73](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/signed-request-type.js#L73)
 
 ___
 
@@ -287,7 +287,7 @@ Encodes a structured request body into an envelope-v0x00 request.
 
 #### Defined in
 
-[request-type.js:39](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L39)
+[request-type.js:46](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/request-type.js#L46)
 
 ___
 
@@ -317,7 +317,7 @@ Encodes a structured result body into a signed result.
 
 #### Defined in
 
-[signed-request-type.js:47](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/signed-request-type.js#L47)
+[signed-request-type.js:47](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/signed-request-type.js#L47)
 
 ___
 
@@ -341,7 +341,7 @@ A helper for resolving the PassesABI. If the instance has no abi property, it re
 
 #### Defined in
 
-[request-type.js:143](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-type.js#L143)
+[request-type.js:150](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/request-type.js#L150)
 
 ___
 
@@ -367,4 +367,4 @@ Sends a request.
 
 #### Defined in
 
-[signed-request-type.js:94](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/signed-request-type.js#L94)
+[signed-request-type.js:94](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/signed-request-type.js#L94)

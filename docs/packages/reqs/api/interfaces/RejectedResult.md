@@ -18,4 +18,4 @@ The status of the result when rejected.
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:10](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/envelope-v0.jsdoc.mjs#L10)
+[envelope-v0.jsdoc.mjs:10](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/envelope-v0.jsdoc.mjs#L10)

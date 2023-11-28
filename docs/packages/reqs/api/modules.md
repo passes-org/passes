@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/envelope-v0.jsdoc.mjs#L26)
+[envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/envelope-v0.jsdoc.mjs#L26)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/envelope-v0.jsdoc.mjs#L30)
+[envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/envelope-v0.jsdoc.mjs#L30)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[signed-request-type.jsdoc.mjs:11](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/signed-request-type.jsdoc.mjs#L11)
+[signed-request-type.jsdoc.mjs:11](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/signed-request-type.jsdoc.mjs#L11)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[request-router.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/request-router.jsdoc.mjs#L3)
+[request-router.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/request-router.jsdoc.mjs#L3)
 
 ## Variables
 
@@ -115,7 +115,7 @@ PassProviders API namespace
 
 #### Defined in
 
-[pass-providers/index.js:4](https://github.com/passes-org/passes/blob/40b5de2/packages/reqs/src/pass-providers/index.js#L4)
+[pass-providers/index.js:4](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/pass-providers/index.js#L4)
 
 ## Functions
 
@@ -135,4 +135,4 @@ PassProviders API namespace
 
 #### Defined in
 
-parse-request-tag.js:4
+[parse-request-tag.js:4](https://github.com/passes-org/passes/blob/5949e02/packages/reqs/src/parse-request-tag.js#L4)

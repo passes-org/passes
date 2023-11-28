@@ -6,6 +6,16 @@ import { EnvelopeV0 } from './envelope-v0';
 /** @template T @typedef {import('./request-type.jsdoc.mjs').Codec<T>} Codec */
 
 /**
+ * @template TRequestBody
+ * @template TResultBody
+ * @typedef RequestTypeParams
+ * @property {string} requestTag
+ * @property {Codec<TRequestBody>} requestBodyCodec
+ * @property {Codec<TResultBody>} resultBodyCodec
+ * @property {import("@passes/types").PassesABI} [abi]
+ */
+
+/**
  * Builds an Envelope-v0x00 request type interface.
  * 
  * @template TRequestBody
@@ -18,12 +28,9 @@ import { EnvelopeV0 } from './envelope-v0';
  */
 export class RequestType {
   /**
-   * @param {string} requestTag
-   * @param {Codec<TRequestBody>} requestBodyCodec
-   * @param {Codec<TResultBody>} resultBodyCodec
-   * @param {import("@passes/types").PassesABI} [abi]
+   * @param {RequestTypeParams<TRequestBody, TResultBody>} params
   */
-  constructor(requestTag, requestBodyCodec, resultBodyCodec, abi) {
+  constructor({ requestTag, requestBodyCodec, resultBodyCodec, abi }) {
     this.requestTag = requestTag;
     this.requestBodyCodec = requestBodyCodec;
     this.resultBodyCodec = resultBodyCodec;

@@ -24,11 +24,11 @@ bun add @passes/reqs
 
 To create a pass request type, you need 3 things:
 
-1. A "request tag" string to identify your pass request. This is what Pass Providers will use to interpret your pass request, so it should _uniquely_ identify your pass request type. A good way to make your request tag unique is to make it the URI of the pass request type's specification on your website. Another good option is a Passes Protocol RFC number (when we launch the RFCs tracker).
+1. **A Request Tag**. A string to identify your pass request. This is what Pass Providers will use to interpret your pass request, so it should _uniquely_ identify your pass request type. A good way to make your request tag unique is to make it the URI of the pass request type's specification on your website. Another good option is a Passes Protocol RFC number (when we launch the RFCs tracker).
 
-2. A request body codec. This translates the rich representation of the request body data your pass request type uses to binary and back.
+2. **A Request Body Codec**. This translates the rich representation of the request body data your pass request type uses to binary and back.
 
-3. A result body codec. This is just like the _request_ body codec, but for your pass request's result body data.
+3. **A Result Body Codec**. This is just like the _request_ body codec, but for your pass request's result body data.
 
 
 ### Codecs
@@ -61,11 +61,11 @@ Let's make a request type that allows us to ask the user a yes-or-no question, a
 ```typescript
 import { Codecs, RequestType } from '@passes/reqs';
 
-const yesOrNoQuestion = new RequestType(
-  'org.passes.example.yes-or-no-question',
-  Codecs.String,
-  Codecs.Boolean,
-);
+const yesOrNoQuestion = new RequestType({
+  requestTag: 'org.passes.example.yes-or-no-question',
+  requestBodyCodec: Codecs.String,
+  resultBodyCodec: Codecs.Boolean,
+});
 ```
 
 Now, we can send our request like so:
@@ -81,6 +81,36 @@ It's generally recommended to use signed pass requests, since they use asymmetri
 
 To make a `RequestType` signed, we simply create a `SignedRequestType` to wrap it, and provide a `signResult` or `verifyResult` implementation...
 
-:::warning Incomplete Section
-This section is in progress.
-:::
+```typescript
+import { Codecs, RequestType, SignedRequestType, SignedBodyWrapper } from '@passes/reqs';
+
+// For this demo implementation, we'll use the SubtleCrypto API
+const keypair = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verify']);
+
+const yesOrNoQuestion = new SignedRequestType({
+  // We're wrapping the same request type we defined above
+  requestType: new RequestType({
+    requestTag: 'org.passes.example.yes-or-no-question',
+    requestBodyCodec: Codecs.String,
+    resultBodyCodec: Codecs.Boolean,
+  }),
+  signResult: async (body: boolean): Promise<SignedBodyWrapper<boolean>> => ({
+    publicKey: await crypto.subtle.exportKey(
+      keyFormat,
+      keyPair.value.publicKey
+    ),
+    signature: new Uint8Array(await crypto.subtle.sign(
+      keyParams,
+      keyPair.value.privateKey,
+      Codecs.Boolean.encode(body)
+    )),
+  }),
+  verifyResult: async (signed: SignedBodyWrapper<Boolean>): Promise<boolean> =>
+    crypto.subtle.verify(
+      keyParams,
+      publicKey: await crypto.subtle.importKey(keyFormat, signed.header.publicKey, keyParams, true, ['verify']),
+      signed.header.signature,
+      Codecs.Boolean.encode(signed.body)
+    ),
+});
+```
