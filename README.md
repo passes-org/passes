@@ -1,57 +1,97 @@
-**Passes** is a free, open-source web API that enables apps to make arbitrary requests directly to the user on the client side, enabling the user to use a common identity across the various apps they visit.
+# What Is Passes?
 
-**Pass Requests** are sent from an app via a client-side API, which presents a UI with a rich interpretation of the request, allowing the user to review and approve or reject the request.
+**Passes** is a client-side API for making requests directly to users.
 
-[Visit the documentation](https://docs.passes.org) to learn more.
+<img src="/diagram_01_light.gif" alt="Diagram of a Pass Request" class="light-mode-only" />
+<img src="/diagram_01_dark.gif" alt="Diagram of a Pass Request" class="dark-mode-only" />
 
-## Why?
+Passes enables apps to send **Pass Requests**, which are presented to the user for review and handling via their **Pass Provider**.
 
-**The web platform lacks a notion of a portable user identity.**
+***This is an early preview release of Passes.***
+We invite you to read the documentation and [source code](https://github.com/passes-org/passes), experiment by adding [Pass Requests](#what-is-a-pass-request) in your apps, and contribute to [discussions](https://github.com/passes-org/passes/discussions) to help shape the future of Passes.
 
-Historically, user identity has been a separate bespoke implementation for *every app you use*. 
+These docs are under active development, and we'll be continuously publishing updates. We welcome your feedback – please [reach out](https://github.com/passes-org/passes/discussions).
 
-Newer web APIs like WebAuthn (including Passkeys) create user identifiers that are specific to the domain they were created on.
+## What Is a Pass Request?
 
-Virtually every end-user experience is affected by this, it greatly contributes the massive-hubs/tiny-spokes form the web of today has matured into, and it constrains the kinds of apps that can be built.
-
-It's plausible that entire categories of valuable apps are blocked by the web's lack of portable user identity.
-
-## Usage
-
-Most developers will interface with Passes using the `@passes/reqs` package, which provides friendly and typesafe APIs for making pass requests,
-building a pass engine, or creating your own types of pass requests.
-
-It's also possible to use the lower-level interface provided by the Passes protocol, the `document.passes.request` ABI.
-This is what `@passes/reqs` uses under the hood.
+A Pass Request can represent anything, and can be defined by anyone. They are identified by a unique tag, for example `org.passes.get-user-email`, and have specific request and result types called `Codecs`.
 
 ```typescript
-export interface PassesABI {
-	/** Request the user to complete a pass request */
-	request(
-		/** The raw pass request bytes */
-		raw: Uint8Array
-	): Promise<Uint8Array>;
-}
+import { RequestType } from '@passes/reqs';
 
-declare global {
-  interface Document {
-		/** document.passes will be defined if it's supported (i.e. if the extension is installed or passes.org JS script has run) */
-    passes?: PassesABI;
-  }
-}
+const getEmail = new RequestType({
+  requestTag: 'com.example.get-email', // This request type is a get-email request
+  requestBodyCodec: Codecs.Void, // The request body type is empty
+  resultBodyCodec: Codecs.String // The result body type is a string of the user's email
+});
 ```
 
----
+To send a Pass Request, apps will use the high-level API of the `RequestType`.
 
-## Contributing
+```typescript
+import { RequestType } from '@passes/reqs';
 
-Here's an overview of the structure of this repo:
+const getEmail = new RequestType({
+  requestTag: 'com.example.get-email', // This request type is a get-email request
+  requestBodyCodec: Codecs.Void, // The request body type is empty
+  resultBodyCodec: Codecs.String // The result body type is a string of the user's email
+});
 
-- `docs/` – The site at [docs.passes.org](https://docs.passes.org)
-- `extension/` – The Passes web extension
-- `packages/` – Packages published by the `@passes` org on npm
-  - `polyfill/` – A polyfill that provides the `document.passes` ABI
-  - `reqs/` – A friendly and typesafe API for making common pass requests, and creating your own request types
-  - `types/` – Type declarations related to the Passes Protocol APIs
-- `passes.org/` – The web application at [passes.org](https://passes.org), which consists of a splash screen, and routes used by the `@passes/polyfill` package
+const getEmailResult = await getEmail.sendRequest();// [!code focus]
+                                                    // [!code focus]
+if (getEmailResult.status === 'accepted') {         // [!code focus]
+  const userEmail = result.body;                    // [!code focus]
+}                                                   // [!code focus]
+```
 
+<script setup>import IndexExample from './IndexExample.vue';</script>
+<IndexExample />
+
+Some ideas to build with Pass Requests:
+- Sign in with the same account everywhere
+- Fast checkout and payments
+- Data and permissions requests between arbitrary apps
+- Features requiring client-side signatures, like blockchain transactions
+
+## What Is a Pass Provider?
+
+A Pass Provider is an app chosen by the user to handle their Pass Requests. Anyone can make a Pass Provider, and sites that make requests work regardless of the user's chosen Pass Provider.
+
+
+## Design Goals
+
+We believe that the web should recognize you, on your terms, without compromising on privacy, security, or simplicity.
+
+- **Privacy-Preserving, Portable Identity**. Users decide what identity data to share with apps. For example, they can allow each app to recognize them exactly how they prefer – by name, pseudonym, public key, or not at all.
+
+- **Explicit User Control**. Pass requests are reviewed, and approved or rejected by the user via their device.
+
+- **Interoperability**. Data requests and other integrations between apps is simplified. Rather than each app having its own bespoke API others have to integrate, with Passes apps that support common request types can automatically interact.
+
+- **ABI Stability**. The core ABI for making Pass Requests is designed in order to remain stable as usage of Pass Requests evolves during adoption.
+
+
+## Who Is This For?
+Any developer interested in improving the state of authentication, identity, and cross-app interoperability.
+
+The modern web is effectively organized around the HTTP APIs of a few massive hubs that have harmed its composable, fractal nature. If this has stifled the kind of apps you wish to build, Passes is for you.
+
+We are publishing this early release of the documentation to involve you and get your [feedback](https://github.com/passes-org/passes/discussions) early to shape the future of Passes.
+
+**Let's free the web.**
+
+
+## What Can I Do With Passes Today?
+- Read the documentation and [source code](https://github.com/passes-org/passes)
+- Download and use the `@passes/reqs` and `@passes/polyfill` packages to make Pass Requests
+- Build a Pass Provider
+- Engage in [discussions](https://github.com/passes-org/passes/discussions) on our repo
+
+
+## Compared To Other Technologies
+
+Passes is fundamentially different from technologies like [OAuth](https://oauth.net/2/), [Federated Credential Management](https://developer.mozilla.org/en-US/docs/Web/API/FedCM_API), and [WebAuthn/Passkeys](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API) because it enables apps to make requests directly to users. No other web API enables this.
+
+Contrasted to other technologies:
+- **WebAuthn:** Whereas WebAuthn credentials such as Passkeys are linked to a specific domain name, Passes enables users to share a common identity across many apps.
+- **OAuth:** Each OAuth integration is specific to a single identity provider, and when acting on users' behalf, each identity provider's API is bespoke. Apps integrate Passes directly on the client, so any Pass Provider is supported by any app. 
