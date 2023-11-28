@@ -52,7 +52,7 @@ const requestType = new RequestType<UserProfileRequest, UserProfileResult>({
   description="This demo requests to send a (fake) Ethereum transaction."
   acceptButtonTitle="Send 0.02 ETH to samy.eth"
   :requestType="requestType"
-  :requestBody="{ method: 'eth_sendTransaction', jsonrpc: '2.0', id: 1, params: [{ to: '0x7Ee54D537BDF322DcEe8c986Aa12E053D41De30A', value: '0x2386F26FC10000' }] }"
+  :requestBody="{ params: [{ to: '0x7Ee54D537BDF322DcEe8c986Aa12E053D41De30A', value: '0x2386F26FC10000' }], method: 'eth_sendTransaction', jsonrpc: '2.0', id: 1 }"
   :resultBody="{ result: '0xc1b6ecd25082be18956afae966f3c73d1159fc85f6fcdb254d7461814a589290', jsonrpc: '2.0', id: 1 }"
 >
   <template #pass-emulator-ui>
