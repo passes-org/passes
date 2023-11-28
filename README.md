@@ -10,7 +10,7 @@
 
 Passes enables apps to send **Pass Requests**, which are presented to the user for review and handling via their **Pass Provider**.
 
-***This is an early preview release of Passes.***
+***This is an early release of Passes.***
 We invite you to read the documentation and [source code](https://github.com/passes-org/passes), experiment by adding [Pass Requests](#what-is-a-pass-request) in your apps, and contribute to [discussions](https://github.com/passes-org/passes/discussions) to help shape the future of Passes.
 
 These docs are under active development, and we'll be continuously publishing updates. We welcome your feedback – please [reach out](https://github.com/passes-org/passes/discussions).
