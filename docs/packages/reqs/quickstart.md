@@ -1,6 +1,12 @@
-# `@passes/reqs` Quickstart
+# Reqs Quickstart
 
-`@passes/reqs` provides a high-level interface for using Pass Requests in your app. 
+Reqs (pronounced "rex" – /rɛks/) provides a high-level interface for using Pass Requests in your app. 
+
+:::info Reqs is under active development.
+The current release is an alpha, and breaking changes should be expected. Now is a great time to use it to experiment by adding Pass Requests to your app or building a Pass Provider.
+
+We will be reading your feedback and continuously shipping improvements, so please [share your feedback](https://github.com/passes-org/passes/discussions). 
+:::
 
 ## Installation
 
@@ -113,4 +119,35 @@ const yesOrNoQuestion = new SignedRequestType({
       Codecs.Boolean.encode(signed.body)
     ),
 });
+```
+
+## Building a Pass Provider
+
+For building a [Pass Provider](/#what-is-a-pass-provider), `reqs` exports a `PassProviders` namespace with relevent APIs, and some of the common APIs will be useful as well.
+
+#### PassProviders.setPassProvider
+
+When your user signs up or re-authenticates with your Pass Provider, you can send a `setPassProvider` Pass Request to ask them if they want to direct future Pass Requests to your Pass Provider.
+
+```typescript
+import { PassProviders } from '@passes/reqs';
+
+const { status } = await PassProviders.setPassProvider('https://my-pass-provider.com', 'optional-user-id');
+
+if (status === 'accepted') {
+  // Future Pass Requests to this user will be sent to your Pass Provider for handling
+}
+```
+
+#### parseRequestTag
+
+To get the tag of a Pass Request before you know its `RequestType`, you can use `parseRequestTag` on the raw request bytes.
+
+```typescript
+import { parseRequestTag } from '@passes/reqs';
+
+const requestTag = parseRequestTag(
+  // Replace this with a raw request
+  new Uint8Array([/* ... */]),
+);
 ```

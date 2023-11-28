@@ -1,13 +1,14 @@
 # Polyfill Quickstart
 
-Add the polyfill script to your page. This will make the `document.passes` ABI available to all users, even if their environment lacks native support for Passes.
+To make the `document.passes.request` ABI available to all users in any browser, you can add the `@passes/polyfill` script to your page via a module script tag.
 
 ```html
-<script type="module" src="https://unpkg.com/@passes/polyfill@0.0.1-alpha.16/src/main.js"></script>
+<script type="module" src="https://unpkg.com/@passes/polyfill@^0.0.1-alpha"></script>
 ```
 
-Provides a polyfill implementation of the document.passes.request ABI using a POST request to passes.org in a new window which forwards the end user to their pass engine to handle the request.
+## The Polyfill Flow
 
-::: warning Writing In Progress
-This section raises questions about how pass requests are sent to pass providers.
-:::
+<img src="/diagram_02_light.gif" alt="Diagram of a Pass Request" class="light-mode-only" />
+<img src="/diagram_02_dark.gif" alt="Diagram of a Pass Request" class="dark-mode-only" />
+
+The polyfill provides an implementation of the document.passes.request ABI using a POST request to passes.org in a new window which forwards the end user to their pass engine to handle the request.

@@ -18,13 +18,13 @@ import Playground from './.playground/Playground.vue'
 import { Codecs, RequestType } from '../../packages/reqs/src/main'
 
 const requestTag = 'org.passes.example.get-pubkey';
-const requestType = new RequestType<void, string>(
+const requestType = new RequestType<void, string>({
   requestTag,
   // Request body codec (void)
-  Codecs.Void,
+  requestBodyCodec: Codecs.Void,
   // Result body codec (utf8 string)
-  Codecs.String,
-);
+  resultBodyCodec: Codecs.String,
+});
 </script>
 
 <Playground
@@ -58,13 +58,13 @@ const requestType = new RequestType<void, string>(
 ```typescript
 import { Codecs, RequestType } from '@passes/reqs'
 
-const getPubkey = new RequestType<void, string>(
-  'org.passes.example.get-pubkey',
+const getPubkey = new RequestType<void, string>({
+  requestTag: 'org.passes.example.get-pubkey',
   // Request body codec (void)
-  Codecs.Void,
+  requestBodyCodec: Codecs.Void,
   // Result body codec (utf8 string)
-  Codecs.String,
-);
+  resultBodyCodec: Codecs.String,
+});
 ```
 
 ## Request Code

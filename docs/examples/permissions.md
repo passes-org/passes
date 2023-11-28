@@ -25,11 +25,11 @@ type PermissionsRequest = PermissionType[];
 type PermissionsResult = Record<PermissionType, string>;
 
 const requestTag = 'org.passes.example.request-user-data';
-const requestType = new RequestType<PermissionsRequest, PermissionsResult>(
+const requestType = new RequestType<PermissionsRequest, PermissionsResult>({
   requestTag,
-  Codecs.Json,
-  Codecs.Json,
-);
+  requestBodyCodec: Codecs.Json,
+  resultBodyCodec: Codecs.Json,
+});
 </script>
 
 <Playground
