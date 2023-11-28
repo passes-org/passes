@@ -16,3 +16,17 @@
   --vp-button-brand-text: var(--vp-c-black);
   --vp-button-brand-hover-text: var(--vp-c-black);
 }
+
+.dark-mode-only {
+  display: none; /* hidden in light mode */
+}
+.light-mode-only {
+  display: block; /* visible in light mode */
+}
+
+.dark .dark-mode-only {
+    display: block; /* visible in dark mode */
+}
+.dark .light-mode-only {
+    display: none; /* hidden in dark mode */
+}

@@ -1,11 +1,11 @@
-import { getPassEngine } from "$lib/server/PassEngineCookie";
+import { getUserPass } from "$lib/server/UserPassCookie";
 import { redirect, type RequestHandler } from "@sveltejs/kit";
 
 export const POST: RequestHandler = async (event) => {
-  const passEngine = getPassEngine(event);
-  if (passEngine) {
-    throw redirect(307, `${passEngine}`)
+  const userPass = getUserPass(event);
+  if (userPass) {
+    throw redirect(307, `${userPass}`)
   }
 
-  return new Response('Please sign into your pass engine');
+  return new Response('Please sign into your pass');
 };

@@ -41,7 +41,7 @@
     <!-- Hero Section -->
     <div class="flex flex-col items-start space-y-10 lg:w-4/5">
       <h1 class="text-5xl leading-tight font-display lg:text-8xl" style="text-wrap: balance">
-        Many apps. One identity. No passwords.
+        One identity. No passwords.
       </h1>
       <p class="text-2xl font-text">
         Passes give users a portable client-side identity any app can request to recognize them or act on their behalf, putting them in control of their data and privacy.

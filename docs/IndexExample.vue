@@ -4,11 +4,11 @@ import type { SignedBodyWrapper, SignedBodyWrapperHeader } from '../packages/req
 import { Codecs, RequestType, SignedRequestType } from '../packages/reqs/src/main';
 import Playground from './examples/.playground/Playground.vue';
 
-const requestTag = 'org.passes.example.get-email';
-const requestType = new SignedRequestType<string, string>({
+const requestTag = 'com.example.get-email';
+const requestType = new SignedRequestType<void, string>({
   requestType: new RequestType(
     requestTag,
-    Codecs.String,
+    Codecs.Void,
     Codecs.String,
   ),
   signResult,
@@ -16,7 +16,6 @@ const requestType = new SignedRequestType<string, string>({
 });
 
 let keyPair = ref();
-let requestBody = 'Can I have your email address?';
 let resultBody = ref({ _error: 'Not Ready' });
 let email = ref('you@passes.org');
 
@@ -57,10 +56,10 @@ async function verifyResult(signed: SignedBodyWrapper<string>): Promise<boolean>
 
 <template>
   <Playground
-    title="Try an Example"
-    description="A basic demo request that requests an email address and returns it as a signed string."
+    title="Interactive Example"
     emulatorOnly
-    :requestBody="requestBody"
+    description="This demo requests an email address."
+    :requestBody="undefined"
     :requestType="requestType"
     :resultBody="email"
     acceptButtonTitle="Share Email"
@@ -68,8 +67,7 @@ async function verifyResult(signed: SignedBodyWrapper<string>): Promise<boolean>
     >
     <template #pass-emulator-ui>
       <div :class="$style.content">
-        <div>Request body from <b>docs.passes.org</b>:</div>
-        <div><code>{{ requestBody }}</code></div>
+        <div><b>docs.passes.org</b> is requesting your email.</div>
         <hr />
         <div><label>Enter Result Email: <input :class="$style.input" v-model="email" placeholder="you@yoursite.com" /></label></div>
       </div>

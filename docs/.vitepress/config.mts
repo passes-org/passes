@@ -18,7 +18,7 @@ export default defineConfig({
     nav: [
       { text: 'Examples', link: '/examples/signing-in' },
       // { text: 'Downloads', link: '/downloads' },
-      { text: 'ABI Reference', link: '/abi-reference' }
+      { text: 'Protocol Reference', link: '/protocol-reference' }
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/passes-org/passes' }
@@ -26,6 +26,33 @@ export default defineConfig({
     search: { provider: 'local' },
 
     sidebar: [
+      {
+        text: 'Overview',
+        items: [
+          { text: 'What is Passes?', link: '/' },
+          { text: 'Protocol Reference', link: '/protocol-reference' }
+        ],
+      },
+      {
+        text: 'Packages',
+        items: [
+          {
+            text: 'Reqs',
+            link: '/packages/reqs/quickstart',
+            items: [
+              { text: 'API Reference', link: '/packages/reqs/api/modules.md' },
+            ],
+          },
+          {
+            text: 'Polyfill',
+            link: '/packages/polyfill/quickstart',
+          },
+          {
+            text: 'Types',
+            link: '/packages/types/installation',
+          },
+        ],
+      },
       {
         text: 'Examples',
         items: [
@@ -37,39 +64,10 @@ export default defineConfig({
         ]
       },
       {
-        text: 'Packages',
-        items: [
-          {
-            text: '@passes/reqs',
-            link: '/packages/reqs/quickstart',
-            items: [
-              { text: 'Quickstart', link: '/packages/reqs/quickstart' },
-              { text: 'API', link: '/packages/reqs/api/modules.md' },
-              // { text: 'Common pass requests', link: '/packages/reqs/common-requests' },
-            ],
-          },
-          {
-            text: '@passes/polyfill',
-            link: '/packages/polyfill/quickstart',
-            items: [
-              { text: 'Quickstart', link: '/packages/polyfill/quickstart' },
-            ],
-          },
-          {
-            text: '@passes/types',
-            link: '/packages/types/installation',
-            items: [
-              { text: 'Installation', link: '/packages/types/installation' },
-              { text: 'API', link: '/packages/types/api/modules.md' },
-            ],
-          },
-        ],
-      },
-      {
         text: 'Protocol',
         items: [
-          { text: 'Standards', link: '/protocol/standards' },
-          { text: 'Community', link: '/protocol/community' },
+          // { text: 'Standards', link: '/protocol/standards' }, // TODO: Link to RFCs repo
+          { text: 'Discussions', link: 'https://github.com/passes-org/passes/discussions' },
         ],
       },
     ],

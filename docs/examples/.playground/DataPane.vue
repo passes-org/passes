@@ -70,7 +70,7 @@ watchEffect(async () => {
           </div>
         </label>
         <label>
-          <span>Public Key (JWK Thumbprint)</span>
+          <span>User's Public Key (JWK Thumbprint)</span>
           <div :class="$style.key">
             <img
               :src="makeBlockie(publicKeyThumbprint)"
