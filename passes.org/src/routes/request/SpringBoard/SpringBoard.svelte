@@ -21,7 +21,11 @@
   $: requestBodyStringPromise = requestBodyToDisplayString(rawRequest, Codecs[requestBodyCodec]);
 
   let requestType: RequestType<any, any>;
-  $: requestType = new RequestType(requestTag, Codecs[requestBodyCodec], Codecs[resultBodyCodec]);
+  $: requestType = new RequestType({
+    requestTag,
+    requestBodyCodec: Codecs[requestBodyCodec],
+    resultBodyCodec: Codecs[resultBodyCodec],
+  });
 
   async function onResult(status: ResultStatus) {
     const opener = window.opener ?? window.parent;

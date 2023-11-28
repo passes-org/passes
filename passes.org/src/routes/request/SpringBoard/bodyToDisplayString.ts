@@ -3,13 +3,21 @@ import type { Codec } from '../../../../../packages/reqs';
 import { Codecs, RequestType, parseRequestTag } from "../../../../../packages/reqs";
 
 export async function requestBodyToDisplayString(rawRequest: Uint8Array, codec: Codec<any>): Promise<string> {
-  const requestType = new RequestType(parseRequestTag(rawRequest), codec, Codecs.Void);
+  const requestType = new RequestType({
+    requestTag: parseRequestTag(rawRequest),
+    requestBodyCodec: codec,
+    resultBodyCodec: Codecs.Void,
+  });
   const requestBody = await requestType.decodeRequest(rawRequest);
   return toDisplayString(requestBody, codec);
 }
 
 export async function resultBodyToDisplayString(rawRequest: Uint8Array, codec: Codec<any>): Promise<string> {
-  const requestType = new RequestType(parseRequestTag(rawRequest), Codecs.Void, codec);
+  const requestType = new RequestType({
+    requestTag: parseRequestTag(rawRequest),
+    requestBodyCodec: Codecs.Void,
+    resultBodyCodec: codec,
+  });
   const result = await requestType.decodeResult(rawRequest);
   if (result.status !== 'accepted') throw new Error('cannot resultBodyToDisplayString a result that is not accepted');
   return toDisplayString(result.body, codec);

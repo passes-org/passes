@@ -3,7 +3,7 @@
   import { Codecs, RequestType } from "../../../../../packages/reqs";
   import type { RequestResult } from "../../../../../packages/types";
   import { bodyTextToBodyType } from "../SpringBoard/bodyTextToBodyType";
-    import { resultBodyToDisplayString } from "../SpringBoard/bodyToDisplayString";
+  import { resultBodyToDisplayString } from "../SpringBoard/bodyToDisplayString";
 
   let requestTag = 'org.passes.example.my-request';
   let requestBodyCodec: keyof typeof Codecs = 'String';
@@ -13,7 +13,11 @@
   let resultBodyText: string | null;
 
   async function sendRequest() {
-    const reqType = new RequestType(requestTag, Codecs[requestBodyCodec], Codecs[resultBodyCodec]);
+    const reqType = new RequestType({
+      requestTag,
+      requestBodyCodec: Codecs[requestBodyCodec],
+      resultBodyCodec: Codecs[resultBodyCodec]
+    });
     const richRequestBody = await bodyTextToBodyType(requestBodyText, Codecs[requestBodyCodec])
     const rawRequestBody = await reqType.encodeRequest(richRequestBody);
 
