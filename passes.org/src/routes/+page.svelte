@@ -54,48 +54,6 @@
         </svg>        
       </a>
     </div>
-  
-    <!-- Features Section -->
-    <div class="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-5">
-      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
-        <h2 class="text-2xl font-semibold font-display">Easy to use</h2>
-        <p class="text-xl font-text">
-          Approachable and delightful end-user experience.
-        </p>
-      </div>
-      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
-        <h2 class="text-2xl font-semibold font-display">Simple to support</h2>
-        <p class="text-xl font-text">
-          Support for Passes is easy to add to any app.
-        </p>
-      </div>
-      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
-        <h2 class="text-2xl font-semibold font-display">Versatile capabilities</h2>
-        <p class="text-xl font-text">
-          Passes can be used for authentication, identity, permissions, and more.
-        </p>
-      </div>
-
-      <!-- Row 2 -->
-      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
-        <h2 class="text-2xl font-semibold font-display">Seamlessly work with other apps</h2>
-        <p class="text-xl font-text">
-          If two parties support the same pass request type, they're compatible. Any app, any platform.
-        </p>
-      </div>
-      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
-        <h2 class="text-2xl font-semibold font-display">Put users in control</h2>
-        <p class="text-xl font-text">
-          Users control how they're recognized– by a public key, name, pseudonym, or not at all –depending on the app.
-        </p>
-      </div>
-      <div class="flex flex-col items-start p-5 space-y-5 border border-gray-200">
-        <h2 class="text-2xl font-semibold font-display">Solve sign-in</h2>
-        <p class="text-xl font-text">
-          No more auth screens littered with text fields and many different identity providers.
-        </p>
-      </div>
-    </div>
   </main>
     
 </div>
