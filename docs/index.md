@@ -2,7 +2,7 @@
 
 **Passes** is a client-side API for making requests directly to users.
 
-<img src="https://github.com/passes-org/passes/blob/main/docs/public/diagram_01_light.gif?raw=true" alt="Diagram of a Pass Request" />
+![Diagram of a Pass Request](https://github.com/passes-org/passes/blob/main/docs/public/diagram_01_light.gif?raw=true)
 
 Passes enables apps to send **Pass Requests**, which are presented to the user for review and handling via their **Pass Provider**.
 
