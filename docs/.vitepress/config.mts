@@ -21,7 +21,7 @@ export default defineConfig({
 
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Examples', link: '/examples/signing-in' },
+      { text: 'Examples', link: '/examples/recognizing-users' },
       // { text: 'Downloads', link: '/downloads' },
       { text: 'Protocol Reference', link: '/protocol-reference' }
     ],
