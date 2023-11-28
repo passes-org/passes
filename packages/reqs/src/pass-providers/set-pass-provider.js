@@ -7,7 +7,7 @@ import { RequestType } from "../request-type.js";
  * @property {string} [userkey] - A string used to identify the user (their ID, JWT, etc).
  */
 
-const requestTag = 'https://passes.org/v1/set-pass-provider';
+const requestTag = 'org.passes.set-pass-provider';
 
 /**
  * Codec for encoding and decoding SetPassProviderRequestBody.
@@ -31,4 +31,4 @@ const resultBodyCodec = {
  * RequestType for SetPassProvider requests.
  * @type {RequestType<SetPassProviderRequestBody, boolean>}
  */
-export const setPassProvider = new RequestType(requestTag, requestBodyCodec, resultBodyCodec);
+export const setPassProvider = new RequestType({ requestTag, requestBodyCodec, resultBodyCodec });
