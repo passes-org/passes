@@ -19,27 +19,31 @@ const props = defineProps<{
       v-model="store.abi"
       v-if="!emulatorOnly"
     />
-    <div v-if="store.abi === 'emulator'" :class="$style.content">
-      <slot v-if="store.requestPending">
+    <div v-if="store.abi === 'emulator' && store.requestPending" :class="$style.content">
+      <slot>
         <div :class="$style.status">
           <div>(missing emulator UI)</div>
         </div>
       </slot>
-      <div v-else-if="store.result" :class="$style.status">
-        <div>Request Completed!</div>
+      <div :class="$style.actions">
+        <slot name="actions">
+          <Button @click="$emit('accept')">{{ acceptButtonTitle ?? 'Accept' }}</Button>
+          <Button @click="$emit('reject')">{{ rejectButtonTitle ?? 'Reject' }}</Button>
+        </slot>
       </div>
-      <div v-else="store.result" :class="$style.status">
-        <div>Click "Send Request"</div>
+    </div>
+    <div v-else-if="store.abi === 'document.passes' && store.requestPending" :class="$style.content">
+      <div :class="$style.status">
+        <div>(Request pending via document.passes)</div>
       </div>
+    </div>
+    <div v-else-if="store.result" :class="$style.status">
+      Request Completed
     </div>
     <div v-else :class="$style.status">
-      <div>Using document.passes...</div>
-    </div>
-    <div v-if="store.requestPending" :class="$style.actions">
-      <slot name="actions">
-        <Button @click="$emit('accept')">{{ acceptButtonTitle ?? 'Accept' }}</Button>
-        <Button @click="$emit('reject')">{{ rejectButtonTitle ?? 'Reject' }}</Button>
-      </slot>
+      Click "Send Request"
+      <div v-if="store.abi === 'document.passes'">The Pass Request will be sent via `document.passes` and open in a new window</div>
+      <div v-else>The Pass Request will appear here</div>
     </div>
   </div>
 </template>
@@ -56,14 +60,14 @@ const props = defineProps<{
   overflow-y: scroll;
 }
 
-.pane .content {
+.content {
   display: flex;
   flex: 1;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.pane .actions {
+.actions {
   background-color: var(--vp-c-bg-alt);
   display: flex;
   gap: 0.5rem;
@@ -78,6 +82,7 @@ const props = defineProps<{
   flex: 1;
   font-size: 0.8rem;
   font-weight: bold;
+  gap: 1rem;
   justify-content: center;
   padding: 1rem;
   text-align: center;

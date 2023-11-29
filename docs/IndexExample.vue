@@ -67,6 +67,7 @@ async function verifyResult(signed: SignedBodyWrapper<string>): Promise<boolean>
     >
     <template #pass-emulator-ui>
       <div :class="$style.content">
+        <div style="font-size: 0.7rem; text-align: center; text-transform: uppercase; letter-spacing: 0.5ch; border-bottom: 1px solid #ccc;">My Pass Provider</div>
         <div><b>docs.passes.org</b> is requesting your email.</div>
         <hr />
         <div><label>Enter Result Email: <input :class="$style.input" v-model="email" placeholder="you@yoursite.com" /></label></div>

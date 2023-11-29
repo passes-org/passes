@@ -12,13 +12,13 @@ type Store = {
 
   // Actions
   makeRequest: () => Promise<void>;
-  setResult: (bytes: Uint8Array) => Promise<void>;
+  setEmulatorResult: (bytes: Uint8Array) => Promise<void>;
+
+  // Private
+  _emulatorResultPromiseResolver?: (result: Uint8Array) => void;
 };
 
 export function provideStore({ requestBody, requestType }: Pick<Store, 'requestBody' | 'requestType'>) {
-  const resultPromiseResolver = ref<(v: Uint8Array) => void>();
-  const resultPromise = ref<Promise<Uint8Array>>();
-
   const store = ref<Store>({
     abi: 'emulator',
     dataPaneActiveTab: 'request',
@@ -29,12 +29,8 @@ export function provideStore({ requestBody, requestType }: Pick<Store, 'requestB
 
     async makeRequest() {
       const passEmulatorABIRequest = async (raw: Uint8Array) => {
-        resultPromise.value
-        this.requestBody = await this.requestType.decodeRequest(raw);
-        this.requestPending = true;
-        this.result = undefined;
-        resultPromise.value = new Promise((resolve) => { resultPromiseResolver.value = resolve })
-        return resultPromise.value;
+        const resultPromise = new Promise<Uint8Array>((resolve) => { this.emulatorResultPromiseResolver = resolve; });
+        return resultPromise;
       };
       const passEmulatorABI: PassesABI = { request: passEmulatorABIRequest };
 
@@ -42,12 +38,18 @@ export function provideStore({ requestBody, requestType }: Pick<Store, 'requestB
         ? document.passes
         : passEmulatorABI;
       
-      this.requestType.sendRequest(requestBody);
-    },
-    async setResult(bytes: Uint8Array) {
+      this.requestPending = true;
+      this.result = undefined;
+      console.log('about to send request with abi', this.abi);
+      this.result = await this.requestType.sendRequest(requestBody);
+      console.log('result', this.result);
       this.requestPending = false;
-      this.result = await this.requestType.decodeResult(bytes);
       this.dataPaneActiveTab = 'result';
+    },
+    async setEmulatorResult(bytes: Uint8Array) {
+      if (!this.emulatorResultPromiseResolver) throw new Error('emulatorResultPromiseResolver was undefined');
+      this.emulatorResultPromiseResolver(bytes);
+      return;
     },
   });
 

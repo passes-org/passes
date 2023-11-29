@@ -22,11 +22,11 @@ const store = provideStore({
 });
 
 async function handleAccept(body) {
-  store.value.setResult(await store.value.requestType.encodeResult({ status: 'accepted', body }));
+  store.value.setEmulatorResult(await store.value.requestType.encodeResult({ status: 'accepted', body }));
 }
 
 async function handleReject() {
-  store.value.setResult(await store.value.requestType.encodeResult({ status: 'rejected' }));
+  store.value.setEmulatorResult(await store.value.requestType.encodeResult({ status: 'rejected' }));
 }
 </script>
 

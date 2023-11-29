@@ -132,6 +132,7 @@ async function verifyResult(signed: SignedBodyWrapper): Promise<boolean> {
 <Playground
   title="Interactive Example"
   description="This demo requests basic user profile info."
+  emulatorOnly
   :requestType="requestType"
   :requestBody="['email', 'profile.name', 'profile.picture']"
   :resultBody="{ 'profile.picture': 'https://i.pravatar.cc/300', 'email': 'example@passes.org', 'profile.name': 'Passes User' }"
