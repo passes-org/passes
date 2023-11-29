@@ -1,4 +1,4 @@
-import { setUserPass } from "$lib/server/UserPassCookie";
+import { setUserPassProvider } from "$lib/server/UserPassCookie";
 import type { Actions } from "@sveltejs/kit";
 import { z } from "zod";
 import { zfd } from 'zod-form-data';
@@ -15,7 +15,7 @@ export const load: PageServerLoad = async (event) => {
 export const actions = {
   default: async (event) => {
     const { url } = FormDataSchema.parse(await event.request.formData());
-    setUserPass(event, url);
+    setUserPassProvider(event, url);
     return true;
   },
 } satisfies Actions;
