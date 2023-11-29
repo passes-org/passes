@@ -12,26 +12,8 @@
 	<!-- Header -->
   <div class="flex items-center justify-between pb-5 border-b border-black lg:pb-10 dark:border-white">
     <!-- Logo -->
-    <div class="flex items-center gap-5">
-      <svg class="w-14 h-9" viewBox="0 0 140 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="140" height="90" rx="10" class="fill-black dark:fill-white"/>
-        <rect x="80" y="50" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="90" y="40" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="80" y="40" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="70" y="40" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="60" y="30" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="60" y="40" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="60" y="50" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="50" y="50" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="50" y="40" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="50" y="30" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="50" y="30" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="40" y="30" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="40" y="40" width="10" height="10" class="fill-white dark:fill-black"/>
-        <rect x="40" y="50" width="10" height="10" class="fill-white dark:fill-black"/>
-      </svg>
-      <span class="text-xl font-rounded">Passes</span>
-    </div>
+    <img src="/logo_light.svg" alt="Passes Logo" class="dark:hidden" />
+    <img src="/logo_dark.svg" alt="Passes Logo" class="dark:block" />
 
     <!-- Icon: Github -->
     <a href="//github.com/passes-org/passes">Github</a>

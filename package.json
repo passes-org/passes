@@ -21,5 +21,8 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
+  },
+  "overrides": {
+    "@polka/url": "1.0.0-next.20"
   }
 }
