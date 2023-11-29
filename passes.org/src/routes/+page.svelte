@@ -5,6 +5,7 @@
   <meta name="author" content="Passes" />
   <meta name="robots" content="index, follow" />
   <link rel="icon" type="image/png" href="/favicon.svg" />
+  <meta property="og:image" content="https://passes.org/passes-og.png" />
 </svelte:head>
 
 <div class="container p-10 md:p-16 font-text dark:text-white">
