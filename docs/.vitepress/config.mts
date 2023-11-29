@@ -8,6 +8,7 @@ export default defineConfig({
   description: "The web API for portable identity",
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
+    ['meta', { property: 'og:image', content: 'https://docs.passes.org/passes-og.png' }],
     ['script', { type: 'module', src: POLYFILL_MODULE_URL }],
   ],
 
