@@ -92,6 +92,8 @@ import { Codecs, RequestType, SignedRequestType, SignedBodyWrapper, SignedBodyWr
 
 // For this demo implementation, we'll use the SubtleCrypto API
 const keypair = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verify']);
+const keyFormat = 'jwk';
+const keyParams = { name: 'ECDSA', namedCurve: 'P-256', hash: 'SHA-384' };
 
 const yesOrNoQuestion = new SignedRequestType({
   // We're wrapping the same request type we defined above
@@ -123,7 +125,7 @@ const yesOrNoQuestion = new SignedRequestType({
 
 ## Building a Pass Provider
 
-For building a [Pass Provider](/#what-is-a-pass-provider), `reqs` exports a `PassProviders` namespace with relevent APIs, and some of the common APIs will be useful as well.
+Reqs exports APIs that will be useful for building a [Pass Provider](/#what-is-a-pass-provider), including a `PassProviders` namespace.
 
 #### parseRequestTag
 

@@ -18,6 +18,8 @@ type UserProfileResult = Record<ProfileInfoType, string>;
 
 // For this demo implementation, we'll use the SubtleCrypto API to sign and verify the result
 const keypair = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verify']);
+const keyFormat = 'jwk';
+const keyParams = { name: 'ECDSA', namedCurve: 'P-256', hash: 'SHA-384' };
 
 // Wrap the RequestType from the previous example in a SignedRequestType
 const requestUserProfile = new SignedRequestType<UserProfileRequest, UserProfileResult>({
