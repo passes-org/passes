@@ -64,6 +64,17 @@ describe("formatRLE", () => {
       ])
     );
   });
+
+  test("formats bytes with a bytes length requiring more than one byte in 2-byte run-length", () => {
+    // Create an bytes array of 300 elements (> 256)
+    const largeBytes = new Uint8Array(300).fill(1);
+    const formatted = formatRLE(largeBytes, getConfig(2));
+
+    // The length (300) with offset 1 becomes 299
+    // 299 in 2 bytes is [0x01, 0x2B] (1 * 256 + 43)
+    expect(formatted.slice(0, 2)).toEqual(new Uint8Array([0x01, 0x2b]));
+    expect(formatted.slice(2)).toEqual(largeBytes);
+  });
 });
 
 describe("parseRLE", () => {
@@ -138,5 +149,24 @@ describe("parseRLE", () => {
 
     expect(range).toEqual(bytes);
     expect(remainder).toEqual(new Uint8Array([4]));
+  });
+
+  test("parses bytes with a bytes length requiring more than one byte in 2-byte run-length", () => {
+    // Create a bytes array with a length of 300 (> 256)
+    const bytes = new Uint8Array(300).fill(1);
+
+    // The length (300) with offset 1 becomes 299
+    // 299 in 2 bytes is [0x01, 0x2B] (1 * 256 + 43)
+    const lengthBytes = new Uint8Array([
+      0x01, // 1 * 256 = 256
+      0x2b, // 43 + 256 = 299 = 300 - 1 (offset)
+    ]);
+
+    const formatted = new Uint8Array([...lengthBytes, ...bytes]);
+
+    const { range, remainder } = parseRLE(formatted, 0, getConfig(2));
+
+    expect(range).toEqual(bytes);
+    expect(remainder).toEqual(new Uint8Array([]));
   });
 });
