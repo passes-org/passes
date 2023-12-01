@@ -9,8 +9,10 @@
     "moduleResolution": "Bundler",
     "outDir": "./types",
     "target": "ES2019",
-    "types": [
-      "bun-types" // add Bun global
-    ]
-  }
+  },
+  "exclude": [
+    "**/**.test.js",
+    "node_modules",
+    "types"
+  ],
 }
