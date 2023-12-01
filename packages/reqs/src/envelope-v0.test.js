@@ -35,13 +35,13 @@ describe("parseRequest", () => {
 
   test("throws error for incorrect version", () => {
     expect(() => EnvelopeV0.parseRequest(new Uint8Array([0x01]))).toThrow(
-      EnvelopeV0.errors.REQUEST_INCORRECT_VERSION
+      new EnvelopeV0.errors.REQUEST_INCORRECT_VERSION(1)
     );
   });
 
   test("throws error for missing tag length", () => {
     expect(() => EnvelopeV0.parseRequest(new Uint8Array([0x00]))).toThrow(
-      EnvelopeV0.errors.REQUEST_MISSING_TAG_LENGTH
+      new EnvelopeV0.errors.REQUEST_MISSING_TAG_LENGTH()
     );
   });
 });
