@@ -8,6 +8,9 @@
     "module": "esnext",
     "moduleResolution": "Bundler",
     "outDir": "./types",
-    "target": "ES2019"
+    "target": "ES2019",
+    "types": [
+      "bun-types" // add Bun global
+    ]
   }
 }
