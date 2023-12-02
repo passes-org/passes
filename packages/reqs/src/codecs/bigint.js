@@ -1,4 +1,4 @@
-import { String as StringCodec } from "./string";
+import { String as StringCodec } from './string.js';
 
 /**
  * A codec for bigint request/result bodies.

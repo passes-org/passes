@@ -1,4 +1,4 @@
-import { EnvelopeV0 } from './envelope-v0';
+import { EnvelopeV0 } from './envelope-v0.js';
 
 // JSDoc Type Imports
 /** @template TRequestBody @template TResultBody @typedef {import('./request-type.jsdoc.mjs').IRequestType<TRequestBody, TResultBody>} IRequestType */

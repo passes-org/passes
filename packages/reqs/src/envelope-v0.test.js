@@ -1,4 +1,4 @@
-import { EnvelopeV0 } from "./envelope-v0.js";
+import { EnvelopeV0 } from './envelope-v0.js';
 import { describe, expect, test } from "bun:test";
 
 // JSDoc Type Imports

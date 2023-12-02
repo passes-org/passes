@@ -1,4 +1,4 @@
-import { EnvelopeV0 } from './envelope-v0';
+import { EnvelopeV0 } from './envelope-v0.js';
 
 // JSDoc Type Imports
 /** @template TSupport @typedef {import('./request-router.jsdoc.mjs').SupportMap<TSupport>} SupportMap */

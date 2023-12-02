@@ -1,4 +1,4 @@
-import { formatRLE, parseRLE } from "./utils/rle";
+import { formatRLE, parseRLE } from './utils/rle.js';
 
 // JSDoc Type Imports
 /** @template T @typedef {import('./envelope-v0.jsdoc.mjs').RequestResult<T>} RequestResult */
