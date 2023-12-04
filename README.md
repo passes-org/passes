@@ -40,15 +40,12 @@ const getEmail = new RequestType({
   resultBodyCodec: Codecs.String // The result body type is a string of the user's email
 });
 
-const getEmailResult = await getEmail.sendRequest();// [!code focus]
-                                                    // [!code focus]
-if (getEmailResult.status === 'accepted') {         // [!code focus]
-  const userEmail = result.body;                    // [!code focus]
-}                                                   // [!code focus]
-```
+const getEmailResult = await getEmail.sendRequest();
 
-<script setup>import IndexExample from './IndexExample.vue';</script>
-<IndexExample />
+if (getEmailResult.status === 'accepted') {
+  const userEmail = result.body;
+}         
+```
 
 Some ideas to build with Pass Requests:
 - Sign in with the same account everywhere
