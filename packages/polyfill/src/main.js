@@ -6,12 +6,15 @@ import { request } from "./polyfill-request";
  * @returns {boolean}
  */
 function isPassesSupported() {
-  return typeof document.passes !== 'undefined'
-  && typeof document.passes.request === 'function';
+  /** @type {import("./browser-types.jsdoc.mjs").DocumentWithPasses} */
+  const _document = document;
+  return typeof _document.passes !== 'undefined'
+  && typeof _document.passes.request === 'function';
 }
 
 if (!isPassesSupported()) {
-  document.passes = { request };
+  /** @type {import("./browser-types.jsdoc.mjs").DocumentWithPasses} */
+  (document).passes = { request };
 }
 
 /**
