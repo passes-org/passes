@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 
-const POLYFILL_MODULE_URL = 'https://unpkg.com/@passes/polyfill@0.0.1-alpha.25/src/main.js';
+const POLYFILL_MODULE_URL = 'https://unpkg.com/@passes/polyfill@0.0.2-alpha';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -9,7 +9,7 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['meta', { property: 'og:image', content: 'https://docs.passes.org/passes-og.png' }],
-    ['script', { type: 'module', src: POLYFILL_MODULE_URL }],
+    ['script', { src: POLYFILL_MODULE_URL }],
   ],
 
   themeConfig: {
