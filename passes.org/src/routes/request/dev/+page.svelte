@@ -1,8 +1,8 @@
 <script>
-  import { openWindowWithPost } from "../../../../../packages/polyfill/src/utils";
-  import { Codecs, RequestType } from "../../../../../packages/reqs";
-  import { bodyTextToBodyType } from "../SpringBoard/bodyTextToBodyType";
-  import { resultBodyToDisplayString } from "../SpringBoard/bodyToDisplayString";
+	import { openWindowWithPost } from "$lib/openWindowWithPost.js";
+	import { Codecs, RequestType } from "../../../../../packages/reqs";
+	import { bodyTextToBodyType } from "../SpringBoard/bodyTextToBodyType";
+	import { resultBodyToDisplayString } from "../SpringBoard/bodyToDisplayString";
 
   let requestTag = $state('org.passes.example.my-request');
   /** @type {keyof typeof Codecs} */
