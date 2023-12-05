@@ -1,8 +1,8 @@
 <script>
+	import { bodyTextToBodyType } from "$lib/SpringBoard/bodyTextToBodyType";
+	import { resultBodyToDisplayString } from "$lib/SpringBoard/bodyToDisplayString";
 	import { openWindowWithPost } from "$lib/openWindowWithPost.js";
 	import { Codecs, RequestType } from "../../../../../packages/reqs";
-	import { bodyTextToBodyType } from "../SpringBoard/bodyTextToBodyType";
-	import { resultBodyToDisplayString } from "../SpringBoard/bodyToDisplayString";
 
   let requestTag = 'org.passes.example.my-request';
   /** @type {keyof typeof Codecs} */
