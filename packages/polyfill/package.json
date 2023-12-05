@@ -9,7 +9,6 @@
     "prepublishOnly": "tsc"
   },
   "devDependencies": {
-    "@passes/types": "^0.0.1-alpha.23",
     "bun-types": "latest"
   },
   "peerDependencies": {

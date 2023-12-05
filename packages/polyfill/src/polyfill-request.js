@@ -1,6 +1,5 @@
 import { PASSES_BASE_URL } from "./constants";
-import { SUPPORTED_REQUEST_TAGS } from "./request-tag-support";
-import { getRequestTag, openWindowWithPost } from "./utils";
+import { openWindowWithPost } from "./utils";
 
 /**
  * Provides a polyfill implementation of the document.passes.request ABI using a POST request to passes.org in a new window which forwards the end user to their pass engine to handle the request.
@@ -9,15 +8,6 @@ import { getRequestTag, openWindowWithPost } from "./utils";
  * @returns {Promise<Uint8Array>}
  */
 export async function request(raw) {
-  // Get the request tag to check if it has built-in support
-  const requestTag = getRequestTag(raw);
-
-  // Match and handle any request tags with built-in support
-  const builtinSupportFn = SUPPORTED_REQUEST_TAGS[requestTag];
-  if (builtinSupportFn) {
-    return builtinSupportFn(raw);
-  }
-
   // Create request context params
   const formData = new FormData();
   formData.set('request', new Blob([raw]));
@@ -32,7 +22,7 @@ export async function request(raw) {
   /**
    * Handles request-result messages from the pass engine window.
    * 
-   * @param {MessageEvent<import("@passes/types").RequestResult>} event 
+   * @param {MessageEvent<import("./browser-types.jsdoc.mjs").TransportEncodedRequestResult>} event 
    * @returns {void}
    */
   function handleMessage(event) {
