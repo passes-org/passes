@@ -19,17 +19,17 @@ export async function requestBodyToDisplayString(rawRequest, codec) {
 
 /**
  * Returns a string representation of the given result body.
- * @param {Uint8Array} rawRequest 
+ * @param {Uint8Array} rawResult 
  * @param {import('../../../../../packages/reqs').Codec<any>} codec 
  * @returns {Promise<string>}
  */
-export async function resultBodyToDisplayString(rawRequest, codec) {
+export async function resultBodyToDisplayString(rawResult, codec) {
   const requestType = new RequestType({
-    requestTag: parseRequestTag(rawRequest),
+    requestTag: '[ephemeral]',
     requestBodyCodec: Codecs.Void,
     resultBodyCodec: codec,
   });
-  const result = await requestType.decodeResult(rawRequest);
+  const result = await requestType.decodeResult(rawResult);
   if (result.status !== 'accepted') throw new Error('cannot resultBodyToDisplayString a result that is not accepted');
   return toDisplayString(result.body, codec);
 }

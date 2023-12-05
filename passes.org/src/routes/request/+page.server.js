@@ -1,8 +1,8 @@
-import { getUserPassProvider } from "$lib/userPassProvider.server";
 import { redirect } from "@sveltejs/kit";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
-import { parseRequestTag } from "../../../../packages/reqs";
+import { PassProviders, parseRequestTag } from "../../../../packages/reqs";
+import { getUserPassProvider } from "../../lib/userPassProvider.server";
 import { ServerTransportCodec } from "./SpringBoard/ServerTransportCodec";
 
 /** @type {import('./$types').Actions} */
@@ -11,14 +11,19 @@ export const actions = {
     const { request } = await RequestBodySchema.parseAsync(await event.request.formData());
     const referrerValue = event.request.headers.get('referer');
     const referrer = referrerValue ? new URL(referrerValue).host : undefined;
+
+    const requestTag = parseRequestTag(request);
     
+    // Redirect any pass request except setPassProvider to the user's pass provider.
     const userPassProvider = getUserPassProvider(event);
-    if (userPassProvider) throw redirect(302, userPassProvider);
+    if (userPassProvider && requestTag !== PassProviders.setPassProvider.requestTag) {
+      throw redirect(302, userPassProvider);
+    }
 
     return {
       referrer,
       requestBase64Url: ServerTransportCodec.encode(request),
-      requestTag: parseRequestTag(request),
+      requestTag,
     };
   }
 };

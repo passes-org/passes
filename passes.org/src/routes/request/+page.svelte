@@ -1,6 +1,6 @@
 <script>
   import { PassProviders } from "../../../../packages/reqs";
-  import SetPassProvider from "./SetPassProvider/SetPassProvider.svelte";
+  import SetPassProvider from "../../lib/SetPassProvider/SetPassProvider.svelte";
   import { ServerTransportCodec } from "./SpringBoard/ServerTransportCodec.js";
   import SpringBoard from "./SpringBoard/SpringBoard.svelte";
 
