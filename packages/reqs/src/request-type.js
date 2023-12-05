@@ -12,7 +12,7 @@ import { EnvelopeV0 } from './envelope-v0.js';
  * @property {string} requestTag
  * @property {Codec<TRequestBody>} requestBodyCodec
  * @property {Codec<TResultBody>} resultBodyCodec
- * @property {import("@passes/types").PassesABI} [abi]
+ * @property {import("./browser-types.jsdoc.mjs").PassesABI} [abi]
  */
 
 /**
@@ -24,7 +24,7 @@ import { EnvelopeV0 } from './envelope-v0.js';
  * @property {string} requestTag
  * @property {Codec<TRequestBody>} requestBodyCodec
  * @property {Codec<TResultBody>} resultBodyCodec
- * @property {import("@passes/types").PassesABI} [abi]
+ * @property {import("./browser-types.jsdoc.mjs").PassesABI} [abi]
  */
 export class RequestType {
   /**
@@ -144,12 +144,12 @@ export class RequestType {
   /**
    * A helper for resolving the PassesABI. If the instance has no abi property, it returns document.passes if it's available.
    * 
-   * @returns {import("@passes/types").PassesABI}
+   * @returns {import("./browser-types.jsdoc.mjs").PassesABI}
    * @throws {RequestType.Errors.ABI_NOT_AVAILABLE} - document.passes must be available if `abi` is not passed.
    */
   resolveABI() {
     if (this.abi) return this.abi;
-    /** @type {import("@passes/types").DocumentWithPasses} */
+    /** @type {import("./browser-types.jsdoc.mjs").DocumentWithPasses} */
     const _document = typeof document !== 'undefined' ? document : null;
     if (!_document?.passes) throw new RequestType.Errors.ABI_NOT_AVAILABLE();
     return _document.passes;
