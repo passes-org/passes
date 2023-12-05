@@ -1,5 +1,5 @@
 <script>
-  import { Codecs, PassProviders, RequestType, parseRequestTag } from '../../../../../packages/reqs';
+  import { Codecs, PassProviders, RequestType, parseRequestTag } from '../../../../packages/reqs';
   import { bodyTextToBodyType } from "./bodyTextToBodyType.js";
   import { requestBodyToDisplayString } from "./bodyToDisplayString.js";
   import { fetchFaviconUrl } from "./fetchFaviconUrl.js";
