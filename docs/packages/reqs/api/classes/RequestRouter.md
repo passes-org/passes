@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[request-router.js:12](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/request-router.js#L12)
+[request-router.js:12](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/request-router.js#L12)
 
 ## Properties
 
@@ -56,7 +56,7 @@
 
 #### Defined in
 
-[request-router.js:13](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/request-router.js#L13)
+[request-router.js:13](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/request-router.js#L13)
 
 ## Methods
 
@@ -76,4 +76,4 @@
 
 #### Defined in
 
-[request-router.js:20](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/request-router.js#L20)
+[request-router.js:20](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/request-router.js#L20)

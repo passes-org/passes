@@ -20,14 +20,18 @@
 - [Codec](interfaces/Codec.md)
 - [ExceptionResult](interfaces/ExceptionResult.md)
 - [IRequestType](interfaces/IRequestType.md)
+- [PassesABI](interfaces/PassesABI.md)
 - [RejectedResult](interfaces/RejectedResult.md)
 - [SignedAcceptedResult](interfaces/SignedAcceptedResult.md)
 - [SignedBodyWrapper](interfaces/SignedBodyWrapper.md)
 - [SignedBodyWrapperHeader](interfaces/SignedBodyWrapperHeader.md)
+- [TransportEncodedRequestResult](interfaces/TransportEncodedRequestResult.md)
 - [UnsupportedResult](interfaces/UnsupportedResult.md)
 
 ### Type Aliases
 
+- [DocumentWithPasses](modules.md#documentwithpasses)
+- [GlobalDocument](modules.md#globaldocument)
 - [RequestResult](modules.md#requestresult)
 - [ResultStatus](modules.md#resultstatus)
 - [SignedRequestResult](modules.md#signedrequestresult)
@@ -43,6 +47,26 @@
 
 ## Type Aliases
 
+### DocumentWithPasses
+
+Ƭ **DocumentWithPasses**\<\>: `Document` & \{ `passes?`: [`PassesABI`](interfaces/PassesABI.md)  }
+
+#### Defined in
+
+[browser-types.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/browser-types.jsdoc.mjs#L3)
+
+___
+
+### GlobalDocument
+
+Ƭ **GlobalDocument**\<\>: `Document`
+
+#### Defined in
+
+[browser-types.jsdoc.mjs:22](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/browser-types.jsdoc.mjs#L22)
+
+___
+
 ### RequestResult
 
 Ƭ **RequestResult**\<`TResult`\>: [`AcceptedResult`](interfaces/AcceptedResult.md)\<`TResult`\> \| [`RejectedResult`](interfaces/RejectedResult.md) \| [`UnsupportedResult`](interfaces/UnsupportedResult.md) \| [`ExceptionResult`](interfaces/ExceptionResult.md)
@@ -55,7 +79,7 @@
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/envelope-v0.jsdoc.mjs#L26)
+[envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/envelope-v0.jsdoc.mjs#L26)
 
 ___
 
@@ -65,7 +89,7 @@ ___
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/envelope-v0.jsdoc.mjs#L30)
+[envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/envelope-v0.jsdoc.mjs#L30)
 
 ___
 
@@ -81,7 +105,7 @@ ___
 
 #### Defined in
 
-[signed-request-type.jsdoc.mjs:11](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/signed-request-type.jsdoc.mjs#L11)
+[signed-request-type.jsdoc.mjs:11](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/signed-request-type.jsdoc.mjs#L11)
 
 ___
 
@@ -97,7 +121,7 @@ ___
 
 #### Defined in
 
-[request-router.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/request-router.jsdoc.mjs#L3)
+[request-router.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/request-router.jsdoc.mjs#L3)
 
 ## Variables
 
@@ -112,11 +136,11 @@ PassProviders API namespace
 | Name | Type |
 | :------ | :------ |
 | `sendResult` | \<TRequestBody, TResultBody\>(`requestType`: [`RequestType`](classes/RequestType.md)\<`TRequestBody`, `TResultBody`\>, `result`: `RequestResult`\<`TResultBody`\>) => `Promise`\<`void`\> |
-| `setPassProvider` | [`RequestType`](classes/RequestType.md)\<`SetPassProviderRequestBody`, `boolean`\> |
+| `setPassProvider` | [`RequestType`](classes/RequestType.md)\<`SetPassProviderRequestBody`, `void`\> |
 
 #### Defined in
 
-[pass-providers/index.js:5](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/pass-providers/index.js#L5)
+[pass-providers/index.js:5](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/pass-providers/index.js#L5)
 
 ## Functions
 
@@ -136,4 +160,4 @@ PassProviders API namespace
 
 #### Defined in
 
-[parse-request-tag.js:4](https://github.com/passes-org/passes/blob/9039062/packages/reqs/src/parse-request-tag.js#L4)
+[parse-request-tag.js:4](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/parse-request-tag.js#L4)
