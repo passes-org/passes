@@ -1,8 +1,8 @@
 <script>
-  import { PassProviders } from "../../../../packages/reqs";
-  import SetPassProvider from "../../lib/SetPassProvider/SetPassProvider.svelte";
-  import { ServerTransportCodec } from "./SpringBoard/ServerTransportCodec.js";
-  import SpringBoard from "./SpringBoard/SpringBoard.svelte";
+	import { ServerTransportCodec } from "$lib/SpringBoard/ServerTransportCodec";
+	import SpringBoard from "$lib/SpringBoard/SpringBoard.svelte";
+	import { PassProviders } from "../../../../packages/reqs";
+	import SetPassProvider from "../../lib/SetPassProvider/SetPassProvider.svelte";
 
   export let form;
   if (!form) throw new Error('No form data');

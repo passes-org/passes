@@ -3,7 +3,7 @@ import { z } from "zod";
 import { zfd } from "zod-form-data";
 import { PassProviders, parseRequestTag } from "../../../../packages/reqs";
 import { getUserPassProvider } from "../../lib/userPassProvider.server";
-import { ServerTransportCodec } from "./SpringBoard/ServerTransportCodec";
+import { ServerTransportCodec } from "../../lib/SpringBoard/ServerTransportCodec";
 
 /** @type {import('./$types').Actions} */
 export const actions = {

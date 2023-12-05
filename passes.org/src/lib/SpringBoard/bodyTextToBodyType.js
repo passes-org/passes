@@ -1,10 +1,10 @@
 import { hexToBytes, isHex } from 'viem';
-import { Codecs } from "../../../../../packages/reqs";
+import { Codecs } from "@passes/reqs";
 
 /**
  * Returns a representation of the given body text in the given codec's type.
  * @param {string} bodyText 
- * @param {import('../../../../../packages/reqs').Codec<any>} codec 
+ * @param {import('@passes/reqs').Codec<any>} codec 
  * @returns {Promise<unknown>}
  */
 export async function bodyTextToBodyType(bodyText, codec) {

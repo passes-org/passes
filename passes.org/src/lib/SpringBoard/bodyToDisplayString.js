@@ -1,10 +1,10 @@
 import { toHex } from 'viem';
-import { Codecs, RequestType, parseRequestTag } from "../../../../../packages/reqs";
+import { Codecs, RequestType, parseRequestTag } from "@passes/reqs";
 
 /**
  * Returns a string representation of the given request body.
  * @param {Uint8Array} rawRequest 
- * @param {import('../../../../../packages/reqs').Codec<any>} codec 
+ * @param {import('@passes/reqs').Codec<any>} codec 
  * @returns {Promise<string>}
  */
 export async function requestBodyToDisplayString(rawRequest, codec) {
@@ -20,7 +20,7 @@ export async function requestBodyToDisplayString(rawRequest, codec) {
 /**
  * Returns a string representation of the given result body.
  * @param {Uint8Array} rawResult 
- * @param {import('../../../../../packages/reqs').Codec<any>} codec 
+ * @param {import('@passes/reqs').Codec<any>} codec 
  * @returns {Promise<string>}
  */
 export async function resultBodyToDisplayString(rawResult, codec) {
@@ -37,7 +37,7 @@ export async function resultBodyToDisplayString(rawResult, codec) {
 /**
  * Returns a string representation of the given body for display.
  * @param {unknown} body 
- * @param {import('../../../../../packages/reqs').Codec<any>} codec 
+ * @param {import('@passes/reqs').Codec<any>} codec 
  * @returns {string}
  */
 function toDisplayString(body, codec) {
