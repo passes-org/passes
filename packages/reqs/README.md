@@ -8,13 +8,13 @@ npm add @passes/reqs    # or bun, yarn, pnpm
 
 ## Defining a Pass Request Type
 
-To create a pass request type, you need 3 things:
+To create a Pass Request type, you need 3 things:
 
-1. **A Request Tag**. A string to identify your pass request. This is what Pass Providers will use to interpret your pass request, so it should _uniquely_ identify your pass request type. A good way to make your request tag unique is to make it the URI of the pass request type's specification on your website. Another good option is a Passes Protocol RFC number (when we launch the RFCs tracker).
+1. **A Request Tag**. A string to identify your Pass Request. This is what Pass Providers will use to interpret your Pass Request, so it should _uniquely_ identify your Pass Request type. A good way to make your request tag unique is to make it the URI of the Pass Request type's specification on your website. Another good option is a Passes Protocol RFC number (when we launch the RFCs tracker).
 
-2. **A Request Body Codec**. This translates the rich representation of the request body data your pass request type uses to binary and back.
+2. **A Request Body Codec**. This translates the rich representation of the request body data your Pass Request type uses to binary and back.
 
-3. **A Result Body Codec**. This is just like the _request_ body codec, but for your pass request's result body data.
+3. **A Result Body Codec**. This is just like the _request_ body codec, but for your Pass Request's result body data.
 
 
 ### Codecs
@@ -63,7 +63,7 @@ const userAnswer = await yesOrNoQuestion.sendRequest('Have you ever been to Oliv
 
 ### SignedRequestType
 
-It's generally recommended to use signed pass requests, since they use asymmetric key cryptography to assert and verify that pass request results have been approved by the user.
+It's generally recommended to use signed Pass Requests, since they use asymmetric key cryptography to assert and verify that Pass Request results have been approved by the user.
 
 To make a `RequestType` signed, we simply create a `SignedRequestType` to wrap it, and provide a `signResult` or `verifyResult` implementation...
 
@@ -134,7 +134,7 @@ if (status === 'accepted') {
 
 #### PassProviders.sendResult
 
-Once your user has accepted or rejected a pass request, you can send the result back to the requesting app via `PassProviders.sendResult`.
+Once your user has accepted or rejected a Pass Request, you can send the result back to the requesting app via `PassProviders.sendResult`.
 
 ```typescript
 import { PassProviders } from '@passes/reqs';
