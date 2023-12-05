@@ -17,7 +17,7 @@ export const actions = {
     // Redirect any pass request except setPassProvider to the user's pass provider.
     const userPassProvider = getUserPassProvider(event);
     if (userPassProvider && requestTag !== PassProviders.setPassProvider.requestTag) {
-      throw redirect(302, userPassProvider);
+      throw redirect(307, userPassProvider);
     }
 
     return {
