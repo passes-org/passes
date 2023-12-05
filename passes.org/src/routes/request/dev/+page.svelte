@@ -31,7 +31,7 @@
     /**
      * Handles request-result messages from the pass engine window.
      * 
-     * @param {MessageEvent<import("@passes/types").RequestResult>} event 
+     * @param {MessageEvent<import("../../../../../packages/reqs").TransportEncodedRequestResult>} event 
      * @returns {Promise<void>}
      */
     async function handleMessage(event) {
