@@ -1,6 +1,6 @@
 <script>
-  import { PassProviders } from "@passes/reqs";
-  import { fetchFaviconUrl } from "../../routes/request/SpringBoard/fetchFaviconUrl.js";
+	import { fetchFaviconUrl } from "$lib/SpringBoard/fetchFaviconUrl";
+	import { PassProviders } from "@passes/reqs";
 
   /** @type {Uint8Array} */
   export let rawRequest;
