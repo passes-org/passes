@@ -13,6 +13,9 @@ const config = {
 		csrf: { checkOrigin: false }
 	},
 
+	// Use Svelte 5 Runes
+	compilerOptions: { runes: true },
+
 	preprocess: [vitePreprocess({})]
 };
 
