@@ -1,5 +1,5 @@
 <script>
-  import { Codecs, PassProviders, RequestType, parseRequestTag } from '../../../../../packages/reqs/types/main';
+  import { Codecs, PassProviders, RequestType, parseRequestTag } from '../../../../../packages/reqs';
   import { bodyTextToBodyType } from "./bodyTextToBodyType.js";
   import { requestBodyToDisplayString } from "./bodyToDisplayString.js";
   import { fetchFaviconUrl } from "./fetchFaviconUrl.js";
@@ -25,12 +25,12 @@
   }));
 
   /**
-   * @param {import('../../../../../packages/reqs/types/main').ResultStatus} status
+   * @param {import('../../../../../packages/reqs').ResultStatus} status
    */
   async function onResult(status) {
     const bodyText = resultBodyText;
     const body = status === 'accepted' && await bodyTextToBodyType(bodyText, Codecs[resultBodyCodec]);
-    /** @type {import('../../../../../packages/reqs/types/main').RequestResult<any>} */
+    /** @type {import('../../../../../packages/reqs').RequestResult<any>} */
     const result = (() => {
       switch (status) {
         case 'accepted': return { status, body };
