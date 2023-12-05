@@ -4,6 +4,7 @@
   import { ServerTransportCodec } from "./SpringBoard/ServerTransportCodec.js";
   import SpringBoard from "./SpringBoard/SpringBoard.svelte";
 
+  // @ts-ignore (FIXME)
   let { form } = $props();
   if (!form) throw new Error('No form data');
 
