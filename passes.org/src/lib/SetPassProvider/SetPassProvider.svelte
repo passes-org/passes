@@ -19,7 +19,7 @@
 
     await PassProviders.sendResult(PassProviders.setPassProvider, {
       status: 'accepted',
-      body: true,
+      body: undefined,
     });
   }
 
