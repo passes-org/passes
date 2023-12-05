@@ -1,3 +1,4 @@
+import { Codecs } from "../main.js";
 import { RequestType } from "../request-type.js";
 
 /**
@@ -7,28 +8,12 @@ import { RequestType } from "../request-type.js";
  * @property {string} [principal] - A string used to identify the user to their pass provder (their ID, JWT, etc). This is ignored by the Polyfill flow, which instead relies on first-party cookies, but may be used by other implementations like web extensions.
  */
 
-const requestTag = 'org.passes.set-pass-provider';
-
-/**
- * Codec for encoding and decoding SetPassProviderRequestBody.
- * @type {import('../main.js').Codec<SetPassProviderRequestBody>}
- */
-const requestBodyCodec = {
-  encode: (body) => new TextEncoder().encode(JSON.stringify(body)),
-  decode: (bytes) => JSON.parse(new TextDecoder().decode(bytes)),
-};
-
-/**
- * Codec for encoding and decoding result as boolean.
- * @type {import('../main.js').Codec<true>}
- */
-const resultBodyCodec = {
-  encode: () => undefined,
-  decode: () => true,
-};
-
 /** 
  * RequestType for SetPassProvider requests.
- * @type {RequestType<SetPassProviderRequestBody, boolean>}
+ * @type {RequestType<SetPassProviderRequestBody, void>}
  */
-export const setPassProvider = new RequestType({ requestTag, requestBodyCodec, resultBodyCodec });
+export const setPassProvider = new RequestType({
+  requestTag: 'org.passes.set-pass-provider',
+  requestBodyCodec: /** @type {import('../main.js').Codec<SetPassProviderRequestBody>} */ (Codecs.Json),
+  resultBodyCodec: Codecs.Void,
+});
