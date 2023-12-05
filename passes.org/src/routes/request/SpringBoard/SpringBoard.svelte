@@ -4,33 +4,45 @@
   import { requestBodyToDisplayString } from "./bodyToDisplayString.js";
   import { fetchFaviconUrl } from "./fetchFaviconUrl.js";
 
-  /** @type {{ rawRequest: Uint8Array; referrer: string }}*/
-  let { rawRequest, referrer } = $props();
+  /** @type {Uint8Array} */
+  export let rawRequest;
+  /** @type {string} */
+  export let referrer;
 
-  let faviconUrlPromise = $derived(fetchFaviconUrl(referrer));
+  /** @type {Promise<string | null>} */
+  let faviconUrlPromise;
+  $: faviconUrlPromise = fetchFaviconUrl(referrer);
 
   /** @type {keyof typeof Codecs} */
-  let requestBodyCodec = $state('String');
+  let requestBodyCodec = 'String';
   /** @type {keyof typeof Codecs} */
-  let resultBodyCodec = $state('String');
-  let resultBodyText = $state('');
+  let resultBodyCodec = 'String';
+  /** @type {string} */
+  let resultBodyText;
 
-  let requestTag = $derived(parseRequestTag(rawRequest));
-  let requestBodyStringPromise = $derived(requestBodyToDisplayString(rawRequest, Codecs[requestBodyCodec]));
+  /** @type {string} */
+  let requestTag
+  $: requestTag = parseRequestTag(rawRequest);
 
-  let requestType = $derived(new RequestType({
+  /** @type {Promise<string>} */
+  let requestBodyStringPromise;
+  $: requestBodyStringPromise = requestBodyToDisplayString(rawRequest, Codecs[requestBodyCodec]);
+
+  /** @type {RequestType<any, any>} */
+  let requestType;
+  $: requestType = new RequestType({
     requestTag,
     requestBodyCodec: Codecs[requestBodyCodec],
     resultBodyCodec: Codecs[resultBodyCodec],
-  }));
+  });
 
   /**
-   * @param {import('../../../../../packages/reqs').ResultStatus} status
+   * @param {import('@passes/reqs').ResultStatus} status
    */
   async function onResult(status) {
     const bodyText = resultBodyText;
     const body = status === 'accepted' && await bodyTextToBodyType(bodyText, Codecs[resultBodyCodec]);
-    /** @type {import('../../../../../packages/reqs').RequestResult<any>} */
+    /** @type {import('@passes/reqs').RequestResult<any>} */
     const result = (() => {
       switch (status) {
         case 'accepted': return { status, body };
@@ -124,8 +136,8 @@
       </div>
       <!-- Actions -->
       <div class="flex space-x-4">
-        <button onclick={() => onResult('accepted')} class="flex-1 px-4 py-2 font-semibold text-white bg-black rounded dark:bg-white dark:text-black">Accept</button>
-        <button onclick={() => onResult('rejected')} class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white">Reject</button>
+        <button on:click={() => onResult('accepted')} class="flex-1 px-4 py-2 font-semibold text-white bg-black rounded dark:bg-white dark:text-black">Accept</button>
+        <button on:click={() => onResult('rejected')} class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white">Reject</button>
       </div>
     </div>
   </main>

@@ -10,11 +10,8 @@ const config = {
 		adapter: adapter(),
 
 		// CSRF protection is enforced in a hook for every route except /request, which depends on CORS
-		csrf: { checkOrigin: false }
+		csrf: { checkOrigin: false },
 	},
-
-	// Use Svelte 5 Runes
-	compilerOptions: { runes: true },
 
 	preprocess: [vitePreprocess({})]
 };

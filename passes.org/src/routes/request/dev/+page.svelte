@@ -4,16 +4,17 @@
 	import { bodyTextToBodyType } from "../SpringBoard/bodyTextToBodyType";
 	import { resultBodyToDisplayString } from "../SpringBoard/bodyToDisplayString";
 
-  let requestTag = $state('org.passes.example.my-request');
+  let requestTag = 'org.passes.example.my-request';
   /** @type {keyof typeof Codecs} */
-  let requestBodyCodec = $state('String');
+  let requestBodyCodec = 'String';
   /** @type {keyof typeof Codecs} */
-  let resultBodyCodec = $state('String');
-  let requestBodyText = $state('');
+  let resultBodyCodec = 'String';
+  /** @type {string} */
+  let requestBodyText;
   /** @type {string | undefined} */
-  let resultStatus = $state();
+  let resultStatus;
   /** @type {string | null} */
-  let resultBodyText = $state(null);
+  let resultBodyText = null;
 
   async function sendRequest() {
     const reqType = new RequestType({
@@ -31,7 +32,7 @@
     /**
      * Handles request-result messages from the pass engine window.
      * 
-     * @param {MessageEvent<import("../../../../../packages/reqs").TransportEncodedRequestResult>} event 
+     * @param {MessageEvent<import("@passes/reqs").TransportEncodedRequestResult>} event 
      * @returns {Promise<void>}
      */
     async function handleMessage(event) {

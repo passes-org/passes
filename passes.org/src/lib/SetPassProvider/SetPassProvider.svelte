@@ -2,11 +2,16 @@
   import { PassProviders } from "@passes/reqs";
   import { fetchFaviconUrl } from "../../routes/request/SpringBoard/fetchFaviconUrl.js";
 
-  /** @type {{ rawRequest: Uint8Array }} */
-  let { rawRequest } = $props();
+  /** @type {Uint8Array} */
+  export let rawRequest;
   
-  let setPassProviderRequestBodyPromise = $derived(PassProviders.setPassProvider.decodeRequest(rawRequest));
-  let faviconUrlPromise = $derived(setPassProviderRequestBodyPromise.then(({ uri }) => fetchFaviconUrl(uri)));
+  /** @type {Promise<import("@passes/reqs/types/pass-providers/set-pass-provider.js").SetPassProviderRequestBody>} */
+  let setPassProviderRequestBodyPromise;
+  $: setPassProviderRequestBodyPromise = PassProviders.setPassProvider.decodeRequest(rawRequest);
+
+  /** @type {Promise<string | null>} */
+  let faviconUrlPromise;
+  $: faviconUrlPromise = setPassProviderRequestBodyPromise.then(({ uri }) => fetchFaviconUrl(uri));
 
   async function onAccept() {
     const { uri } = await setPassProviderRequestBodyPromise;
@@ -50,8 +55,8 @@
 
       <!-- Main -->
       <div class="flex space-x-4">
-        <button onclick={onAccept} class="flex-1 px-4 py-2 font-semibold text-white bg-black rounded dark:bg-white dark:text-black">Yes</button>
-        <button onclick={onReject} class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white">No</button>
+        <button on:click={onAccept} class="flex-1 px-4 py-2 font-semibold text-white bg-black rounded dark:bg-white dark:text-black">Yes</button>
+        <button on:click={onReject} class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white">No</button>
       </div>
     {/await}
   </div>
