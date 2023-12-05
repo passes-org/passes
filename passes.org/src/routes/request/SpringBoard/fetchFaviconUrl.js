@@ -1,4 +1,9 @@
-export async function fetchFaviconUrl(urlString: string): Promise<string | null> {
+/**
+ * Attempts to return the URL of the favicon for the given URL.
+ * @param {string} urlString 
+ * @returns {Promise<string | null>}
+ */
+export async function fetchFaviconUrl(urlString) {
   // List of common favicon file names
   const faviconFiles = ['favicon.ico', 'favicon.svg', 'icon.png', 'favicon.svg', 'icon.svg'];
   

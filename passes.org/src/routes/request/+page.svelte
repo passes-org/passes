@@ -1,17 +1,23 @@
-<script lang="ts">
-    import type { ActionData } from "./$types";
-    import { ServerTransportCodec } from "./SpringBoard/ServerTransportCodec";
-    import SpringBoard from "./SpringBoard/SpringBoard.svelte";
+<script>
+  import { PassProviders } from "../../../../packages/reqs";
+  import SetPassProvider from "./SetPassProvider/SetPassProvider.svelte";
+  import { ServerTransportCodec } from "./SpringBoard/ServerTransportCodec.js";
+  import SpringBoard from "./SpringBoard/SpringBoard.svelte";
 
-  export let form: ActionData;
+  let { form } = $props();
   if (!form) throw new Error('No form data');
 
-  const opener: Window | undefined = typeof window !== 'undefined'
+  /** @type {Window | undefined} */
+  let opener = typeof window !== 'undefined'
     ? window.opener ?? window.parent
     : undefined;
 </script>
 
-{#if form?.requestBase64Url}
+{#if form?.requestTag === PassProviders.setPassProvider.requestTag}
+  <SetPassProvider
+    rawRequest={ServerTransportCodec.decode(form.requestBase64Url)}
+  />
+{:else if form?.requestBase64Url}
   <SpringBoard
     rawRequest={ServerTransportCodec.decode(form.requestBase64Url)}
     referrer={form.referrer ?? opener?.location.host ?? 'unknown referrer'}

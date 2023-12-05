@@ -1,16 +1,19 @@
-<script lang="ts">
+<script>
   import { openWindowWithPost } from "../../../../../packages/polyfill/src/utils";
   import { Codecs, RequestType } from "../../../../../packages/reqs";
-  import type { RequestResult } from "../../../../../packages/types";
   import { bodyTextToBodyType } from "../SpringBoard/bodyTextToBodyType";
   import { resultBodyToDisplayString } from "../SpringBoard/bodyToDisplayString";
 
-  let requestTag = 'org.passes.example.my-request';
-  let requestBodyCodec: keyof typeof Codecs = 'String';
-  let resultBodyCodec: keyof typeof Codecs = 'String';
-  let requestBodyText = '';
-  let resultStatus: string;
-  let resultBodyText: string | null;
+  let requestTag = $state('org.passes.example.my-request');
+  /** @type {keyof typeof Codecs} */
+  let requestBodyCodec = $state('String');
+  /** @type {keyof typeof Codecs} */
+  let resultBodyCodec = $state('String');
+  let requestBodyText = $state('');
+  /** @type {string | undefined} */
+  let resultStatus = $state();
+  /** @type {string | null} */
+  let resultBodyText = $state(null);
 
   async function sendRequest() {
     const reqType = new RequestType({
@@ -29,9 +32,9 @@
      * Handles request-result messages from the pass engine window.
      * 
      * @param {MessageEvent<import("@passes/types").RequestResult>} event 
-     * @returns {void}
+     * @returns {Promise<void>}
      */
-    async function handleMessage(event: MessageEvent<RequestResult>) {
+    async function handleMessage(event) {
       const message = event.data;
       // Ignore messages that aren't from the pass engine window opened in this call
       if (event.source !== passEngineWindow) return;

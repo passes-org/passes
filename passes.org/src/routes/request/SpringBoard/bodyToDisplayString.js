@@ -1,8 +1,13 @@
 import { toHex } from 'viem';
-import type { Codec } from '../../../../../packages/reqs';
 import { Codecs, RequestType, parseRequestTag } from "../../../../../packages/reqs";
 
-export async function requestBodyToDisplayString(rawRequest: Uint8Array, codec: Codec<any>): Promise<string> {
+/**
+ * Returns a string representation of the given request body.
+ * @param {Uint8Array} rawRequest 
+ * @param {import('../../../../../packages/reqs').Codec<any>} codec 
+ * @returns {Promise<string>}
+ */
+export async function requestBodyToDisplayString(rawRequest, codec) {
   const requestType = new RequestType({
     requestTag: parseRequestTag(rawRequest),
     requestBodyCodec: codec,
@@ -12,7 +17,13 @@ export async function requestBodyToDisplayString(rawRequest: Uint8Array, codec: 
   return toDisplayString(requestBody, codec);
 }
 
-export async function resultBodyToDisplayString(rawRequest: Uint8Array, codec: Codec<any>): Promise<string> {
+/**
+ * Returns a string representation of the given result body.
+ * @param {Uint8Array} rawRequest 
+ * @param {import('../../../../../packages/reqs').Codec<any>} codec 
+ * @returns {Promise<string>}
+ */
+export async function resultBodyToDisplayString(rawRequest, codec) {
   const requestType = new RequestType({
     requestTag: parseRequestTag(rawRequest),
     requestBodyCodec: Codecs.Void,
@@ -23,24 +34,26 @@ export async function resultBodyToDisplayString(rawRequest: Uint8Array, codec: C
   return toDisplayString(result.body, codec);
 }
 
-function toDisplayString(body: unknown, codec: Codec<any>): string {
-  console.log('codec', codec);
-  console.log('body', body);
-  console.log('body', String(body));
+/**
+ * Returns a string representation of the given body for display.
+ * @param {unknown} body 
+ * @param {import('../../../../../packages/reqs').Codec<any>} codec 
+ * @returns {string}
+ */
+function toDisplayString(body, codec) {
   switch (codec) {
     case Codecs.BigInt:
-      return toHex(body as bigint);
+      return toHex(/**@type {bigint}*/ (body));
     case Codecs.Boolean:
       return body ? 'true' : 'false';
     case Codecs.Bytes:
-      return toHex(body as Uint8Array);
+      return toHex(/**@type {Uint8Array}*/ (body));
     case Codecs.Json:
       return JSON.stringify(body, null, 2);
     case Codecs.Number:
       return String(body);
     case Codecs.String:
-      console.log('just return body', body);
-      return body as string;
+      return /**@type {string}*/ (body);
     case Codecs.Void:
       return '(empty)';
     default:

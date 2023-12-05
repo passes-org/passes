@@ -1,49 +1,46 @@
-<script lang="ts">
-  import type { RequestResult, ResultStatus } from '../../../../../packages/reqs';
-  import { Codecs, RequestType, parseRequestTag } from '../../../../../packages/reqs';
-  import type * as PassesTypes from '../../../../../packages/types';
-  import { bodyTextToBodyType } from "./bodyTextToBodyType";
-  import { requestBodyToDisplayString } from "./bodyToDisplayString";
-  import { fetchFaviconUrl } from "./fetchFaviconUrl";
+<script>
+  import { Codecs, PassProviders, RequestType, parseRequestTag } from '../../../../../packages/reqs/types/main';
+  import { bodyTextToBodyType } from "./bodyTextToBodyType.js";
+  import { requestBodyToDisplayString } from "./bodyToDisplayString.js";
+  import { fetchFaviconUrl } from "./fetchFaviconUrl.js";
 
-  export let rawRequest: Uint8Array;
-  export let referrer: string;
+  /** @type {{ rawRequest: Uint8Array; referrer: string }}*/
+  let { rawRequest, referrer } = $props();
 
-  $: faviconUrlPromise = fetchFaviconUrl(referrer);
+  let faviconUrlPromise = $derived(fetchFaviconUrl(referrer));
 
-  let requestBodyCodec: keyof typeof Codecs = 'String';
-  let resultBodyCodec: keyof typeof Codecs = 'String';
-  let resultBodyText = '';
+  /** @type {keyof typeof Codecs} */
+  let requestBodyCodec = $state('String');
+  /** @type {keyof typeof Codecs} */
+  let resultBodyCodec = $state('String');
+  let resultBodyText = $state('');
 
-  let requestTag: string;
-  $: requestTag = parseRequestTag(rawRequest);
-  let requestBodyStringPromise: Promise<string>;
-  $: requestBodyStringPromise = requestBodyToDisplayString(rawRequest, Codecs[requestBodyCodec]);
+  let requestTag = $derived(parseRequestTag(rawRequest));
+  let requestBodyStringPromise = $derived(requestBodyToDisplayString(rawRequest, Codecs[requestBodyCodec]));
 
-  let requestType: RequestType<any, any>;
-  $: requestType = new RequestType({
+  let requestType = $derived(new RequestType({
     requestTag,
     requestBodyCodec: Codecs[requestBodyCodec],
     resultBodyCodec: Codecs[resultBodyCodec],
-  });
+  }));
 
-  async function onResult(status: ResultStatus) {
-    const opener = window.opener ?? window.parent;
+  /**
+   * @param {import('../../../../../packages/reqs/types/main').ResultStatus} status
+   */
+  async function onResult(status) {
     const bodyText = resultBodyText;
     const body = status === 'accepted' && await bodyTextToBodyType(bodyText, Codecs[resultBodyCodec]);
-    const result = ((): RequestResult<any> => {
+    /** @type {import('../../../../../packages/reqs/types/main').RequestResult<any>} */
+    const result = (() => {
       switch (status) {
         case 'accepted': return { status, body };
         case 'rejected': return { status };
         case 'exception': return { status, message: 'An exception occurred' };
         case 'unsupported': return { status };
       }
-    })()
+    })();
 
-    opener.postMessage({
-      type: 'request-result',
-      result: await requestType.encodeResult(result),
-    } satisfies PassesTypes.RequestResult, '*');
+    PassProviders.sendResult(requestType, result);
   }
 </script>
 
@@ -127,8 +124,8 @@
       </div>
       <!-- Actions -->
       <div class="flex space-x-4">
-        <button on:click={() => onResult('accepted')} class="flex-1 px-4 py-2 font-semibold text-white bg-black rounded dark:bg-white dark:text-black">Accept</button>
-        <button on:click={() => onResult('rejected')} class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white">Reject</button>
+        <button onclick={() => onResult('accepted')} class="flex-1 px-4 py-2 font-semibold text-white bg-black rounded dark:bg-white dark:text-black">Accept</button>
+        <button onclick={() => onResult('rejected')} class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white">Reject</button>
       </div>
     </div>
   </main>

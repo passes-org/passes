@@ -1,9 +1,16 @@
 import { hexToBytes, isHex } from 'viem';
-import { Codecs, type Codec } from "../../../../../packages/reqs";
+import { Codecs } from "../../../../../packages/reqs";
 
-export async function bodyTextToBodyType(bodyText: string, codec: Codec<any>): Promise<unknown> {
+/**
+ * Returns a representation of the given body text in the given codec's type.
+ * @param {string} bodyText 
+ * @param {import('../../../../../packages/reqs').Codec<any>} codec 
+ * @returns {Promise<unknown>}
+ */
+export async function bodyTextToBodyType(bodyText, codec) {
   switch (codec) {
     case Codecs.BigInt:
+      // eslint-disable-next-line no-undef
       return BigInt(bodyText);
     case Codecs.Boolean:
       return bodyText === 'true';
