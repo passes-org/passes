@@ -2,8 +2,8 @@
 	import { page } from "$app/stores";
 	import { fetchFaviconUrl } from "$lib/SpringBoard/fetchFaviconUrl";
 
-  let providerUri = $page.url.searchParams.get('providerUri');
-  let returnUri = $page.url.searchParams.get('returnUri');
+  let providerUri = $page.url.searchParams.get('provider');
+  let returnUri = $page.url.searchParams.get('return');
 
   if (!providerUri || !returnUri) {
     throw new Error('Missing providerUri or returnUri search param');
