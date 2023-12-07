@@ -6,9 +6,6 @@ export * from './envelope-v0.jsdoc.mjs';
 
 export { parseRequestTag } from './parse-request-tag.js';
 
-export { RequestRouter } from './request-router.js';
-export * from './request-router.jsdoc.mjs';
-
 export { RequestType } from './request-type.js';
 export * from './request-type.jsdoc.mjs';
 

@@ -19,7 +19,7 @@ The result in the form of a Uint8Array.
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:16](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/browser-types.jsdoc.mjs#L16)
+[browser-types.jsdoc.mjs:16](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/browser-types.jsdoc.mjs#L16)
 
 ___
 
@@ -31,4 +31,4 @@ The type of the result, should be 'request-result'.
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:15](https://github.com/passes-org/passes/blob/d0f7a6f/packages/reqs/src/browser-types.jsdoc.mjs#L15)
+[browser-types.jsdoc.mjs:15](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/browser-types.jsdoc.mjs#L15)
