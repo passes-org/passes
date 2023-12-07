@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 
-const POLYFILL_MODULE_URL = 'https://unpkg.com/@passes/polyfill@^0.0.2-alpha';
+const POLYFILL_MODULE_URL = 'https://unpkg.com/@passes/polyfill@^0.0.3-alpha';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
