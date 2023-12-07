@@ -36,7 +36,7 @@
     {#if providerUri}
       <!-- Favicon -->
       <div class="w-[60px] h-[60px] rounded-xl p-[3px] -mt-[50px] border-black dark:border-white border bg-white dark:bg-black self-center">
-        <img src={`/api/favicon?uri=${encodeURIComponent(providerUri)}`} alt="Provider Favicon" class="w-full h-full object-contain rounded-[9px] p-3" />
+        <img src={`/api/favicon?uri=${encodeURIComponent(providerUri)}`} alt="Provider Favicon" class="w-full h-full object-contain rounded-[9px]" />
       </div>
       
       <!-- Title -->
