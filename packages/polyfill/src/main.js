@@ -33,7 +33,7 @@
     // If the request is to set the pass provider, redirect to the passes.org set-pass-provider page
     if (getRequestTag(raw) === 'org.passes.set-pass-provider') {
       const setPassProviderBody = JSON.parse(new TextDecoder().decode(getRequestBody(raw)));
-      window.location.href = `${PASSES_BASE_URL}/set-pass-provider?providerUri=${encodeURIComponent(setPassProviderBody)}&returnUri=${encodeURIComponent(window.location.href)}`;
+      window.location.href = `${PASSES_BASE_URL}/set-pass-provider?provider=${encodeURIComponent(setPassProviderBody)}&return=${encodeURIComponent(window.location.href)}`;
       return;
     }
 
