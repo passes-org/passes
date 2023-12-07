@@ -10,7 +10,7 @@
     /** @type {import("./browser-types.jsdoc.mjs").DocumentWithPasses} */
     const _document = document;
     return typeof _document.passes !== 'undefined'
-    && typeof _document.passes.request === 'function';
+      && typeof _document.passes.request === 'function';
   }
 
   // If the document.passes ABI is already available, don't polyfill
@@ -30,6 +30,13 @@
    * @returns {Promise<Uint8Array>}
    */
   async function polyfillRequest(raw) {
+    // If the request is to set the pass provider, redirect to the passes.org set-pass-provider page
+    if (getRequestTag(raw) === 'org.passes.set-pass-provider') {
+      const setPassProviderBody = JSON.parse(new TextDecoder().decode(getRequestBody(raw)));
+      window.location.href = `${PASSES_BASE_URL}/set-pass-provider?uri=${encodeURIComponent(setPassProviderBody)}&returnUri=${encodeURIComponent(window.location.href)}`;
+      return;
+    }
+
     // Create request context params
     const formData = new FormData();
     formData.set('request', new Blob([raw]));
@@ -126,5 +133,33 @@
     }, 100);
 
     return newWin;
+  }
+
+  /**
+   * Returns a string view of tag of a Uint8Array-encoded pass request.
+   * 
+   * @param {Uint8Array} request 
+   * @returns {string}
+   */
+  function getRequestTag(request) {
+    const tagBegin = 2;
+    const tagLength = (request.at(1) ?? 0) + 1;
+    const tagEnd = tagBegin + tagLength;
+    const tagBytes = request.slice(2, tagEnd);
+    return new TextDecoder().decode(tagBytes);
+  }
+
+  /**
+   * Selects and returns the body segment of a Uint8Array-encoded pass request.
+   * 
+   * @param {Uint8Array} request 
+   * @returns {Uint8Array}
+   */
+  function getRequestBody(request) {
+    const tagBegin = 2;
+    const tagLength = (request.at(1) ?? 0) + 1;
+    const tagEnd = tagBegin + tagLength;
+    const bodyBytes = request.slice(tagEnd);
+    return bodyBytes;
   }
 })();
