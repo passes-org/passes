@@ -109,6 +109,12 @@
   font-style: normal;
   src: url('/fonts/SF-Pro-Rounded-Regular.otf') format('opentype');
 }
+@font-face {
+  font-family: 'SF Pro Rounded';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Rounded-Bold.otf') format('opentype');
+}
 
 /* Root background color */
 html,

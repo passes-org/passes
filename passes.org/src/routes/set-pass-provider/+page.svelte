@@ -9,8 +9,6 @@
     throw new Error('Missing providerUri or returnUri search param');
   }
 
-  let faviconUrlPromise = fetchFaviconUrl(providerUri);
-
   async function onAccept() {    
     await fetch('/set-pass-provider', {
       method: 'POST',
@@ -30,27 +28,42 @@
   }
 </script>
 
-<div class="flex flex-col space-y-20">
-  <!-- Header -->
-  <div class="flex flex-col items-center self-center space-y-2">
-    <!-- Favicon -->
-    <div class="p-[3px] border border-black rounded-xl w-14 h-14 dark:border-white">
-      <div class="w-full bg-black rounded-lg aspect-square dark:bg-white">
-        {#await faviconUrlPromise then faviconUrl}
-          <img src={faviconUrl} class="w-full h-full rounded-lg" alt="Pass Provider Icon" />
-        {/await}
-      </div>
-    </div>
-    <!-- Title -->
-    <div class="leading-tight text-center">
-      <h1>Do you want to set <b>{providerUri}</b> as your pass provider?</h1>
-      <h2>Future pass requests will be sent there.</h2>
-    </div> 
+<!-- Page Container -->
+<div class="flex-1 flex flex-col items-center justify-center">
 
-    <!-- Main -->
-    <div class="flex space-x-4">
-      <button on:click={onAccept} class="flex-1 px-4 py-2 font-semibold text-white bg-black rounded dark:bg-white dark:text-black">Yes</button>
-      <button on:click={onReject} class="flex-1 px-4 py-2 font-semibold border border-black rounded dark:border-white">No</button>
-    </div>
-  </div>
+  <!-- Dialog -->
+  <main class="border border-black dark:border-white rounded p-5 gap-6 flex flex-col text-center">
+    {#if providerUri}
+      <!-- Favicon -->
+      <div class="w-[60px] h-[60px] rounded-xl p-[3px] -mt-[50px] border-black dark:border-white border bg-white dark:bg-black self-center">
+        <img src={`/api/favicon?uri=${encodeURIComponent(providerUri)}`} alt="Provider Favicon" class="w-full h-full object-contain rounded-[9px] p-3" />
+      </div>
+      
+      <!-- Title -->
+      <div class="space-y-2">
+        <div class="text-xl font-bold">
+          {new URL(providerUri).hostname}
+        </div>
+        <div class="text-xl">
+          Wants To Be Your Pass Provider
+        </div>
+      </div>
+
+      <!-- Notice -->
+      <div class="bg-black/5 dark:bg-white/5 p-4 text-opacity-50">
+        You will receive future pass requests here.
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-5">
+        <button class="p-3 border border-black dark:border-white rounded-sm flex-1" on:click={onAccept}>
+          Don't Allow
+        </button>
+        <button class="p-3 bg-black text-white dark:bg-white dark:text-black rounded-sm flex-1" on:click={onReject}>
+          Allow
+        </button>
+      </div>
+    {/if}
+  </main>
+
 </div>
