@@ -50,7 +50,7 @@
       </div>
 
       <!-- Notice -->
-      <div class="bg-black/5 dark:bg-white/5 p-4 text-opacity-50">
+      <div class="bg-black/5 dark:bg-white/5 py-4 px-2 text-opacity-50">
         You will receive future pass requests here.
       </div>
 
