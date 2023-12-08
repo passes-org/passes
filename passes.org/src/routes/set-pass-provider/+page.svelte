@@ -56,10 +56,10 @@
 
       <!-- Actions -->
       <div class="flex gap-5">
-        <button class="p-3 border border-black dark:border-white rounded-sm flex-1" on:click={onAccept}>
+        <button on:click={onReject} class="p-3 border border-black dark:border-white rounded-sm flex-1">
           Don't Allow
         </button>
-        <button class="p-3 bg-black text-white dark:bg-white dark:text-black rounded-sm flex-1" on:click={onReject}>
+        <button on:click={onAccept} class="p-3 bg-black text-white dark:bg-white dark:text-black rounded-sm flex-1">
           Allow
         </button>
       </div>
