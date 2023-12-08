@@ -1,7 +1,6 @@
 <script>
 	import { page } from "$app/stores";
-	import { fetchFaviconUrl } from "$lib/SpringBoard/fetchFaviconUrl";
-
+	
   let providerUri = $page.url.searchParams.get('provider');
   let returnUri = $page.url.searchParams.get('return');
 

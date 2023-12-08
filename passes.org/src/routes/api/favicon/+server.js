@@ -14,11 +14,11 @@ export async function GET(event) {
   const html = await (await fetch(baseUrl)).text();
   const $ = cheerio.load(html);
   const faviconHref =
-    $('link[rel="icon"]').prop("href") ??
-    $('link[rel="shortcut icon"]').prop("href");
+    $('link[rel="shortcut icon"]').prop("href") ??
+    $('link[rel="icon"]').prop("href");
   const faviconUrl = faviconHref ? new URL(faviconHref, baseUrl).href : null;
   if (faviconUrl) {
-    throw redirect(302, faviconUrl);
+    throw redirect(301, faviconUrl);
   }
 
   return new Response(createFallbackImage(uri.hostname[0].toUpperCase()), { headers: { 'Content-Type': 'image/svg+xml' } });
