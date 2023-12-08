@@ -21,3 +21,12 @@ export function setUserPassProvider({ cookies }, uri) {
 
   cookies.set(PASS_PROVIDER_COOKIE_NAME, uri, { sameSite: 'lax', path: '/', expires });
 }
+
+/**
+ * Deletes the user pass provider cookie.
+ * @param {import("@sveltejs/kit").RequestEvent} event - SvelteKit request event.
+ * @returns {void}
+ */
+export function clearUserPassProvider(event) {
+  event.cookies.delete(PASS_PROVIDER_COOKIE_NAME, { sameSite: 'lax', path: '/' });
+}

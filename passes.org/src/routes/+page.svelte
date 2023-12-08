@@ -1,3 +1,20 @@
+<script>
+  export let data;
+  let passProviderHostname = data?.userPassProvider
+    ? new URL(data.userPassProvider).hostname
+    : null;
+
+  async function onClickClearPassProvider() {
+    const clear = confirm(`Do you want to clear your Pass Provider?\n\nYou will need to sign back into ${passProviderHostname} to receive Pass Requests there again.`);
+    if (clear) {
+      const response = await fetch('/api/clear-pass-provider', { method: 'POST' })
+      if (response.ok) {
+        window.location.reload();
+      }
+    }
+  }
+</script>
+
 <svelte:head>
   <title>Passes - The Web API for Portable Identity</title>
   <meta name="description" content="Passes give users a common client-side identity that any app can request to recognize them or act on their behalf, putting them in control of their data and privacy.">
@@ -16,7 +33,15 @@
     <img src="/logo_dark.svg" alt="Passes Logo" class="dark:block" />
 
     <!-- Icon: Github -->
-    <a href="//github.com/passes-org/passes">Github</a>
+    <div class="flex space-x-4 items-baseline">
+      <a href="//github.com/passes-org/passes">Github</a>
+      {#if passProviderHostname}
+        <div>•</div>
+        <button class="text-xs" on:click={onClickClearPassProvider}>
+          Using: <span class="font-bold">{passProviderHostname}</span>
+        </button>
+      {/if}
+    </div>
   </div>
 
   <!-- Main Content -->
