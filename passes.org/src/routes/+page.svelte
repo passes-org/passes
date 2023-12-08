@@ -33,10 +33,9 @@
     <img src="/logo_dark.svg" alt="Passes Logo" class="dark:block" />
 
     <!-- Icon: Github -->
-    <div class="flex space-x-4 items-baseline">
-      <a href="//github.com/passes-org/passes">Github</a>
+    <div class="space-y-1 flex flex-col items-end">
+      <a class="block" href="//github.com/passes-org/passes">Github</a>
       {#if passProviderHostname}
-        <div>•</div>
         <button class="text-xs" on:click={onClickClearPassProvider}>
           Using: <span class="font-bold">{passProviderHostname}</span>
         </button>
