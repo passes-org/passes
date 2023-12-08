@@ -9,11 +9,12 @@
   }
 
   async function onAccept() {    
-    await fetch('/set-pass-provider', {
+    const response = await fetch('/set-pass-provider', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ uri: providerUri }),
     });
+    await response.text();
 
     if (returnUri) {
       window.location.replace(returnUri);
