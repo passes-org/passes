@@ -24,7 +24,7 @@ A codec for bigint request/result bodies.
 
 #### Defined in
 
-[codecs/bigint.js:7](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/codecs/bigint.js#L7)
+[codecs/bigint.js:7](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/bigint.js#L7)
 
 ___
 
@@ -36,7 +36,7 @@ A codec for boolean request/result bodies.
 
 #### Defined in
 
-[codecs/boolean.js:5](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/codecs/boolean.js#L5)
+[codecs/boolean.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/boolean.js#L5)
 
 ___
 
@@ -48,7 +48,7 @@ An identity codec for Uint8Array request/result bodies.
 
 #### Defined in
 
-[codecs/bytes.js:5](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/codecs/bytes.js#L5)
+[codecs/bytes.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/bytes.js#L5)
 
 ___
 
@@ -62,7 +62,7 @@ A codec for json request/result bodies.
 
 #### Defined in
 
-[codecs/json.js:8](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/codecs/json.js#L8)
+[codecs/json.js:8](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/json.js#L8)
 
 ___
 
@@ -74,7 +74,7 @@ A codec for number request/result bodies.
 
 #### Defined in
 
-[codecs/number.js:5](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/codecs/number.js#L5)
+[codecs/number.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/number.js#L5)
 
 ___
 
@@ -86,7 +86,7 @@ A codec for string request/result bodies.
 
 #### Defined in
 
-[codecs/string.js:5](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/codecs/string.js#L5)
+[codecs/string.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/string.js#L5)
 
 ___
 
@@ -98,4 +98,4 @@ A codec for empty request/result bodies.
 
 #### Defined in
 
-[codecs/void.js:5](https://github.com/passes-org/passes/blob/9dd091e/packages/reqs/src/codecs/void.js#L5)
+[codecs/void.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/void.js#L5)
