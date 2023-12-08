@@ -24,115 +24,83 @@
   const PASSES_BASE_URL = 'https://passes.org';
 
   /**
-   * Provides a polyfill implementation of the document.passes.request ABI using a POST request to passes.org in a new window which forwards the end user to their pass engine to handle the request.
+   * Provides a polyfill implementation of the document.passes.request ABI using a POST request to passes.org in a new window which forwards the end user to their Pass Provider to handle the request.
    * 
    * @param {Uint8Array} raw 
    * @returns {Promise<Uint8Array>}
    */
   async function polyfillRequest(raw) {
-    // If the request is to set the pass provider, redirect to the passes.org set-pass-provider page
+    // If the request is to set the Pass Provider, redirect to the passes.org set-pass-provider page
     if (getRequestTag(raw) === 'org.passes.set-pass-provider') {
       const { uri } = JSON.parse(new TextDecoder().decode(getRequestBody(raw)));
       window.location.href = `${PASSES_BASE_URL}/set-pass-provider?provider=${encodeURIComponent(uri)}&return=${encodeURIComponent(window.location.href)}`;
       return;
     }
 
-    // Create request context params
-    const formData = new FormData();
-    formData.set('request', new Blob([raw]));
-    const passEngineWindow = openWindowWithPost(`${PASSES_BASE_URL}/request`, formData);
+    // Open a window to passes.org to redirect to the user's Pass Provider
+    const passProviderWindow = window.open(`${PASSES_BASE_URL}/request`, '_blank');
 
-    // Create a promise and resolver fn which will be used to return a promise that gets resolved from handleMessage once there's a result
+    /**
+     * Handles connect messages from the Pass Provider window.
+     * 
+     * @param {MessageEvent<import("./browser-types.jsdoc.mjs").ConnectMessage>} event 
+     * @returns {void}
+     */
+    function handleConnectMessage(event) {
+      const message = event.data;
+
+      // Ignore messages that aren't from the Pass Provider window opened in this call
+      if (event.source !== passProviderWindow) return;
+
+      // Ignore messages that aren't connect messages
+      if (message.type !== 'org.passes.messages.connect') return;
+
+      // Send the request to the Pass Provider window
+      const requestMessage = { type: 'org.passes.messages.request', request: raw };
+      passProviderWindow.postMessage(requestMessage, '*');
+
+      // Remove this event listener
+      window.removeEventListener('message', handleConnectMessage);
+    }
+
+    // Handle connect messages from the passProviderWindow
+    window.addEventListener('message', handleConnectMessage);
+
+    // Create a promise and resolver fn which will be used to return a promise that gets resolved from handleResultMessage once there's a result
     /** @type {(result: Uint8Array) => void} */
     let resolveResultPromise;
     /** @type {Promise<Uint8Array>} */
     const resultPromise = new Promise((resolve) => { resolveResultPromise = resolve; });
 
     /**
-     * Handles request-result messages from the pass engine window.
+     * Handles result messages from the Pass Provider window.
      * 
-     * @param {MessageEvent<import("./browser-types.jsdoc.mjs").TransportEncodedRequestResult>} event 
+     * @param {MessageEvent<import("./browser-types.jsdoc.mjs").ResultMessage>} event 
      * @returns {void}
      */
-    function handleMessage(event) {
+    function handleResultMessage(event) {
       const message = event.data;
 
-      // Ignore messages that aren't from the pass engine window opened in this call
-      if (event.source !== passEngineWindow) return;
+      // Ignore messages that aren't from the Pass Provider window opened in this call
+      if (event.source !== passProviderWindow) return;
 
       // Ignore messages that aren't request results
-      if (message.type !== 'request-result') return;
+      if (message.type !== 'org.passes.messages.result') return;
 
       // Resolve the result promise returned by this function
       resolveResultPromise(message.result);
       // Close the window
-      passEngineWindow.close();
+      passProviderWindow.close();
     }
 
-    // Handle messages from the passEngineWindow
-    window.addEventListener('message', handleMessage);
+    // Handle result messages from the passProviderWindow
+    window.addEventListener('message', handleResultMessage);
 
-    // When the passEngineWindow closes, remove the message handler from this window
-    passEngineWindow.addEventListener('close', () => window.removeEventListener('message', handleMessage));
+    // When the passProviderWindow closes, remove the message handler from this window
+    passProviderWindow.addEventListener('close', () => window.removeEventListener('message', handleResultMessage));
 
-    // Return the promise for the request result, which will be resolved in handleMessage above
+    // Return the promise for the request result, which will be resolved in handleResultMessage above
     return resultPromise;
-  }
-
-  /**
-   * Submits a POST request with the provided form data to the provided url. 
-   * Under the hood, this uses a hidden form that's temporarily added to the DOM until it's submitted.
-   * 
-   * @param {string} url 
-   * @param {FormData} formData 
-   * @returns {Window} (the opened window)
-   */
-  function openWindowWithPost(url, formData) {
-    // Open a new window
-    const target = crypto.randomUUID();
-    const newWin = window.open('', target);
-    if (!newWin) throw new Error('Failed to open new window for POST');
-
-    // Create a form dynamically
-    const form = document.createElement('form');
-    form.action = url;
-    form.method = 'POST';
-    form.enctype = 'multipart/form-data';
-    form.target = target;
-
-    // Append FormData entries as form inputs
-    formData.forEach((value, key) => {
-      if (value instanceof File) {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.name = key;
-
-        // Simulate a user-selected file using a DataTransfer object
-        const dataTransfer = new DataTransfer();
-        dataTransfer.items.add(value);
-        input.files = dataTransfer.files;
-
-        form.appendChild(input);
-      } else {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value;
-        form.appendChild(input);
-      }
-    });
-
-    // Append the form to the body
-    document.body.appendChild(form);
-
-    // Submit the form
-    setTimeout(() => {
-      form.submit();
-      // Remove the form from the body (cleanup)
-      document.body.removeChild(form);
-    }, 100);
-
-    return newWin;
   }
 
   /**

@@ -32,7 +32,7 @@
     /**
      * Handles request-result messages from the pass engine window.
      * 
-     * @param {MessageEvent<import("@passes/reqs").TransportEncodedRequestResult>} event 
+     * @param {MessageEvent<import("@passes/reqs").ResultMessage>} event 
      * @returns {Promise<void>}
      */
     async function handleMessage(event) {
@@ -40,7 +40,7 @@
       // Ignore messages that aren't from the pass engine window opened in this call
       if (event.source !== passEngineWindow) return;
       // Ignore messages that aren't request results
-      if (message.type !== 'request-result') return;
+      if (message.type !== 'org.passes.messages.result') return;
 
       const decodedResult = await reqType.decodeResult(message.result);
       resultStatus = decodedResult.status;

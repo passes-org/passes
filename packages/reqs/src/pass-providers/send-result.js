@@ -9,9 +9,9 @@ export async function sendResult(requestType, result) {
   const requester = window.opener ?? window.parent;
   if (!requester) throw new Error('sendResult must be called from a popup or iframe');
 
-  /** @type {import("../browser-types.jsdoc.mjs").TransportEncodedRequestResult} */
+  /** @type {import("../browser-types.jsdoc.mjs").ResultMessage} */
   const resultMessage = {
-    type: 'request-result',
+    type: 'org.passes.messages.result',
     result: await requestType.encodeResult(result),
   };
 
