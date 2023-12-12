@@ -1,6 +1,6 @@
-[@passes/reqs](../README.md) / [Exports](../modules.md) / RequestType
+[@passes/reqs](../README.md) / [Exports](../modules.md) / RequestTopic
 
-# Class: RequestType\<TRequestBody, TResultBody\>
+# Class: RequestTopic\<TRequestBody, TResultBody\>
 
 Builds an Envelope-v0x00 request type interface.
 
@@ -15,38 +15,39 @@ Builds an Envelope-v0x00 request type interface.
 
 ## Hierarchy
 
-- **`RequestType`**
+- **`RequestTopic`**
 
-  ↳ [`SignedRequestType`](SignedRequestType.md)
+  ↳ [`SignedRequestTopic`](SignedRequestTopic.md)
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](RequestType.md#constructor)
+- [constructor](RequestTopic.md#constructor)
 
 ### Properties
 
-- [abi](RequestType.md#abi)
-- [requestBodyCodec](RequestType.md#requestbodycodec)
-- [requestTag](RequestType.md#requesttag)
-- [resultBodyCodec](RequestType.md#resultbodycodec)
-- [Errors](RequestType.md#errors)
+- [abi](RequestTopic.md#abi)
+- [id](RequestTopic.md#id)
+- [requestBodyCodec](RequestTopic.md#requestbodycodec)
+- [resultBodyCodec](RequestTopic.md#resultbodycodec)
+- [Errors](RequestTopic.md#errors)
 
 ### Methods
 
-- [decodeRequest](RequestType.md#decoderequest)
-- [decodeResult](RequestType.md#decoderesult)
-- [encodeRequest](RequestType.md#encoderequest)
-- [encodeResult](RequestType.md#encoderesult)
-- [resolveABI](RequestType.md#resolveabi)
-- [sendRequest](RequestType.md#sendrequest)
+- [decodeRequest](RequestTopic.md#decoderequest)
+- [decodeResult](RequestTopic.md#decoderesult)
+- [encodeRequest](RequestTopic.md#encoderequest)
+- [encodeResult](RequestTopic.md#encoderesult)
+- [resolveABI](RequestTopic.md#resolveabi)
+- [sendRequest](RequestTopic.md#sendrequest)
+- [toString](RequestTopic.md#tostring)
 
 ## Constructors
 
 ### constructor
 
-• **new RequestType**\<`TRequestBody`, `TResultBody`\>(`params`): [`RequestType`](RequestType.md)\<`TRequestBody`, `TResultBody`\>
+• **new RequestTopic**\<`TRequestBody`, `TResultBody`\>(`params`): [`RequestTopic`](RequestTopic.md)\<`TRequestBody`, `TResultBody`\>
 
 #### Type parameters
 
@@ -59,15 +60,15 @@ Builds an Envelope-v0x00 request type interface.
 
 | Name | Type |
 | :------ | :------ |
-| `params` | `RequestTypeParams`\<`TRequestBody`, `TResultBody`\> |
+| `params` | `RequestTopicParams`\<`TRequestBody`, `TResultBody`\> |
 
 #### Returns
 
-[`RequestType`](RequestType.md)\<`TRequestBody`, `TResultBody`\>
+[`RequestTopic`](RequestTopic.md)\<`TRequestBody`, `TResultBody`\>
 
 #### Defined in
 
-[request-type.js:33](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L33)
+request-topic.js:33
 
 ## Properties
 
@@ -77,7 +78,17 @@ Builds an Envelope-v0x00 request type interface.
 
 #### Defined in
 
-[request-type.js:37](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L37)
+request-topic.js:37
+
+___
+
+### id
+
+• **id**: `string`
+
+#### Defined in
+
+request-topic.js:34
 
 ___
 
@@ -87,17 +98,7 @@ ___
 
 #### Defined in
 
-[request-type.js:35](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L35)
-
-___
-
-### requestTag
-
-• **requestTag**: `string`
-
-#### Defined in
-
-[request-type.js:34](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L34)
+request-topic.js:35
 
 ___
 
@@ -107,7 +108,7 @@ ___
 
 #### Defined in
 
-[request-type.js:36](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L36)
+request-topic.js:36
 
 ___
 
@@ -119,12 +120,12 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `ABI_NOT_AVAILABLE` | typeof `RequestTypeABINotAvailable` |
-| `INCORRECT_TAG` | typeof `RequestTypeIncorrectTagError` |
+| `ABI_NOT_AVAILABLE` | typeof `RequestTopicABINotAvailable` |
+| `INCORRECT_TOPIC` | typeof `RequestTopicIncorrectTagError` |
 
 #### Defined in
 
-[request-type.js:112](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L112)
+request-topic.js:112
 
 ## Methods
 
@@ -146,7 +147,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-type.js:59](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L59)
+request-topic.js:59
 
 ___
 
@@ -168,7 +169,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-type.js:86](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L86)
+request-topic.js:86
 
 ___
 
@@ -190,7 +191,7 @@ Encodes a structured request body into an envelope-v0x00 request.
 
 #### Defined in
 
-[request-type.js:46](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L46)
+request-topic.js:46
 
 ___
 
@@ -212,7 +213,7 @@ Encodes a structured result body into an envelope-v0x00 result.
 
 #### Defined in
 
-[request-type.js:71](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L71)
+request-topic.js:71
 
 ___
 
@@ -232,7 +233,7 @@ A helper for resolving the PassesABI. If the instance has no abi property, it re
 
 #### Defined in
 
-[request-type.js:150](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L150)
+request-topic.js:150
 
 ___
 
@@ -254,4 +255,20 @@ Sends a request.
 
 #### Defined in
 
-[request-type.js:105](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.js#L105)
+request-topic.js:105
+
+___
+
+### toString
+
+▸ **toString**(): `string`
+
+Returns a string representation of the request topic.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+request-topic.js:162

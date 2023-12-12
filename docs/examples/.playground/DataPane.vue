@@ -3,7 +3,7 @@ import { computed, ref, watchEffect } from 'vue';
 import Button from './Button.vue';
 import PaneTabs from './PaneTabs.vue';
 import { useStore } from './store';
-import { SignedAcceptedResult, SignedRequestType } from '../../../packages/reqs/src/main';
+import { SignedAcceptedResult, SignedRequestTopic } from '../../../packages/reqs/src/main';
 import { calculateJwkThumbprint, base64url, JWK } from 'jose';
 import makeBlockie from 'ethereum-blockies-base64';
 
@@ -13,13 +13,13 @@ const decodedRequestBody = store.value.requestBody;
 const decodedResult = computed(() => store.value.result);
 
 const signatureBase64 = computed(() => {
-  if (store.value.requestType instanceof SignedRequestType && decodedResult.value?.status === 'accepted') {
+  if (store.value.requestTopic instanceof SignedRequestTopic && decodedResult.value?.status === 'accepted') {
     return base64url.encode((decodedResult.value as SignedAcceptedResult<any>).signed.signature);
   }
 });
 const publicKeyThumbprint = ref();
 watchEffect(async () => {
-  if (store.value.requestType instanceof SignedRequestType && decodedResult.value?.status === 'accepted') {
+  if (store.value.requestTopic instanceof SignedRequestTopic && decodedResult.value?.status === 'accepted') {
     publicKeyThumbprint.value = await calculateJwkThumbprint((decodedResult.value as SignedAcceptedResult<any>).signed.publicKey as JWK);
   }
 })
@@ -35,7 +35,7 @@ watchEffect(async () => {
     <div v-if="store.dataPaneActiveTab === 'request'" :class="$style.content">
       <label>
         <span>Tag</span>
-        <div :class="$style.code">{{ store.requestType.requestTag }}</div>
+        <div :class="$style.code">{{ store.requestTopic.id }}</div>
       </label>
       <label>
         <span>Body</span>

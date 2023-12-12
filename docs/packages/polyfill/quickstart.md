@@ -11,4 +11,4 @@ To make the `document.passes.request` ABI available to all users in any browser,
 <img src="/diagram_02_light.gif" alt="Diagram of a Pass Request" class="light-mode-only" />
 <img src="/diagram_02_dark.gif" alt="Diagram of a Pass Request" class="dark-mode-only" />
 
-The polyfill provides an implementation of the document.passes.request ABI using a POST request to passes.org in a new window which forwards the end user to their pass engine to handle the request.
+The polyfill provides an implementation of the document.passes.request ABI using a POST request to passes.org in a new window which forwards the end user to their pass provider to handle the request.

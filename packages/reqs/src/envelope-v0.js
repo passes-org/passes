@@ -11,17 +11,17 @@ export const EnvelopeV0 = {
   VERSION: 0x00,
   
   /**
-   * Returns an encoded request header with the provided string tag.
+   * Returns an encoded request header with the provided string topic.
    * 
-   * @param {string} tag 
+   * @param {string} topic 
    * @returns {Uint8Array}
    */
-  encodeRequestHeader(tag) {
-    const tagBytes = new TextEncoder().encode(tag);
+  encodeRequestHeader(topic) {
+    const topicBytes = new TextEncoder().encode(topic);
   
     return new Uint8Array([
       this.VERSION,
-      ...formatRLE(tagBytes, { length: 1 }),
+      ...formatRLE(topicBytes, { length: 1 }),
     ]);
   },
 
@@ -29,16 +29,16 @@ export const EnvelopeV0 = {
    * Returns a structured view of the provided request bytes.
    * 
    * @param {Uint8Array} bytes 
-   * @returns {{ tag: string; body: Uint8Array }}
+   * @returns {{ topic: string; body: Uint8Array }}
    */
   parseRequest(bytes) {
     const version = bytes.at(0);
     if (version !== this.VERSION) throw new this.errors.REQUEST_INCORRECT_VERSION(version);
-    const tagLengthField = bytes.at(1);
-    if (typeof tagLengthField === 'undefined') throw new this.errors.REQUEST_MISSING_TAG_LENGTH();
-    const { range: tagBytes, remainder: body } = parseRLE(bytes, 1, { length: 1 });
-    const tag = new TextDecoder().decode(tagBytes);
-    return { tag, body };
+    const topicLengthField = bytes.at(1);
+    if (typeof topicLengthField === 'undefined') throw new this.errors.REQUEST_MISSING_TAG_LENGTH();
+    const { range: topicBytes, remainder: body } = parseRLE(bytes, 1, { length: 1 });
+    const topic = new TextDecoder().decode(topicBytes);
+    return { topic, body };
   },
 
   /**
@@ -149,9 +149,9 @@ export const EnvelopeV0 = {
         this.version = version;
       }
     },
-    REQUEST_MISSING_TAG_LENGTH: class EnvelopeV0RequestMissingTagLength extends Error {
-      name = 'Missing Request Envelope Tag Length';
-      message = 'EnvelopeV0 request must have its tag length at byte 1';
+    REQUEST_MISSING_TOPIC_LENGTH: class EnvelopeV0RequestMissingTopicLength extends Error {
+      name = 'Missing Request Envelope Topic Length';
+      message = 'EnvelopeV0 request must have its topic length at byte 1';
     },
 
     // –

@@ -17,25 +17,25 @@ These docs are under active development, and we'll be continuously publishing up
 
 ## What Is a Pass Request?
 
-A Pass Request can represent anything, and can be defined by anyone. They are identified by a unique tag, for example `org.passes.get-user-email`, and have specific request and result types called `Codecs`.
+A Pass Request can represent anything, and can be defined by anyone. They are identified by a unique topic, for example `org.passes.get-user-email`, and have specific request and result body `Codecs`.
 
 ```typescript
-import { RequestType } from '@passes/reqs';
+import { RequestTopic } from '@passes/reqs';
 
-const getEmail = new RequestType({
-  requestTag: 'com.example.get-email', // This request type is a get-email request
+const getEmail = new RequestTopic({
+  id: 'com.example.get-email', // This is a get-email request
   requestBodyCodec: Codecs.Void, // The request body type is empty
   resultBodyCodec: Codecs.String // The result body type is a string of the user's email
 });
 ```
 
-To send a Pass Request, apps will use the high-level API of the `RequestType`.
+To send a Pass Request, apps will use the high-level API of the `RequestTopic`.
 
 ```typescript
-import { RequestType } from '@passes/reqs';
+import { RequestTopic } from '@passes/reqs';
 
-const getEmail = new RequestType({
-  requestTag: 'com.example.get-email', // This request type is a get-email request
+const getEmail = new RequestTopic({
+  id: 'com.example.get-email', // This is a get-email request
   requestBodyCodec: Codecs.Void, // The request body type is empty
   resultBodyCodec: Codecs.String // The result body type is a string of the user's email
 });
@@ -66,7 +66,7 @@ We believe that the web should recognize you, on your terms, without compromisin
 
 - **Explicit User Control**. Pass requests are reviewed, and approved or rejected by the user via their device.
 
-- **Interoperability**. Data requests and other integrations between apps is simplified. Rather than each app having its own bespoke API others have to integrate, with Passes apps that support common request types can automatically interact.
+- **Interoperability**. Data requests and other integrations between apps is simplified. Rather than each app having its own bespoke API others have to integrate, with Passes, apps that support common request topics can automatically interact.
 
 - **ABI Stability**. The core ABI for making Pass Requests is designed in order to remain stable as usage of Pass Requests evolves during adoption.
 

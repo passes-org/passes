@@ -6,13 +6,13 @@ Reqs (pronounced "rex" – /rɛks/) provides a high-level interface for using Pa
 npm add @passes/reqs    # or bun, yarn, pnpm
 ```
 
-## Defining a Pass Request Type
+## Defining a Pass Request Topic
 
-To create a Pass Request type, you need 3 things:
+To create a Pass Request topic, you need 3 things:
 
-1. **A Request Tag**. A string to identify your Pass Request. This is what Pass Providers will use to interpret your Pass Request, so it should _uniquely_ identify your Pass Request type. A good way to make your request tag unique is to make it the URI of the Pass Request type's specification on your website. Another good option is a Passes Protocol RFC number (when we launch the RFCs tracker).
+1. **A Topic ID**. A string to identify your Request Topic. This is what Pass Providers will use to interpret a Pass Request of your topic, so it should _uniquely_ identify your Pass Request topic. This should use [reverse-dns notation](https://en.wikipedia.org/wiki/Reverse_domain_name_notation) and be namespaced to your organization – for example `org.passes.my-example-request-topic`.
 
-2. **A Request Body Codec**. This translates the rich representation of the request body data your Pass Request type uses to binary and back.
+2. **A Request Body Codec**. This translates the rich representation of the request body data your Pass Request topic uses to binary and back.
 
 3. **A Result Body Codec**. This is just like the _request_ body codec, but for your Pass Request's result body data.
 
@@ -40,15 +40,15 @@ type Codec<T> = {
 }
 ```
 
-### RequestType
+### RequestTopic
 
-Let's make a request type that allows us to ask the user a yes-or-no question, and they can accept the request with a boolean representing their answer.
+Let's make a request topic that allows us to ask the user a yes-or-no question, and they can accept the request with a boolean representing their answer.
 
 ```typescript
-import { Codecs, RequestType } from '@passes/reqs';
+import { Codecs, RequestTopic } from '@passes/reqs';
 
-const yesOrNoQuestion = new RequestType({
-  requestTag: 'org.passes.example.yes-or-no-question',
+const yesOrNoQuestion = new RequestTopic({
+  id: 'org.passes.example.yes-or-no-question',
   requestBodyCodec: Codecs.String,
   resultBodyCodec: Codecs.Boolean,
 });
@@ -61,22 +61,22 @@ const userAnswer = await yesOrNoQuestion.sendRequest('Have you ever been to Oliv
 //    ^ { status: 'accepted', body: true }
 ```
 
-### SignedRequestType
+### SignedRequestTopic
 
 It's generally recommended to use signed Pass Requests, since they use asymmetric key cryptography to assert and verify that Pass Request results have been approved by the user.
 
-To make a `RequestType` signed, we simply create a `SignedRequestType` to wrap it, and provide a `signResult` or `verifyResult` implementation...
+To make a `RequestTopic` signed, we simply create a `SignedRequestTopic` to wrap it, and provide a `signResult` or `verifyResult` implementation...
 
 ```typescript
-import { Codecs, RequestType, SignedRequestType, SignedBodyWrapper, SignedBodyWrapperHeader } from '@passes/reqs';
+import { Codecs, RequestTopic, SignedRequestTopic, SignedBodyWrapper, SignedBodyWrapperHeader } from '@passes/reqs';
 
 // For this demo implementation, we'll use the SubtleCrypto API
 const keypair = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verify']);
 
-const yesOrNoQuestion = new SignedRequestType({
-  // We're wrapping the same request type we defined above
-  requestType: new RequestType({
-    requestTag: 'org.passes.example.yes-or-no-question',
+const yesOrNoQuestion = new SignedRequestTopic({
+  // We're wrapping the same request topic we defined above
+  requestTopic: new RequestTopic({
+    id: 'org.passes.example.yes-or-no-question',
     requestBodyCodec: Codecs.String,
     resultBodyCodec: Codecs.Boolean,
   }),
@@ -107,12 +107,12 @@ For building a [Pass Provider](/#what-is-a-pass-provider), `reqs` exports a `Pas
 
 #### parseRequestTag
 
-To get the tag of a Pass Request before you know its `RequestType`, you can use `parseRequestTag` on the raw request bytes.
+To get the tag of a Pass Request before you know its `RequestTopic`, you can use `parseRequestTag` on the raw request bytes.
 
 ```typescript
 import { parseRequestTag } from '@passes/reqs';
 
-const requestTag = parseRequestTag(
+const id = parseRequestTag(
   // Replace this with a raw request
   new Uint8Array([/* ... */]),
 );
@@ -139,19 +139,19 @@ Once your user has accepted or rejected a Pass Request, you can send the result 
 ```typescript
 import { PassProviders } from '@passes/reqs';
 
-// Note: `handleRequest` is a placeholder for your handling logic for the given request type
+// Note: `handleRequest` is a placeholder for your handling logic for the given request topic
 const result = await handleRequest(request);
 
-await PassProviders.sendResult(requestType, result);
+await PassProviders.sendResult(requestTopic, result);
 ```
 
 ### Putting It All Together
 
-Here's an example of how to use the above APIs together to implement support for a set of Pass Request types in a basic Web Pass Provider.
+Here's an example of how to use the above APIs together to implement support for a set of Pass Request topics in a basic Web Pass Provider.
 
 ```typescript
 import { PassProviders } from '@passes/reqs';
-import * as SupportedRequestTypes from './supported-request-types'; // A map of the request types supported by your Pass Provider
+import * as SupportedRequestTopics from './supported-request-topics'; // A map of the request topics supported by your Pass Provider
 
 // Called when your user signs in to set your app as their Pass Provider
 async function onUserAuthn(userToken) {
@@ -165,26 +165,26 @@ async function onUserAuthn(userToken) {
 
 // Presents a UI for the user to review and handle the incoming Pass Request, and sends the result to the requesting app
 async function handlePassRequest(request: Uint8Array) {
-  const requestTag = parseRequestTag(request);
+  const id = parseRequestTag(request);
 
-  switch (requestTag) {
-    case SupportedRequestTypes.GetUserEmail.RequestTag: {
-      const requestType = SupportedRequestTypes.Example1.RequestType;
+  switch (id) {
+    case SupportedRequestTopics.GetUserEmail.RequestTag: {
+      const requestTopic = SupportedRequestTopics.Example1.RequestTopic;
       try {
-        const requestBody = await requestType.decodeRequest(request);
-        const result = await presentRequestReviewUIAndGetResult(requestType, requestBody);
+        const requestBody = await requestTopic.decodeRequest(request);
+        const result = await presentRequestReviewUIAndGetResult(requestTopic, requestBody);
         await PassProviders.sendResult(result);
       } catch (error) {
-        await PassProviders.sendResult({ type: 'exception', message: error.message });
+        await PassProviders.sendResult({ status: 'exception', message: error.message });
       }
       break;
     }
 
-    // ... (other supported request types)
+    // ... (other supported request topics)
 
     default:
       // Communicate to your user that the incoming request tag is not supported by your Pass Provider
-      await PassProviders.sendResult({ type: 'unsupported' });
+      await PassProviders.sendResult({ status: 'unsupported' });
   }
 }
 ```

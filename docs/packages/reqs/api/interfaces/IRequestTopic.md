@@ -1,6 +1,6 @@
-[@passes/reqs](../README.md) / [Exports](../modules.md) / IRequestType
+[@passes/reqs](../README.md) / [Exports](../modules.md) / IRequestTopic
 
-# Interface: IRequestType\<TRequestBody, TResultBody\>
+# Interface: IRequestTopic\<TRequestBody, TResultBody\>
 
 ## Type parameters
 
@@ -13,12 +13,12 @@
 
 ### Properties
 
-- [decodeRequest](IRequestType.md#decoderequest)
-- [decodeResult](IRequestType.md#decoderesult)
-- [encodeRequest](IRequestType.md#encoderequest)
-- [encodeResult](IRequestType.md#encoderesult)
-- [requestTag](IRequestType.md#requesttag)
-- [sendRequest](IRequestType.md#sendrequest)
+- [decodeRequest](IRequestTopic.md#decoderequest)
+- [decodeResult](IRequestTopic.md#decoderesult)
+- [encodeRequest](IRequestTopic.md#encoderequest)
+- [encodeResult](IRequestTopic.md#encoderesult)
+- [id](IRequestTopic.md#id)
+- [sendRequest](IRequestTopic.md#sendrequest)
 
 ## Properties
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[request-type.jsdoc.mjs:7](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.jsdoc.mjs#L7)
+request-topic.jsdoc.mjs:7
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[request-type.jsdoc.mjs:9](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.jsdoc.mjs#L9)
+request-topic.jsdoc.mjs:9
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[request-type.jsdoc.mjs:6](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.jsdoc.mjs#L6)
+request-topic.jsdoc.mjs:6
 
 ___
 
@@ -114,17 +114,17 @@ ___
 
 #### Defined in
 
-[request-type.jsdoc.mjs:8](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.jsdoc.mjs#L8)
+request-topic.jsdoc.mjs:8
 
 ___
 
-### requestTag
+### id
 
-• **requestTag**: `string`
+• **id**: `string`
 
 #### Defined in
 
-[request-type.jsdoc.mjs:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.jsdoc.mjs#L5)
+request-topic.jsdoc.mjs:5
 
 ___
 
@@ -148,4 +148,4 @@ ___
 
 #### Defined in
 
-[request-type.jsdoc.mjs:10](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/request-type.jsdoc.mjs#L10)
+request-topic.jsdoc.mjs:10

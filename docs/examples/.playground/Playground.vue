@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { IRequestType } from '../../../packages/reqs/src/main';
+import { IRequestTopic } from '../../../packages/reqs/src/main';
 import DataPane from './DataPane.vue';
 import EmulatorPane from './EmulatorPane.vue';
 import PlaygroundHeader from './PlaygroundHeader.vue';
 import { provideStore } from './store';
 
-const { requestBody, requestType, resultBody } = defineProps<{
+const { requestBody, requestTopic, resultBody } = defineProps<{
   title?: string;
   description?: string;
   requestBody: any;
-  requestType: IRequestType<any, any>;
+  requestTopic: IRequestTopic<any, any>;
   resultBody?: any;
   acceptButtonTitle?: string;
   rejectButtonTitle?: string;
@@ -18,15 +18,15 @@ const { requestBody, requestType, resultBody } = defineProps<{
 
 const store = provideStore({
   requestBody,
-  requestType,
+  requestTopic,
 });
 
 async function handleAccept(body) {
-  store.value.setEmulatorResult(await store.value.requestType.encodeResult({ status: 'accepted', body }));
+  store.value.setEmulatorResult(await store.value.requestTopic.encodeResult({ status: 'accepted', body }));
 }
 
 async function handleReject() {
-  store.value.setEmulatorResult(await store.value.requestType.encodeResult({ status: 'rejected' }));
+  store.value.setEmulatorResult(await store.value.requestTopic.encodeResult({ status: 'rejected' }));
 }
 </script>
 

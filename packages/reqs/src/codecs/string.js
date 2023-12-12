@@ -1,6 +1,7 @@
 /**
  * A codec for string request/result bodies.
- * @type {import("../request-type").Codec<string>}
+ * @type {import("../request-topic").Codec<string>}
+ * @memberof Codecs
  */
 const StringCodec = {
   encode: (value) => new TextEncoder().encode(value),

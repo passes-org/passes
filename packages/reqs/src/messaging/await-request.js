@@ -1,15 +1,17 @@
 /**
- * Sends a connect message to the requesting app window and returns a promise that resolves with the request when it's received.
+ * Topic and Pass Providers should call `awaitRequest` when opened by a requesting app to receive the Pass Request.
+ * Under the hood, it sends a connect message to the requesting app window and returns a promise that resolves with the request when it's received.
  * @returns {Promise<Uint8Array>}
+ * @memberof Messaging
  */
 export async function awaitRequest() {
-  if (typeof window === 'undefined') throw new Error('receiveRequest is only available in the browser');
+  if (typeof window === 'undefined') throw new Error('awaitRequest is only available in the browser');
   const requestingAppWindow = window.opener ?? window.parent;
-  if (!requestingAppWindow) throw new Error('receiveRequest must be called from a popup or iframe');
+  if (!requestingAppWindow) throw new Error('awaitRequest must be called from a popup or iframe');
 
   // Send connect message
   /** @type {import("../browser-types.jsdoc.mjs").ConnectMessage} */
-  const resultMessage = { type: 'org.passes.messages.connect' };
+  const resultMessage = { type: 'org.passes.messaging.connect' };
   requestingAppWindow.postMessage(resultMessage, '*');
 
   // Create a promise and resolver fn which will be used to return a promise that gets resolved from handleRequestMessage once there's a result
@@ -31,7 +33,7 @@ export async function awaitRequest() {
     if (event.source !== requestingAppWindow) return;
 
     // Ignore messages that aren't request results
-    if (message.type !== 'org.passes.messages.request') return;
+    if (message.type !== 'org.passes.messaging.request') return;
 
     // Resolve the result promise returned by this function
     resolveRequestPromise(message.request);
@@ -46,3 +48,4 @@ export async function awaitRequest() {
   // Return the request promise
   return requestPromise;
 }
+

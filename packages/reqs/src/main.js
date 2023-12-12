@@ -1,13 +1,14 @@
-export * as Codecs from './codecs/index.js';
-export * from './pass-providers/index.js';
+export { Codecs } from './codecs/index.js';
+export { PassProviders } from './pass-providers/index.js';
+export { Messaging } from './messaging/index.js';
 
 export * from './browser-types.jsdoc.mjs';
 export * from './envelope-v0.jsdoc.mjs';
 
-export { parseRequestTag } from './parse-request-tag.js';
+export { parseTopic } from './parse-topic.js';
 
-export { RequestType } from './request-type.js';
-export * from './request-type.jsdoc.mjs';
+export { RequestTopic } from './request-topic.js';
+export * from './request-topic.jsdoc.mjs';
 
-export { SignedRequestType } from './signed-request-type.js';
-export * from './signed-request-type.jsdoc.mjs';
+export { SignedRequestTopic } from './signed-request-topic.js';
+export * from './signed-request-topic.jsdoc.mjs';

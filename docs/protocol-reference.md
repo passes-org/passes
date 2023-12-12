@@ -24,15 +24,15 @@ interface PassesABI {
 type RequestEnvelopeV0 = {
     // Version is always 0 for this envelope version
     version: 0;
-    // The request type's identifier. This field is run-length encoded and can be up to 256 bytes long
-    tag: string;
-    // The raw request body, encoded via the request type's request body codec
+    // The request topic's identifier. This field is run-length encoded and can be up to 256 bytes long
+    topic: string;
+    // The raw request body, encoded via the request topic's request body codec
     body: Uint8Array;
 }
 
 // Result message structure
 type ResultEnvelopeV0 =
-    // The user accepted the request. Body contains the raw result body, encoded via the request type's result body codec
+    // The user accepted the request. Body contains the raw result body, encoded via the request topic's result body codec
     | { status: 'accepted'; body: Uint8Array }
     // The user rejected the request (no additional information is available)
     | { status: 'rejected' }
@@ -44,13 +44,13 @@ type ResultEnvelopeV0 =
 
 This is the standard format for Pass Requests and their results.
 
-A "tag" is a string that uniquely identifies a request type, conventionally using reverse-domain notation, or if you have a specification published on your website, you could use its URI as the request tag to find it more easily.
+A "topic" is a string using reverse-dns notation to uniquely identify a request topic.
 
 This format includes a 1-byte version specifier to provide future-compatibility for changes to the transport encoding.
     
-## Request Type Specs
+## Request Topic Specs
 
-For apps and Pass Providers to implement support for common Pass Request types, they need specifications to refer to.
+For apps and Pass Providers to implement support for common Pass Request topics, they need specifications to refer to.
 
 Pass Request specifications will specify:
 - Envelope Format (generally, v0 – [see above](#envelope-v0-request-format))
@@ -63,9 +63,9 @@ Pass Request specifications will specify:
 To propose and participate in discussions around Pass Request Type RFCs, please go to [Passes Discussions](https://github.com/passes-org/passes/discussions/categories/pass-request-types). 
 :::
 
-## `@passes/reqs` `RequestTypes`
+## `@passes/reqs` `RequestTopic`
 
-As [Request Type Specs](#request-type-specs) become standard, `@passes/reqs` and other community packages will implement `RequestTypes` to provide high-level APIs for use in apps.
+As [Request Type Specs](#request-topic-specs) become standard, `@passes/reqs` and other community packages will implement `RequestTopic` to provide high-level APIs for use in apps.
 
 ## ABI Implementations
 
@@ -85,6 +85,8 @@ Some examples of how Pass Requests flow to Pass Providers given different ABI im
 <img src="/diagram_04_light.gif" alt="Diagram of native browser support for Pass Requests" class="light-mode-only" />
 <img src="/diagram_04_dark.gif" alt="Diagram of native browser support for Pass Requests" class="dark-mode-only" />
 
+<!-- FIXME: Update Pass Provider, Topic Provider, and Polyfill details
+
 ## Pass Providers
 
 Pass Providers are responsible for presenting a rich interpretation of a Pass Request to the user so they can review and then approve or reject it.
@@ -96,14 +98,14 @@ A Pass Provider can be a web or native mobile app. It could even be built into a
 To implement a Pass Provider on the web that works with the `@passes/polyfill` script and the upcoming Passes web extension, you need two things:
 
 1. **HTTPS Server**. An HTTPS server at an arbitrary URI that accepts `POST` requests with [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) containing a `'request'` field which is a [`Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob) of the Pass Request’s raw bytes.
-2. **Request Handling Page**. The response to the `POST` request should be a page including a rich representation of the request, implemented according to its [Request Type Spec](#request-type-specs).
+2. **Request Handling Page**. The response to the `POST` request should be a page including a rich representation of the request, implemented according to its [Request Topic Spec](#request-topic-specs).
 
     When the user approves or rejects, the page should [`postMessage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) to `window.opener ?? window.parent` with the message type:
 
     ```typescript
     type RequestResult = {
-        type: 'request-result';
+        type: 'org.passes.messaging.result';
         result: Uint8Array;
     };
     ```
-
+ -->

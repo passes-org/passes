@@ -53,10 +53,10 @@
       if (event.source !== passProviderWindow) return;
 
       // Ignore messages that aren't connect messages
-      if (message.type !== 'org.passes.messages.connect') return;
+      if (message.type !== 'org.passes.messaging.connect') return;
 
       // Send the request to the Pass Provider window
-      const requestMessage = { type: 'org.passes.messages.request', request: raw };
+      const requestMessage = { type: 'org.passes.messaging.request', request: raw };
       passProviderWindow.postMessage(requestMessage, '*');
 
       // Remove this event listener
@@ -85,7 +85,7 @@
       if (event.source !== passProviderWindow) return;
 
       // Ignore messages that aren't request results
-      if (message.type !== 'org.passes.messages.result') return;
+      if (message.type !== 'org.passes.messaging.result') return;
 
       // Resolve the result promise returned by this function
       resolveResultPromise(message.result);

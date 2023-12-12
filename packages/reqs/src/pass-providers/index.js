@@ -1,10 +1,9 @@
-import { awaitRequest } from "./await-request.js";
-import { sendResult } from "./send-result.js";
-import { setPassProvider } from "./set-pass-provider.js";
+import { providePass } from "./provide-pass.js";
 
-/** PassProviders API namespace */
+/**
+ * Namespace containing APIs for messaging between a requesting app and a Topic or Pass Provider.
+ * @namespace PassProviders
+ */
 export const PassProviders = {
-  awaitRequest,
-  sendResult,
-  setPassProvider,
+  providePass,
 };

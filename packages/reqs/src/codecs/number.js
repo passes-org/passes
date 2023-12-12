@@ -1,6 +1,7 @@
 /**
  * A codec for number request/result bodies.
- * @type {import("../request-type").Codec<number>}
+ * @type {import("../request-topic").Codec<number>}
+ * @memberof Codecs
  */
 const NumberCodec = {
   encode: (value) => {

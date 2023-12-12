@@ -1,13 +1,12 @@
 import { inject, provide, ref, Ref } from 'vue';
-import { IRequestType, RequestResult, SignedRequestResult } from '../../../packages/reqs/src/main';
-import { PassesABI } from '../../../packages/types/index';
+import { IRequestTopic, PassesABI, RequestResult, SignedRequestResult } from '../../../packages/reqs/src/main';
 
 type Store = {
   abi: 'emulator' | 'document.passes';
   dataPaneActiveTab: 'request' | 'result';
   requestBody: any;
   requestPending: false;
-  requestType: IRequestType<any, any>;
+  requestTopic: IRequestTopic<any, any>;
   result?: RequestResult<any> | SignedRequestResult<any>;
 
   // Actions
@@ -18,13 +17,13 @@ type Store = {
   _emulatorResultPromiseResolver?: (result: Uint8Array) => void;
 };
 
-export function provideStore({ requestBody, requestType }: Pick<Store, 'requestBody' | 'requestType'>) {
+export function provideStore({ requestBody, requestTopic }: Pick<Store, 'requestBody' | 'requestTopic'>) {
   const store = ref<Store>({
     abi: 'emulator',
     dataPaneActiveTab: 'request',
     requestBody,
     requestPending: false,
-    requestType,
+    requestTopic,
     result: undefined,
 
     async makeRequest() {
@@ -34,14 +33,14 @@ export function provideStore({ requestBody, requestType }: Pick<Store, 'requestB
       };
       const passEmulatorABI: PassesABI = { request: passEmulatorABIRequest };
 
-      this.requestType.abi = this.abi === 'document.passes'
+      this.requestTopic.abi = this.abi === 'document.passes'
         ? document.passes
         : passEmulatorABI;
       
       this.requestPending = true;
       this.result = undefined;
       console.log('about to send request with abi', this.abi);
-      this.result = await this.requestType.sendRequest(requestBody);
+      this.result = await this.requestTopic.sendRequest(requestBody);
       console.log('result', this.result);
       this.requestPending = false;
       this.dataPaneActiveTab = 'result';

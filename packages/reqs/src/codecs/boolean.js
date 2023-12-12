@@ -1,6 +1,7 @@
 /**
  * A codec for boolean request/result bodies.
- * @type {import("../request-type").Codec<boolean>}
+ * @type {import("../request-topic").Codec<boolean>}
+ * @memberof Codecs
  */
 const BooleanCodec = {
   encode: (value) => new Uint8Array([value ? 1 : 0]),

@@ -2,6 +2,9 @@
 
 # Namespace: Codecs
 
+Namespace containing common codecs that may be used for a RequestTopic's request and result bodies.
+ Codecs
+
 ## Table of contents
 
 ### Variables
@@ -18,84 +21,68 @@
 
 ### BigInt
 
-• `Const` **BigInt**: `Codec`\<`bigint`\>
-
-A codec for bigint request/result bodies.
+• **BigInt**: `Codec`\<`bigint`\>
 
 #### Defined in
 
-[codecs/bigint.js:7](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/bigint.js#L7)
+[codecs/index.js:14](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L14)
 
 ___
 
 ### Boolean
 
-• `Const` **Boolean**: `Codec`\<`boolean`\>
-
-A codec for boolean request/result bodies.
+• **Boolean**: `Codec`\<`boolean`\>
 
 #### Defined in
 
-[codecs/boolean.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/boolean.js#L5)
+[codecs/index.js:15](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L15)
 
 ___
 
 ### Bytes
 
-• `Const` **Bytes**: `Codec`\<`Uint8Array`\>
-
-An identity codec for Uint8Array request/result bodies.
+• **Bytes**: `Codec`\<`Uint8Array`\>
 
 #### Defined in
 
-[codecs/bytes.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/bytes.js#L5)
+[codecs/index.js:16](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L16)
 
 ___
 
 ### Json
 
-• `Const` **Json**: `Codec`\<`TJson`\>
-
-**`Template`**
-
-A codec for json request/result bodies.
+• **Json**: `Codec`\<`TJson`\>
 
 #### Defined in
 
-[codecs/json.js:8](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/json.js#L8)
+[codecs/index.js:17](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L17)
 
 ___
 
 ### Number
 
-• `Const` **Number**: `Codec`\<`number`\>
-
-A codec for number request/result bodies.
+• **Number**: `Codec`\<`number`\>
 
 #### Defined in
 
-[codecs/number.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/number.js#L5)
+[codecs/index.js:18](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L18)
 
 ___
 
 ### String
 
-• `Const` **String**: `Codec`\<`string`\>
-
-A codec for string request/result bodies.
+• **String**: `Codec`\<`string`\>
 
 #### Defined in
 
-[codecs/string.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/string.js#L5)
+[codecs/index.js:19](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L19)
 
 ___
 
 ### Void
 
-• `Const` **Void**: `Codec`\<`void`\>
-
-A codec for empty request/result bodies.
+• **Void**: `Codec`\<`void`\>
 
 #### Defined in
 
-[codecs/void.js:5](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/codecs/void.js#L5)
+[codecs/index.js:20](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L20)

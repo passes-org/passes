@@ -1,5 +1,5 @@
 <script>
-  import { Codecs, PassProviders, RequestType, parseRequestTag } from '../../../../packages/reqs';
+  import { Codecs, Messaging, RequestTopic, parseTopic } from '../../../../packages/reqs';
   import { bodyTextToBodyType } from "./bodyTextToBodyType.js";
   import { requestBodyToDisplayString } from "./bodyToDisplayString.js";
   import { fetchFaviconUrl } from "./fetchFaviconUrl.js";
@@ -21,17 +21,17 @@
   let resultBodyText;
 
   /** @type {string} */
-  let requestTag
-  $: requestTag = parseRequestTag(rawRequest);
+  let id
+  $: id = parseTopic(rawRequest);
 
   /** @type {Promise<string>} */
   let requestBodyStringPromise;
   $: requestBodyStringPromise = requestBodyToDisplayString(rawRequest, Codecs[requestBodyCodec]);
 
-  /** @type {RequestType<any, any>} */
-  let requestType;
-  $: requestType = new RequestType({
-    requestTag,
+  /** @type {RequestTopic<any, any>} */
+  let requestTopic;
+  $: requestTopic = new RequestTopic({
+    id,
     requestBodyCodec: Codecs[requestBodyCodec],
     resultBodyCodec: Codecs[resultBodyCodec],
   });
@@ -52,7 +52,7 @@
       }
     })();
 
-    PassProviders.sendResult(requestType, result);
+    Messaging.sendResult(requestTopic, result);
   }
 </script>
 
@@ -81,7 +81,7 @@
       <!-- Tag -->
       <div class="p-3 space-y-4 border border-black/10 dark:border-white/10">
         <div class="font-semibold opacity-50 font-sm">Request Tag</div>
-        <div>{requestTag}</div>
+        <div>{id}</div>
       </div>
       <!-- Body -->
       <div class="flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">

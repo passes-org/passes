@@ -2,13 +2,13 @@
 
 Passes allows apps to make requests directly to users. This pattern is powerful for building features backed by blockchains like Ethereum, since Pass Providers can implement signatures using the same kind of cryptography blockchains use.
 
-In this example we'll define a request type called `{{ requestTag }}`, whose body can be any Ethereum JSON-RPC request:
+In this example we'll define a request topic called `{{ id }}`, whose body can be any Ethereum JSON-RPC request:
 
 ```typescript
-import { RequestType } from '@passes/reqs';
+import { RequestTopic } from '@passes/reqs';
 
-const ethJsonRpc = new RequestType<EthJsonRpc2Request, EthJsonRpc2Result>({
-  requestTag: 'org.ethereum.json-rpc-request',
+const ethJsonRpc = new RequestTopic<EthJsonRpc2Request, EthJsonRpc2Result>({
+  id: 'org.ethereum.json-rpc-request',
   requestBodyCodec: Codecs.Json,
   resultBodyCodec: Codecs.Json,
 });
@@ -33,15 +33,15 @@ if (result.status === 'accepted') {
 <script setup lang="ts">
 import Button from './.playground/Button.vue'
 import Playground from './.playground/Playground.vue'
-import { Codecs, RequestType } from '../../packages/reqs/src/main'
+import { Codecs, RequestTopic } from '../../packages/reqs/src/main'
 
 type ProfileInfoType = 'email' | 'profile.name' | 'profile.picture';
 type UserProfileRequest = ProfileInfoType[];
 type UserProfileResult = Record<ProfileInfoType, string>;
 
-const requestTag = 'org.ethereum.json-rpc-request';
-const requestType = new RequestType<UserProfileRequest, UserProfileResult>({
-  requestTag,
+const id = 'org.ethereum.json-rpc-request';
+const requestTopic = new RequestTopic<UserProfileRequest, UserProfileResult>({
+  id,
   requestBodyCodec: Codecs.Json,
   resultBodyCodec: Codecs.Json,
 });
@@ -51,7 +51,7 @@ const requestType = new RequestType<UserProfileRequest, UserProfileResult>({
   title="Interactive Example"
   description="This demo requests to send a (fake) Ethereum transaction."
   acceptButtonTitle="Send 0.02 ETH to samy.eth"
-  :requestType="requestType"
+  :requestTopic="requestTopic"
   :requestBody="{ params: [{ to: '0x7Ee54D537BDF322DcEe8c986Aa12E053D41De30A', value: '0x2386F26FC10000' }], method: 'eth_sendTransaction', jsonrpc: '2.0', id: 1 }"
   :resultBody="{ result: '0xc1b6ecd25082be18956afae966f3c73d1159fc85f6fcdb254d7461814a589290', jsonrpc: '2.0', id: 1 }"
 >

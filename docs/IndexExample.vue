@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { SignedBodyWrapper, SignedBodyWrapperHeader } from '../packages/reqs/src/main';
-import { Codecs, RequestType, SignedRequestType } from '../packages/reqs/src/main';
+import { Codecs, RequestTopic, SignedRequestTopic } from '../packages/reqs/src/main';
 import Playground from './examples/.playground/Playground.vue';
 
-const requestTag = 'com.example.get-email';
-const requestType = new SignedRequestType<void, string>({
-  requestType: new RequestType({
-    requestTag,
+const id = 'com.example.get-email';
+const requestTopic = new SignedRequestTopic<void, string>({
+  requestTopic: new RequestTopic({
+    id,
     requestBodyCodec: Codecs.Void,
     resultBodyCodec: Codecs.String,
   }),
@@ -60,7 +60,7 @@ async function verifyResult(signed: SignedBodyWrapper<string>): Promise<boolean>
     emulatorOnly
     description="This demo requests an email address."
     :requestBody="undefined"
-    :requestType="requestType"
+    :requestTopic="requestTopic"
     :resultBody="email"
     acceptButtonTitle="Share Email"
     rejectButtonTitle="Cancel"

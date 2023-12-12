@@ -2,9 +2,9 @@
 	import { bodyTextToBodyType } from "$lib/SpringBoard/bodyTextToBodyType";
 	import { resultBodyToDisplayString } from "$lib/SpringBoard/bodyToDisplayString";
 	import { openWindowWithPost } from "$lib/openWindowWithPost.js";
-	import { Codecs, RequestType } from "../../../../../packages/reqs";
+	import { Codecs, RequestTopic } from "../../../../../packages/reqs";
 
-  let requestTag = 'org.passes.example.my-request';
+  let id = 'org.passes.example.my-request';
   /** @type {keyof typeof Codecs} */
   let requestBodyCodec = 'String';
   /** @type {keyof typeof Codecs} */
@@ -17,8 +17,8 @@
   let resultBodyText = null;
 
   async function sendRequest() {
-    const reqType = new RequestType({
-      requestTag,
+    const reqType = new RequestTopic({
+      id,
       requestBodyCodec: Codecs[requestBodyCodec],
       resultBodyCodec: Codecs[resultBodyCodec]
     });
@@ -30,17 +30,17 @@
     const passEngineWindow = openWindowWithPost(`../request`, formData);
 
     /**
-     * Handles request-result messages from the pass engine window.
+     * Handles request-result messages from the pass provider window.
      * 
-     * @param {MessageEvent<import("@passes/reqs").ResultMessage>} event 
+     * @param {MessageEvent<import("../../../../../packages/reqs").ResultMessage>} event 
      * @returns {Promise<void>}
      */
     async function handleMessage(event) {
       const message = event.data;
-      // Ignore messages that aren't from the pass engine window opened in this call
+      // Ignore messages that aren't from the pass provider window opened in this call
       if (event.source !== passEngineWindow) return;
       // Ignore messages that aren't request results
-      if (message.type !== 'org.passes.messages.result') return;
+      if (message.type !== 'org.passes.messaging.result') return;
 
       const decodedResult = await reqType.decodeResult(message.result);
       resultStatus = decodedResult.status;
@@ -71,7 +71,7 @@
       <!-- Tag -->
       <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10 dark:border-white/10">
         <div class="font-semibold opacity-50 font-sm">Request Tag</div>
-        <input bind:value={requestTag} placeholder="com.my-site.my-new-request-tag">
+        <input bind:value={id} placeholder="com.my-site.my-new-request-tag">
       </div>
       <!-- Request Body -->
       <div class="flex flex-col flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">

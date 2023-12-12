@@ -7,8 +7,8 @@ import { describe, expect, test } from "bun:test";
 
 describe("encodeRequestHeader", () => {
   test("encodes a request header correctly", () => {
-    const tag = "com.example.test";
-    const encoded = EnvelopeV0.encodeRequestHeader(tag);
+    const topic = "com.example.test";
+    const encoded = EnvelopeV0.encodeRequestHeader(topic);
 
     expect(encoded).toBeInstanceOf(Uint8Array);
     expect(encoded).toHaveLength(18);
@@ -16,7 +16,7 @@ describe("encodeRequestHeader", () => {
       new Uint8Array([
         0x00, // Version
         15, // Tag length
-        ...new TextEncoder().encode(tag),
+        ...new TextEncoder().encode(topic),
       ])
     );
   });
@@ -24,12 +24,12 @@ describe("encodeRequestHeader", () => {
 
 describe("parseRequest", () => {
   test("parses valid request bytes", () => {
-    const tag = "com.example.test";
+    const topic = "com.example.test";
 
-    const encoded = EnvelopeV0.encodeRequestHeader(tag);
+    const encoded = EnvelopeV0.encodeRequestHeader(topic);
     const parsed = EnvelopeV0.parseRequest(encoded);
 
-    expect(parsed.tag).toEqual(tag);
+    expect(parsed.topic).toEqual(topic);
     expect(parsed.body).toBeInstanceOf(Uint8Array);
   });
 
@@ -39,9 +39,9 @@ describe("parseRequest", () => {
     );
   });
 
-  test("throws error for missing tag length", () => {
+  test("throws error for missing topic length", () => {
     expect(() => EnvelopeV0.parseRequest(new Uint8Array([0x00]))).toThrow(
-      new EnvelopeV0.errors.REQUEST_MISSING_TAG_LENGTH()
+      new EnvelopeV0.errors.REQUEST_MISSING_TOPIC_LENGTH()
     );
   });
 });

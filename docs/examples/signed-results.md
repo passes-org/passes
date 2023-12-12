@@ -2,10 +2,10 @@
 
 When using Pass Requests for load-bearing identity and authentication, it's critical to verify the user is who they say they are.
 
-One way we can do this is to make our pass request type use a signed codec. Let's update our example from [Recognizing Users](./recognizing-users) to use a signed bytes codec as its result.
+We can do this by using a SignedRequestTopic to wrap our example topic from [Recognizing Users](./recognizing-users), which will sign the result for verification in the requesting app.
 
 ```typescript
-import { RequestType, SignedRequestType } from '@passes/reqs';
+import { RequestTopic, SignedRequestTopic } from '@passes/reqs';
 import type { SignedBodyWrapper, SignedBodyWrapperHeader } from '@passes/reqs';
 
 // The profile info fields that can be requested
@@ -21,10 +21,10 @@ const keypair = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verif
 const keyFormat = 'jwk';
 const keyParams = { name: 'ECDSA', namedCurve: 'P-256', hash: 'SHA-384' };
 
-// Wrap the RequestType from the previous example in a SignedRequestType
-const requestUserProfile = new SignedRequestType<UserProfileRequest, UserProfileResult>({
-  requestType: new RequestType({
-    requestTag: 'org.passes.example.signed-request-user-profile',
+// Wrap the RequestTopic from the previous example in a SignedRequestTopic
+const requestUserProfile = new SignedRequestTopic<UserProfileRequest, UserProfileResult>({
+  requestTopic: new RequestTopic({
+    id: 'org.passes.example.signed-request-user-profile',
     requestBodyCodec: Codecs.Json,
     resultBodyCodec: Codecs.Json,
   }),
@@ -73,16 +73,16 @@ In the example below, after you accept the pass request, you can click "Valid Re
 import { ref } from 'vue';
 import Button from './.playground/Button.vue'
 import Playground from './.playground/Playground.vue'
-import { Codecs, RequestType, SignedBodyWrapper, SignedBodyWrapperHeader, SignedRequestType } from '../../packages/reqs/src/main'
+import { Codecs, RequestTopic, SignedBodyWrapper, SignedBodyWrapperHeader, SignedRequestTopic } from '../../packages/reqs/src/main'
 
 type ProfileInfoType = 'email' | 'profile.name' | 'profile.picture';
 type UserProfileRequest = ProfileInfoType[];
 type UserProfileResult = Record<ProfileInfoType, string>;
 
-const requestTag = 'org.passes.example.signed-request-user-profile';
-const requestType = new SignedRequestType<UserProfileRequest, UserProfileResult>({
-  requestType: new RequestType({
-    requestTag,
+const id = 'org.passes.example.signed-request-user-profile';
+const requestTopic = new SignedRequestTopic<UserProfileRequest, UserProfileResult>({
+  requestTopic: new RequestTopic({
+    id,
     requestBodyCodec: Codecs.Json,
     resultBodyCodec: Codecs.Json,
   }),
@@ -133,7 +133,7 @@ async function verifyResult(signed: SignedBodyWrapper): Promise<boolean> {
   title="Interactive Example"
   description="This demo requests basic user profile info."
   emulatorOnly
-  :requestType="requestType"
+  :requestTopic="requestTopic"
   :requestBody="['email', 'profile.name', 'profile.picture']"
   :resultBody="{ 'profile.picture': 'https://i.pravatar.cc/300', 'email': 'example@passes.org', 'profile.name': 'Passes User' }"
 >

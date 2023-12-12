@@ -7,11 +7,13 @@
 ### Namespaces
 
 - [Codecs](modules/Codecs.md)
+- [Messaging](modules/Messaging.md)
+- [PassProviders](modules/PassProviders.md)
 
 ### Classes
 
-- [RequestType](classes/RequestType.md)
-- [SignedRequestType](classes/SignedRequestType.md)
+- [RequestTopic](classes/RequestTopic.md)
+- [SignedRequestTopic](classes/SignedRequestTopic.md)
 
 ### Interfaces
 
@@ -19,7 +21,7 @@
 - [Codec](interfaces/Codec.md)
 - [ConnectMessage](interfaces/ConnectMessage.md)
 - [ExceptionResult](interfaces/ExceptionResult.md)
-- [IRequestType](interfaces/IRequestType.md)
+- [IRequestTopic](interfaces/IRequestTopic.md)
 - [PassesABI](interfaces/PassesABI.md)
 - [RejectedResult](interfaces/RejectedResult.md)
 - [RequestMessage](interfaces/RequestMessage.md)
@@ -37,13 +39,9 @@
 - [ResultStatus](modules.md#resultstatus)
 - [SignedRequestResult](modules.md#signedrequestresult)
 
-### Variables
-
-- [PassProviders](modules.md#passproviders)
-
 ### Functions
 
-- [parseRequestTag](modules.md#parserequesttag)
+- [parseTopic](modules.md#parsetopic)
 
 ## Type Aliases
 
@@ -53,7 +51,7 @@
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/browser-types.jsdoc.mjs#L3)
+[browser-types.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/browser-types.jsdoc.mjs#L3)
 
 ___
 
@@ -63,7 +61,7 @@ ___
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:35](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/browser-types.jsdoc.mjs#L35)
+[browser-types.jsdoc.mjs:35](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/browser-types.jsdoc.mjs#L35)
 
 ___
 
@@ -79,7 +77,7 @@ ___
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/envelope-v0.jsdoc.mjs#L26)
+[envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/envelope-v0.jsdoc.mjs#L26)
 
 ___
 
@@ -89,7 +87,7 @@ ___
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/envelope-v0.jsdoc.mjs#L30)
+[envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/envelope-v0.jsdoc.mjs#L30)
 
 ___
 
@@ -105,33 +103,15 @@ ___
 
 #### Defined in
 
-[signed-request-type.jsdoc.mjs:11](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/signed-request-type.jsdoc.mjs#L11)
-
-## Variables
-
-### PassProviders
-
-• `Const` **PassProviders**: `Object`
-
-PassProviders API namespace
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `awaitRequest` | () => `Promise`\<`Uint8Array`\> |
-| `sendResult` | \<TRequestBody, TResultBody\>(`requestType`: [`RequestType`](classes/RequestType.md)\<`TRequestBody`, `TResultBody`\>, `result`: `RequestResult`\<`TResultBody`\>) => `Promise`\<`void`\> |
-| `setPassProvider` | [`RequestType`](classes/RequestType.md)\<`SetPassProviderRequestBody`, `void`\> |
-
-#### Defined in
-
-[pass-providers/index.js:6](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/pass-providers/index.js#L6)
+signed-request-topic.jsdoc.mjs:11
 
 ## Functions
 
-### parseRequestTag
+### parseTopic
 
-▸ **parseRequestTag**(`rawRequest`): `string`
+▸ **parseTopic**(`rawRequest`): `string`
+
+Parse and return the topic from a raw request.
 
 #### Parameters
 
@@ -145,4 +125,4 @@ PassProviders API namespace
 
 #### Defined in
 
-[parse-request-tag.js:4](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/parse-request-tag.js#L4)
+parse-topic.js:8

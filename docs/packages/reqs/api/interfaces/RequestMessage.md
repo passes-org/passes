@@ -19,16 +19,16 @@ The raw request.
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:22](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/browser-types.jsdoc.mjs#L22)
+[browser-types.jsdoc.mjs:22](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/browser-types.jsdoc.mjs#L22)
 
 ___
 
 ### type
 
-• **type**: ``"org.passes.messages.request"``
+• **type**: ``"org.passes.messaging.request"``
 
-The type of the result, should be 'org.passes.messages.result'.
+The type of the result, should be 'org.passes.messaging.result'.
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:21](https://github.com/passes-org/passes/blob/55014ff/packages/reqs/src/browser-types.jsdoc.mjs#L21)
+[browser-types.jsdoc.mjs:21](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/browser-types.jsdoc.mjs#L21)

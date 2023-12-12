@@ -1,15 +1,15 @@
 import { EnvelopeV0 } from './envelope-v0.js';
 
 // JSDoc Type Imports
-/** @template TRequestBody @template TResultBody @typedef {import('./request-type.jsdoc.mjs').IRequestType<TRequestBody, TResultBody>} IRequestType */
+/** @template TRequestBody @template TResultBody @typedef {import('./request-topic.jsdoc.mjs').IRequestTopic<TRequestBody, TResultBody>} IRequestTopic */
 /** @template TResultBody @typedef {import('./envelope-v0.jsdoc.mjs').RequestResult<TResultBody>} RequestResult */
-/** @template T @typedef {import('./request-type.jsdoc.mjs').Codec<T>} Codec */
+/** @template T @typedef {import('./request-topic.jsdoc.mjs').Codec<T>} Codec */
 
 /**
  * @template TRequestBody
  * @template TResultBody
- * @typedef RequestTypeParams
- * @property {string} requestTag
+ * @typedef RequestTopicParams
+ * @property {string} id
  * @property {Codec<TRequestBody>} requestBodyCodec
  * @property {Codec<TResultBody>} resultBodyCodec
  * @property {import("./browser-types.jsdoc.mjs").PassesABI} [abi]
@@ -20,18 +20,18 @@ import { EnvelopeV0 } from './envelope-v0.js';
  * 
  * @template TRequestBody
  * @template TResultBody
- * @implements {IRequestType<TRequestBody, TResultBody>}
- * @property {string} requestTag
+ * @implements {IRequestTopic<TRequestBody, TResultBody>}
+ * @property {string} id
  * @property {Codec<TRequestBody>} requestBodyCodec
  * @property {Codec<TResultBody>} resultBodyCodec
  * @property {import("./browser-types.jsdoc.mjs").PassesABI} [abi]
  */
-export class RequestType {
+export class RequestTopic {
   /**
-   * @param {RequestTypeParams<TRequestBody, TResultBody>} params
+   * @param {RequestTopicParams<TRequestBody, TResultBody>} params
   */
-  constructor({ requestTag, requestBodyCodec, resultBodyCodec, abi }) {
-    this.requestTag = requestTag;
+  constructor({ id, requestBodyCodec, resultBodyCodec, abi }) {
+    this.id = id;
     this.requestBodyCodec = requestBodyCodec;
     this.resultBodyCodec = resultBodyCodec;
     this.abi = abi;
@@ -45,7 +45,7 @@ export class RequestType {
    */
   async encodeRequest(body) {
     return new Uint8Array([
-      ...EnvelopeV0.encodeRequestHeader(this.requestTag),
+      ...EnvelopeV0.encodeRequestHeader(this.id),
       ...this.requestBodyCodec.encode(body),
     ]);
   }
@@ -57,8 +57,8 @@ export class RequestType {
    * @returns {Promise<TRequestBody>}
    */
   async decodeRequest(bytes) {
-    const { tag, body } = EnvelopeV0.parseRequest(bytes);
-    if (tag !== this.requestTag) throw new RequestType.Errors.INCORRECT_TAG(this.requestTag, tag);
+    const { topic, body } = EnvelopeV0.parseRequest(bytes);
+    if (topic !== this.id) throw new RequestTopic.Errors.INCORRECT_TOPIC(this.id, topic);
     return this.requestBodyCodec.decode(body);
   }
 
@@ -114,14 +114,14 @@ export class RequestType {
      * @property {string} expected
      * @property {string} actual
      */
-    INCORRECT_TAG: class RequestTypeIncorrectTagError extends Error {
+    INCORRECT_TOPIC: class RequestTopicIncorrectTagError extends Error {
       /**
        * @param {string} expected
        * @param {string} actual
        */
       constructor(expected, actual) {
         super();
-        this.name = "Incorrect Request Tag";
+        this.id = "Incorrect Request Tag";
         this.message = `Expected request tag: "${expected}". Actual: "${actual}"`;
         this.expected = expected;
         this.actual = actual;
@@ -132,10 +132,10 @@ export class RequestType {
      * @property {string} expected
      * @property {string} actual
      */
-    ABI_NOT_AVAILABLE: class RequestTypeABINotAvailable extends Error {
+    ABI_NOT_AVAILABLE: class RequestTopicABINotAvailable extends Error {
       constructor() {
         super();
-        this.name = 'Passes ABI not available';
+        this.id = 'Passes ABI not available';
         this.message = 'A value for `abi` must be passed to RequestBuilder if `document.passes` is not set';
       }
     },
@@ -145,13 +145,21 @@ export class RequestType {
    * A helper for resolving the PassesABI. If the instance has no abi property, it returns document.passes if it's available.
    * 
    * @returns {import("./browser-types.jsdoc.mjs").PassesABI}
-   * @throws {RequestType.Errors.ABI_NOT_AVAILABLE} - document.passes must be available if `abi` is not passed.
+   * @throws {RequestTopic.Errors.ABI_NOT_AVAILABLE} - document.passes must be available if `abi` is not passed.
    */
   resolveABI() {
     if (this.abi) return this.abi;
     /** @type {import("./browser-types.jsdoc.mjs").DocumentWithPasses} */
     const _document = typeof document !== 'undefined' ? document : null;
-    if (!_document?.passes) throw new RequestType.Errors.ABI_NOT_AVAILABLE();
+    if (!_document?.passes) throw new RequestTopic.Errors.ABI_NOT_AVAILABLE();
     return _document.passes;
+  }
+
+  /**
+   * Returns a string representation of the request topic.
+   * @returns {string}
+   */
+  toString() {
+    return `RequestTopic(${this.id})`;
   }
 };

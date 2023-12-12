@@ -1,5 +1,5 @@
 import { toHex } from 'viem';
-import { Codecs, RequestType, parseRequestTag } from "@passes/reqs";
+import { Codecs, RequestTopic, parseTopic } from "@passes/reqs";
 
 /**
  * Returns a string representation of the given request body.
@@ -8,12 +8,12 @@ import { Codecs, RequestType, parseRequestTag } from "@passes/reqs";
  * @returns {Promise<string>}
  */
 export async function requestBodyToDisplayString(rawRequest, codec) {
-  const requestType = new RequestType({
-    requestTag: parseRequestTag(rawRequest),
+  const requestTopic = new RequestTopic({
+    id: parseTopic(rawRequest),
     requestBodyCodec: codec,
     resultBodyCodec: Codecs.Void,
   });
-  const requestBody = await requestType.decodeRequest(rawRequest);
+  const requestBody = await requestTopic.decodeRequest(rawRequest);
   return toDisplayString(requestBody, codec);
 }
 
@@ -24,12 +24,12 @@ export async function requestBodyToDisplayString(rawRequest, codec) {
  * @returns {Promise<string>}
  */
 export async function resultBodyToDisplayString(rawResult, codec) {
-  const requestType = new RequestType({
-    requestTag: '[ephemeral]',
+  const requestTopic = new RequestTopic({
+    id: '[ephemeral]',
     requestBodyCodec: Codecs.Void,
     resultBodyCodec: codec,
   });
-  const result = await requestType.decodeResult(rawResult);
+  const result = await requestTopic.decodeResult(rawResult);
   if (result.status !== 'accepted') throw new Error('cannot resultBodyToDisplayString a result that is not accepted');
   return toDisplayString(result.body, codec);
 }
