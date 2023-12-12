@@ -35,7 +35,7 @@ export const EnvelopeV0 = {
     const version = bytes.at(0);
     if (version !== this.VERSION) throw new this.errors.REQUEST_INCORRECT_VERSION(version);
     const topicLengthField = bytes.at(1);
-    if (typeof topicLengthField === 'undefined') throw new this.errors.REQUEST_MISSING_TAG_LENGTH();
+    if (typeof topicLengthField === 'undefined') throw new this.errors.REQUEST_MISSING_TOPIC_LENGTH();
     const { range: topicBytes, remainder: body } = parseRLE(bytes, 1, { length: 1 });
     const topic = new TextDecoder().decode(topicBytes);
     return { topic, body };
