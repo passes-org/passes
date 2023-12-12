@@ -15,7 +15,7 @@ import { RequestTopic } from "../request-topic.js";
  * @memberof PassProviders
  */
 export const providePass = new RequestTopic({
-  id: 'org.passes.provider-pass',
+  id: 'org.passes.provide-pass',
   requestBodyCodec: /** @type {import('../main.js').Codec<ProvidePassRequestBody>} */ (Codecs.Json),
   resultBodyCodec: Codecs.Void,
 });
