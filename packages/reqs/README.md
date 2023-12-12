@@ -105,44 +105,44 @@ const yesOrNoQuestion = new SignedRequestTopic({
 
 For building a [Pass Provider](/#what-is-a-pass-provider), `reqs` exports a `PassProviders` namespace with relevent APIs, and some of the common APIs will be useful as well.
 
-#### parseRequestTag
+#### parseTopic
 
-To get the tag of a Pass Request before you know its `RequestTopic`, you can use `parseRequestTag` on the raw request bytes.
+To get the topic of a Pass Request before you know its `RequestTopic`, you can use `parseTopic` on the raw request bytes.
 
 ```typescript
-import { parseRequestTag } from '@passes/reqs';
+import { parseTopic } from '@passes/reqs';
 
-const id = parseRequestTag(
+const id = parseTopic(
   // Replace this with a raw request
   new Uint8Array([/* ... */]),
 );
 ```
 
-#### PassProviders.setPassProvider
+#### PassProviders.providePass
 
-When your user signs up or re-authenticates with your Pass Provider, you can send a `setPassProvider` Pass Request to ask them if they want to direct future Pass Requests to your Pass Provider.
+When your user signs up or re-authenticates with your Pass Provider, you can send a `providePass` Pass Request to ask them if they want to direct future Pass Requests to your Pass Provider.
 
 ```typescript
 import { PassProviders } from '@passes/reqs';
 
-const { status } = await PassProviders.setPassProvider('https://my-pass-provider.com', 'optional-user-id');
+const { status } = await PassProviders.providePass('https://my-pass-provider.com', 'optional-user-id');
 
 if (status === 'accepted') {
   // Future Pass Requests to this user will be sent to your Pass Provider for handling
 }
 ```
 
-#### PassProviders.sendResult
+#### Messaging.sendResult
 
-Once your user has accepted or rejected a Pass Request, you can send the result back to the requesting app via `PassProviders.sendResult`.
+Once your user has accepted or rejected a Pass Request, you can send the result back to the requesting app via `Messaging.sendResult`.
 
 ```typescript
-import { PassProviders } from '@passes/reqs';
+import { Messaging } from '@passes/reqs';
 
 // Note: `handleRequest` is a placeholder for your handling logic for the given request topic
 const result = await handleRequest(request);
 
-await PassProviders.sendResult(requestTopic, result);
+await Messaging.sendResult(requestTopic, result);
 ```
 
 ### Putting It All Together
@@ -155,7 +155,7 @@ import * as SupportedRequestTopics from './supported-request-topics'; // A map o
 
 // Called when your user signs in to set your app as their Pass Provider
 async function onUserAuthn(userToken) {
-  await PassProviders.setPassProvider(
+  await PassProviders.providePass(
     // The URI of your pass provider
     'https://your-pass-provider.com',
     // A token you can use later to identify the user when presenting a Pass Request UI to them - for example, a JWT
@@ -165,17 +165,17 @@ async function onUserAuthn(userToken) {
 
 // Presents a UI for the user to review and handle the incoming Pass Request, and sends the result to the requesting app
 async function handlePassRequest(request: Uint8Array) {
-  const id = parseRequestTag(request);
+  const id = parseTopic(request);
 
   switch (id) {
-    case SupportedRequestTopics.GetUserEmail.RequestTag: {
+    case SupportedRequestTopics.GetUserEmail.RequestTopic: {
       const requestTopic = SupportedRequestTopics.Example1.RequestTopic;
       try {
         const requestBody = await requestTopic.decodeRequest(request);
         const result = await presentRequestReviewUIAndGetResult(requestTopic, requestBody);
-        await PassProviders.sendResult(result);
+        await Messaging.sendResult(result);
       } catch (error) {
-        await PassProviders.sendResult({ status: 'exception', message: error.message });
+        await Messaging.sendResult({ status: 'exception', message: error.message });
       }
       break;
     }
@@ -183,8 +183,8 @@ async function handlePassRequest(request: Uint8Array) {
     // ... (other supported request topics)
 
     default:
-      // Communicate to your user that the incoming request tag is not supported by your Pass Provider
-      await PassProviders.sendResult({ status: 'unsupported' });
+      // Communicate to your user that the incoming request topic is not supported by your Pass Provider
+      await Messaging.sendResult({ status: 'unsupported' });
   }
 }
 ```
