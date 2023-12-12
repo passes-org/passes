@@ -16,7 +16,7 @@ import { EnvelopeV0 } from './envelope-v0.js';
  */
 
 /**
- * Builds an Envelope-v0x00 request type interface.
+ * Builds an Envelope-v0x00 request topic interface.
  * 
  * @template TRequestBody
  * @template TResultBody
@@ -114,15 +114,15 @@ export class RequestTopic {
      * @property {string} expected
      * @property {string} actual
      */
-    INCORRECT_TOPIC: class RequestTopicIncorrectTagError extends Error {
+    INCORRECT_TOPIC: class RequestTopicIncorrectTopicError extends Error {
       /**
        * @param {string} expected
        * @param {string} actual
        */
       constructor(expected, actual) {
         super();
-        this.id = "Incorrect Request Tag";
-        this.message = `Expected request tag: "${expected}". Actual: "${actual}"`;
+        this.id = "Incorrect Request Topic";
+        this.message = `Expected request topic: "${expected}". Actual: "${actual}"`;
         this.expected = expected;
         this.actual = actual;
       }
