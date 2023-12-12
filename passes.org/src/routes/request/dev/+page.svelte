@@ -68,10 +68,10 @@
 
     <!-- Request -->
     <div class="flex flex-col px-4 py-8 space-y-4 border border-black rounded dark:border-white">
-      <!-- Tag -->
+      <!-- Topic -->
       <div class="flex flex-col items-stretch p-3 space-y-4 border border-black/10 dark:border-white/10">
-        <div class="font-semibold opacity-50 font-sm">Request Tag</div>
-        <input bind:value={id} placeholder="com.my-site.my-new-request-tag">
+        <div class="font-semibold opacity-50 font-sm">Request Topic</div>
+        <input bind:value={id} placeholder="com.my-site.my-new-request-topic">
       </div>
       <!-- Request Body -->
       <div class="flex flex-col flex-1 p-3 space-y-4 border border-black/10 dark:border-white/10">

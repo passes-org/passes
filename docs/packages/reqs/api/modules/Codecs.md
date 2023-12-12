@@ -25,7 +25,7 @@ Namespace containing common codecs that may be used for a RequestTopic's request
 
 #### Defined in
 
-[codecs/index.js:14](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L14)
+[codecs/index.js:14](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/codecs/index.js#L14)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[codecs/index.js:15](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L15)
+[codecs/index.js:15](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/codecs/index.js#L15)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[codecs/index.js:16](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L16)
+[codecs/index.js:16](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/codecs/index.js#L16)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[codecs/index.js:17](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L17)
+[codecs/index.js:17](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/codecs/index.js#L17)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[codecs/index.js:18](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L18)
+[codecs/index.js:18](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/codecs/index.js#L18)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[codecs/index.js:19](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L19)
+[codecs/index.js:19](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/codecs/index.js#L19)
 
 ___
 
@@ -85,4 +85,4 @@ ___
 
 #### Defined in
 
-[codecs/index.js:20](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/codecs/index.js#L20)
+[codecs/index.js:20](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/codecs/index.js#L20)

@@ -36,7 +36,7 @@ type ResultEnvelopeV0 =
     | { status: 'accepted'; body: Uint8Array }
     // The user rejected the request (no additional information is available)
     | { status: 'rejected' }
-    // The Pass Provider doesn't support the requested tag
+    // The Pass Provider doesn't support the requested topic
     | { status: 'unsupported' }
     // An exception occurred when presenting or accepting the request
     | { status: 'exception'; message: string }
@@ -54,18 +54,18 @@ For apps and Pass Providers to implement support for common Pass Request topics,
 
 Pass Request specifications will specify:
 - Envelope Format (generally, v0 – [see above](#envelope-v0-request-format))
-- Request Tag
+- Request Topic ID
 - Request Body Codec
 - Result Body Codec
 - Request Interpretation and Presentation Details
 
 :::info Discussing RFCs
-To propose and participate in discussions around Pass Request Type RFCs, please go to [Passes Discussions](https://github.com/passes-org/passes/discussions/categories/pass-request-types). 
+To propose and participate in discussions around Pass Request Topic RFCs, please go to [Passes Discussions](https://github.com/passes-org/passes/discussions/categories/pass-request-topics). 
 :::
 
 ## `@passes/reqs` `RequestTopic`
 
-As [Request Type Specs](#request-topic-specs) become standard, `@passes/reqs` and other community packages will implement `RequestTopic` to provide high-level APIs for use in apps.
+As [Request Topic Specs](#request-topic-specs) become standard, `@passes/reqs` and other community packages will implement `RequestTopic` to provide high-level APIs for use in apps.
 
 ## ABI Implementations
 

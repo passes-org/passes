@@ -15,7 +15,7 @@ These docs are under active development, and we'll be continuously publishing up
 
 ## What Is a Pass Request?
 
-A Pass Request can represent anything, and can be defined by anyone. They are identified by a unique tag, for example `org.passes.get-user-email`, and have specific request and result body [Codecs](/packages/reqs/api/modules/Codecs).
+A Pass Request can represent anything, and can be defined by anyone. They are identified by a unique topic, for example `org.passes.get-user-email`, and have specific request and result body [Codecs](/packages/reqs/api/modules/Codecs).
 
 ```typescript
 import { RequestTopic } from '@passes/reqs';

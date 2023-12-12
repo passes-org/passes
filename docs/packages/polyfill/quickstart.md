@@ -1,6 +1,6 @@
 # Polyfill Quickstart
 
-To make the `document.passes.request` ABI available to all users in any browser, you can add the `@passes/polyfill` script to your page via a module script tag.
+To make the `document.passes.request` ABI available to all users in any browser, you can add the `@passes/polyfill` script to your page via a script tag.
 
 ```html
 <script src="https://unpkg.com/@passes/polyfill@^0.0.6-alpha"></script>

@@ -34,7 +34,7 @@ watchEffect(async () => {
     <!-- Request View -->
     <div v-if="store.dataPaneActiveTab === 'request'" :class="$style.content">
       <label>
-        <span>Tag</span>
+        <span>Topic</span>
         <div :class="$style.code">{{ store.requestTopic.id }}</div>
       </label>
       <label>

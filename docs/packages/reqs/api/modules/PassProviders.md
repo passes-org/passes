@@ -19,4 +19,4 @@ Namespace containing APIs for messaging between a requesting app and a Topic or 
 
 #### Defined in
 
-[pass-providers/index.js:8](https://github.com/passes-org/passes/blob/535223d/packages/reqs/src/pass-providers/index.js#L8)
+[pass-providers/index.js:8](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/pass-providers/index.js#L8)

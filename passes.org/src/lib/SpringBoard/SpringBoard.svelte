@@ -78,9 +78,9 @@
   <main class="grid grid-cols-1 gap-5 lg:grid-cols-2">
     <!-- Request -->
     <div class="flex flex-col px-4 py-8 space-y-4 border border-black rounded dark:border-white">
-      <!-- Tag -->
+      <!-- Topic -->
       <div class="p-3 space-y-4 border border-black/10 dark:border-white/10">
-        <div class="font-semibold opacity-50 font-sm">Request Tag</div>
+        <div class="font-semibold opacity-50 font-sm">Request Topic</div>
         <div>{id}</div>
       </div>
       <!-- Body -->

@@ -74,7 +74,7 @@ Wraps a RequestTopic to implement result signing and verification.
 
 #### Defined in
 
-signed-request-topic.js:34
+[signed-request-topic.js:34](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/signed-request-topic.js#L34)
 
 ## Properties
 
@@ -88,7 +88,7 @@ signed-request-topic.js:34
 
 #### Defined in
 
-request-topic.js:37
+[request-topic.js:37](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/request-topic.js#L37)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-request-topic.js:34
+[request-topic.js:34](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/request-topic.js#L34)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-request-topic.js:35
+[request-topic.js:35](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/request-topic.js#L35)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-request-topic.js:36
+[request-topic.js:36](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/request-topic.js#L36)
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 #### Defined in
 
-signed-request-topic.js:36
+[signed-request-topic.js:36](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/signed-request-topic.js#L36)
 
 ___
 
@@ -178,7 +178,7 @@ ___
 
 #### Defined in
 
-signed-request-topic.js:37
+[signed-request-topic.js:37](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/signed-request-topic.js#L37)
 
 ___
 
@@ -193,7 +193,7 @@ ___
 | `ABI_NOT_AVAILABLE` | typeof `RequestTopicABINotAvailable` |
 | `CANNOT_SIGN` | typeof `SignedRequestTopicCannotSign` |
 | `CANNOT_VERIFY` | typeof `SignedRequestTopicCannotVerify` |
-| `INCORRECT_TOPIC` | typeof `RequestTopicIncorrectTagError` |
+| `INCORRECT_TOPIC` | typeof `RequestTopicIncorrectTopicError` |
 | `INVALID_SIGNATURE` | typeof `SignedRequestTopicInvalidSignature` |
 
 #### Overrides
@@ -202,7 +202,7 @@ ___
 
 #### Defined in
 
-signed-request-topic.js:101
+[signed-request-topic.js:101](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/signed-request-topic.js#L101)
 
 ## Methods
 
@@ -228,7 +228,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-request-topic.js:59
+[request-topic.js:59](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/request-topic.js#L59)
 
 ___
 
@@ -262,7 +262,7 @@ Returns the signed result's body if the result signature is valid. Throws if the
 
 #### Defined in
 
-signed-request-topic.js:73
+[signed-request-topic.js:73](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/signed-request-topic.js#L73)
 
 ___
 
@@ -288,7 +288,7 @@ Encodes a structured request body into an envelope-v0x00 request.
 
 #### Defined in
 
-request-topic.js:46
+[request-topic.js:46](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/request-topic.js#L46)
 
 ___
 
@@ -318,7 +318,7 @@ Encodes a structured result body into a signed result.
 
 #### Defined in
 
-signed-request-topic.js:47
+[signed-request-topic.js:47](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/signed-request-topic.js#L47)
 
 ___
 
@@ -342,7 +342,7 @@ A helper for resolving the PassesABI. If the instance has no abi property, it re
 
 #### Defined in
 
-request-topic.js:150
+[request-topic.js:150](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/request-topic.js#L150)
 
 ___
 
@@ -368,7 +368,7 @@ Sends a request.
 
 #### Defined in
 
-signed-request-topic.js:94
+[signed-request-topic.js:94](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/signed-request-topic.js#L94)
 
 ___
 
@@ -388,4 +388,4 @@ Returns a string representation of the request topic.
 
 #### Defined in
 
-request-topic.js:162
+[request-topic.js:162](https://github.com/passes-org/passes/blob/1776ea1/packages/reqs/src/request-topic.js#L162)
