@@ -149,7 +149,7 @@ import { PassProviders } from '@passes/reqs';
 const { status } = await PassProviders.providePass('https://my-pass-provider.com', 'optional-user-id');
 
 if (status === 'accepted') {
-  // Future Pass Requests to this user will be sent to your Pass Provider for handling
+  // Future Pass Requests to this user will be sent to https://my-pass-provider.com for handling
 }
 ```
 
@@ -178,7 +178,7 @@ import * as SupportedRequestTopics from './supported-request-topics'; // A map o
 async function onUserAuthn(userToken) {
   await PassProviders.providePass(
     // The URI of your pass provider
-    'https://your-pass-provider.com',
+    'https://my-pass-provider.com',
     // A token you can use later to identify the user when presenting a Pass Request UI to them - for example, a JWT
     userToken,
   );
