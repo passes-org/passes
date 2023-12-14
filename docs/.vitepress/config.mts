@@ -36,6 +36,7 @@ export default defineConfig({
         text: 'Overview',
         items: [
           { text: 'What is Passes?', link: '/' },
+          { text: 'Request Handlers', link: '/request-handlers' },
           { text: 'Protocol Reference', link: '/protocol-reference' }
         ],
       },
