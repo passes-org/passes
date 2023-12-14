@@ -1,6 +1,6 @@
 {
   "name": "@passes/reqs",
-  "version": "0.0.7-alpha.1",
+  "version": "0.0.7-alpha.2",
   "type": "module",
   "main": "src/main.js",
   "types": "types/main.d.ts",
