@@ -1,5 +1,6 @@
 export { Codecs } from './codecs/index.js';
 export { PassProviders } from './pass-providers/index.js';
+export { TopicProviders } from './topic-providers/index.js';
 export { Messaging } from './messaging/index.js';
 
 export * from './browser-types.jsdoc.mjs';
