@@ -1,4 +1,4 @@
-@passes/reqs / [Modules](modules.md)
+@passes/reqs / [Exports](modules.md)
 
 Reqs (pronounced "rex" – /rɛks/) provides a high-level interface for using Pass Requests in your app. 
 
@@ -74,7 +74,8 @@ It's generally recommended to use signed Pass Requests, since they use asymmetri
 To make a `RequestTopic` signed, we simply create a `SignedRequestTopic` to wrap it, and provide a `signResult` or `verifyResult` implementation...
 
 ```typescript
-import { Codecs, RequestTopic, SignedRequestTopic, SignedBodyWrapper, SignedBodyWrapperHeader } from '@passes/reqs';
+import { RequestTopic, SignedRequestTopic, SignedBodyWrapper, SignedBodyWrapperHeader } from '@passes/reqs';
+import * as Codecs from '@passes/reqs/codecs';
 
 // For this demo implementation, we'll use the SubtleCrypto API
 const keypair = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verify']);
@@ -156,6 +157,7 @@ await Messaging.sendResult(requestTopic, result);
 Here's an example of how to use the above APIs together to implement support for a set of Pass Request topics in a basic Web Pass Provider.
 
 ```typescript
+import * as Messaging from '@passes/reqs/messaging';
 import * as PassProviders from '@passes/reqs/topics/pass-providers';
 import * as SupportedRequestTopics from './supported-request-topics'; // A map of the request topics supported by your Pass Provider
 

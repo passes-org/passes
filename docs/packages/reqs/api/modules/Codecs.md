@@ -1,18 +1,18 @@
-[@passes/reqs](../README.md) / [Modules](../modules.md) / codecs
+[@passes/reqs](../README.md) / [Exports](../modules.md) / Codecs
 
-# Module: codecs
+# Namespace: Codecs
 
 ## Table of contents
 
 ### Variables
 
-- [BigInt](codecs.md#bigint)
-- [Boolean](codecs.md#boolean)
-- [Bytes](codecs.md#bytes)
-- [Json](codecs.md#json)
-- [Number](codecs.md#number)
-- [String](codecs.md#string)
-- [Void](codecs.md#void)
+- [BigInt](Codecs.md#bigint)
+- [Boolean](Codecs.md#boolean)
+- [Bytes](Codecs.md#bytes)
+- [Json](Codecs.md#json)
+- [Number](Codecs.md#number)
+- [String](Codecs.md#string)
+- [Void](Codecs.md#void)
 
 ## Variables
 
@@ -28,7 +28,7 @@ Codecs
 
 #### Defined in
 
-[codecs/bigint.js:8](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/bigint.js#L8)
+[codecs/bigint.js:8](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/codecs/bigint.js#L8)
 
 ___
 
@@ -44,7 +44,7 @@ Codecs
 
 #### Defined in
 
-[codecs/boolean.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/boolean.js#L6)
+[codecs/boolean.js:6](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/codecs/boolean.js#L6)
 
 ___
 
@@ -60,7 +60,7 @@ Codecs
 
 #### Defined in
 
-[codecs/bytes.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/bytes.js#L6)
+[codecs/bytes.js:6](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/codecs/bytes.js#L6)
 
 ___
 
@@ -78,7 +78,7 @@ Codecs
 
 #### Defined in
 
-[codecs/json.js:9](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/json.js#L9)
+[codecs/json.js:9](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/codecs/json.js#L9)
 
 ___
 
@@ -94,7 +94,7 @@ Codecs
 
 #### Defined in
 
-[codecs/number.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/number.js#L6)
+[codecs/number.js:6](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/codecs/number.js#L6)
 
 ___
 
@@ -110,7 +110,7 @@ Codecs
 
 #### Defined in
 
-[codecs/string.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/string.js#L6)
+[codecs/string.js:6](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/codecs/string.js#L6)
 
 ___
 
@@ -126,4 +126,4 @@ Codecs
 
 #### Defined in
 
-[codecs/void.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/void.js#L6)
+[codecs/void.js:6](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/codecs/void.js#L6)

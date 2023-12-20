@@ -1,13 +1,13 @@
-[@passes/reqs](../README.md) / [Modules](../modules.md) / messaging
+[@passes/reqs](../README.md) / [Exports](../modules.md) / Messaging
 
-# Module: messaging
+# Namespace: Messaging
 
 ## Table of contents
 
 ### Functions
 
-- [awaitRequest](messaging.md#awaitrequest)
-- [sendResult](messaging.md#sendresult)
+- [awaitRequest](Messaging.md#awaitrequest)
+- [sendResult](Messaging.md#sendresult)
 
 ## Functions
 
@@ -28,7 +28,7 @@ Messaging
 
 #### Defined in
 
-[messaging/await-request.js:7](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/messaging/await-request.js#L7)
+[messaging/await-request.js:7](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/messaging/await-request.js#L7)
 
 ___
 
@@ -49,7 +49,7 @@ Topic and Pass Providers should call `sendResult` when they have a result to sen
 
 | Name | Type |
 | :------ | :------ |
-| `requestTopic` | [`RequestTopic`](../classes/main.RequestTopic.md)\<`TRequestBody`, `TResultBody`\> |
+| `requestTopic` | [`RequestTopic`](../classes/RequestTopic.md)\<`TRequestBody`, `TResultBody`\> |
 | `result` | `RequestResult`\<`TResultBody`\> |
 
 #### Returns
@@ -62,4 +62,4 @@ Messaging
 
 #### Defined in
 
-[messaging/send-result.js:9](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/messaging/send-result.js#L9)
+[messaging/send-result.js:9](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/messaging/send-result.js#L9)

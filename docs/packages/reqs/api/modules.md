@@ -1,13 +1,129 @@
-[@passes/reqs](README.md) / Modules
+[@passes/reqs](README.md) / Exports
 
 # @passes/reqs
 
 ## Table of contents
 
-### Modules
+### Namespaces
 
-- [codecs](modules/codecs.md)
-- [main](modules/main.md)
-- [messaging](modules/messaging.md)
-- [topics/pass-providers](modules/topics_pass_providers.md)
-- [topics/topic-providers](modules/topics_topic_providers.md)
+- [Codecs](modules/Codecs.md)
+- [Messaging](modules/Messaging.md)
+- [PassProviders](modules/PassProviders.md)
+- [TopicProviders](modules/TopicProviders.md)
+
+### Classes
+
+- [RequestTopic](classes/RequestTopic.md)
+- [SignedRequestTopic](classes/SignedRequestTopic.md)
+
+### Interfaces
+
+- [AcceptedResult](interfaces/AcceptedResult.md)
+- [Codec](interfaces/Codec.md)
+- [ConnectMessage](interfaces/ConnectMessage.md)
+- [ExceptionResult](interfaces/ExceptionResult.md)
+- [IRequestTopic](interfaces/IRequestTopic.md)
+- [PassesABI](interfaces/PassesABI.md)
+- [RejectedResult](interfaces/RejectedResult.md)
+- [RequestMessage](interfaces/RequestMessage.md)
+- [ResultMessage](interfaces/ResultMessage.md)
+- [SignedAcceptedResult](interfaces/SignedAcceptedResult.md)
+- [SignedBodyWrapper](interfaces/SignedBodyWrapper.md)
+- [SignedBodyWrapperHeader](interfaces/SignedBodyWrapperHeader.md)
+- [UnsupportedResult](interfaces/UnsupportedResult.md)
+
+### Type Aliases
+
+- [DocumentWithPasses](modules.md#documentwithpasses)
+- [GlobalDocument](modules.md#globaldocument)
+- [RequestResult](modules.md#requestresult)
+- [ResultStatus](modules.md#resultstatus)
+- [SignedRequestResult](modules.md#signedrequestresult)
+
+### Functions
+
+- [parseTopic](modules.md#parsetopic)
+
+## Type Aliases
+
+### DocumentWithPasses
+
+Ƭ **DocumentWithPasses**\<\>: `Document` & \{ `passes?`: [`PassesABI`](interfaces/PassesABI.md)  }
+
+#### Defined in
+
+[main/browser-types.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/browser-types.jsdoc.mjs#L3)
+
+___
+
+### GlobalDocument
+
+Ƭ **GlobalDocument**\<\>: `Document`
+
+#### Defined in
+
+[main/browser-types.jsdoc.mjs:35](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/browser-types.jsdoc.mjs#L35)
+
+___
+
+### RequestResult
+
+Ƭ **RequestResult**\<`TResult`\>: [`AcceptedResult`](interfaces/AcceptedResult.md)\<`TResult`\> \| [`RejectedResult`](interfaces/RejectedResult.md) \| [`UnsupportedResult`](interfaces/UnsupportedResult.md) \| [`ExceptionResult`](interfaces/ExceptionResult.md)
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `TResult` |
+
+#### Defined in
+
+[main/envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/envelope-v0.jsdoc.mjs#L26)
+
+___
+
+### ResultStatus
+
+Ƭ **ResultStatus**\<\>: ``"accepted"`` \| ``"rejected"`` \| ``"unsupported"`` \| ``"exception"``
+
+#### Defined in
+
+[main/envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/envelope-v0.jsdoc.mjs#L30)
+
+___
+
+### SignedRequestResult
+
+Ƭ **SignedRequestResult**\<`TResultBody`\>: `RequestResult` \| [`SignedAcceptedResult`](interfaces/SignedAcceptedResult.md)\<`TResultBody`\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `TResultBody` |
+
+#### Defined in
+
+[main/signed-request-topic.jsdoc.mjs:11](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/signed-request-topic.jsdoc.mjs#L11)
+
+## Functions
+
+### parseTopic
+
+▸ **parseTopic**(`rawRequest`): `string`
+
+Parse and return the topic from a raw request.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `rawRequest` | `Uint8Array` |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[main/parse-topic.js:8](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/parse-topic.js#L8)

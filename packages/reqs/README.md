@@ -73,7 +73,8 @@ It's generally recommended to use signed Pass Requests, since they use asymmetri
 To make a `RequestTopic` signed, we simply create a `SignedRequestTopic` to wrap it, and provide a `signResult` or `verifyResult` implementation...
 
 ```typescript
-import { Codecs, RequestTopic, SignedRequestTopic, SignedBodyWrapper, SignedBodyWrapperHeader } from '@passes/reqs';
+import { RequestTopic, SignedRequestTopic, SignedBodyWrapper, SignedBodyWrapperHeader } from '@passes/reqs';
+import * as Codecs from '@passes/reqs/codecs';
 
 // For this demo implementation, we'll use the SubtleCrypto API
 const keypair = await crypto.subtle.generateKey(keyParams, true, ['sign', 'verify']);

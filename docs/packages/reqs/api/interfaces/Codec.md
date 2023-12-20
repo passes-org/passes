@@ -1,8 +1,6 @@
-[@passes/reqs](../README.md) / [Modules](../modules.md) / [main](../modules/main.md) / Codec
+[@passes/reqs](../README.md) / [Exports](../modules.md) / Codec
 
 # Interface: Codec\<T\>
-
-[main](../modules/main.md).Codec
 
 ## Type parameters
 
@@ -14,8 +12,8 @@
 
 ### Properties
 
-- [decode](main.Codec.md#decode)
-- [encode](main.Codec.md#encode)
+- [decode](Codec.md#decode)
+- [encode](Codec.md#encode)
 
 ## Properties
 
@@ -39,7 +37,7 @@
 
 #### Defined in
 
-[main/request-topic.jsdoc.mjs:17](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.jsdoc.mjs#L17)
+[main/request-topic.jsdoc.mjs:17](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/request-topic.jsdoc.mjs#L17)
 
 ___
 
@@ -63,4 +61,4 @@ ___
 
 #### Defined in
 
-[main/request-topic.jsdoc.mjs:16](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.jsdoc.mjs#L16)
+[main/request-topic.jsdoc.mjs:16](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/request-topic.jsdoc.mjs#L16)

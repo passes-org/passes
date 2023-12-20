@@ -13,6 +13,6 @@ import { RequestTopic } from "../../main/request-topic.js";
  */
 export const provideTopics = new RequestTopic({
   id: 'org.passes.provide-topics',
-  requestBodyCodec: /** @type {import('../../main/index.js').Codec<ProvideTopicsRequestBody>} */ (Json),
+  requestBodyCodec: /** @type {import('../../main.js').Codec<ProvideTopicsRequestBody>} */ (Json),
   resultBodyCodec: Void,
 });
