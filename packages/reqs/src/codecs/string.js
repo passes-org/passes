@@ -1,6 +1,6 @@
 /**
  * A codec for string request/result bodies.
- * @type {import("../main/request-topic").Codec<string>}
+ * @type {import("../request-topic").Codec<string>}
  * @memberof Codecs
  */
 const StringCodec = {

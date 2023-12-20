@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[main/signed-request-topic.jsdoc.mjs:16](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/signed-request-topic.jsdoc.mjs#L16)
+signed-request-topic.jsdoc.mjs:16
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[main/signed-request-topic.jsdoc.mjs:17](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/signed-request-topic.jsdoc.mjs#L17)
+signed-request-topic.jsdoc.mjs:17

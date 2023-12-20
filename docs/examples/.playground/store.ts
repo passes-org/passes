@@ -1,5 +1,5 @@
 import { inject, provide, ref, Ref } from 'vue';
-import { IRequestTopic, PassesABI, RequestResult, SignedRequestResult } from '../../../packages/reqs/main';
+import { IRequestTopic, PassesABI, RequestResult, SignedRequestResult } from '../../../packages/reqs';
 
 type Store = {
   abi: 'emulator' | 'document.passes';

@@ -1,6 +1,6 @@
 /**
  * A codec for boolean request/result bodies.
- * @type {import("../main/request-topic").Codec<boolean>}
+ * @type {import("../request-topic").Codec<boolean>}
  * @memberof Codecs
  */
 const BooleanCodec = {

@@ -19,7 +19,7 @@ The message explaining the exception.
 
 #### Defined in
 
-[main/envelope-v0.jsdoc.mjs:21](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/envelope-v0.jsdoc.mjs#L21)
+envelope-v0.jsdoc.mjs:21
 
 ___
 
@@ -31,4 +31,4 @@ The status of the result when there is an exception.
 
 #### Defined in
 
-[main/envelope-v0.jsdoc.mjs:20](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/envelope-v0.jsdoc.mjs#L20)
+envelope-v0.jsdoc.mjs:20

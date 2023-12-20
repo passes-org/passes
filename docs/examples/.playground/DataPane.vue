@@ -3,7 +3,7 @@ import { computed, ref, watchEffect } from 'vue';
 import Button from './Button.vue';
 import PaneTabs from './PaneTabs.vue';
 import { useStore } from './store';
-import { SignedAcceptedResult, SignedRequestTopic } from '../../../packages/reqs/main';
+import { SignedAcceptedResult, SignedRequestTopic } from '../../../packages/reqs';
 import { calculateJwkThumbprint, base64url, JWK } from 'jose';
 import makeBlockie from 'ethereum-blockies-base64';
 

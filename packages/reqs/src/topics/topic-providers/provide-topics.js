@@ -1,5 +1,5 @@
 import { Json, Void } from "../../codecs/index.js";
-import { RequestTopic } from "../../main/request-topic.js";
+import { RequestTopic } from "../../request-topic.js";
 
 /**
  * Represents the body of a ProvideTopics request.
@@ -13,6 +13,6 @@ import { RequestTopic } from "../../main/request-topic.js";
  */
 export const provideTopics = new RequestTopic({
   id: 'org.passes.provide-topics',
-  requestBodyCodec: /** @type {import('../../main.js').Codec<ProvideTopicsRequestBody>} */ (Json),
+  requestBodyCodec: /** @type {import('../../index.js').Codec<ProvideTopicsRequestBody>} */ (Json),
   resultBodyCodec: Void,
 });

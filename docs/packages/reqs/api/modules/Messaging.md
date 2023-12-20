@@ -28,7 +28,7 @@ Messaging
 
 #### Defined in
 
-[messaging/await-request.js:7](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/messaging/await-request.js#L7)
+messaging/await-request.js:7
 
 ___
 
@@ -62,4 +62,4 @@ Messaging
 
 #### Defined in
 
-[messaging/send-result.js:9](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/messaging/send-result.js#L9)
+messaging/send-result.js:9

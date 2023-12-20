@@ -2,8 +2,8 @@
  * Topic and Pass Providers should call `sendResult` when they have a result to send back to the requesting app.
  * @template TRequestBody
  * @template TResultBody
- * @param {import("../main/request-topic").RequestTopic<TRequestBody, TResultBody>} requestTopic
- * @param {import("../main/request-topic").RequestResult<TResultBody>} result
+ * @param {import("../request-topic").RequestTopic<TRequestBody, TResultBody>} requestTopic
+ * @param {import("../request-topic").RequestResult<TResultBody>} result
  * @memberof Messaging
  */
 export async function sendResult(requestTopic, result) {
@@ -11,7 +11,7 @@ export async function sendResult(requestTopic, result) {
   const requester = window.opener ?? window.parent;
   if (!requester) throw new Error('sendResult must be called from a popup or iframe');
 
-  /** @type {import("../main/browser-types.jsdoc.mjs").ResultMessage} */
+  /** @type {import("../browser-types.jsdoc.mjs").ResultMessage} */
   const resultMessage = {
     type: 'org.passes.messaging.result',
     result: await requestTopic.encodeResult(result),

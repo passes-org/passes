@@ -2,16 +2,42 @@
   "name": "@passes/reqs",
   "version": "0.0.9-alpha.0",
   "type": "module",
-  "main": "main.js",
-  "types": "main.d.ts",
+  "main": "src/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "build:docs": "typedoc --plugin typedoc-plugin-markdown --out ../../docs/packages/reqs/api --tsconfig ./tsconfig.json ./docs-entry.ts",
+    "build:docs": "typedoc --plugin typedoc-plugin-markdown --out ../../docs/packages/reqs/api --tsconfig ./tsconfig.json ./src/index.docs.ts",
     "build": "tsc && bun run build:docs",
     "prepublishOnly": "tsc"
   },
   "devDependencies": {
     "bun-types": "latest",
     "typescript": "^5.2.2"
+  },
+  "files": [
+    "*",
+    "!**/*.docs.ts"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./codecs": {
+      "types": "./types/codecs/index.d.ts",
+      "default": "./src/codecs/index.js"
+    },
+    "./messaging": {
+      "types": "./types/messaging/index.d.ts",
+      "default": "./src/messaging/index.js"
+    },
+    "./topics/pass-providers": {
+      "types": "./types/topics/pass-providers/index.d.ts",
+      "default": "./src/topics/pass-providers/index.js"
+    },
+    "./topics/topic-providers": {
+      "types": "./types/topics/topic-providers/index.d.ts",
+      "default": "./src/topics/topic-providers/index.js"
+    }
   },
   "gitHead": "196eb5f98060061f2bfaedbb15e3e99fe4cc4fb5"
 }

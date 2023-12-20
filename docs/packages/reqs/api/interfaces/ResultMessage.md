@@ -19,7 +19,7 @@ The raw result.
 
 #### Defined in
 
-[main/browser-types.jsdoc.mjs:29](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/browser-types.jsdoc.mjs#L29)
+browser-types.jsdoc.mjs:29
 
 ___
 
@@ -31,4 +31,4 @@ The type of the result, should be 'org.passes.messaging.result'.
 
 #### Defined in
 
-[main/browser-types.jsdoc.mjs:28](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/browser-types.jsdoc.mjs#L28)
+browser-types.jsdoc.mjs:28

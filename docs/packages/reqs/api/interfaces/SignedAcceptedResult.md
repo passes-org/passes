@@ -26,7 +26,7 @@ The body of the result.
 
 #### Defined in
 
-[main/signed-request-topic.jsdoc.mjs:5](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/signed-request-topic.jsdoc.mjs#L5)
+signed-request-topic.jsdoc.mjs:5
 
 ___
 
@@ -38,7 +38,7 @@ The signature and public key of the signed result.
 
 #### Defined in
 
-[main/signed-request-topic.jsdoc.mjs:6](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/signed-request-topic.jsdoc.mjs#L6)
+signed-request-topic.jsdoc.mjs:6
 
 ___
 
@@ -50,4 +50,4 @@ The status of the result when accepted.
 
 #### Defined in
 
-[main/signed-request-topic.jsdoc.mjs:4](https://github.com/passes-org/passes/blob/1847fbe/packages/reqs/main/signed-request-topic.jsdoc.mjs#L4)
+signed-request-topic.jsdoc.mjs:4

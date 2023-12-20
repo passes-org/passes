@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IRequestTopic } from '../../../packages/reqs/main';
+import { IRequestTopic } from '../../../packages/reqs';
 import DataPane from './DataPane.vue';
 import EmulatorPane from './EmulatorPane.vue';
 import PlaygroundHeader from './PlaygroundHeader.vue';
