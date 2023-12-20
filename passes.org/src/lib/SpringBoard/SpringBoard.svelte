@@ -1,5 +1,7 @@
 <script>
-  import { Codecs, Messaging, RequestTopic, parseTopic } from '../../../../packages/reqs';
+  import { RequestTopic, parseTopic } from '../../../../packages/reqs';
+  import * as Codecs from '../../../../packages/reqs/codecs';
+  import * as Messaging from '../../../../packages/reqs/messaging';
   import { bodyTextToBodyType } from "./bodyTextToBodyType.js";
   import { requestBodyToDisplayString } from "./bodyToDisplayString.js";
   import { fetchFaviconUrl } from "./fetchFaviconUrl.js";

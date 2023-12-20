@@ -1,5 +1,6 @@
 import { toHex } from 'viem';
-import { Codecs, RequestTopic, parseTopic } from "@passes/reqs";
+import { RequestTopic, parseTopic } from "../../../../packages/reqs/main";
+import * as Codecs from "../../../../packages/reqs/codecs";
 
 /**
  * Returns a string representation of the given request body.
