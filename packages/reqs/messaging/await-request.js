@@ -10,7 +10,7 @@ export async function awaitRequest() {
   if (!requestingAppWindow) throw new Error('awaitRequest must be called from a popup or iframe');
 
   // Send connect message
-  /** @type {import("../browser-types.jsdoc.mjs").ConnectMessage} */
+  /** @type {import("../main/browser-types.jsdoc.mjs").ConnectMessage} */
   const resultMessage = { type: 'org.passes.messaging.connect' };
   requestingAppWindow.postMessage(resultMessage, '*');
 
@@ -23,7 +23,7 @@ export async function awaitRequest() {
   /**
    * Handles request messages from the Pass Provider window.
    * 
-   * @param {MessageEvent<import("../browser-types.jsdoc.mjs").RequestMessage>} event 
+   * @param {MessageEvent<import("../main/browser-types.jsdoc.mjs").RequestMessage>} event 
    * @returns {void}
    */
   function handleRequestMessage(event) {

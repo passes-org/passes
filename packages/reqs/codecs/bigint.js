@@ -2,7 +2,7 @@ import { String as StringCodec } from './string.js';
 
 /**
  * A codec for bigint request/result bodies.
- * @type {import("../request-topic.js").Codec<bigint>}
+ * @type {import("../main/request-topic.js").Codec<bigint>}
  * @memberof Codecs
  */
 const BigIntCodec = {

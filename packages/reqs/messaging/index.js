@@ -3,9 +3,9 @@ import { sendResult } from './send-result.js';
 
 /**
  * Namespace containing APIs for messaging between a requesting app and a Topic or Pass Provider.
- * @namespace Messaging
+ * @module Messaging
  */
-export const Messaging = {
+export {
   awaitRequest,
   sendResult,
 };

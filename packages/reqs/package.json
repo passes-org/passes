@@ -2,10 +2,10 @@
   "name": "@passes/reqs",
   "version": "0.0.7-alpha.2",
   "type": "module",
-  "main": "src/main.js",
+  "main": "main/index.js",
   "types": "types/main.d.ts",
   "scripts": {
-    "build:docs": "typedoc --plugin typedoc-plugin-markdown --out ../../docs/packages/reqs/api --tsconfig ./tsconfig.json ./src/main.js",
+    "build:docs": "typedoc --plugin typedoc-plugin-markdown --out ../../docs/packages/reqs/api --tsconfig ./tsconfig.json ./main/index.js ./codecs/index.js ./messaging/index.js ./topics/pass-providers/index.js ./topics/topic-providers/index.js",
     "build": "tsc && bun run build:docs",
     "prepublishOnly": "tsc"
   },

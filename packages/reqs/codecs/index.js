@@ -8,9 +8,9 @@ import { Void } from './void.js';
 
 /**
  * Namespace containing common codecs that may be used for a RequestTopic's request and result bodies.
- * @namespace Codecs
+ * @module Codecs
  */
-export const Codecs = {
+export {
   BigInt,
   Boolean,
   Bytes,

@@ -1,6 +1,6 @@
 /**
  * An identity codec for Uint8Array request/result bodies.
- * @type {import("../request-topic").Codec<Uint8Array>}
+ * @type {import("../main/request-topic").Codec<Uint8Array>}
  * @memberof Codecs
  */
 const BytesCodec = {

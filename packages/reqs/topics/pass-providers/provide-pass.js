@@ -1,5 +1,5 @@
-import { Codecs } from "../codecs/index.js";
-import { RequestTopic } from "../request-topic.js";
+import { Json, Void } from "../../codecs/index.js";
+import { RequestTopic } from "../../main/request-topic.js";
 
 /**
  * Represents the body of a ProvidePass request.
@@ -16,6 +16,6 @@ import { RequestTopic } from "../request-topic.js";
  */
 export const providePass = new RequestTopic({
   id: 'org.passes.provide-pass',
-  requestBodyCodec: /** @type {import('../main.js').Codec<ProvidePassRequestBody>} */ (Codecs.Json),
-  resultBodyCodec: Codecs.Void,
+  requestBodyCodec: /** @type {import('../../main/index.js').Codec<ProvidePassRequestBody>} */ (Json),
+  resultBodyCodec: Void,
 });

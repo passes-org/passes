@@ -1,6 +1,6 @@
 /**
  * A codec for empty request/result bodies.
- * @type {import("../request-topic").Codec<void>}
+ * @type {import("../main/request-topic").Codec<void>}
  * @memberof Codecs
  */
 export const Void = {
