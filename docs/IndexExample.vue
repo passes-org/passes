@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { SignedBodyWrapper, SignedBodyWrapperHeader } from '../packages/reqs/src/main';
-import { Codecs, RequestTopic, SignedRequestTopic } from '../packages/reqs/src/main';
+import * as Codecs from '../packages/reqs/codecs';
 import Playground from './examples/.playground/Playground.vue';
+import { SignedBodyWrapper, SignedBodyWrapperHeader } from '../packages/reqs/types/main';
+import { RequestTopic, SignedRequestTopic } from '../packages/reqs/main';
 
 const id = 'com.example.get-email';
 const requestTopic = new SignedRequestTopic<void, string>({

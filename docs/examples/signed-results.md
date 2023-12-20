@@ -73,7 +73,8 @@ In the example below, after you accept the pass request, you can click "Valid Re
 import { ref } from 'vue';
 import Button from './.playground/Button.vue'
 import Playground from './.playground/Playground.vue'
-import { Codecs, RequestTopic, SignedBodyWrapper, SignedBodyWrapperHeader, SignedRequestTopic } from '../../packages/reqs/src/main'
+import { RequestTopic, SignedBodyWrapper, SignedBodyWrapperHeader, SignedRequestTopic } from '../../packages/reqs/main'
+import * as Codecs from '../../packages/reqs/codecs'
 
 type ProfileInfoType = 'email' | 'profile.name' | 'profile.picture';
 type UserProfileRequest = ProfileInfoType[];

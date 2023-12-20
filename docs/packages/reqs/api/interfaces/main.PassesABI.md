@@ -1,12 +1,14 @@
-[@passes/reqs](../README.md) / [Exports](../modules.md) / PassesABI
+[@passes/reqs](../README.md) / [Modules](../modules.md) / [main](../modules/main.md) / PassesABI
 
 # Interface: PassesABI\<\>
+
+[main](../modules/main.md).PassesABI
 
 ## Table of contents
 
 ### Properties
 
-- [request](PassesABI.md#request)
+- [request](main.PassesABI.md#request)
 
 ## Properties
 
@@ -32,4 +34,4 @@ Request the user to complete a pass request.
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:9](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/browser-types.jsdoc.mjs#L9)
+[main/browser-types.jsdoc.mjs:9](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/browser-types.jsdoc.mjs#L9)

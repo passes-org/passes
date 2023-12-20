@@ -33,7 +33,8 @@ if (result.status === 'accepted') {
 <script setup lang="ts">
 import Button from './.playground/Button.vue'
 import Playground from './.playground/Playground.vue'
-import { Codecs, RequestTopic } from '../../packages/reqs/src/main'
+import { RequestTopic } from '../../packages/reqs/main'
+import * as Codecs from '../../packages/reqs/codecs'
 
 type ProfileInfoType = 'email' | 'profile.name' | 'profile.picture';
 type UserProfileRequest = ProfileInfoType[];

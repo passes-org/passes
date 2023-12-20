@@ -1,6 +1,8 @@
-[@passes/reqs](../README.md) / [Exports](../modules.md) / RequestTopic
+[@passes/reqs](../README.md) / [Modules](../modules.md) / [main](../modules/main.md) / RequestTopic
 
 # Class: RequestTopic\<TRequestBody, TResultBody\>
+
+[main](../modules/main.md).RequestTopic
 
 Builds an Envelope-v0x00 request topic interface.
 
@@ -17,37 +19,37 @@ Builds an Envelope-v0x00 request topic interface.
 
 - **`RequestTopic`**
 
-  ↳ [`SignedRequestTopic`](SignedRequestTopic.md)
+  ↳ [`SignedRequestTopic`](main.SignedRequestTopic.md)
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](RequestTopic.md#constructor)
+- [constructor](main.RequestTopic.md#constructor)
 
 ### Properties
 
-- [abi](RequestTopic.md#abi)
-- [id](RequestTopic.md#id)
-- [requestBodyCodec](RequestTopic.md#requestbodycodec)
-- [resultBodyCodec](RequestTopic.md#resultbodycodec)
-- [Errors](RequestTopic.md#errors)
+- [abi](main.RequestTopic.md#abi)
+- [id](main.RequestTopic.md#id)
+- [requestBodyCodec](main.RequestTopic.md#requestbodycodec)
+- [resultBodyCodec](main.RequestTopic.md#resultbodycodec)
+- [Errors](main.RequestTopic.md#errors)
 
 ### Methods
 
-- [decodeRequest](RequestTopic.md#decoderequest)
-- [decodeResult](RequestTopic.md#decoderesult)
-- [encodeRequest](RequestTopic.md#encoderequest)
-- [encodeResult](RequestTopic.md#encoderesult)
-- [resolveABI](RequestTopic.md#resolveabi)
-- [sendRequest](RequestTopic.md#sendrequest)
-- [toString](RequestTopic.md#tostring)
+- [decodeRequest](main.RequestTopic.md#decoderequest)
+- [decodeResult](main.RequestTopic.md#decoderesult)
+- [encodeRequest](main.RequestTopic.md#encoderequest)
+- [encodeResult](main.RequestTopic.md#encoderesult)
+- [resolveABI](main.RequestTopic.md#resolveabi)
+- [sendRequest](main.RequestTopic.md#sendrequest)
+- [toString](main.RequestTopic.md#tostring)
 
 ## Constructors
 
 ### constructor
 
-• **new RequestTopic**\<`TRequestBody`, `TResultBody`\>(`params`): [`RequestTopic`](RequestTopic.md)\<`TRequestBody`, `TResultBody`\>
+• **new RequestTopic**\<`TRequestBody`, `TResultBody`\>(`params`): [`RequestTopic`](main.RequestTopic.md)\<`TRequestBody`, `TResultBody`\>
 
 #### Type parameters
 
@@ -64,21 +66,21 @@ Builds an Envelope-v0x00 request topic interface.
 
 #### Returns
 
-[`RequestTopic`](RequestTopic.md)\<`TRequestBody`, `TResultBody`\>
+[`RequestTopic`](main.RequestTopic.md)\<`TRequestBody`, `TResultBody`\>
 
 #### Defined in
 
-[request-topic.js:33](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L33)
+[main/request-topic.js:33](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L33)
 
 ## Properties
 
 ### abi
 
-• **abi**: [`PassesABI`](../interfaces/PassesABI.md)
+• **abi**: [`PassesABI`](../interfaces/main.PassesABI.md)
 
 #### Defined in
 
-[request-topic.js:37](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L37)
+[main/request-topic.js:37](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L37)
 
 ___
 
@@ -88,7 +90,7 @@ ___
 
 #### Defined in
 
-[request-topic.js:34](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L34)
+[main/request-topic.js:34](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L34)
 
 ___
 
@@ -98,7 +100,7 @@ ___
 
 #### Defined in
 
-[request-topic.js:35](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L35)
+[main/request-topic.js:35](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L35)
 
 ___
 
@@ -108,7 +110,7 @@ ___
 
 #### Defined in
 
-[request-topic.js:36](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L36)
+[main/request-topic.js:36](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L36)
 
 ___
 
@@ -125,7 +127,7 @@ ___
 
 #### Defined in
 
-[request-topic.js:112](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L112)
+[main/request-topic.js:112](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L112)
 
 ## Methods
 
@@ -147,7 +149,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-topic.js:59](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L59)
+[main/request-topic.js:59](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L59)
 
 ___
 
@@ -169,7 +171,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-topic.js:86](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L86)
+[main/request-topic.js:86](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L86)
 
 ___
 
@@ -191,7 +193,7 @@ Encodes a structured request body into an envelope-v0x00 request.
 
 #### Defined in
 
-[request-topic.js:46](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L46)
+[main/request-topic.js:46](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L46)
 
 ___
 
@@ -213,19 +215,19 @@ Encodes a structured result body into an envelope-v0x00 result.
 
 #### Defined in
 
-[request-topic.js:71](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L71)
+[main/request-topic.js:71](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L71)
 
 ___
 
 ### resolveABI
 
-▸ **resolveABI**(): [`PassesABI`](../interfaces/PassesABI.md)
+▸ **resolveABI**(): [`PassesABI`](../interfaces/main.PassesABI.md)
 
 A helper for resolving the PassesABI. If the instance has no abi property, it returns document.passes if it's available.
 
 #### Returns
 
-[`PassesABI`](../interfaces/PassesABI.md)
+[`PassesABI`](../interfaces/main.PassesABI.md)
 
 **`Throws`**
 
@@ -233,7 +235,7 @@ A helper for resolving the PassesABI. If the instance has no abi property, it re
 
 #### Defined in
 
-[request-topic.js:150](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L150)
+[main/request-topic.js:150](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L150)
 
 ___
 
@@ -255,7 +257,7 @@ Sends a request.
 
 #### Defined in
 
-[request-topic.js:105](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L105)
+[main/request-topic.js:105](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L105)
 
 ___
 
@@ -271,4 +273,4 @@ Returns a string representation of the request topic.
 
 #### Defined in
 
-[request-topic.js:162](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/request-topic.js#L162)
+[main/request-topic.js:162](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/main/request-topic.js#L162)

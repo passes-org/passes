@@ -1,88 +1,129 @@
-[@passes/reqs](../README.md) / [Exports](../modules.md) / Codecs
+[@passes/reqs](../README.md) / [Modules](../modules.md) / codecs
 
-# Namespace: Codecs
-
-Namespace containing common codecs that may be used for a RequestTopic's request and result bodies.
- Codecs
+# Module: codecs
 
 ## Table of contents
 
 ### Variables
 
-- [BigInt](Codecs.md#bigint)
-- [Boolean](Codecs.md#boolean)
-- [Bytes](Codecs.md#bytes)
-- [Json](Codecs.md#json)
-- [Number](Codecs.md#number)
-- [String](Codecs.md#string)
-- [Void](Codecs.md#void)
+- [BigInt](codecs.md#bigint)
+- [Boolean](codecs.md#boolean)
+- [Bytes](codecs.md#bytes)
+- [Json](codecs.md#json)
+- [Number](codecs.md#number)
+- [String](codecs.md#string)
+- [Void](codecs.md#void)
 
 ## Variables
 
 ### BigInt
 
-• **BigInt**: `Codec`\<`bigint`\>
+• `Const` **BigInt**: `Codec`\<`bigint`\>
+
+A codec for bigint request/result bodies.
+
+**`Memberof`**
+
+Codecs
 
 #### Defined in
 
-[codecs/index.js:14](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/codecs/index.js#L14)
+[codecs/bigint.js:8](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/bigint.js#L8)
 
 ___
 
 ### Boolean
 
-• **Boolean**: `Codec`\<`boolean`\>
+• `Const` **Boolean**: `Codec`\<`boolean`\>
+
+A codec for boolean request/result bodies.
+
+**`Memberof`**
+
+Codecs
 
 #### Defined in
 
-[codecs/index.js:15](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/codecs/index.js#L15)
+[codecs/boolean.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/boolean.js#L6)
 
 ___
 
 ### Bytes
 
-• **Bytes**: `Codec`\<`Uint8Array`\>
+• `Const` **Bytes**: `Codec`\<`Uint8Array`\>
+
+An identity codec for Uint8Array request/result bodies.
+
+**`Memberof`**
+
+Codecs
 
 #### Defined in
 
-[codecs/index.js:16](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/codecs/index.js#L16)
+[codecs/bytes.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/bytes.js#L6)
 
 ___
 
 ### Json
 
-• **Json**: `Codec`\<`TJson`\>
+• `Const` **Json**: `Codec`\<`TJson`\>
+
+**`Template`**
+
+A codec for json request/result bodies.
+
+**`Memberof`**
+
+Codecs
 
 #### Defined in
 
-[codecs/index.js:17](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/codecs/index.js#L17)
+[codecs/json.js:9](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/json.js#L9)
 
 ___
 
 ### Number
 
-• **Number**: `Codec`\<`number`\>
+• `Const` **Number**: `Codec`\<`number`\>
+
+A codec for number request/result bodies.
+
+**`Memberof`**
+
+Codecs
 
 #### Defined in
 
-[codecs/index.js:18](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/codecs/index.js#L18)
+[codecs/number.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/number.js#L6)
 
 ___
 
 ### String
 
-• **String**: `Codec`\<`string`\>
+• `Const` **String**: `Codec`\<`string`\>
+
+A codec for string request/result bodies.
+
+**`Memberof`**
+
+Codecs
 
 #### Defined in
 
-[codecs/index.js:19](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/codecs/index.js#L19)
+[codecs/string.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/string.js#L6)
 
 ___
 
 ### Void
 
-• **Void**: `Codec`\<`void`\>
+• `Const` **Void**: `Codec`\<`void`\>
+
+A codec for empty request/result bodies.
+
+**`Memberof`**
+
+Codecs
 
 #### Defined in
 
-[codecs/index.js:20](https://github.com/passes-org/passes/blob/a56270b/packages/reqs/src/codecs/index.js#L20)
+[codecs/void.js:6](https://github.com/passes-org/passes/blob/4a9c88f/packages/reqs/codecs/void.js#L6)

@@ -1,4 +1,4 @@
-@passes/reqs / [Exports](modules.md)
+@passes/reqs / [Modules](modules.md)
 
 Reqs (pronounced "rex" – /rɛks/) provides a high-level interface for using Pass Requests in your app. 
 
@@ -20,7 +20,11 @@ To create a Pass Request topic, you need 3 things:
 
 ### Codecs
 
-The `Codecs` namespace includes many common codecs for your convenience. It's available as a named export of `@passes/reqs`.
+The `Codecs` module includes many common codecs for your convenience. It's available at `@passes/reqs/codecs`.
+
+```typescript
+import * as Codecs from '@passes/reqs/codecs';
+```
 
 | Name                  | Rich Type          |
 | --------------------- | ------------------ |
@@ -46,7 +50,8 @@ type Codec<T> = {
 Let's make a request topic that allows us to ask the user a yes-or-no question, and they can accept the request with a boolean representing their answer.
 
 ```typescript
-import { Codecs, RequestTopic } from '@passes/reqs';
+import { RequestTopic } from '@passes/reqs';
+import * as Codecs from '@passes/reqs/codecs';
 
 const yesOrNoQuestion = new RequestTopic({
   id: 'org.passes.example.yes-or-no-question',
@@ -124,7 +129,7 @@ const id = parseTopic(
 When your user signs up or re-authenticates with your Pass Provider, you can send a `providePass` Pass Request to ask them if they want to direct future Pass Requests to your Pass Provider.
 
 ```typescript
-import { PassProviders } from '@passes/reqs';
+import * as PassProviders from '@passes/reqs/topics/pass-providers';
 
 const { status } = await PassProviders.providePass('https://my-pass-provider.com', 'optional-user-id');
 
@@ -138,7 +143,7 @@ if (status === 'accepted') {
 Once your user has accepted or rejected a Pass Request, you can send the result back to the requesting app via `Messaging.sendResult`.
 
 ```typescript
-import { Messaging } from '@passes/reqs';
+import * as Messaging from '@passes/reqs/messaging';
 
 // Note: `handleRequest` is a placeholder for your handling logic for the given request topic
 const result = await handleRequest(request);
@@ -151,7 +156,7 @@ await Messaging.sendResult(requestTopic, result);
 Here's an example of how to use the above APIs together to implement support for a set of Pass Request topics in a basic Web Pass Provider.
 
 ```typescript
-import { PassProviders } from '@passes/reqs';
+import * as PassProviders from '@passes/reqs/topics/pass-providers';
 import * as SupportedRequestTopics from './supported-request-topics'; // A map of the request topics supported by your Pass Provider
 
 // Called when your user signs in to set your app as their Pass Provider
