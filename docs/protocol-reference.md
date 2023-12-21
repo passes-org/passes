@@ -117,7 +117,7 @@ You just need a page served over HTTPS at an arbitrary URI.
 Communication between the requesting app and your page will happen on the client side via `window.postMessage`.
 
 ```typescript
-import { Messaging } from '@passes/reqs';
+import * as Messaging from '@passes/reqs/messaging';
 
 const passRequest = await Messaging.awaitRequest();
 const { requestTopic, result } = await presentRequestToUserAndAwaitResult(passRequest); // < your custom presentation logic
