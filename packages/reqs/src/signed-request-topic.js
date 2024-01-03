@@ -1,7 +1,7 @@
 import { Json as JsonCodec } from './codecs/json.js';
 import { EnvelopeV0 } from './envelope-v0.js';
+import { formatRLE, parseRLE } from './private/rle.js';
 import { RequestTopic } from './request-topic.js';
-import { formatRLE, parseRLE } from './utils/rle.js';
 
 // JSDoc Type Imports
 /** @template TRequestBody @template TResultBody @typedef {import('./request-topic.jsdoc.mjs').IRequestTopic<TRequestBody, TResultBody>} IRequestTopic */
