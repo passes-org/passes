@@ -23,4 +23,4 @@ PassProviders
 
 #### Defined in
 
-topics/pass-providers/provide-pass.js:17
+[topics/pass-providers/provide-pass.js:17](https://github.com/passes-org/passes/blob/19b6ca1/packages/reqs/src/topics/pass-providers/provide-pass.js#L17)

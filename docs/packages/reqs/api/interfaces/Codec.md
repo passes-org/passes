@@ -37,7 +37,7 @@
 
 #### Defined in
 
-request-topic.jsdoc.mjs:17
+[request-topic.jsdoc.mjs:17](https://github.com/passes-org/passes/blob/19b6ca1/packages/reqs/src/request-topic.jsdoc.mjs#L17)
 
 ___
 
@@ -61,4 +61,4 @@ ___
 
 #### Defined in
 
-request-topic.jsdoc.mjs:16
+[request-topic.jsdoc.mjs:16](https://github.com/passes-org/passes/blob/19b6ca1/packages/reqs/src/request-topic.jsdoc.mjs#L16)
