@@ -58,9 +58,6 @@
       // Send the request to the Pass Provider window
       const requestMessage = { type: 'org.passes.messaging.request', request: raw };
       passProviderWindow.postMessage(requestMessage, '*');
-
-      // Remove this event listener
-      window.removeEventListener('message', handleConnectMessage);
     }
 
     // Handle connect messages from the passProviderWindow
@@ -91,6 +88,10 @@
       resolveResultPromise(message.result);
       // Close the window
       passProviderWindow.close();
+
+      // Remove added event listeners
+      window.removeEventListener('message', handleConnectMessage);
+      window.removeEventListener('message', handleResultMessage);
     }
 
     // Handle result messages from the passProviderWindow
