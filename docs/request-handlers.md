@@ -38,14 +38,16 @@ For example, an app that host git repos can implement support for Pass Request t
 
 ### Building a Topic Provider
 
-When the user signs into the Topic Provider, it can declare the topics it supports to their Pass Provider via an `org.passes.provide-topics` request, containing a list of the topics it supports.
+When the user signs into the Topic Provider, it can announce the topics it supports to their Pass Provider via an `org.passes.provide-topics` request, containing a list of the topics it supports.
 
 ```typescript
 import { TopicProviders } from '@passes/reqs';
 
-await TopicProviders.provideTopics.sendRequest([
-  'com.git-scm.remote-urls', // This app supports requests for Git repo URLs
-]);
+// Announce that this app supports requests for Git repo URLs
+await TopicProviders.provideTopics.sendRequest({
+  uri: 'https://my-app.com/handle-pass-request',
+  topics: ['com.git-scm.remote-urls'],
+});
 ```
 
 Future Pass Requests with the topic `com.git-scm.remote-urls` can now be forwarded to your app by the user's Pass Provider.

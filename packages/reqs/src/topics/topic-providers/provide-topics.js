@@ -3,7 +3,9 @@ import { RequestTopic } from "../../request-topic.js";
 
 /**
  * Represents the body of a ProvideTopics request.
- * @typedef {string[]} ProvideTopicsRequestBody - An array of topic IDs that the Topics Provider supports.
+ * @typedef {Object} ProvideTopicsRequestBody
+ * @property {string} uri - The URI that provides request handling for the specified topics.
+ * @property {string[]} topics - An array of topic IDs that the Topic Provider supports.
  */
 
 /** 
