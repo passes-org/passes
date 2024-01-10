@@ -92,8 +92,8 @@ import { provideTopics } from '@passes/reqs/topics/topic-providers';
 async function handleUserSignIn() {
   await signUserIn();
 
-  // Announce that this app provides `example.topic-1`
-  const result = await provideTopics.sendRequest(['example.topic-1']);
+  // Announce that this app provides `example.topic-1` at the URL https://my-app.com/handle-pass-request
+  const result = await provideTopics.sendRequest({ uri: 'https://my-app.com/handle-pass-request', topics: ['example.topic-1'] });
 
   if (result.status === 'accepted') {
     // Future `example.topic-1` requests will be opened at this URL
