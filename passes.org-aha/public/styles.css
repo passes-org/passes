@@ -1,0 +1,137 @@
+/** SF-Pro-Display normal font-weights */
+@font-face {
+  font-family: 'SF Pro Display';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Display-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-weight: 500;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Display-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-weight: 600;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Display-Semibold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Display-Bold.otf') format('opentype');
+}
+
+/** SF-Pro-Display italic font-weights */
+@font-face {
+  font-family: 'SF Pro Display';
+  font-weight: 400;
+  font-style: italic;
+  src: url('/fonts/SF-Pro-Display-RegularItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-weight: 500;
+  font-style: italic;
+  src: url('/fonts/SF-Pro-Display-MediumItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-weight: 600;
+  font-style: italic;
+  src: url('/fonts/SF-Pro-Display-SemiboldItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-weight: 700;
+  font-style: italic;
+  src: url('/fonts/SF-Pro-Display-BoldItalic.otf') format('opentype');
+}
+
+/** SF-Pro-Text normal font-weights */
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Text-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 500;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Text-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 600;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Text-Semibold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Text-Bold.otf') format('opentype');
+}
+
+/** SF-Pro-Text italic font-weights */
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 400;
+  font-style: italic;
+  src: url('/fonts/SF-Pro-Text-RegularItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 500;
+  font-style: italic;
+  src: url('/fonts/SF-Pro-Text-MediumItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 600;
+  font-style: italic;
+  src: url('/fonts/SF-Pro-Text-SemiboldItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 700;
+  font-style: italic;
+  src: url('/fonts/SF-Pro-Text-BoldItalic.otf') format('opentype');
+}
+
+/** SF-Pro-Rounded */
+@font-face {
+  font-family: 'SF Pro Rounded';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Rounded-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Rounded';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/SF-Pro-Rounded-Bold.otf') format('opentype');
+}
+
+/* Root background color */
+html,
+body,
+input,
+textarea,
+select {
+  background-color: white;
+  color: black;
+}
+@media (prefers-color-scheme: dark) {
+  html,
+  body,
+  input,
+  textarea,
+  select {
+    background-color: black;
+    color: white;
+  }
+}
