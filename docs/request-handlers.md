@@ -6,15 +6,15 @@ This page only scratches the surface of Request Handlers. We'll be continuously 
 If you have unanswered questions, please reach out via our [discussions site](https://github.com/passes-org/passes/discussions).
 :::
 
-When an app sends a Pass Request, it has to be presented to the user for them to approve.
+Request Handlers present Pass Requests to the user. Currently, there are two kinds: Pass Providers and Topic Providers.
 
-This is the job of Request Handlers.
+A Pass Provider can present a Pass Request to the user if it supports the topic. If not, a Topic Provider will handle the request.
 
 ## Pass Providers
 
-All Pass Requests are sent directly to the user's Pass Provider.
+All Pass Requests are sent first to the user's chosen Pass Provider.
 
-Naturally, the Pass Provider can present the Pass Request to the user if it supports the topic.
+If the Pass Provider supports the topic, it will present the Pass Request to the user.
 
 However, if _every_ Pass Request topic needed to be supported by every user's Pass Provider for them to use Passes effectively, that would be very limiting.
 
@@ -23,6 +23,12 @@ The role of Pass Providers is thus to provide the user's identity (their keypair
 Pass Providers are free to support any topics they'd like. For everything else, there's Topic Providers.
 
 ## Topic Providers
+
+If Pass Providers need to support every possible Pass Request topic, it would become a burden for Pass Providers to handle the long-tail of Pass Request topics and limit the incentive for developers to make new, creative types of Pass Requests.
+
+Topic Providers solve this problem by supporting Pass Request topics related to their app's domain. Any app can be a Topic Provider, and they are simple to build alongside the new type of Pass Request being introduced.
+
+The incentive to build a Topic Provider is that anyone who wants to leverage the respective Pass Request, can use that Topic Provider. This introduces a network of Topic Providers that any developer can then leverage."
 
 Topic Providers are user-facing apps that implement support for Pass Request topics related to their app domain.
 

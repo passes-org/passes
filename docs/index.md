@@ -1,11 +1,19 @@
-# What Is Passes?
+# Introduction
 
-**Passes** is a client-side API for making requests directly to users.
+**Passes** gives you a client-side API for requesting data and actions directly from end-users so you can build seamless authentication and cross-app interactions.
 
 <img src="/diagram_01_light.gif" alt="Diagram of a Pass Request" class="light-mode-only" />
 <img src="/diagram_01_dark.gif" alt="Diagram of a Pass Request" class="dark-mode-only" />
 
-Passes enables apps to send **Pass Requests**, which are presented to the user for review and handling via their **Pass Provider**.
+- **Direct, User-Centric Requests**: Requests are sent to users on the client, and opened by the user's preferred app (called a _Pass Provider_).
+- **Cross-App Interactions**: The type of a request is called its _topic_. When an app sends a request, the user's Pass Provider can delegate it to any app the user has visited which provides that topic (called a _Topic Provider_).
+- **Seamless Portable Identity**: Users fully control which data they share with apps, and can choose to use the same identity across many of the apps they use.
+
+## How Passes Works
+
+1. An app uses the `document.passes.request` API to send requests directly to the end user via the client.
+2. The request is opened by an app called a _Pass Provider_.
+4. If the user approves the request, the result is sent back to the requesting app via the client.
 
 :::info This is an early release of Passes.
 We invite you to read the documentation and [source code](https://github.com/passes-org/passes), experiment by adding [Pass Requests](#what-is-a-pass-request) in your apps, and contribute to [discussions](https://github.com/passes-org/passes/discussions) to help shape the future of Passes.
@@ -38,6 +46,7 @@ const getEmail = new RequestTopic({
   resultBodyCodec: Codecs.String // The result body type is a string of the user's email
 });
 
+// Under the hood, sendRequest calls document.passes.request and sends the encoded request // [!code focus]
 const getEmailResult = await getEmail.sendRequest();// [!code focus]
                                                     // [!code focus]
 if (getEmailResult.status === 'accepted') {         // [!code focus]
@@ -50,8 +59,9 @@ if (getEmailResult.status === 'accepted') {         // [!code focus]
 
 Some ideas to build with Pass Requests:
 - Sign in with the same account everywhere
+- Bring your AI model of choice to any app you use
+- Cross-app embeds and interactions
 - Fast checkout and payments
-- Data and permissions requests between arbitrary apps
 - Features requiring client-side signatures, like blockchain transactions
 
 :::info Experiment With Pass Requests
@@ -60,10 +70,36 @@ To get started implementing support for Pass Requests in your app today, check o
 [**View Reqs Docs**](/packages/reqs/quickstart.md)
 :::
 
+### How Pass Requests Are Handled
+
+Passes enables apps to send Pass Requests, which are presented to the user for review and handling via their Pass Provider.
+
+A Pass Provider can delegate the handling of a Pass Request to any app the user has authorized to handle its request topic.
+
 ## What Is a Pass Provider?
 
 A Pass Provider is an app chosen by the user to handle their Pass Requests. Anyone can make a Pass Provider, and sites that make requests work regardless of the user's chosen Pass Provider.
 
+## What Is a Topic Provider?
+
+A Topic Provider is any app that sends a pass request announcing it provides a set of Pass Request topics. Conventionlly, a Topic Provider announces the topics it provides when the user signs into the app.
+
+If the user accepts the "provide topics" request from the app, their Pass Provider can delegate future pass requests whose topics the app provides to it for handling.
+
+```typescript
+import { provideTopics } from '@passes/reqs/topics/topic-providers';
+
+async function handleUserSignIn() {
+  await signUserIn();
+
+  // Announce that this app provides `example.topic-1`
+  const result = await provideTopics.sendRequest(['example.topic-1']);
+
+  if (result.status === 'accepted') {
+    // Future `example.topic-1` requests will be opened at this URL
+  }
+}
+```
 
 ## Design Goals
 
