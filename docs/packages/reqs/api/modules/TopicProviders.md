@@ -22,4 +22,4 @@ TopicProviders
 
 #### Defined in
 
-[topics/topic-providers/provide-topics.js:14](https://github.com/passes-org/passes/blob/19b6ca1/packages/reqs/src/topics/topic-providers/provide-topics.js#L14)
+[topics/topic-providers/provide-topics.js:16](https://github.com/passes-org/passes/blob/cf65b5d/packages/reqs/src/topics/topic-providers/provide-topics.js#L16)
