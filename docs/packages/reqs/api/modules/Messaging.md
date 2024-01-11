@@ -13,14 +13,14 @@
 
 ### awaitRequest
 
-▸ **awaitRequest**(): `Promise`\<`Uint8Array`\>
+▸ **awaitRequest**(): `Promise`\<\{ `origin`: `string` ; `request`: `Uint8Array`  }\>
 
 Topic and Pass Providers should call `awaitRequest` when opened by a requesting app to receive the Pass Request.
 Under the hood, it sends a connect message to the requesting app window and returns a promise that resolves with the request when it's received.
 
 #### Returns
 
-`Promise`\<`Uint8Array`\>
+`Promise`\<\{ `origin`: `string` ; `request`: `Uint8Array`  }\>
 
 **`Memberof`**
 
@@ -28,13 +28,13 @@ Messaging
 
 #### Defined in
 
-[messaging/await-request.js:7](https://github.com/passes-org/passes/blob/cf65b5d/packages/reqs/src/messaging/await-request.js#L7)
+[messaging/await-request.js:7](https://github.com/passes-org/passes/blob/0a98c6d/packages/reqs/src/messaging/await-request.js#L7)
 
 ___
 
 ### sendResult
 
-▸ **sendResult**\<`TRequestBody`, `TResultBody`\>(`requestTopic`, `result`): `Promise`\<`void`\>
+▸ **sendResult**\<`TRequestBody`, `TResultBody`\>(`requestTopic`, `result`, `origin?`): `Promise`\<`void`\>
 
 Topic and Pass Providers should call `sendResult` when they have a result to send back to the requesting app.
 
@@ -47,10 +47,11 @@ Topic and Pass Providers should call `sendResult` when they have a result to sen
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `requestTopic` | [`RequestTopic`](../classes/RequestTopic.md)\<`TRequestBody`, `TResultBody`\> |
-| `result` | `RequestResult`\<`TResultBody`\> |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `requestTopic` | [`RequestTopic`](../classes/RequestTopic.md)\<`TRequestBody`, `TResultBody`\> | `undefined` |  |
+| `result` | `RequestResult`\<`TResultBody`\> | `undefined` |  |
+| `origin?` | `string` | `'*'` | The origin to send the result to. Defaults to '*'. |
 
 #### Returns
 
@@ -62,4 +63,4 @@ Messaging
 
 #### Defined in
 
-[messaging/send-result.js:9](https://github.com/passes-org/passes/blob/cf65b5d/packages/reqs/src/messaging/send-result.js#L9)
+[messaging/send-result.js:10](https://github.com/passes-org/passes/blob/0a98c6d/packages/reqs/src/messaging/send-result.js#L10)
