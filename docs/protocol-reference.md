@@ -119,7 +119,7 @@ Communication between the requesting app and your page will happen on the client
 ```typescript
 import * as Messaging from '@passes/reqs/messaging';
 
-const passRequest = await Messaging.awaitRequest();
-const { requestTopic, result } = await presentRequestToUserAndAwaitResult(passRequest); // < your custom presentation logic
-await Messaging.sendResult(requestTopic, result);
+const { request, origin } = await Messaging.awaitRequest();
+const { requestTopic, result } = await presentRequestToUserAndAwaitResult(request); // < your custom presentation logic
+await Messaging.sendResult(requestTopic, result, origin);
 ```
