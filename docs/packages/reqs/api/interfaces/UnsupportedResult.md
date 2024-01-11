@@ -18,4 +18,4 @@ The status of the result when unsupported.
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:15](https://github.com/passes-org/passes/blob/0a98c6d/packages/reqs/src/envelope-v0.jsdoc.mjs#L15)
+[envelope-v0.jsdoc.mjs:15](https://github.com/passes-org/passes/blob/6f5f306/packages/reqs/src/envelope-v0.jsdoc.mjs#L15)

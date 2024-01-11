@@ -4,6 +4,10 @@
 
 ## Table of contents
 
+### Interfaces
+
+- [RequestMessage](../interfaces/Messaging.RequestMessage.md)
+
 ### Functions
 
 - [awaitRequest](Messaging.md#awaitrequest)
@@ -13,14 +17,14 @@
 
 ### awaitRequest
 
-▸ **awaitRequest**(): `Promise`\<\{ `origin`: `string` ; `request`: `Uint8Array`  }\>
+▸ **awaitRequest**(): `Promise`\<[`RequestMessage`](../interfaces/Messaging.RequestMessage.md)\>
 
 Topic and Pass Providers should call `awaitRequest` when opened by a requesting app to receive the Pass Request.
 Under the hood, it sends a connect message to the requesting app window and returns a promise that resolves with the request when it's received.
 
 #### Returns
 
-`Promise`\<\{ `origin`: `string` ; `request`: `Uint8Array`  }\>
+`Promise`\<[`RequestMessage`](../interfaces/Messaging.RequestMessage.md)\>
 
 **`Memberof`**
 
@@ -28,7 +32,7 @@ Messaging
 
 #### Defined in
 
-[messaging/await-request.js:7](https://github.com/passes-org/passes/blob/0a98c6d/packages/reqs/src/messaging/await-request.js#L7)
+[messaging/await-request.js:14](https://github.com/passes-org/passes/blob/6f5f306/packages/reqs/src/messaging/await-request.js#L14)
 
 ___
 
@@ -63,4 +67,4 @@ Messaging
 
 #### Defined in
 
-[messaging/send-result.js:10](https://github.com/passes-org/passes/blob/0a98c6d/packages/reqs/src/messaging/send-result.js#L10)
+[messaging/send-result.js:10](https://github.com/passes-org/passes/blob/6f5f306/packages/reqs/src/messaging/send-result.js#L10)
