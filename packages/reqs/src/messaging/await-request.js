@@ -1,7 +1,14 @@
 /**
+ * The result of awaitRequest is a "request message" containing the request and the origin of the requesting app.
+ * @typedef {Object} RequestMessage
+ * @property {Uint8Array} request - The raw request.
+ * @property {string} origin - The origin of the requesting app.
+ */
+
+/**
  * Topic and Pass Providers should call `awaitRequest` when opened by a requesting app to receive the Pass Request.
  * Under the hood, it sends a connect message to the requesting app window and returns a promise that resolves with the request when it's received.
- * @returns {Promise<{ request: Uint8Array; origin: string }>}
+ * @returns {Promise<RequestMessage>}
  * @memberof Messaging
  */
 export async function awaitRequest() {
@@ -15,9 +22,9 @@ export async function awaitRequest() {
   requestingAppWindow.postMessage(resultMessage, '*');
 
   // Create a promise and resolver fn which will be used to return a promise that gets resolved from handleRequestMessage once there's a result
-  /** @type {(result: { request: Uint8Array; origin: string }) => void} */
+  /** @type {(result: RequestMessage) => void} */
   let resolveRequestPromise;
-  /** @type {Promise<{ request: Uint8Array; origin: string }>} */
+  /** @type {Promise<RequestMessage>} */
   const requestPromise = new Promise((resolve) => { resolveRequestPromise = resolve; });
 
   /**
