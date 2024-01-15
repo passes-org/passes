@@ -1,0 +1,92 @@
+---
+import Layout from "../../Layouts/Layout.astro";
+import { getUserPassProvider } from "../../lib/userPassProvider";
+
+if (Astro.request.method === "OPTIONS") {
+  return new Response(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Credentials": "true",
+      "Cross-Origin-Opener-Policy": "cross-origin",
+      "Cross-Origin-Resource-Policy": "cross-origin",
+    },
+  });
+}
+
+// const referrerValue = Astro.request.headers.get('referer');
+// const referrer = referrerValue ? new URL(referrerValue).host : undefined;
+
+// Redirect pass requests to the user's Pass Provider
+const userPassProvider = getUserPassProvider(Astro);
+if (userPassProvider) {
+  throw Astro.redirect(userPassProvider, 307);
+}
+---
+
+<html lang="en">
+  <Layout>
+    {!userPassProvider ? 
+      <main>
+        <form
+          id="request-container"
+          hx-post="/request/support"
+          hx-encoding="multipart/form-data"
+          hx-trigger="request"
+        >
+          <div class="htmx-indicator animate-pulse duration-200">
+            <div class="flex flex-col items-center justify-center">
+              <svg
+                class="w-12 h-12 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              <p class="mt-1 text-sm text-gray-500">Loading...</p>
+            </div>
+            <input id="request" type="file" name="request" class="hidden" />
+            <input id="origin" type="hidden" name="origin" />
+          </div>
+
+          <script>
+            // @ts-ignore
+            import * as htmx from "htmx.org";
+            import * as Messaging from "@passes/reqs/messaging";
+
+            document.body.addEventListener("htmx:load", async () => {
+              const requestMessage = await Messaging.awaitRequest();
+              const requestRaw = requestMessage.request;
+              const requestBlob = new Blob([requestRaw]);
+              const requestFile = new File([requestBlob], "request");
+
+              const dataTransfer = new DataTransfer();
+              dataTransfer.items.add(requestFile);
+
+              const requestInput = document.getElementById(
+                "request",
+              ) as HTMLInputElement;
+              requestInput.files = dataTransfer.files;
+
+              const originInput = document.getElementById(
+                "origin",
+              ) as HTMLInputElement;
+              originInput.value = requestMessage.origin;
+
+              const requestContainer =
+                document.getElementById("request-container");
+
+              htmx.trigger(requestContainer, "request", null);
+            });
+          </script>
+        </form>
+      </main>
+    : null}
+  </Layout>
+</html>

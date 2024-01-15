@@ -12,13 +12,16 @@
   "dependencies": {
     "@astrojs/check": "^0.4.1",
     "@astrojs/tailwind": "^5.1.0",
+    "@passes/reqs": "^0.0.15-alpha.0",
     "astro": "^4.1.1",
+    "astro-htmx": "^1.0.5",
+    "cheerio": "^1.0.0-rc.12",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^6.18.1",
-    "eslint": "^8.56.0",
-    "eslint-plugin-astro": "^0.31.0"
+    "eslint": "^8.56.0"
   }
 }
