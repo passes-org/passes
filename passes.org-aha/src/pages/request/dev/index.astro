@@ -22,7 +22,7 @@ import Layout from "../../../layouts/Layout.astro";
       return bodyBytes;
     }
 
-    async function polyfillRequest(url: string, raw: Uint8Array) {
+    async function sendRequest(url: string, raw: Uint8Array) {
       // If the request is to set the Pass Provider, redirect to the passes.org set-pass-provider page
       if (getRequestTopic(raw) === "org.passes.provide-pass") {
         const { uri } = JSON.parse(
@@ -119,7 +119,7 @@ import Layout from "../../../layouts/Layout.astro";
       const requestBytes = Uint8Array.from(atob(body.value), (c) =>
         c.charCodeAt(0),
       );
-      const result = await polyfillRequest(url, requestBytes);
+      const result = await sendRequest(url, requestBytes);
       console.log("result: ", result);
     }
 
@@ -146,7 +146,7 @@ import Layout from "../../../layouts/Layout.astro";
           id="request-body"
           placeholder="Base64-encoded Request"
           class="w-full h-64 text-center border-2"></textarea>
-        <button id="url-submit" type="submit">Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </main>
   </Layout>
