@@ -2,6 +2,7 @@
 import Layout from "../../Layouts/Layout.astro";
 import { getUserPassProvider } from "../../lib/userPassProvider";
 
+
 if (Astro.request.method === "OPTIONS") {
   return new Response(null, {
     headers: {
@@ -55,30 +56,27 @@ if (userPassProvider) {
           <script>
             import * as htmx from "htmx.org";
             import * as Messaging from "@passes/reqs/messaging";
+            import * as Utils from "@passes/reqs/utils";
+
+            function getRequestTopic(request: Uint8Array) {
+              const topicBegin = 2;
+              const topicLength = (request.at(1) ?? 0) + 1;
+              const topicEnd = topicBegin + topicLength;
+              const topicBytes = request.slice(2, topicEnd);
+              return new TextDecoder().decode(topicBytes);
+            }
 
             document.body.addEventListener("htmx:load", async () => {
               const requestMessage = await Messaging.awaitRequest();
               const requestRaw = requestMessage.request;
-              const requestBlob = new Blob([requestRaw]);
-              const requestFile = new File([requestBlob], "request");
 
-              const dataTransfer = new DataTransfer();
-              dataTransfer.items.add(requestFile);
+              if (getRequestTopic(requestRaw) !== Utils.requestFallbackProvider.toString()) {
+                return;
+              }
 
-              const requestInput = document.getElementById(
-                "request",
-              ) as HTMLInputElement;
-              requestInput.files = dataTransfer.files;
+              const { fallbackProvider } = await Utils.requestFallbackProvider.decodeRequest(requestRaw);
 
-              const originInput = document.getElementById(
-                "origin",
-              ) as HTMLInputElement;
-              originInput.value = requestMessage.origin;
-
-              const requestContainer =
-                document.getElementById("request-container");
-
-              htmx.trigger(requestContainer, "request", null);
+              window.location.href = fallbackProvider;
             });
           </script>
         </form>
