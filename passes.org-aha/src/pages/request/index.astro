@@ -14,9 +14,6 @@ if (Astro.request.method === "OPTIONS") {
   });
 }
 
-// const referrerValue = Astro.request.headers.get('referer');
-// const referrer = referrerValue ? new URL(referrerValue).host : undefined;
-
 // Redirect pass requests to the user's Pass Provider
 const userPassProvider = getUserPassProvider(Astro);
 if (userPassProvider) {
@@ -56,7 +53,6 @@ if (userPassProvider) {
           </div>
 
           <script>
-            // @ts-ignore
             import * as htmx from "htmx.org";
             import * as Messaging from "@passes/reqs/messaging";
 
