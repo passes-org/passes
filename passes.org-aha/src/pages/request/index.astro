@@ -26,60 +26,51 @@ if (userPassProvider) {
   <Layout>
     {!userPassProvider ? 
       <main>
-        <form
-          id="request-container"
-          hx-post="/request/support"
-          hx-encoding="multipart/form-data"
-          hx-trigger="request"
-        >
-          <div class="htmx-indicator animate-pulse duration-200">
-            <div class="flex flex-col items-center justify-center">
-              <svg
-                class="w-12 h-12 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-              </svg>
-              <p class="mt-1 text-sm text-gray-500">Loading...</p>
-            </div>
-            <input id="request" type="file" name="request" class="hidden" />
-            <input id="origin" type="hidden" name="origin" />
+        <div class="animate-pulse duration-200">
+          <div class="flex flex-col items-center justify-center">
+            <svg
+              class="w-12 h-12 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            <p class="mt-1 text-sm text-gray-500">Loading...</p>
           </div>
+        </div>
 
-          <script>
-            import * as htmx from "htmx.org";
-            import * as Messaging from "@passes/reqs/messaging";
-            import * as Utils from "@passes/reqs/utils";
+        <script>
+          import * as Messaging from "@passes/reqs/messaging";
+          import * as Utils from "@passes/reqs/utils";
 
-            function getRequestTopic(request: Uint8Array) {
-              const topicBegin = 2;
-              const topicLength = (request.at(1) ?? 0) + 1;
-              const topicEnd = topicBegin + topicLength;
-              const topicBytes = request.slice(2, topicEnd);
-              return new TextDecoder().decode(topicBytes);
+          function getRequestTopic(request: Uint8Array) {
+            const topicBegin = 2;
+            const topicLength = (request.at(1) ?? 0) + 1;
+            const topicEnd = topicBegin + topicLength;
+            const topicBytes = request.slice(2, topicEnd);
+            return new TextDecoder().decode(topicBytes);
+          }
+
+          document.body.addEventListener("load", async () => {
+            const requestMessage = await Messaging.awaitRequest();
+            const requestRaw = requestMessage.request;
+
+            if (getRequestTopic(requestRaw) !== Utils.requestFallbackProvider.toString()) {
+              document.querySelector("main")!.innerHTML = "Please Sign-In To Your Pass Provider";
+              return;
             }
 
-            document.body.addEventListener("htmx:load", async () => {
-              const requestMessage = await Messaging.awaitRequest();
-              const requestRaw = requestMessage.request;
+            const { fallbackProvider } = await Utils.requestFallbackProvider.decodeRequest(requestRaw);
 
-              if (getRequestTopic(requestRaw) !== Utils.requestFallbackProvider.toString()) {
-                return;
-              }
-
-              const { fallbackProvider } = await Utils.requestFallbackProvider.decodeRequest(requestRaw);
-
-              window.location.href = fallbackProvider;
-            });
-          </script>
-        </form>
+            window.location.href = fallbackProvider;
+          });
+        </script>
       </main>
     : null}
   </Layout>
