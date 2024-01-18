@@ -1,8 +1,8 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
+import LayoutWithMenu from "../../../layouts/LayoutWithMenu.astro";
 ---
 
-<Layout>
+<LayoutWithMenu>
   <main class="flex items-center justify-center w-full flex-1">
     <form
       id="pass-request-form"
@@ -120,4 +120,4 @@ import Layout from "../../../layouts/Layout.astro";
       .getElementById("pass-request-form")
       ?.addEventListener("submit", handleSubmitRequest);
   </script>
-</Layout>
+</LayoutWithMenu>

@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import DocumentLayout from "../../layouts/DocumentLayout.astro";
 import { setUserPassProvider } from "../../lib/userPassProvider";
 
 // Handle POST requests 
@@ -23,7 +23,7 @@ if (!providerUri || !returnUri) {
 }
 ---
 
-<Layout>
+<DocumentLayout>
   <!-- Page Container -->
   <div class="flex-1 flex flex-col items-center justify-center">
     <!-- Dialog -->
@@ -94,4 +94,4 @@ if (!providerUri || !returnUri) {
       )}
     </main>
   </div>
-</Layout>
+</DocumentLayout>

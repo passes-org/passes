@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import LayoutWithMenu from "../../layouts/LayoutWithMenu.astro";
 import { getUserPassProvider } from "../../lib/userPassProvider";
 
 // Allow CORS preflight requests
@@ -22,7 +22,7 @@ if (userPassProvider) {
 }
 ---
 
-<Layout>
+<LayoutWithMenu>
   <main>
     <div class="animate-pulse duration-200">
       <div class="flex flex-col items-center justify-center">
@@ -53,4 +53,4 @@ if (userPassProvider) {
       window.location.href = defaultProvider;
     })();
   </script>
-</Layout>
+</LayoutWithMenu>
