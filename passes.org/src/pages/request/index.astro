@@ -18,7 +18,7 @@ if (Astro.request.method === "OPTIONS") {
 // Redirect pass requests to the user's Pass Provider
 const userPassProvider = getUserPassProvider(Astro);
 if (userPassProvider) {
-  throw Astro.redirect(userPassProvider, 307);
+  return Astro.redirect(userPassProvider, 307);
 }
 ---
 
