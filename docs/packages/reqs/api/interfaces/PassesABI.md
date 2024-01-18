@@ -32,4 +32,4 @@ Request the user to complete a pass request.
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:9](https://github.com/passes-org/passes/blob/68c44c5/packages/reqs/src/browser-types.jsdoc.mjs#L9)
+[browser-types.jsdoc.mjs:9](https://github.com/passes-org/passes/blob/8e6096b/packages/reqs/src/browser-types.jsdoc.mjs#L9)

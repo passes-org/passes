@@ -21,7 +21,7 @@ The origin of the requesting app.
 
 #### Defined in
 
-[messaging/await-request.js:5](https://github.com/passes-org/passes/blob/68c44c5/packages/reqs/src/messaging/await-request.js#L5)
+[messaging/await-request.js:5](https://github.com/passes-org/passes/blob/8e6096b/packages/reqs/src/messaging/await-request.js#L5)
 
 ___
 
@@ -33,4 +33,4 @@ The raw request.
 
 #### Defined in
 
-[messaging/await-request.js:4](https://github.com/passes-org/passes/blob/68c44c5/packages/reqs/src/messaging/await-request.js#L4)
+[messaging/await-request.js:4](https://github.com/passes-org/passes/blob/8e6096b/packages/reqs/src/messaging/await-request.js#L4)
