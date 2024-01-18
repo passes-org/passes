@@ -1,7 +1,14 @@
 /**
+ * The result of awaitRequest is a "request message" containing the request and the origin of the requesting app.
+ * @typedef {Object} RequestMessage
+ * @property {Uint8Array} request - The raw request.
+ * @property {string} origin - The origin of the requesting app.
+ */
+
+/**
  * Topic and Pass Providers should call `awaitRequest` when opened by a requesting app to receive the Pass Request.
  * Under the hood, it sends a connect message to the requesting app window and returns a promise that resolves with the request when it's received.
- * @returns {Promise<Uint8Array>}
+ * @returns {Promise<RequestMessage>}
  * @memberof Messaging
  */
 export async function awaitRequest() {
@@ -15,9 +22,9 @@ export async function awaitRequest() {
   requestingAppWindow.postMessage(resultMessage, '*');
 
   // Create a promise and resolver fn which will be used to return a promise that gets resolved from handleRequestMessage once there's a result
-  /** @type {(result: Uint8Array) => void} */
+  /** @type {(result: RequestMessage) => void} */
   let resolveRequestPromise;
-  /** @type {Promise<Uint8Array>} */
+  /** @type {Promise<RequestMessage>} */
   const requestPromise = new Promise((resolve) => { resolveRequestPromise = resolve; });
 
   /**
@@ -36,7 +43,7 @@ export async function awaitRequest() {
     if (message.type !== 'org.passes.messaging.request') return;
 
     // Resolve the result promise returned by this function
-    resolveRequestPromise(message.request);
+    resolveRequestPromise({ request: message.request, origin: event.origin });
 
     // Remove this event listener
     window.removeEventListener('message', handleRequestMessage);

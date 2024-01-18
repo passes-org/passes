@@ -1,6 +1,6 @@
 {
   "name": "@passes/reqs",
-  "version": "0.0.13-alpha.0",
+  "version": "0.0.17-alpha.0",
   "type": "module",
   "main": "src/index.js",
   "types": "types/index.d.ts",
@@ -37,6 +37,10 @@
     "./topics/topic-providers": {
       "types": "./types/topics/topic-providers/index.d.ts",
       "default": "./src/topics/topic-providers/index.js"
+    },
+    "./wrappers": {
+      "types": "./types/wrappers/index.d.ts",
+      "default": "./src/wrappers/index.js"
     }
   },
   "gitHead": "196eb5f98060061f2bfaedbb15e3e99fe4cc4fb5"
