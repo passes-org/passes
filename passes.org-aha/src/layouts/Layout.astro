@@ -12,18 +12,20 @@
   </head>
   <body>
     {/* Page */}
-    <div class="p-5 min-h-screen flex flex-col font-rounded">
-      {/* Logo */}
-      <a href="/" title="Passes.org">
-        <svg width="42" height="30" viewBox="0 0 42 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="42" height="30" rx="3" class="fill-black dark:fill-white" />
-          <rect x="16" y="7" width="3" height="8" rx="1.5" class="fill-white dark:fill-black" />
-          <rect x="23" y="7" width="3" height="8" rx="1.5" class="fill-white dark:fill-black" />
-          <path d="M27 19C25.1926 20.2802 23.1553 21 21 21C18.8447 21 16.8074 20.2802 15 19" class="stroke-white dark:stroke-black" stroke-width="3" stroke-linecap="round" />
-        </svg>
-      </a>
+    <div class="container p-10 md:p-16 font-rounded dark:text-white">
+      {/* Header */}
+      <div class="flex items-center justify-between pb-5 border-b border-black lg:pb-10 dark:border-white">
+        {/* Logo */}
+        <a href="/">
+          <img src="/logo_light.svg" alt="Passes Logo" class="dark:hidden" />
+          <img src="/logo_dark.svg" alt="Passes Logo" class="dark:block" />
+        </a>
 
-      {/* Content */}
+        {/* Slot: Menu-Right Content */}
+        <slot name="menu-right" />
+      </div>
+      
+      {/* Page Content */}
       <slot />
     </div>
   </body>
