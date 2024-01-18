@@ -1,0 +1,123 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+---
+
+<Layout>
+  <main class="flex items-center justify-center w-full flex-1">
+    <form
+      id="pass-request-form"
+      class="flex flex-col flex-1 items-center justify-center max-w-xl space-y-4"
+    >
+      {/* URL Input */}
+      <input
+        id="request-url"
+        type="url"
+        placeholder="Provider URL"
+        class="text-center border-2 w-full"
+      />
+
+      {/* Request Body Input */}
+      <textarea
+        id="request-body"
+        placeholder="Base64-encoded Request"
+        class="w-full h-64 text-center border-2"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <script>
+    async function sendRequest(url: string, raw: Uint8Array) {
+      // Open a window to passes.org to redirect to the user's Pass Provider
+      const passProviderWindow = window.open(`${url}/request`, "_blank");
+
+      /**
+       * Handles connect messages from the Pass Provider window.
+       *
+       * @param {MessageEvent<import("./browser-types.jsdoc.mjs").ConnectMessage>} event
+       * @returns {void}
+       */
+      function handleConnectMessage(event) {
+        const message = event.data;
+
+        // Ignore messages that aren't from the Pass Provider window opened in this call
+        if (event.source !== passProviderWindow) return;
+
+        // Ignore messages that aren't connect messages
+        if (message.type !== "org.passes.messaging.connect") return;
+
+        // Send the request to the Pass Provider window
+        const requestMessage = {
+          type: "org.passes.messaging.request",
+          request: raw,
+        };
+        passProviderWindow?.postMessage(requestMessage, "*");
+      }
+
+      // Handle connect messages from the passProviderWindow
+      window.addEventListener("message", handleConnectMessage);
+
+      // Create a promise and resolver fn which will be used to return a promise that gets resolved from handleResultMessage once there's a result
+      /** @type {(result: Uint8Array) => void} */
+      let resolveResultPromise;
+      /** @type {Promise<Uint8Array>} */
+      const resultPromise = new Promise((resolve) => {
+        resolveResultPromise = resolve;
+      });
+
+      /**
+       * Handles result messages from the Pass Provider window.
+       *
+       * @param {MessageEvent<import("./browser-types.jsdoc.mjs").ResultMessage>} event
+       * @returns {void}
+       */
+      function handleResultMessage(event) {
+        const message = event.data;
+
+        // Ignore messages that aren't from the Pass Provider window opened in this call
+        if (event.source !== passProviderWindow) return;
+
+        // Ignore messages that aren't request results
+        if (message.type !== "org.passes.messaging.result") return;
+
+        // Resolve the result promise returned by this function
+        resolveResultPromise(message.result);
+        // Close the window
+        passProviderWindow?.close();
+
+        // Remove added event listeners
+        window.removeEventListener("message", handleConnectMessage);
+        window.removeEventListener("message", handleResultMessage);
+      }
+
+      // Handle result messages from the passProviderWindow
+      window.addEventListener("message", handleResultMessage);
+
+      // When the passProviderWindow closes, remove the message handler from this window
+      passProviderWindow?.addEventListener("close", () =>
+        window.removeEventListener("message", handleResultMessage),
+      );
+
+      // Return the promise for the request result, which will be resolved in handleResultMessage above
+      return resultPromise;
+    }
+
+    async function handleSubmitRequest(event) {
+      event.preventDefault();
+      const url = (document.getElementById("request-url") as HTMLInputElement)
+        .value;
+      const body = document.getElementById(
+        "request-body",
+      ) as HTMLTextAreaElement;
+
+      const requestBytes = Uint8Array.from(atob(body.value), (c) =>
+        c.charCodeAt(0),
+      );
+      const result = await sendRequest(url, requestBytes);
+      console.log("result: ", result);
+    }
+
+    document
+      .getElementById("pass-request-form")
+      ?.addEventListener("submit", handleSubmitRequest);
+  </script>
+</Layout>

@@ -2,10 +2,11 @@
 module.exports = {
   extends: [
     'eslint:recommended',
+    '@typescript-eslint/recommended',
     'plugin:astro/recommended',
   ],
   parserOptions: {
-		sourceType: 'module',
+    sourceType: 'module',
 		ecmaVersion: 2020,
 		extraFileExtensions: ['.astro'],
     parser: '@typescript-eslint/parser',

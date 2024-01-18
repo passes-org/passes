@@ -1,0 +1,56 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getUserPassProvider } from "../../lib/userPassProvider";
+
+// Allow CORS preflight requests
+if (Astro.request.method === "OPTIONS") {
+  return new Response(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Credentials": "true",
+      "Cross-Origin-Opener-Policy": "cross-origin",
+      "Cross-Origin-Resource-Policy": "cross-origin",
+    },
+  });
+}
+
+// Redirect pass requests to the user's Pass Provider
+const userPassProvider = getUserPassProvider(Astro);
+if (userPassProvider) {
+  throw Astro.redirect(userPassProvider, 307);
+}
+---
+
+<Layout>
+  <main>
+    <div class="animate-pulse duration-200">
+      <div class="flex flex-col items-center justify-center">
+        <svg class="w-12 h-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        <p class="mt-1 text-sm text-gray-500">Loading...</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    import { parseTopic } from "@passes/reqs";
+    import * as Messaging from "@passes/reqs/messaging";
+    import * as Wrappers from "@passes/reqs/wrappers";
+  
+    (async () => {
+      const requestMessage = await Messaging.awaitRequest();
+      const requestRaw = requestMessage.request;
+  
+      if (parseTopic(requestRaw) !== Wrappers.requestWithDefaultProvider.id) {
+        document.querySelector("main")!.innerHTML = "Please Sign-In To Your Pass Provider";
+        return;
+      }
+  
+      const { defaultProvider } = await Wrappers.requestWithDefaultProvider.decodeRequest(requestRaw);
+  
+      window.location.href = defaultProvider;
+    })();
+  </script>
+</Layout>

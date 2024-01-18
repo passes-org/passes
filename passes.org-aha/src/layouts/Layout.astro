@@ -1,0 +1,32 @@
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Passes - The Web API for Portable Identity</title>
+    <slot name="head" />
+  </head>
+  <body>
+    {/* Page */}
+    <div class="container p-10 md:p-16 font-rounded dark:text-white">
+      {/* Header */}
+      <div class="flex items-center justify-between pb-5 border-b border-black lg:pb-10 dark:border-white">
+        {/* Logo */}
+        <a href="/">
+          <img src="/logo_light.svg" alt="Passes Logo" class="dark:hidden" />
+          <img src="/logo_dark.svg" alt="Passes Logo" class="dark:block" />
+        </a>
+
+        {/* Slot: Menu-Right Content */}
+        <slot name="menu-right" />
+      </div>
+      
+      {/* Page Content */}
+      <slot />
+    </div>
+  </body>
+</html>
