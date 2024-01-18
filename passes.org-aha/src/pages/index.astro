@@ -1,4 +1,5 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import { getUserPassProvider } from "../lib/userPassProvider";
 
 const userPassProvider = getUserPassProvider(Astro);
@@ -8,82 +9,47 @@ const passProviderHostname = userPassProvider
   : null;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/styles.css" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Passes - The Web API for Portable Identity</title>
-
-    <script>
-      import * as htmx from "htmx.org";
-    </script>
-  </head>
-  <body>
-    <div class="container p-10 md:p-16 font-text dark:text-white">
-      <!-- Header -->
-      <div
-        class="flex items-center justify-between pb-5 border-b border-black lg:pb-10 dark:border-white"
+<Layout>
+  {/* Menu-Right: Github / User Pass Provider */}
+  <div slot="menu-right" class="space-y-1 flex flex-col items-end">
+    <a class="block" href="https://github.com/passes-org/passes">Github</a>
+    {passProviderHostname && (
+      <button
+        class="text-xs"
+        hx-post="/api/clear-pass-provider"
+        hx-confirm={`Do you want to clear your Pass Provider?\n\nYou will need to sign back into ${passProviderHostname} to receive Pass Requests there again.`}
       >
-        <!-- Logo -->
-        <img src="/logo_light.svg" alt="Passes Logo" class="dark:hidden" />
-        <img src="/logo_dark.svg" alt="Passes Logo" class="dark:block" />
+        Using: <span class="font-bold">{passProviderHostname}</span>
+      </button>
+    )}
+  </div>
 
-        <!-- Icon: Github -->
-        <div class="space-y-1 flex flex-col items-end">
-          <a class="block" href="//github.com/passes-org/passes">Github</a>
-          {
-            passProviderHostname ? (
-              <button
-                class="text-xs"
-                hx-post="/api/clear-pass-provider"
-                hx-confirm={`Do you want to clear your Pass Provider?\n\nYou will need to sign back into ${passProviderHostname} to receive Pass Requests there again.`}
-              >
-                Using: <span class="font-bold">{passProviderHostname}</span>
-              </button>
-            ) : null
-          }
-        </div>
-      </div>
+  {/* Main Content */}
+  <main class="py-24 space-y-20 lg:px-12">
+    {/* Hero Section */}
+    <div class="flex flex-col items-start space-y-10 lg:w-4/5">
+      <h1 class="text-5xl leading-tight font-display lg:text-8xl text-balance">
+        One identity. No passwords.
+      </h1>
+      <p class="text-2xl font-text">
+        Passes give users a portable client-side identity any app can
+        request to recognize them or act on their behalf, putting them in
+        control of their data and privacy.
+      </p>
 
-      <!-- Main Content -->
-      <main class="py-24 space-y-20 lg:px-12">
-        <!-- Hero Section -->
-        <div class="flex flex-col items-start space-y-10 lg:w-4/5">
-          <h1
-            class="text-5xl leading-tight font-display lg:text-8xl"
-            style="text-wrap: balance"
-          >
-            One identity. No passwords.
-          </h1>
-          <p class="text-2xl font-text">
-            Passes give users a portable client-side identity any app can
-            request to recognize them or act on their behalf, putting them in
-            control of their data and privacy.
-          </p>
-
-          <a
-            href="//docs.passes.org"
-            class="flex items-baseline gap-4 px-6 py-5 text-lg text-white bg-black rounded dark:bg-white dark:text-black"
-          >
-            <span>Developer Docs</span>
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="fill-white dark:fill-black"
-            >
-              <path
-                d="M4 0H12V8H10V4H8V6H6V8H4V10H2V12H0V10H2V8H4V6H6V4H8V2H4V0Z"
-              ></path>
-            </svg>
-          </a>
-        </div>
-      </main>
+      <a href="https://docs.passes.org" class="flex items-baseline gap-4 px-6 py-5 text-lg text-white bg-black rounded dark:bg-white dark:text-black">
+        <span>Developer Docs</span>
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="fill-white dark:fill-black"
+        >
+          <path d="M4 0H12V8H10V4H8V6H6V8H4V10H2V12H0V10H2V8H4V6H6V4H8V2H4V0Z" />
+        </svg>
+      </a>
     </div>
-  </body>
-</html>
+  </main>
+</Layout>
