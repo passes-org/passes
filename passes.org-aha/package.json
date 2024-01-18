@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/check": "^0.4.1",
     "@astrojs/tailwind": "^5.1.0",
-    "@passes/reqs": "^0.0.16-alpha.0",
+    "@passes/reqs": "^0.0.17-alpha.0",
     "astro": "^4.1.1",
     "astro-htmx": "^1.0.5",
     "cheerio": "^1.0.0-rc.12",
