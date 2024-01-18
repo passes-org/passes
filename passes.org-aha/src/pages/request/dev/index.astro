@@ -2,38 +2,31 @@
 import Layout from "../../../layouts/Layout.astro";
 ---
 
-<html lang="en">
+<Layout>
+  <main class="flex items-center justify-center w-full flex-1">
+    <form
+      id="pass-request-form"
+      class="flex flex-col flex-1 items-center justify-center max-w-xl space-y-4"
+    >
+      {/* URL Input */}
+      <input
+        id="request-url"
+        type="url"
+        placeholder="Provider URL"
+        class="text-center border-2 w-full"
+      />
+
+      {/* Request Body Input */}
+      <textarea
+        id="request-body"
+        placeholder="Base64-encoded Request"
+        class="w-full h-64 text-center border-2"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
   <script>
-    const PASSES_BASE_URL = "https://passes.org";
-
-    function getRequestTopic(request) {
-      const topicBegin = 2;
-      const topicLength = (request.at(1) ?? 0) + 1;
-      const topicEnd = topicBegin + topicLength;
-      const topicBytes = request.slice(2, topicEnd);
-      return new TextDecoder().decode(topicBytes);
-    }
-
-    function getRequestBody(request) {
-      const topicBegin = 2;
-      const topicLength = (request.at(1) ?? 0) + 1;
-      const topicEnd = topicBegin + topicLength;
-      const bodyBytes = request.slice(topicEnd);
-      return bodyBytes;
-    }
-
     async function sendRequest(url: string, raw: Uint8Array) {
-      // If the request is to set the Pass Provider, redirect to the passes.org set-pass-provider page
-      if (getRequestTopic(raw) === "org.passes.provide-pass") {
-        const { uri } = JSON.parse(
-          new TextDecoder().decode(getRequestBody(raw)),
-        );
-        window.location.href = `${PASSES_BASE_URL}/set-pass-provider?provider=${encodeURIComponent(
-          uri,
-        )}&return=${encodeURIComponent(window.location.href)}`;
-        return;
-      }
-
       // Open a window to passes.org to redirect to the user's Pass Provider
       const passProviderWindow = window.open(`${url}/request`, "_blank");
 
@@ -127,27 +120,4 @@ import Layout from "../../../layouts/Layout.astro";
       .getElementById("pass-request-form")
       ?.addEventListener("submit", handleSubmitRequest);
   </script>
-  <Layout>
-    <!-- URL Input  -->
-
-    <main class="flex items-center justify-center w-full flex-1">
-      <form
-        id="pass-request-form"
-        class="flex flex-col flex-1 items-center justify-center max-w-xl space-y-4"
-      >
-        <input
-          id="request-url"
-          type="url"
-          placeholder="Provider URL"
-          class="text-center border-2 w-full"
-        />
-
-        <textarea
-          id="request-body"
-          placeholder="Base64-encoded Request"
-          class="w-full h-64 text-center border-2"></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </main>
-  </Layout>
-</html>
+</Layout>
