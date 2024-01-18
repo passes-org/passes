@@ -1,13 +1,27 @@
-/** @type { import("eslint").Linter.FlatConfig } */
+/** @type { import('eslint').Linter.FlatConfig } */
 module.exports = {
-	root: true,
-	extends: ['eslint:recommended', 'plugin:svelte/recommended', 'prettier'],
-	parserOptions: {
-		sourceType: 'module',
+  extends: [
+    'eslint:recommended',
+    '@typescript-eslint/recommended',
+    'plugin:astro/recommended',
+  ],
+  parserOptions: {
+    sourceType: 'module',
 		ecmaVersion: 2020,
-		extraFileExtensions: ['.svelte']
+		extraFileExtensions: ['.astro'],
+    parser: '@typescript-eslint/parser',
 	},
-	env: {
+  overrides: [
+    {
+      // Define the configuration for `.astro` file.
+      files: ['*.astro'],
+      // Allows Astro components to be parsed.
+      parser: 'astro-eslint-parser',
+      // Support client-side typescript
+      processor: 'astro/client-side-ts',
+    },
+  ],
+  env: {
 		browser: true,
 		es2017: true,
 		node: true
