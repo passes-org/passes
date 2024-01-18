@@ -1,5 +1,5 @@
-import cheerio from 'cheerio';
 import type { APIRoute } from "astro";
+import cheerio from 'cheerio';
 import { zfd } from 'zod-form-data';
 
 export const GET: APIRoute = async (context) => {
@@ -28,10 +28,9 @@ export const GET: APIRoute = async (context) => {
 }
 
 const SearchParamsSchema = zfd.formData({
-    uri: zfd.text()
-      .transform((v) => new URL(v)),
-  });
-
+  uri: zfd.text()
+    .transform((v) => new URL(v)),
+});
   
 function createFallbackImage(name: string) {
     return `<svg viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -40,5 +39,5 @@ function createFallbackImage(name: string) {
       ${name}
     </text>
   </svg>`;
-  }
+}
   
