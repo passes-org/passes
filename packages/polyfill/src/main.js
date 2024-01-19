@@ -30,15 +30,25 @@
    * @returns {Promise<Uint8Array>}
    */
   async function polyfillRequest(raw) {
+    const requestTopic = getRequestTopic(raw);
+
     // If the request is to set the Pass Provider, redirect to the passes.org set-pass-provider page
-    if (getRequestTopic(raw) === 'org.passes.provide-pass') {
+    if (requestTopic === 'org.passes.provide-pass') {
       const { uri } = JSON.parse(new TextDecoder().decode(getRequestBody(raw)));
-      window.location.href = `${PASSES_BASE_URL}/set-pass-provider?provider=${encodeURIComponent(uri)}&return=${encodeURIComponent(window.location.href)}`;
-      return;
+      window.open(`${PASSES_BASE_URL}/set-pass-provider?provider=${encodeURIComponent(uri)}&return=${encodeURIComponent(window.location.href)}`, '_self');
+      return new Uint8Array([0]); // Success result
     }
 
+    // Create the URL for the passes.org request relay
+    let passesOrgRelayUrl = `${PASSES_BASE_URL}/request`;
+    // If the request has a default provider, add a query parameter to the passes.org request so it can redirect the user on the server side if needed
+    if (requestTopic === 'org.passes.request-with-default-provider') {
+      const defaultProvider = getRequestDefaultProvider(getRequestBody(raw));
+      passesOrgRelayUrl += `?defaultProvider=${encodeURIComponent(defaultProvider)}`;
+    }
+    
     // Open a window to passes.org to redirect to the user's Pass Provider
-    const passProviderWindow = window.open(`${PASSES_BASE_URL}/request`, '_blank');
+    const passProviderWindow = window.open(passesOrgRelayUrl, '_blank');
 
     /**
      * Handles connect messages from the Pass Provider window.
@@ -130,5 +140,20 @@
     const topicEnd = topicBegin + topicLength;
     const bodyBytes = request.slice(topicEnd);
     return bodyBytes;
+  }
+
+  /**
+   * @param {Uint8Array} requestBody - The raw request to get the default provider for.
+   * @return {string}
+   */
+  function getRequestDefaultProvider(requestBody) {
+    const buffer = requestBody.buffer;
+    const view = new DataView(buffer);
+    const runLength = view.getUint8(0) + 1;
+    const rangeStart = 1;
+    const rangeEnd = rangeStart + runLength;
+    const range = requestBody.slice(rangeStart, rangeEnd);
+    const defaultProvider = new TextDecoder().decode(range);
+    return defaultProvider;
   }
 })();
