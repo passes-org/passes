@@ -1,5 +1,5 @@
 {
-  "name": "passes.org-aha",
+  "name": "passes.org",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -13,7 +13,7 @@
     "@astrojs/check": "^0.4.1",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vercel": "^6.1.4",
-    "@passes/reqs": "^0.1.0",
+    "@passes/reqs": "^0.1.1",
     "astro": "^4.1.1",
     "astro-htmx": "^1.0.5",
     "cheerio": "^1.0.0-rc.12",
