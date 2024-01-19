@@ -69,7 +69,7 @@ Builds an Envelope-v0x00 request topic interface.
 
 #### Defined in
 
-[request-topic.js:33](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L33)
+[request-topic.js:33](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L33)
 
 ## Properties
 
@@ -79,7 +79,7 @@ Builds an Envelope-v0x00 request topic interface.
 
 #### Defined in
 
-[request-topic.js:37](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L37)
+[request-topic.js:37](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L37)
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-[request-topic.js:34](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L34)
+[request-topic.js:34](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L34)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[request-topic.js:35](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L35)
+[request-topic.js:35](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L35)
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 #### Defined in
 
-[request-topic.js:36](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L36)
+[request-topic.js:36](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L36)
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 #### Defined in
 
-[request-topic.js:112](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L112)
+[request-topic.js:112](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L112)
 
 ## Methods
 
@@ -148,7 +148,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-topic.js:59](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L59)
+[request-topic.js:59](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L59)
 
 ___
 
@@ -170,7 +170,7 @@ Decodes an envelope-v0x00 request into a structured request body.
 
 #### Defined in
 
-[request-topic.js:86](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L86)
+[request-topic.js:86](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L86)
 
 ___
 
@@ -192,7 +192,7 @@ Encodes a structured request body into an envelope-v0x00 request.
 
 #### Defined in
 
-[request-topic.js:46](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L46)
+[request-topic.js:46](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L46)
 
 ___
 
@@ -214,7 +214,7 @@ Encodes a structured result body into an envelope-v0x00 result.
 
 #### Defined in
 
-[request-topic.js:71](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L71)
+[request-topic.js:71](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L71)
 
 ___
 
@@ -234,7 +234,7 @@ A helper for resolving the PassesABI. If the instance has no abi property, it re
 
 #### Defined in
 
-[request-topic.js:150](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L150)
+[request-topic.js:150](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L150)
 
 ___
 
@@ -256,7 +256,7 @@ Sends a request.
 
 #### Defined in
 
-[request-topic.js:105](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L105)
+[request-topic.js:105](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L105)
 
 ___
 
@@ -272,7 +272,7 @@ Returns a string representation of the request topic.
 
 #### Defined in
 
-[request-topic.js:175](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L175)
+[request-topic.js:175](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L175)
 
 ___
 
@@ -294,4 +294,4 @@ Returns a new RequestTopic instance with the same id and codecs, but with a new 
 
 #### Defined in
 
-[request-topic.js:162](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/request-topic.js#L162)
+[request-topic.js:162](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/request-topic.js#L162)

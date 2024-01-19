@@ -32,7 +32,7 @@ Messaging
 
 #### Defined in
 
-[messaging/await-request.js:14](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/messaging/await-request.js#L14)
+[messaging/await-request.js:14](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/messaging/await-request.js#L14)
 
 ___
 
@@ -67,4 +67,4 @@ Messaging
 
 #### Defined in
 
-[messaging/send-result.js:10](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/messaging/send-result.js#L10)
+[messaging/send-result.js:10](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/messaging/send-result.js#L10)

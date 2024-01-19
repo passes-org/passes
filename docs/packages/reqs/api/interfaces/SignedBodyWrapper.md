@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[signed-request-topic.jsdoc.mjs:24](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/signed-request-topic.jsdoc.mjs#L24)
+[signed-request-topic.jsdoc.mjs:24](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/signed-request-topic.jsdoc.mjs#L24)
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 #### Defined in
 
-[signed-request-topic.jsdoc.mjs:23](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/signed-request-topic.jsdoc.mjs#L23)
+[signed-request-topic.jsdoc.mjs:23](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/signed-request-topic.jsdoc.mjs#L23)
