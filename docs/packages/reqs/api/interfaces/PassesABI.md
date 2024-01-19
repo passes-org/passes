@@ -14,6 +14,8 @@
 
 • **request**: (`raw`: `Uint8Array`) => `Promise`\<`Uint8Array`\>
 
+Request the user to complete a pass request.
+
 #### Type declaration
 
 ▸ (`raw`): `Promise`\<`Uint8Array`\>
@@ -32,4 +34,4 @@ Request the user to complete a pass request.
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:9](https://github.com/passes-org/passes/blob/b59e848/packages/reqs/src/browser-types.jsdoc.mjs#L9)
+[browser-types.jsdoc.mjs:9](https://github.com/passes-org/passes/blob/d32fb4d/packages/reqs/src/browser-types.jsdoc.mjs#L9)
