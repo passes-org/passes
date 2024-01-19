@@ -3,7 +3,7 @@
 To make the `document.passes.request` ABI available to all users in any browser, you can add the `@passes/polyfill` script to your page via a script tag.
 
 ```html
-<script src="https://unpkg.com/@passes/polyfill@^0.1.0"></script>
+<script src="https://unpkg.com/@passes/polyfill@^0.1.4"></script>
 ```
 
 ## The Polyfill Flow
