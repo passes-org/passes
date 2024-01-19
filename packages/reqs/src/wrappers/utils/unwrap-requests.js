@@ -6,6 +6,7 @@ import { requestWithDefaultProvider } from "../request-with-default-provider.js"
  * @typedef {Object} UnwrappedRequests
  * @property {string} [defaultProvider] - The default provider, if one was specified.
  * @property {Uint8Array[]} requests - An array containing the unwrapped requests
+ * @property {(acceptedResults: Uint8Array[]) => Promise<Uint8Array>} wrapResults - A function that wraps the accepted results in a single result to the original wrapper request.
  */
 
 /**
@@ -19,7 +20,10 @@ export async function unwrapRequests(rawRequest) {
 
   // If the request is not wrapped, return it
   if (!isWrapperTopic(requestTopic)) {
-    return { requests: [rawRequest] };
+    return {
+      requests: [rawRequest],
+      wrapResults: async ([acceptedResult]) => acceptedResult,
+    };
   }
 
   // The request is wrapped...
@@ -29,19 +33,28 @@ export async function unwrapRequests(rawRequest) {
     const defaultProvider = requestTopic === requestWithDefaultProvider.id
       ? decodedRequestWithDefaultProvider.defaultProvider
       : undefined;
-
-    const { requests: unwrappedRequests } = await unwrapRequests(decodedRequestWithDefaultProvider.request);
+    const unwrapped = await unwrapRequests(decodedRequestWithDefaultProvider.request);
 
     return {
       defaultProvider,
-      requests: unwrappedRequests,
+      requests: unwrapped.requests,
+      wrapResults: async (acceptedResults) => requestWithDefaultProvider.encodeResult({
+        status: 'accepted',
+        body: await unwrapped.wrapResults(acceptedResults),
+      }),
     };
   }
 
   // If the wrapped request is a request batch, unwrap its requests
   if (requestTopic === requestBatch.id) {
     const batchRequests = await requestBatch.decodeRequest(rawRequest);
-    return { requests: batchRequests };
+    return {
+      requests: batchRequests,
+      wrapResults: async (acceptedResults) => requestBatch.encodeResult({
+        status: 'accepted',
+        body: acceptedResults,
+      }),
+    };
   }
 
   // If the request is wrapped in an unknown wrapper, throw an error
