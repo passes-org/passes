@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/browser-types.jsdoc.mjs#L3)
+[browser-types.jsdoc.mjs:3](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/browser-types.jsdoc.mjs#L3)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:35](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/browser-types.jsdoc.mjs#L35)
+[browser-types.jsdoc.mjs:35](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/browser-types.jsdoc.mjs#L35)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/envelope-v0.jsdoc.mjs#L26)
+[envelope-v0.jsdoc.mjs:26](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/envelope-v0.jsdoc.mjs#L26)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/envelope-v0.jsdoc.mjs#L30)
+[envelope-v0.jsdoc.mjs:30](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/envelope-v0.jsdoc.mjs#L30)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[signed-request-topic.jsdoc.mjs:11](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/signed-request-topic.jsdoc.mjs#L11)
+[signed-request-topic.jsdoc.mjs:11](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/signed-request-topic.jsdoc.mjs#L11)
 
 ## Functions
 
@@ -126,4 +126,4 @@ Parse and return the topic from a raw request.
 
 #### Defined in
 
-[parse-topic.js:8](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/parse-topic.js#L8)
+[parse-topic.js:8](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/parse-topic.js#L8)

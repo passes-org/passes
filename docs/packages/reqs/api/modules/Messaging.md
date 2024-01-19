@@ -32,34 +32,26 @@ Messaging
 
 #### Defined in
 
-[messaging/await-request.js:14](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/messaging/await-request.js#L14)
+[messaging/await-request.js:14](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/messaging/await-request.js#L14)
 
 ___
 
 ### sendResult
 
-▸ **sendResult**\<`TRequestBody`, `TResultBody`\>(`requestTopic`, `result`, `origin?`): `Promise`\<`void`\>
+▸ **sendResult**(`result`, `origin?`): `void`
 
 Topic and Pass Providers should call `sendResult` when they have a result to send back to the requesting app.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `TRequestBody` |
-| `TResultBody` |
 
 #### Parameters
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `requestTopic` | [`RequestTopic`](../classes/RequestTopic.md)\<`TRequestBody`, `TResultBody`\> | `undefined` |  |
-| `result` | `RequestResult`\<`TResultBody`\> | `undefined` |  |
+| `result` | `Uint8Array` | `undefined` | The encoded result to send back to the requesting app. |
 | `origin?` | `string` | `'*'` | The origin to send the result to. Defaults to '*'. |
 
 #### Returns
 
-`Promise`\<`void`\>
+`void`
 
 **`Memberof`**
 
@@ -67,4 +59,4 @@ Messaging
 
 #### Defined in
 
-[messaging/send-result.js:10](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/messaging/send-result.js#L10)
+[messaging/send-result.js:7](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/messaging/send-result.js#L7)

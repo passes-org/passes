@@ -18,4 +18,4 @@ The type of the result, should be 'org.passes.messaging.connect'.
 
 #### Defined in
 
-[browser-types.jsdoc.mjs:15](https://github.com/passes-org/passes/blob/2d660fa/packages/reqs/src/browser-types.jsdoc.mjs#L15)
+[browser-types.jsdoc.mjs:15](https://github.com/passes-org/passes/blob/d270bec/packages/reqs/src/browser-types.jsdoc.mjs#L15)
