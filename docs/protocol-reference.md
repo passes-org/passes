@@ -120,6 +120,6 @@ Communication between the requesting app and your page will happen on the client
 import * as Messaging from '@passes/reqs/messaging';
 
 const { request, origin } = await Messaging.awaitRequest();
-const { requestTopic, result } = await presentRequestToUserAndAwaitResult(request); // < your custom presentation logic
-await Messaging.sendResult(requestTopic, result, origin);
+const result = await presentRequestToUserAndAwaitResult(request); // < your custom presentation logic
+await Messaging.sendResult(result, origin);
 ```

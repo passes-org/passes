@@ -169,7 +169,7 @@ import * as Messaging from '@passes/reqs/messaging';
 // Note: `handleRequest` is a placeholder for your handling logic for the given request topic
 const result = await handleRequest(request);
 
-await Messaging.sendResult(requestTopic, result);
+await Messaging.sendResult(result);
 ```
 
 ### Putting It All Together
@@ -203,7 +203,7 @@ async function handlePassRequest(request: Uint8Array) {
         const result = await presentRequestReviewUIAndGetResult(requestTopic, requestBody);
         await Messaging.sendResult(result);
       } catch (error) {
-        await Messaging.sendResult({ status: 'exception', message: error.message });
+        await Messaging.sendResult(await requestTopic.encodeResult({ status: 'exception', message: error.message }));
       }
       break;
     }
@@ -212,7 +212,7 @@ async function handlePassRequest(request: Uint8Array) {
 
     default:
       // Communicate to your user that the incoming request topic is not supported by your Pass Provider
-      await Messaging.sendResult({ status: 'unsupported' });
+      await Messaging.sendResult(EnvelopeV0.encodeResult({ status: 'unsupported' }));
   }
 }
 ```
