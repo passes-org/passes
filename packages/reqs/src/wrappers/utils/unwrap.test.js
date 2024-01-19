@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'bun:test';
-import { RequestTopic } from '../../request-topic.js';
+import { describe, expect, it } from 'bun:test';
 import * as Codecs from '../../codecs/index.js';
-import { unwrapRequests } from './unwrap-requests.js';
+import { RequestTopic } from '../../request-topic.js';
 import { requestBatch } from '../request-batch.js';
 import { requestWithDefaultProvider } from '../request-with-default-provider.js';
+import { unwrap } from './unwrap.js';
 
-describe('unwrapRequests', () => {
+describe('unwrap', () => {
   it('returns a non-wrapped request', async () => {
     const TOPIC = new RequestTopic({
       id: 'non-wrapped-test',
@@ -16,7 +16,7 @@ describe('unwrapRequests', () => {
     const REQUEST = await TOPIC.encodeRequest();
     const RESULT = await TOPIC.encodeResult({ status: 'accepted' });
 
-    const unwrapped = await unwrapRequests(REQUEST);
+    const unwrapped = await unwrap(REQUEST);
     const wrappedResult = await unwrapped.wrapResults([RESULT]);
 
     expect(unwrapped.defaultProvider).toBeUndefined();
@@ -36,7 +36,7 @@ describe('unwrapRequests', () => {
     const INNER_RESULT = await INNER_TOPIC.encodeResult({ status: 'accepted' });
     const BATCH_REQUEST = await requestBatch.encodeRequest([INNER_REQUEST, INNER_REQUEST]);
     
-    const unwrapped = await unwrapRequests(BATCH_REQUEST);
+    const unwrapped = await unwrap(BATCH_REQUEST);
     const wrappedResult = await unwrapped.wrapResults([INNER_RESULT, INNER_RESULT]);
 
     expect(unwrapped.defaultProvider).toBeUndefined();
@@ -63,7 +63,7 @@ describe('unwrapRequests', () => {
       request: INNER_REQUEST,
     });
 
-    const unwrapped = await unwrapRequests(WITH_DEFAULT_PROVIDER_REQUEST);
+    const unwrapped = await unwrap(WITH_DEFAULT_PROVIDER_REQUEST);
     const wrappedResult = await unwrapped.wrapResults([INNER_RESULT]);
 
     expect(unwrapped.defaultProvider).toBe('test-provider');
@@ -90,7 +90,7 @@ describe('unwrapRequests', () => {
       request: BATCH_REQUEST,
     });
 
-    const unwrapped = await unwrapRequests(WITH_DEFAULT_PROVIDER_REQUEST);
+    const unwrapped = await unwrap(WITH_DEFAULT_PROVIDER_REQUEST);
     const wrappedResult = await unwrapped.wrapResults([INNER_RESULT, INNER_RESULT]);
 
     expect(unwrapped.defaultProvider).toBe('test-provider');

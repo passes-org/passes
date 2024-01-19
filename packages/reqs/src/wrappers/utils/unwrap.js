@@ -3,18 +3,19 @@ import { requestBatch } from "../request-batch.js";
 import { requestWithDefaultProvider } from "../request-with-default-provider.js";
 
 /**
- * @typedef {Object} UnwrappedRequests
+ * @typedef {Object} UnwrappedRequest
  * @property {string} [defaultProvider] - The default provider, if one was specified.
  * @property {Uint8Array[]} requests - An array containing the unwrapped requests
  * @property {(acceptedResults: Uint8Array[]) => Promise<Uint8Array>} wrapResults - A function that wraps the accepted results in a single result to the original wrapper request.
  */
 
 /**
- * Convenience function to unwrap requests if they are wrapped in a request batch or request with a default provider.
+ * Convenience function to unwrap a wrapper request.
+ * @description There are two topics that wrap requests: org.passes.request-batch and org.passes.request-with-default-provider. This function unwraps both of them.
  * @param {Uint8Array} rawRequest
- * @returns {Promise<UnwrappedRequests>}
+ * @returns {Promise<UnwrappedRequest>}
  */
-export async function unwrapRequests(rawRequest) {
+export async function unwrap(rawRequest) {
   // Parse the outer request topic
   const requestTopic = parseTopic(rawRequest);
 
@@ -33,7 +34,7 @@ export async function unwrapRequests(rawRequest) {
     const defaultProvider = requestTopic === requestWithDefaultProvider.id
       ? decodedRequestWithDefaultProvider.defaultProvider
       : undefined;
-    const unwrapped = await unwrapRequests(decodedRequestWithDefaultProvider.request);
+    const unwrapped = await unwrap(decodedRequestWithDefaultProvider.request);
 
     return {
       defaultProvider,

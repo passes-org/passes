@@ -1,7 +1,7 @@
 import { sendRequestBatchWithDefaultProvider } from './send-request-batch-with-default-provider.js';
 import { sendRequestBatch } from './send-request-batch.js';
 import { sendRequestWithDefaultProvider } from './send-request-with-default-provider.js';
-import { unwrapRequests } from './unwrap-requests.js';
+import { unwrap } from './unwrap.js';
 
 /**
  * Namespace containing utils for working with wrapped requests.
@@ -11,6 +11,6 @@ export {
   sendRequestBatch,
   sendRequestBatchWithDefaultProvider,
   sendRequestWithDefaultProvider,
-  unwrapRequests,
+  unwrap,
 };
 
