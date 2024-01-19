@@ -9,6 +9,8 @@
     "prepublishOnly": "tsc"
   },
   "devDependencies": {
+    "@happy-dom/global-registrator": "^13.2.0",
+    "@passes/reqs": "^0.1.3",
     "bun-types": "latest"
   },
   "peerDependencies": {

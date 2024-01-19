@@ -1,0 +1,4 @@
+logLevel = "debug"
+
+[test]
+preload = "./happy-dom.ts"
