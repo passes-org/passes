@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { Void } from "../codecs/void.js";
+import { Void } from "../codecs/index.js";
 import { RequestTopic } from "../request-topic.js";
-import { BytesBatchCodec, RequestBatchCannotContainRequestWithDefaultProviderError, RequestBatchCodec } from "./request-batch.js";
+import { BytesBatchCodec, RequestBatchCannotContainRequestBatchError, RequestBatchCannotContainRequestWithDefaultProviderError, RequestBatchCodec, requestBatch } from "./request-batch.js";
 import { requestWithDefaultProvider } from "./request-with-default-provider.js";
 
 describe("BytesBatchCodec", () => {
@@ -45,5 +45,12 @@ describe("RequestBatchCodec", () => {
 
     expect(() => RequestBatchCodec.encode([reqWithDefaultProvider]))
       .toThrow(RequestBatchCannotContainRequestWithDefaultProviderError);
+  });
+
+  test("RequestBatchCodec rejects entries with `org.passes.request-batch` topic", async () => {
+    const reqBatch = await requestBatch.encodeRequest([]);
+
+    expect(() => RequestBatchCodec.encode([reqBatch]))
+      .toThrow(RequestBatchCannotContainRequestBatchError);
   });
 });

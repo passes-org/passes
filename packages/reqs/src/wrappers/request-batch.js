@@ -1,14 +1,22 @@
-import { parseTopic } from "..";
-import { RequestTopic } from "../request-topic";
-import { requestWithDefaultProvider } from "./request-with-default-provider";
+import { parseTopic } from "../parse-topic.js";
+import { RequestTopic } from "../request-topic.js";
+import { requestWithDefaultProvider } from "./request-with-default-provider.js";
+
+/**
+ * An error thrown when a request batch contains a request with a default provider.
+ */
+export class RequestBatchCannotContainRequestBatchError extends Error {
+  name = 'RequestBatchCannotContainRequestBatchError';
+  message = 'A request batch cannot contain a request batch (topic `org.passes.request-batch`). Instead of nesting, merge the requests into a single request batch.';
+};
 
 /**
  * An error thrown when a request batch contains a request with a default provider.
  */
 export class RequestBatchCannotContainRequestWithDefaultProviderError extends Error {
-  name = 'RequestBatchCannotContainRequestWithDefaultProviderError'
+  name = 'RequestBatchCannotContainRequestWithDefaultProviderError';
   message = 'A request batch cannot contain a request with a default provider (topic `org.passes.request-with-default-provider`). Instead, you may wrap the request batch in a request with default provider.';
-}
+};
 
 /**
  * A codec for encoding and decoding a batch of raw requests.
@@ -16,9 +24,12 @@ export class RequestBatchCannotContainRequestWithDefaultProviderError extends Er
  */
 export const RequestBatchCodec = {
   encode: (requests) => {
+    const requestTopics = requests.map((request) => parseTopic(request));
+
+    // Request batches cannot be nested.
+    if (requestTopics.includes(requestBatch.id)) throw new RequestBatchCannotContainRequestBatchError();
     // Requests with default providers are not allowed in a batch. Instead, they can wrap a batch.
-    const containsRequestWithDefaultProvider = requests.some((request) => parseTopic(request) === requestWithDefaultProvider.id);
-    if (containsRequestWithDefaultProvider) throw new RequestBatchCannotContainRequestWithDefaultProviderError();
+    if (requestTopics.includes(requestWithDefaultProvider.id)) throw new RequestBatchCannotContainRequestWithDefaultProviderError();
 
     return BytesBatchCodec.encode(requests);
   },
@@ -78,9 +89,11 @@ export const BytesBatchCodec = {
 
 /**
  * A request topic that can send a batch of raw requests.
+ * 
+ * @description A request batch is all-or-nothing: if the request is accepted, all requests in the batch are accepted. If the request is rejected, all requests in the batch are rejected.
  */
 export const requestBatch = new RequestTopic({
   id: 'org.passes.request-batch',
   requestBodyCodec: RequestBatchCodec,
-  resultBodyCodec: RequestBatchCodec,
+  resultBodyCodec: BytesBatchCodec,
 });

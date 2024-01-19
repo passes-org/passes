@@ -156,6 +156,19 @@ export class RequestTopic {
   }
 
   /**
+   * Returns a new RequestTopic instance with the same id and codecs, but with a new ABI.
+   * @param {import("./browser-types.jsdoc.mjs").PassesABI} abi
+   */
+  withABI(abi) {
+    return new RequestTopic({
+      id: this.id,
+      requestBodyCodec: this.requestBodyCodec,
+      resultBodyCodec: this.resultBodyCodec,
+      abi,
+    });
+  }
+
+  /**
    * Returns a string representation of the request topic.
    * @returns {string}
    */
