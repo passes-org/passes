@@ -50,7 +50,7 @@ if (userPassProvider) {
   
       const { defaultProvider } = await Wrappers.requestWithDefaultProvider.decodeRequest(requestRaw);
   
-      window.location.href = defaultProvider;
+      window.open(defaultProvider, '_self');
     })();
   </script>
 </LayoutWithMenu>
