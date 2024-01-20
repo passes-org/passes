@@ -21,7 +21,7 @@ if (Astro.request.method === "POST") {
   }
 
   setUserPassProvider(Astro, newProvider);
-  return Astro.redirect(returnURL);
+  return Astro.redirect(returnURL, 302);
 }
 
 // Handle unsupported request methods
@@ -33,6 +33,9 @@ if (!["GET", "OPTIONS"].includes(Astro.request.method)) {
 const currentProvider = getUserPassProvider(Astro);
 const newProvider = Astro.url.searchParams.get("provider");
 const returnURL = Astro.url.searchParams.get("return");
+console.log('currentProvider', currentProvider);
+console.log('newProvider', newProvider);
+console.log('returnURL', returnURL);
 
 if (!newProvider || !returnURL) {
   throw new Error("Missing `provider` or `return` search param");
@@ -40,9 +43,12 @@ if (!newProvider || !returnURL) {
 
 // If the user is already using the new provider, do not present a confirmation UI
 if (!currentProvider || currentProvider === newProvider) {
+  console.log('redirection without user confirmation to', returnURL);
   setUserPassProvider(Astro, newProvider);
-  return Astro.redirect(returnURL);
+  return Astro.redirect(returnURL, 302);
 }
+
+console.log('requiring user confirmation');
 ---
 
 <DocumentLayout>
