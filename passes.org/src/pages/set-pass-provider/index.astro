@@ -1,25 +1,47 @@
 ---
+import { zfd } from "zod-form-data";
 import DocumentLayout from "../../layouts/DocumentLayout.astro";
-import { setUserPassProvider } from "../../lib/userPassProvider";
+import { getUserPassProvider, setUserPassProvider } from "../../lib/userPassProvider";
+import { z } from "zod";
 
-// Handle POST requests 
+const FormDataSchema = zfd.formData({
+  provider: zfd.text().pipe(z.string().url()),
+  return: zfd.text().pipe(z.string().url()),
+});
+
+// Handle POST submissions
 if (Astro.request.method === "POST") {
-  const formData = await Astro.request.formData();
-  const providerUri = formData.get("providerUri");
-  const returnUri = formData.get("returnUri");
+  const {
+    provider: newProvider,
+    return: returnURL,
+  } = FormDataSchema.parse(await Astro.request.formData());
 
-  if (providerUri && typeof providerUri === "string") {
-    setUserPassProvider(Astro, providerUri);
+  if (!newProvider || !returnURL) {
+    return new Response("Missing `provider` or `return` form field", { status: 400 });
   }
 
-  return Astro.redirect(returnUri);
+  setUserPassProvider(Astro, newProvider);
+  return Astro.redirect(returnURL);
 }
 
-const providerUri = Astro.url.searchParams.get("provider");
-const returnUri = Astro.url.searchParams.get("return");
+// Handle unsupported request methods
+if (!["GET", "OPTIONS"].includes(Astro.request.method)) {
+  return new Response("Unsupported request method", { status: 405 });
+}
 
-if (!providerUri || !returnUri) {
-  throw new Error("Missing providerUri or returnUri search param");
+// Handle GET requests
+const currentProvider = getUserPassProvider(Astro);
+const newProvider = Astro.url.searchParams.get("provider");
+const returnURL = Astro.url.searchParams.get("return");
+
+if (!newProvider || !returnURL) {
+  throw new Error("Missing `provider` or `return` search param");
+}
+
+// If the user is already using the new provider, do not present a confirmation UI
+if (!currentProvider || currentProvider === newProvider) {
+  setUserPassProvider(Astro, newProvider);
+  return Astro.redirect(returnURL);
 }
 ---
 
@@ -28,12 +50,12 @@ if (!providerUri || !returnUri) {
   <div class="flex-1 flex flex-col items-center justify-center">
     <!-- Dialog -->
     <main class="border border-black dark:border-white rounded p-5 gap-6 flex flex-col text-center">
-      {providerUri && (
+      {newProvider && (
         <>
           {/* Provider Favicon */}
           <div class="w-[60px] h-[60px] rounded-xl p-[3px] -mt-[50px] border-black dark:border-white border bg-white dark:bg-black self-center">
             <img
-              src={`/api/favicon?uri=${encodeURIComponent(providerUri)}`}
+              src={`/api/favicon?uri=${encodeURIComponent(newProvider)}`}
               alt="Provider Favicon"
               class="w-full h-full object-contain rounded-[9px]"
             />
@@ -42,7 +64,7 @@ if (!providerUri || !returnUri) {
           {/* Title */}
           <div class="space-y-2">
             <div class="text-xl font-bold">
-              {new URL(providerUri).hostname}
+              {new URL(newProvider).hostname}
             </div>
             <div class="text-xl">Wants To Be Your Pass Provider</div>
           </div>
@@ -54,20 +76,9 @@ if (!providerUri || !returnUri) {
 
           {/* Actions */}
           <div class="flex gap-5">
-            <form
-              action="/set-pass-provider"
-              method="post"
-              class="p-3 border border-black dark:border-white rounded-sm flex-1"
-            >
-              <input
-                type="text"
-                name="returnUri"
-                value={returnUri}
-                hidden
-              />
-
-              <button> Don't Allow</button>
-            </form>
+            <button onclick={`window.location.assign("${returnURL}")`} class="p-3 border border-black dark:border-white rounded-sm flex-1" type="button">
+              Don't Allow
+            </button>
 
             <form
               action="/set-pass-provider"
@@ -76,18 +87,18 @@ if (!providerUri || !returnUri) {
             >
               <input
                 type="text"
-                name="providerUri"
-                value={providerUri}
+                name="provider"
+                value={newProvider}
                 hidden
               />
               <input
                 type="text"
-                name="returnUri"
-                value={returnUri}
+                name="return"
+                value={returnURL}
                 hidden
               />
 
-              <button> Allow</button>
+              <button type="submit">Allow</button>
             </form>
           </div>
         </>
