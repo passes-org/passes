@@ -21,7 +21,7 @@ if (Astro.request.method === "POST") {
   }
 
   setUserPassProvider(Astro, newProvider);
-  return Astro.redirect(returnURL, 307);
+  return Astro.redirect(returnURL, 302);
 }
 
 // Handle unsupported request methods
@@ -45,7 +45,7 @@ if (!newProvider || !returnURL) {
 if (!currentProvider || currentProvider === newProvider) {
   console.log('redirection without user confirmation to', returnURL);
   setUserPassProvider(Astro, newProvider);
-  return Astro.redirect(returnURL, 307);
+  return Astro.redirect(returnURL, 302);
 }
 
 console.log('requiring user confirmation');
