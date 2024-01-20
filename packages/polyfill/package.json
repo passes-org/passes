@@ -1,6 +1,6 @@
 {
   "name": "@passes/polyfill",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "type": "module",
   "main": "src/main.js",
   "types": "types/main.d.ts",
@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^13.2.0",
-    "@passes/reqs": "^0.1.4",
+    "@passes/reqs": "^0.1.5",
     "bun-types": "latest"
   },
   "peerDependencies": {
