@@ -15,7 +15,7 @@ export function getUserPassProvider({ cookies }: { cookies: AstroCookies }): str
 export function setUserPassProvider({ cookies }: { cookies: AstroCookies }, uri: string): void {
   const expires = new Date();
   expires.setFullYear(expires.getFullYear() + 10);
-  cookies.set(PASS_PROVIDER_COOKIE_NAME, uri, { sameSite: 'lax', path: '/', expires });
+  cookies.set(PASS_PROVIDER_COOKIE_NAME, uri, { sameSite: 'none', path: '/', expires, secure: true, httpOnly : true});
 }
 
 /**
