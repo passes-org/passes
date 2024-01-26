@@ -1,4 +1,4 @@
-import { getUserPassProvider } from "$lib";
+import { getUserPassProvider } from "$lib/userPassProvider";
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "../$types";
 

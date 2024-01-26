@@ -1,4 +1,4 @@
-import { setUserPassProvider } from "$lib";
+import { setUserPassProvider } from "$lib/userPassProvider";
 import { error, redirect, type Actions } from "@sveltejs/kit";
 import { z } from "zod";
 import { zfd } from "zod-form-data";

@@ -1,4 +1,4 @@
-import { getUserPassProvider } from '$lib';
+import { getUserPassProvider } from '$lib/userPassProvider';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {

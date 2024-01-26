@@ -1,6 +1,6 @@
+import { clearUserPassProvider } from "$lib/userPassProvider";
 import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerData } from "./$types";
-import { clearUserPassProvider } from "$lib";
 
 export const load: PageServerData = (event) => {
   const { userPassProvider } = event.locals;
