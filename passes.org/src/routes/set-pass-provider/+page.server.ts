@@ -1,3 +1,4 @@
+import { createPlausibleEvent } from "$lib/createPlausibleEvent";
 import { setUserPassProvider } from "$lib/userPassProvider";
 import { error, redirect, type Actions } from "@sveltejs/kit";
 import { z } from "zod";
@@ -15,7 +16,23 @@ export const load: PageServerLoad = async (event) => {
   
   // If the user is already using the new provider, do not present a confirmation UI
   if (!currentProvider || currentProvider === newProvider) {
+    // Set the user's new provider
     setUserPassProvider(event, newProvider);
+
+    // Create a Set Pass Provider event in Plausible
+    event.platform?.context?.waitUntil(createPlausibleEvent({
+      name: 'setPassProvider',
+      props: {
+        setPassProvider_from: currentProvider,
+        setPassProvider_to: newProvider,
+        setPassProvider_returnURL: returnURL,
+        setPassProvider_withConfirmationUI: false,
+      },
+      headers: event.request.headers,
+      url: event.request.url,
+    }));
+    
+    // Redirect the user to the return URL
     redirect(302, returnURL);
   }
 
@@ -42,7 +59,26 @@ export const actions: Actions = {
       return new Response("Missing `provider` or `return` form field", { status: 400 });
     }
   
+    // Get the user's current provider
+    const currentProvider = event.locals.userPassProvider;
+
+    // Set the user's new provider
     setUserPassProvider(event, newProvider);
+
+    // Create a Set Pass Provider event in Plausible
+    event.platform?.context?.waitUntil(createPlausibleEvent({
+      name: 'setPassProvider',
+      props: {
+        setPassProvider_from: currentProvider,
+        setPassProvider_to: newProvider,
+        setPassProvider_returnURL: returnURL,
+        setPassProvider_withConfirmationUI: true,
+      },
+      headers: event.request.headers,
+      url: event.request.url,
+    }));
+
+    // Redirect the user to the return URL
     redirect(302, returnURL);
   },
 };
