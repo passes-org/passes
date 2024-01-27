@@ -10,6 +10,7 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['meta', { property: 'og:image', content: 'https://docs.passes.org/passes-og.png' }],
     ['script', { src: POLYFILL_MODULE_URL }],
+    ['script', { defer: '', 'data-domain': 'passes.org', 'data-api': 'https://events.genesisxyz.workers.dev/passes-events/event', src: 'https://events.genesisxyz.workers.dev/passes-events/script.js' }],
   ],
 
   themeConfig: {
